@@ -104,44 +104,75 @@ module.exports =
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 var _jsxFileName = "/Users/davidzoufaly/code/dp/nextjsTs/pages/index.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
-const Index = () => {
+
+const Index = props => {
   const {
-    0: fruit,
-    1: setFruit
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
-
-  const priradOvoce = () => {
-    setFruit("banana");
-  };
-
+    0: clients,
+    1: setClient
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([{
+    _id: "ff",
+    name: "ffff"
+  }]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    document.title = `${fruit}`;
+    setClient(props.data);
+
+    const mapClients = () => {
+      const listOfClients = clients.map(e => {
+        __jsx("li", {
+          key: e._id,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 12
+          },
+          __self: undefined
+        }, e.name);
+      });
+      return listOfClients;
+    };
+
+    const clientList = mapClients();
+    return clientList;
   });
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16
+      lineNumber: 22
     },
     __self: undefined
-  }, __jsx("button", {
-    onClick: priradOvoce,
+  }, __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17
+      lineNumber: 23
     },
     __self: undefined
-  }, "Jak\xE9 ovoce m\xE1m nejrad\u011Bji?"), __jsx("h1", {
+  }, "hiii"), __jsx("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18
+      lineNumber: 24
     },
     __self: undefined
-  }, fruit));
+  }, clientList), __jsx("ul", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: undefined
+  }, clients.map(e => e.name)));
+};
+
+Index.getInitialProps = async () => {
+  const res = await axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("http://localhost:8080/api/clients");
+  const data = await res.data;
+  return {
+    data
+  };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
@@ -157,6 +188,17 @@ const Index = () => {
 
 module.exports = __webpack_require__(/*! /Users/davidzoufaly/code/dp/nextjsTs/pages/index.tsx */"./pages/index.tsx");
 
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
 
 /***/ }),
 
