@@ -6,7 +6,7 @@ const Header = () => {
       <ul>
         <li>
           <Link href="/clients">
-            <a>Clients list</a>
+            <a>Clients</a>
           </Link>
         </li>
         <li>

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -143,7 +143,7 @@ const Header = () => {
       lineNumber: 9
     },
     __self: undefined
-  }, "Clients list"))), __jsx("li", {
+  }, "Clients"))), __jsx("li", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 12
@@ -2127,14 +2127,67 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Header */ "./components/Header.tsx");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
 var _jsxFileName = "/Users/davidzoufaly/code/dp/nextjsTs/pages/clients.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+ //TODO: TABULKA DYNAMICKÉ ZÁHLAVÍ
+//TODO: SORTOVÁNÍ
 
-const Index = props => {
+const ClientsList = props => {
+  return props.clients.map(e => __jsx("tr", {
+    key: e._id,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 11
+    },
+    __self: undefined
+  }, __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12
+    },
+    __self: undefined
+  }, e.name), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13
+    },
+    __self: undefined
+  }, e.age), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: undefined
+  }, e.address), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15
+    },
+    __self: undefined
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    href: "/clients/[id]",
+    as: `/clients/${e._id}`,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17
+    },
+    __self: undefined
+  }, "Go to client")))));
+};
+
+const Clients = props => {
   const {
     0: clients,
     1: setClient
@@ -2150,42 +2203,78 @@ const Index = props => {
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16
+      lineNumber: 35
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17
+      lineNumber: 36
     },
     __self: undefined
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18
+      lineNumber: 37
     },
     __self: undefined
-  }, "List of all clients"), __jsx("ul", {
+  }, "List of all clients"), __jsx("table", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 38
     },
     __self: undefined
-  }, clients.map(e => __jsx("li", {
-    key: e._id,
+  }, __jsx("thead", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 39
     },
     __self: undefined
-  }, e.name, ", ", e.age, ", ", e.address))));
+  }, __jsx("th", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 40
+    },
+    __self: undefined
+  }, __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41
+    },
+    __self: undefined
+  }, "Name"), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42
+    },
+    __self: undefined
+  }, "Age"), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43
+    },
+    __self: undefined
+  }, "Address"))), __jsx("tbody", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 46
+    },
+    __self: undefined
+  }, __jsx(ClientsList, {
+    clients: clients,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47
+    },
+    __self: undefined
+  }))));
 };
 
-Index.getInitialProps = async () => {
+Clients.getInitialProps = async () => {
   const res = await axios__WEBPACK_IMPORTED_MODULE_1___default()({
-    method: 'get',
-    url: 'http://localhost:8080/api/clients',
-    responseType: 'json'
+    method: "get",
+    url: "http://localhost:8080/api/clients",
+    responseType: "json"
   });
   const data = await res.data;
   return {
@@ -2193,11 +2282,11 @@ Index.getInitialProps = async () => {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Index);
+/* harmony default export */ __webpack_exports__["default"] = (Clients);
 
 /***/ }),
 
-/***/ 5:
+/***/ 4:
 /*!*********************************!*\
   !*** multi ./pages/clients.tsx ***!
   \*********************************/

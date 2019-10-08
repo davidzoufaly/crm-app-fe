@@ -50,7 +50,7 @@ var Header = function Header() {
       lineNumber: 9
     },
     __self: this
-  }, "Clients list"))), __jsx("li", {
+  }, "Clients"))), __jsx("li", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 12
@@ -12339,6 +12339,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Header */ "./components/Header.tsx");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_5__);
 
 
 var _jsxFileName = "/Users/davidzoufaly/code/dp/nextjsTs/pages/clients.tsx";
@@ -12347,8 +12349,61 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
+ //TODO: TABULKA DYNAMICKÉ ZÁHLAVÍ
+//TODO: SORTOVÁNÍ
 
-var Index = function Index(props) {
+var ClientsList = function ClientsList(props) {
+  return props.clients.map(function (e) {
+    return __jsx("tr", {
+      key: e._id,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11
+      },
+      __self: this
+    }, __jsx("td", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 12
+      },
+      __self: this
+    }, e.name), __jsx("td", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 13
+      },
+      __self: this
+    }, e.age), __jsx("td", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 14
+      },
+      __self: this
+    }, e.address), __jsx("td", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 15
+      },
+      __self: this
+    }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
+      href: "/clients/[id]",
+      as: "/clients/".concat(e._id),
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 16
+      },
+      __self: this
+    }, __jsx("a", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 17
+      },
+      __self: this
+    }, "Go to client"))));
+  });
+};
+
+var Clients = function Clients(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
       clients = _useState[0],
       setClient = _useState[1];
@@ -12364,40 +12419,74 @@ var Index = function Index(props) {
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16
+      lineNumber: 35
     },
     __self: this
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17
+      lineNumber: 36
     },
     __self: this
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18
+      lineNumber: 37
     },
     __self: this
-  }, "List of all clients"), __jsx("ul", {
+  }, "List of all clients"), __jsx("table", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 38
     },
     __self: this
-  }, clients.map(function (e) {
-    return __jsx("li", {
-      key: e._id,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 19
-      },
-      __self: this
-    }, e.name, ", ", e.age, ", ", e.address);
-  })));
+  }, __jsx("thead", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: this
+  }, __jsx("th", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 40
+    },
+    __self: this
+  }, __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41
+    },
+    __self: this
+  }, "Name"), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42
+    },
+    __self: this
+  }, "Age"), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43
+    },
+    __self: this
+  }, "Address"))), __jsx("tbody", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 46
+    },
+    __self: this
+  }, __jsx(ClientsList, {
+    clients: clients,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47
+    },
+    __self: this
+  }))));
 };
 
-Index.getInitialProps =
+Clients.getInitialProps =
 /*#__PURE__*/
 Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
 /*#__PURE__*/
@@ -12409,9 +12498,9 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(f
         case 0:
           _context.next = 2;
           return axios__WEBPACK_IMPORTED_MODULE_3___default()({
-            method: 'get',
-            url: 'http://localhost:8080/api/clients',
-            responseType: 'json'
+            method: "get",
+            url: "http://localhost:8080/api/clients",
+            responseType: "json"
           });
 
         case 2:
@@ -12432,11 +12521,11 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(f
     }
   }, _callee);
 }));
-/* harmony default export */ __webpack_exports__["default"] = (Index);
+/* harmony default export */ __webpack_exports__["default"] = (Clients);
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!********************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fclients&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2FnextjsTs%2Fpages%2Fclients.tsx ***!
   \********************************************************************************************************************************************/
@@ -12459,5 +12548,5 @@ module.exports = dll_b35e09dc2ca94ac6d9c1;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=clients.js.map
