@@ -188,10 +188,10 @@ const Header = () => {
 
 /***/ }),
 
-/***/ "./functions/stringMethods.tsx":
-/*!*************************************!*\
-  !*** ./functions/stringMethods.tsx ***!
-  \*************************************/
+/***/ "./library/stringMethods.tsx":
+/*!***********************************!*\
+  !*** ./library/stringMethods.tsx ***!
+  \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -207,7 +207,7 @@ class stringMethods {
   constructor(_text) {
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "text", void 0);
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "splitCamelString", () => {
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "camelStringToText", () => {
       this.text = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(this.text).map(e => e === e.toUpperCase() ? e = `%-%${e.toLowerCase()}` : e).join("").replace(/%-%/g, " ");
       return this;
     });
@@ -223,7 +223,26 @@ class stringMethods {
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "addStringToEnd", text => {
-      this.text = this.text.concat(` ${text}`);
+      this.text = this.text + " " + text;
+      return this;
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "textToCamelString", () => {
+      let array = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(this.text.toLowerCase());
+
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] === " ") {
+          array[i + 1] = array[i + 1].toUpperCase();
+          array.splice(i, 1);
+        }
+      }
+
+      this.text = array.join("");
+      return this;
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "replaceStringDiacritics", () => {
+      this.text = this.text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       return this;
     });
 
@@ -2235,7 +2254,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/Header */ "./components/Header.tsx");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _functions_stringMethods__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../functions/stringMethods */ "./functions/stringMethods.tsx");
+/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../library/stringMethods */ "./library/stringMethods.tsx");
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/clients/[id].tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
@@ -2252,12 +2271,12 @@ const Client = props => {
     document.title = `${name} | CRM-APP`;
   });
 
-  const fce = () => {
+  const showAllProperities = () => {
     const data = props.data;
     const list = [];
 
     for (let key in data) {
-      const convertedKey = new _functions_stringMethods__WEBPACK_IMPORTED_MODULE_3__["default"](key).splitCamelString().firstCharUpperCase();
+      const convertedKey = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_3__["default"](key).camelStringToText().firstCharUpperCase();
 
       if (key !== "_id" && key !== "name") {
         list.push(__jsx("li", {
@@ -2298,7 +2317,7 @@ const Client = props => {
       lineNumber: 38
     },
     __self: undefined
-  }, fce()));
+  }, showAllProperities()));
 };
 
 Client.getInitialProps = async context => {

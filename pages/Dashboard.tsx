@@ -1,9 +1,10 @@
 import Header from '../components/Header';
-import ShowRecordsNumber from '../components/ShowRecordsNumber';
 import axios from 'axios';
-import stringMethods from "../functions/stringMethods";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import ShowRecordsNumber from '../components/ShowRecordsNumber';
+import stringMethods from "../library/stringMethods";
+import titleSubText from "../library/globalVariables"; 
 
 
 const Dashboard = (props: any) => {
@@ -13,7 +14,7 @@ const Dashboard = (props: any) => {
     const title = new stringMethods(router.pathname)
       .removeSlash()
       .firstCharUpperCase()
-      .addStringToEnd("| CRM-APP");
+      .addStringToEnd(titleSubText);
     document.title = title.text;
   }, [router]);
 

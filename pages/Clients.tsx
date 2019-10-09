@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios";
 import Header from "../components/Header";
-import stringMethods from "../functions/stringMethods";
+import stringMethods from "../library/stringMethods";
+import titleSubText from "../library/globalVariables";
 
 
 //TODO: SORTOVÁNÍ
@@ -37,7 +38,7 @@ const Clients = (props: any) => {
     const title = new stringMethods(router.pathname)
       .removeSlash()
       .firstCharUpperCase()
-      .addStringToEnd("| CRM-APP");
+      .addStringToEnd(titleSubText);
     document.title = title.text;
   }, [router]);
 

@@ -1,7 +1,8 @@
 import Header from "../components/Header";
-import stringMethods from "../functions/stringMethods";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import stringMethods from "../library/stringMethods";
+import titleSubText from "../library/globalVariables";
 
 const Settings = () => {
   const router = useRouter();
@@ -10,7 +11,7 @@ const Settings = () => {
     const title = new stringMethods(router.pathname)
       .removeSlash()
       .firstCharUpperCase()
-      .addStringToEnd("| CRM-APP");
+      .addStringToEnd(titleSubText);
     document.title = title.text;
   }, [router]);
 

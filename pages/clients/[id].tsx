@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
 import axios from "axios";
 import { useEffect } from "react";
-import stringMethods from "../../functions/stringMethods";
+import stringMethods from "../../library/stringMethods";
 
 //TODO: SKRÝVÁNÍ POLÍ CO NEJSOU V DB
 
@@ -12,12 +12,12 @@ const Client = (props: any) => {
     document.title = `${name} | CRM-APP`;
   });
 
-  const fce = () => {
+  const showAllProperities = () => {
     const data = props.data;
     const list = [];
     for (let key in data) {
       const convertedKey = new stringMethods(key)
-        .splitCamelString()
+        .camelStringToText()
         .firstCharUpperCase();
    
       if (key !== "_id" && key !== "name") {
@@ -35,7 +35,7 @@ const Client = (props: any) => {
     <div>
       <Header />
       <h1>{name}</h1>
-      <ul>{fce()}</ul>
+      <ul>{showAllProperities()}</ul>
     </div>
   );
 };

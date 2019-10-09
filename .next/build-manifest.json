@@ -19,10 +19,6 @@
     "/clients/[id]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
-    ],
-    "/settings": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
     ]
   }
 }

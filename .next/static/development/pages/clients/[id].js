@@ -95,10 +95,10 @@ var Header = function Header() {
 
 /***/ }),
 
-/***/ "./functions/stringMethods.tsx":
-/*!*************************************!*\
-  !*** ./functions/stringMethods.tsx ***!
-  \*************************************/
+/***/ "./library/stringMethods.tsx":
+/*!***********************************!*\
+  !*** ./library/stringMethods.tsx ***!
+  \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -119,7 +119,7 @@ var stringMethods = function stringMethods(_text) {
 
   Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "text", void 0);
 
-  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "splitCamelString", function () {
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "camelStringToText", function () {
     _this.text = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(_this.text).map(function (e) {
       return e === e.toUpperCase() ? e = "%-%".concat(e.toLowerCase()) : e;
     }).join("").replace(/%-%/g, " ");
@@ -139,7 +139,26 @@ var stringMethods = function stringMethods(_text) {
   });
 
   Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "addStringToEnd", function (text) {
-    _this.text = _this.text.concat(" ".concat(text));
+    _this.text = _this.text + " " + text;
+    return _this;
+  });
+
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "textToCamelString", function () {
+    var array = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(_this.text.toLowerCase());
+
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === " ") {
+        array[i + 1] = array[i + 1].toUpperCase();
+        array.splice(i, 1);
+      }
+    }
+
+    _this.text = array.join("");
+    return _this;
+  });
+
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "replaceStringDiacritics", function () {
+    _this.text = _this.text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     return _this;
   });
 
@@ -12555,7 +12574,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Header */ "./components/Header.tsx");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _functions_stringMethods__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../functions/stringMethods */ "./functions/stringMethods.tsx");
+/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../library/stringMethods */ "./library/stringMethods.tsx");
 
 
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/clients/[id].tsx";
@@ -12572,12 +12591,12 @@ var Client = function Client(props) {
     document.title = "".concat(name, " | CRM-APP");
   });
 
-  var fce = function fce() {
+  var showAllProperities = function showAllProperities() {
     var data = props.data;
     var list = [];
 
     for (var key in data) {
-      var convertedKey = new _functions_stringMethods__WEBPACK_IMPORTED_MODULE_5__["default"](key).splitCamelString().firstCharUpperCase();
+      var convertedKey = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_5__["default"](key).camelStringToText().firstCharUpperCase();
 
       if (key !== "_id" && key !== "name") {
         list.push(__jsx("li", {
@@ -12618,7 +12637,7 @@ var Client = function Client(props) {
       lineNumber: 38
     },
     __self: this
-  }, fce()));
+  }, showAllProperities()));
 };
 
 Client.getInitialProps =
