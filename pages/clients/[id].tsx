@@ -17,8 +17,7 @@ const Client = (props: any) => {
     const list = [];
     for (let key in data) {
       const convertedKey = new stringMethods(key)
-        .getIndexUpperCase()
-        .splitStringByIndex()
+        .splitCamelString()
         .firstCharUpperCase();
    
       if (key !== "_id" && key !== "name") {

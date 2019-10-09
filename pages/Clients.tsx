@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios";
 import Header from "../components/Header";
-import title from "../functions/title";
+import stringMethods from "../functions/stringMethods";
+
 
 //TODO: SORTOVÁNÍ
 //TODO: TABULKA DYNAMICKÉ ZÁHLAVÍ
@@ -32,9 +33,13 @@ const Clients = (props: any) => {
     setClientList(props.data);
   });
 
-  useEffect(() => {
-    title(router.pathname);
-  }, [router])
+  useEffect(() => {
+    const title = new stringMethods(router.pathname)
+      .removeSlash()
+      .firstCharUpperCase()
+      .addStringToEnd("| CRM-APP");
+    document.title = title.text;
+  }, [router]);
 
   const reverseOrder = () => {
     setClientList(clients.reverse());

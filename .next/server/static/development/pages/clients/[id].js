@@ -207,50 +207,18 @@ class stringMethods {
   constructor(_text) {
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "text", void 0);
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "helperArray", void 0);
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "getIndexUpperCase", () => {
-      const textInArray = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(this.text);
-
-      for (let i = 0; i < textInArray.length; i++) {
-        if (textInArray[i] === textInArray[i].toUpperCase()) {
-          this.helperArray.push(i);
-        }
-      }
-
-      return this;
-    });
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "splitStringByIndex", () => {
-      let arrayText = [];
-
-      for (let i = 0; i <= this.helperArray.length; i++) {
-        if (i === 0) {
-          //first iteration
-          arrayText.push(this.text.substr(0, this.helperArray[i]));
-        } else if (i > 0 && i < this.helperArray.length) {
-          //iteration in the middle
-          arrayText.push(this.text.substr(this.helperArray[i - 1], this.helperArray[i] - this.helperArray[i - 1]));
-        } else if (i === this.helperArray.length) {
-          //last iteration
-          arrayText.push(this.text.substr(this.helperArray[i - 1]));
-        }
-      }
-
-      this.text = arrayText.join(" ");
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "splitCamelString", () => {
+      this.text = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(this.text).map(e => e === e.toUpperCase() ? e = `%-%${e.toLowerCase()}` : e).join("").replace(/%-%/g, " ");
       return this;
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "firstCharUpperCase", () => {
-      let str = this.text.toLowerCase();
-      const firstCharString = str.substr(0, 1).toUpperCase();
-      const restString = str.substr(1);
-      this.text = firstCharString + restString;
+      this.text = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(this.text).map((e, i) => i === 0 ? e.toUpperCase() : e).join("");
       return this;
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "removeSlash", () => {
-      this.text = this.text.replace('/', '');
+      this.text = this.text.replace("/", "");
       return this;
     });
 
@@ -260,12 +228,10 @@ class stringMethods {
     });
 
     this.text = _text;
-    this.helperArray = [];
   }
 
 }
 
-;
 /* harmony default export */ __webpack_exports__["default"] = (stringMethods);
 
 /***/ }),
@@ -2291,14 +2257,14 @@ const Client = props => {
     const list = [];
 
     for (let key in data) {
-      const convertedKey = new _functions_stringMethods__WEBPACK_IMPORTED_MODULE_3__["default"](key).getIndexUpperCase().splitStringByIndex().firstCharUpperCase();
+      const convertedKey = new _functions_stringMethods__WEBPACK_IMPORTED_MODULE_3__["default"](key).splitCamelString().firstCharUpperCase();
 
       if (key !== "_id" && key !== "name") {
         list.push(__jsx("li", {
           key: key,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 26
+            lineNumber: 25
           },
           __self: undefined
         }, convertedKey.text, ": ", data[key]));
@@ -2311,25 +2277,25 @@ const Client = props => {
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 35
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 36
     },
     __self: undefined
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 37
     },
     __self: undefined
   }, name), __jsx("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 38
     },
     __self: undefined
   }, fce()));

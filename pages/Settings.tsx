@@ -7,7 +7,10 @@ const Settings = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const title = new stringMethods(router.pathname).removeSlash().firstCharUpperCase().addStringToEnd("| CRM-APP");
+    const title = new stringMethods(router.pathname)
+      .removeSlash()
+      .firstCharUpperCase()
+      .addStringToEnd("| CRM-APP");
     document.title = title.text;
   }, [router]);
 

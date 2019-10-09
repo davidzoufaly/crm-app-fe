@@ -119,51 +119,22 @@ var stringMethods = function stringMethods(_text) {
 
   Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "text", void 0);
 
-  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "helperArray", void 0);
-
-  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "getIndexUpperCase", function () {
-    var textInArray = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(_this.text);
-
-    for (var i = 0; i < textInArray.length; i++) {
-      if (textInArray[i] === textInArray[i].toUpperCase()) {
-        _this.helperArray.push(i);
-      }
-    }
-
-    return _this;
-  });
-
-  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "splitStringByIndex", function () {
-    var arrayText = [];
-
-    for (var i = 0; i <= _this.helperArray.length; i++) {
-      if (i === 0) {
-        //first iteration
-        arrayText.push(_this.text.substr(0, _this.helperArray[i]));
-      } else if (i > 0 && i < _this.helperArray.length) {
-        //iteration in the middle
-        arrayText.push(_this.text.substr(_this.helperArray[i - 1], _this.helperArray[i] - _this.helperArray[i - 1]));
-      } else if (i === _this.helperArray.length) {
-        //last iteration
-        arrayText.push(_this.text.substr(_this.helperArray[i - 1]));
-      }
-    }
-
-    _this.text = arrayText.join(" ");
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "splitCamelString", function () {
+    _this.text = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(_this.text).map(function (e) {
+      return e === e.toUpperCase() ? e = "%-%".concat(e.toLowerCase()) : e;
+    }).join("").replace(/%-%/g, " ");
     return _this;
   });
 
   Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "firstCharUpperCase", function () {
-    var str = _this.text.toLowerCase();
-
-    var firstCharString = str.substr(0, 1).toUpperCase();
-    var restString = str.substr(1);
-    _this.text = firstCharString + restString;
+    _this.text = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(_this.text).map(function (e, i) {
+      return i === 0 ? e.toUpperCase() : e;
+    }).join("");
     return _this;
   });
 
   Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "removeSlash", function () {
-    _this.text = _this.text.replace('/', '');
+    _this.text = _this.text.replace("/", "");
     return _this;
   });
 
@@ -173,10 +144,8 @@ var stringMethods = function stringMethods(_text) {
   });
 
   this.text = _text;
-  this.helperArray = [];
 };
 
-;
 /* harmony default export */ __webpack_exports__["default"] = (stringMethods);
 
 /***/ }),
@@ -10589,25 +10558,25 @@ var Settings = function Settings() {
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 18
     },
     __self: this
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16
+      lineNumber: 19
     },
     __self: this
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17
+      lineNumber: 20
     },
     __self: this
   }, "Settings"), __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18
+      lineNumber: 21
     },
     __self: this
   }, "This is app settings"));
