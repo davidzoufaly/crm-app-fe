@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import axios from "axios";
 import Header from "../components/Header";
-import Link from "next/link";
+import title from "../functions/title";
 
-//TODO: TABULKA DYNAMICKÉ ZÁHLAVÍ
 //TODO: SORTOVÁNÍ
+//TODO: TABULKA DYNAMICKÉ ZÁHLAVÍ
+//TODO: PŘIDAT NOVÉHO KLIENTA
 
 const ClientsList = (props: any) => {
   return props.clients.map(e => (
@@ -22,11 +25,20 @@ const ClientsList = (props: any) => {
 };
 
 const Clients = (props: any) => {
-  const [clients, setClient] = useState([]);
+  const router = useRouter();
+  const [clients, setClientList] = useState([]);
 
   useEffect(() => {
-    setClient(props.data);
+    setClientList(props.data);
   });
+
+  useEffect(() => {
+    title(router.pathname);
+  }, [router])
+
+  const reverseOrder = () => {
+    setClientList(clients.reverse());
+  }
 
   if (clients.length === 0) {
     return "Loading";
@@ -34,14 +46,14 @@ const Clients = (props: any) => {
   return (
     <div>
       <Header />
-      <h1>List of all clients</h1>
+      <h1>All clients</h1>
       <table>
         <thead>
-          <th>
-            <td>Name</td>
-            <td>Age</td>
-            <td>Address</td>
-          </th>
+          <tr>
+            <th><button onClick={reverseOrder}>Name</button></th>
+            <th>Age</th>
+            <th>Address</th>
+          </tr>
         </thead>
         <tbody>
           <ClientsList clients={clients} />

@@ -5,13 +5,18 @@ const Header = () => {
     <div>
       <ul>
         <li>
+          <Link href="/dashboard">
+            <a>Dashboard</a>
+          </Link>
+        </li>
+        <li>
           <Link href="/clients">
             <a>Clients</a>
           </Link>
         </li>
         <li>
-          <Link href="/">
-            <a>Dashboard</a>
+          <Link href="/settings">
+            <a>Settings</a>
           </Link>
         </li>
       </ul>

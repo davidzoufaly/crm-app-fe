@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -106,7 +106,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/nextjsTs/components/Header.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/Header.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -131,7 +131,7 @@ const Header = () => {
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/clients",
+    href: "/dashboard",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 8
@@ -143,14 +143,14 @@ const Header = () => {
       lineNumber: 9
     },
     __self: undefined
-  }, "Clients"))), __jsx("li", {
+  }, "Dashboard"))), __jsx("li", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 12
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/",
+    href: "/clients",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 13
@@ -162,10 +162,122 @@ const Header = () => {
       lineNumber: 14
     },
     __self: undefined
-  }, "Dashboard")))));
+  }, "Clients"))), __jsx("li", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17
+    },
+    __self: undefined
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/settings",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
+    },
+    __self: undefined
+  }, "Settings")))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
+/***/ "./functions/stringMethods.tsx":
+/*!*************************************!*\
+  !*** ./functions/stringMethods.tsx ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/array/from */ "./node_modules/@babel/runtime-corejs2/core-js/array/from.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+
+
+
+class stringMethods {
+  constructor(_text) {
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "text", void 0);
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "helperArray", void 0);
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "getIndexUpperCase", () => {
+      const textInArray = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(this.text);
+
+      for (let i = 0; i < textInArray.length; i++) {
+        if (textInArray[i] === textInArray[i].toUpperCase()) {
+          this.helperArray.push(i);
+        }
+      }
+
+      return this;
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "splitStringByIndex", () => {
+      let arrayText = [];
+
+      for (let i = 0; i <= this.helperArray.length; i++) {
+        if (i === 0) {
+          //first iteration
+          arrayText.push(this.text.substr(0, this.helperArray[i]));
+        } else if (i > 0 && i < this.helperArray.length) {
+          //iteration in the middle
+          arrayText.push(this.text.substr(this.helperArray[i - 1], this.helperArray[i] - this.helperArray[i - 1]));
+        } else if (i === this.helperArray.length) {
+          //last iteration
+          arrayText.push(this.text.substr(this.helperArray[i - 1]));
+        }
+      }
+
+      this.text = arrayText.join(" ");
+      return this;
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "firstCharUpperCase", () => {
+      let str = this.text.toLowerCase();
+      const firstCharString = str.substr(0, 1).toUpperCase();
+      const restString = str.substr(1);
+      this.text = firstCharString + restString;
+      return this;
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "removeSlash", () => {
+      this.text = this.text.replace('/', '');
+      return this;
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "addStringToEnd", text => {
+      this.text = this.text.concat(` ${text}`);
+      return this;
+    });
+
+    this.text = _text;
+    this.helperArray = [];
+  }
+
+}
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (stringMethods);
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/array/from.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/array/from.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/array/from */ "core-js/library/fn/array/from");
 
 /***/ }),
 
@@ -243,6 +355,36 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "core
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/promise */ "core-js/library/fn/promise");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _defineProperty; });
+/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
 
 /***/ }),
 
@@ -2127,44 +2269,70 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/Header */ "./components/Header.tsx");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/nextjsTs/pages/clients/[id].tsx";
+/* harmony import */ var _functions_stringMethods__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../functions/stringMethods */ "./functions/stringMethods.tsx");
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/clients/[id].tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+ //TODO: SKRÝVÁNÍ POLÍ CO NEJSOU V DB
+
 const Client = props => {
+  const {
+    name
+  } = props.data;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    document.title = `${name} | CRM-APP`;
+  });
+
+  const fce = () => {
+    const data = props.data;
+    const list = [];
+
+    for (let key in data) {
+      const convertedKey = new _functions_stringMethods__WEBPACK_IMPORTED_MODULE_3__["default"](key).getIndexUpperCase().splitStringByIndex().firstCharUpperCase();
+
+      if (key !== "_id" && key !== "name") {
+        list.push(__jsx("li", {
+          key: key,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 26
+          },
+          __self: undefined
+        }, convertedKey.text, ": ", data[key]));
+      }
+    }
+
+    return list;
+  };
+
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 6
+      lineNumber: 36
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 7
+      lineNumber: 37
     },
     __self: undefined
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8
+      lineNumber: 38
     },
     __self: undefined
-  }, props.data.name), __jsx("p", {
+  }, name), __jsx("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10
+      lineNumber: 39
     },
     __self: undefined
-  }, "Age: ", props.data.age), __jsx("p", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 11
-    },
-    __self: undefined
-  }, "Address: ", props.data.address));
+  }, fce()));
 };
 
 Client.getInitialProps = async context => {
@@ -2186,14 +2354,14 @@ Client.getInitialProps = async context => {
 
 /***/ }),
 
-/***/ 6:
+/***/ 4:
 /*!**************************************!*\
   !*** multi ./pages/clients/[id].tsx ***!
   \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/davidzoufaly/code/dp/nextjsTs/pages/clients/[id].tsx */"./pages/clients/[id].tsx");
+module.exports = __webpack_require__(/*! /Users/davidzoufaly/code/dp/crm-app-fe/pages/clients/[id].tsx */"./pages/clients/[id].tsx");
 
 
 /***/ }),
@@ -2206,6 +2374,17 @@ module.exports = __webpack_require__(/*! /Users/davidzoufaly/code/dp/nextjsTs/pa
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
+
+/***/ }),
+
+/***/ "core-js/library/fn/array/from":
+/*!************************************************!*\
+  !*** external "core-js/library/fn/array/from" ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/array/from");
 
 /***/ }),
 
