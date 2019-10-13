@@ -1,28 +1,35 @@
 import Header from '../components/Header';
 import axios from 'axios';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import ShowRecordsNumber from '../components/ShowRecordsNumber';
+import ShowRecordsNumber from '../components/RecordsNumber';
 import stringMethods from "../library/stringMethods";
-import titleSubText from "../library/globalVariables"; 
-
+import globalVars from "../library/globalVariables";
 
 const Dashboard = (props: any) => {
   const router = useRouter();
+  const [headingOne, setHeadingOne] = useState("");
 
   useEffect(() => {
+    setHeadingOne(
+      new stringMethods(router.pathname)
+        .removeSlash()
+        .firstCharUpperCase()
+        .getString()
+    );
     const title = new stringMethods(router.pathname)
       .removeSlash()
       .firstCharUpperCase()
-      .addStringToEnd(titleSubText);
-    document.title = title.text;
+      .addStringToEnd(globalVars.titleSubText)
+      .getString();
+    document.title = title;
   }, [router]);
 
 
   return (
     <div>
       <Header/>
-      <h1>CRM-APP dashboard</h1>
+      <h1>{headingOne}</h1>
       <ShowRecordsNumber data={props.data} />
     </div>
   );
@@ -31,13 +38,11 @@ const Dashboard = (props: any) => {
 Dashboard.getInitialProps = async () => {
   const res = await axios({
       method: "get",
-      url: "http://localhost:8080/api/clients/count",
+      url: `${globalVars.serverURL}/clients/count`,
       responseType: "json"
     });
     const data = await res.data;
-    return {
-      data
-    };
+    return data;
 };
 
 export default Dashboard;

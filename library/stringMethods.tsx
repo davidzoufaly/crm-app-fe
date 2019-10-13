@@ -1,5 +1,5 @@
 class stringMethods {
-  text: string;
+  private text: string;
 
   constructor(text: string) {
     this.text = text;
@@ -48,6 +48,10 @@ class stringMethods {
   replaceStringDiacritics = () => {
     this.text = this.text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     return this;
+  }
+
+  getString = () => {
+    return this.text;
   }
 }
 

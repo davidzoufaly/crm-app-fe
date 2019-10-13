@@ -16,7 +16,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/clients/[id]": [
+    "/settings": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

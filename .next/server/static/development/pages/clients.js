@@ -93,6 +93,89 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./components/ClientList.tsx":
+/*!***********************************!*\
+  !*** ./components/ClientList.tsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/ClientList.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+const ClientsList = ({
+  clients,
+  reverse,
+  sort
+}) => {
+  reverse ? clients.sort((a, b) => b[sort] > a[sort] ? 1 : -1) : clients.sort((a, b) => b[sort] > a[sort] ? -1 : 1);
+  const tableClients = clients.map(e => __jsx("tr", {
+    key: e._id,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15
+    },
+    __self: undefined
+  }, __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16
+    },
+    __self: undefined
+  }, e.dateAdded), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17
+    },
+    __self: undefined
+  }, e.name), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18
+    },
+    __self: undefined
+  }, e.age), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
+    },
+    __self: undefined
+  }, e.address), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: undefined
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/clients/[id]",
+    as: `/clients/${e._id}`,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22
+    },
+    __self: undefined
+  }, "Go to client")))));
+  return tableClients;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ClientsList);
+
+/***/ }),
+
 /***/ "./components/Header.tsx":
 /*!*******************************!*\
   !*** ./components/Header.tsx ***!
@@ -197,8 +280,11 @@ const Header = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const titleSubText = "| CRM-APP";
-/* harmony default export */ __webpack_exports__["default"] = (titleSubText);
+const globalVars = {
+  titleSubText: "| CRM-APP",
+  serverURL: "http://localhost:8080/api"
+};
+/* harmony default export */ __webpack_exports__["default"] = (globalVars);
 
 /***/ }),
 
@@ -258,6 +344,10 @@ class stringMethods {
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "replaceStringDiacritics", () => {
       this.text = this.text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       return this;
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "getString", () => {
+      return this.text;
     });
 
     this.text = _text;
@@ -2267,11 +2357,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/router */ "next/router");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Header */ "./components/Header.tsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Header */ "./components/Header.tsx");
+/* harmony import */ var _components_ClientList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/ClientList */ "./components/ClientList.tsx");
 /* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../library/stringMethods */ "./library/stringMethods.tsx");
 /* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/clients.tsx";
@@ -2283,58 +2372,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
- //TODO: SORTOVÁNÍ
-//TODO: TABULKA DYNAMICKÉ ZÁHLAVÍ
+ //TODO: TABULKA DYNAMICKÉ ZÁHLAVÍ
 //TODO: PŘIDAT NOVÉHO KLIENTA
-
-const ClientsList = props => {
-  return props.clients.map(e => __jsx("tr", {
-    key: e._id,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 16
-    },
-    __self: undefined
-  }, __jsx("td", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 17
-    },
-    __self: undefined
-  }, e.name), __jsx("td", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 18
-    },
-    __self: undefined
-  }, e.age), __jsx("td", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 19
-    },
-    __self: undefined
-  }, e.address), __jsx("td", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 20
-    },
-    __self: undefined
-  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/clients/[id]",
-    as: `/clients/${e._id}`,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21
-    },
-    __self: undefined
-  }, __jsx("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22
-    },
-    __self: undefined
-  }, "Go to client")))));
-};
 
 const Clients = props => {
   const router = Object(next_router__WEBPACK_IMPORTED_MODULE_1__["useRouter"])();
@@ -2342,16 +2381,30 @@ const Clients = props => {
     0: clients,
     1: setClientList
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const {
+    0: reverse,
+    1: setReverseOrder
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const {
+    0: sort,
+    1: setSortBy
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("dateAdded");
+  const {
+    0: headingOne,
+    1: setHeadingOne
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     setClientList(props.data);
-  });
+    setHeadingOne(new _library_stringMethods__WEBPACK_IMPORTED_MODULE_5__["default"](router.pathname).removeSlash().firstCharUpperCase().getString());
+  }, [props.data]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    const title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_5__["default"](router.pathname).removeSlash().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"]);
-    document.title = title.text;
+    const title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_5__["default"](router.pathname).removeSlash().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].titleSubText).getString();
+    document.title = title;
   }, [router]);
 
-  const reverseOrder = () => {
-    setClientList(clients.reverse());
+  const sortBy = () => {
+    setSortBy("age");
+    reverse === false ? setReverseOrder(true) : setReverseOrder(false);
   };
 
   if (clients.length === 0) {
@@ -2361,84 +2414,104 @@ const Clients = props => {
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 50
     },
     __self: undefined
-  }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 51
     },
     __self: undefined
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 52
     },
     __self: undefined
-  }, "All clients"), __jsx("table", {
+  }, headingOne), __jsx("table", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 53
     },
     __self: undefined
   }, __jsx("thead", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 54
     },
     __self: undefined
   }, __jsx("tr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 55
     },
     __self: undefined
   }, __jsx("th", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 56
     },
     __self: undefined
   }, __jsx("button", {
-    onClick: reverseOrder,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 56
+    },
+    __self: undefined
+  }, "Date Added")), __jsx("th", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 57
+    },
+    __self: undefined
+  }, __jsx("button", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 57
     },
     __self: undefined
   }, "Name")), __jsx("th", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 58
     },
     __self: undefined
-  }, "Age"), __jsx("th", {
+  }, __jsx("button", {
+    onClick: sortBy,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 58
+    },
+    __self: undefined
+  }, "Age")), __jsx("th", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 59
     },
     __self: undefined
   }, "Address"))), __jsx("tbody", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 62
     },
     __self: undefined
-  }, __jsx(ClientsList, {
+  }, __jsx(_components_ClientList__WEBPACK_IMPORTED_MODULE_4__["default"], {
     clients: clients,
+    sort: sort,
+    reverse: reverse,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 63
     },
     __self: undefined
   }))));
 };
 
 Clients.getInitialProps = async () => {
-  const res = await axios__WEBPACK_IMPORTED_MODULE_3___default()({
+  const res = await axios__WEBPACK_IMPORTED_MODULE_2___default()({
     method: "get",
-    url: "http://localhost:8080/api/clients",
+    url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].serverURL}/clients`,
     responseType: "json"
   });
   const data = await res.data;
