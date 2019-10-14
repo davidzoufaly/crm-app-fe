@@ -88,10 +88,175 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./components/AddOrEditField.tsx":
+/*!***************************************!*\
+  !*** ./components/AddOrEditField.tsx ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SelectFieldOptions */ "./components/SelectFieldOptions.tsx");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! uniqid */ "uniqid");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_3__);
+
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/AddOrEditField.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
+
+const AddOrEditField = ({
+  fieldObject,
+  changeDisplayComponent
+}) => {
+  const {
+    0: updatedField,
+    1: setUpdatedField
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(fieldObject);
+  const {
+    0: options,
+    1: setNewOption
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]);
+
+  const saveField = () => {
+    //todo: post req na fields s editedField
+    setUpdatedField({});
+    changeDisplayComponent();
+  };
+
+  const onNameChange = event => {
+    setUpdatedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, updatedField, {
+      fieldName: event.target.value
+    }));
+  };
+
+  const onSelectChange = event => {
+    setUpdatedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, updatedField, {
+      fieldType: event.target.options[event.target.options.selectedIndex].value
+    }));
+  };
+
+  const handleInputsSpawn = () => {
+    setNewOption([...options, {
+      id: uniqid__WEBPACK_IMPORTED_MODULE_3___default()(),
+      value: ""
+    }]);
+  };
+
+  const onChange = event => {
+    setNewOption(options.filter(e => event.target.id === e.id ? e.value = event.target.value : e));
+  };
+
+  const onDelete = event => {
+    setNewOption(options.filter(e => event.target.id !== e.id ? e : null));
+  };
+
+  return __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 45
+    },
+    __self: undefined
+  }, __jsx("label", {
+    htmlFor: "field-name",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 46
+    },
+    __self: undefined
+  }, "Field name"), __jsx("input", {
+    type: "text",
+    id: "field-name",
+    defaultValue: updatedField.fieldName,
+    onChange: onNameChange,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47
+    },
+    __self: undefined
+  }), __jsx("label", {
+    htmlFor: "field-type",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53
+    },
+    __self: undefined
+  }, "Field type"), __jsx("select", {
+    id: "field-type",
+    onChange: onSelectChange,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 54
+    },
+    __self: undefined
+  }, __jsx("option", {
+    value: "text",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: undefined
+  }, "Text"), __jsx("option", {
+    value: "select",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 56
+    },
+    __self: undefined
+  }, "Select"), __jsx("option", {
+    value: "number",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 57
+    },
+    __self: undefined
+  }, "Number")), __jsx(_components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    options: options,
+    onChange: onChange,
+    onDelete: onDelete,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 59
+    },
+    __self: undefined
+  }), updatedField.fieldType === "select" ? __jsx("button", {
+    onClick: handleInputsSpawn,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 61
+    },
+    __self: undefined
+  }, "New") : null, __jsx("button", {
+    onClick: saveField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 63
+    },
+    __self: undefined
+  }, "Save"), __jsx("button", {
+    onClick: changeDisplayComponent,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 64
+    },
+    __self: undefined
+  }, "Cancel"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AddOrEditField);
+
+/***/ }),
 
 /***/ "./components/CustomClientFields.tsx":
 /*!*******************************************!*\
@@ -119,6 +284,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/ListItem */ "@material-ui/core/ListItem");
 /* harmony import */ var _material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Grid */ "@material-ui/core/Grid");
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _components_AddOrEditField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/AddOrEditField */ "./components/AddOrEditField.tsx");
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CustomClientFields.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
@@ -130,14 +298,17 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+
+
+
 const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])({
   card: {
-    minWidth: 275
+    textAlign: "center",
+    height: "100%",
+    minWidth: "300px"
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
+  list: {
+    listStyleType: "disc"
   },
   title: {
     fontSize: 14
@@ -148,9 +319,26 @@ const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["
 });
 
 const CustomClientFields = ({
-  fields
+  fields,
+  deleteField
 }) => {
-  const classes = useStyles();
+  const {
+    0: displayComponent,
+    1: setDisplayComponent
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const {
+    0: editedField
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    fieldName: "",
+    fieldType: "text",
+    fieldPermanent: false
+  });
+  const classes = useStyles({});
+
+  const changeDisplayComponent = () => {
+    displayComponent ? setDisplayComponent(false) : setDisplayComponent(true);
+  };
+
   const customFields = fields.filter(({
     fieldPermanent
   }) => !fieldPermanent).map(({
@@ -159,8 +347,7 @@ const CustomClientFields = ({
     fieldType,
     fieldOptions
   }) => {
-    const customFieldNameFormated = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](fieldName).camelStringToText().firstCharUpperCase().getString();
-    const customFieldTypeFormated = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](fieldType).camelStringToText().getString();
+    const customFieldNameFormated = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](fieldName.toLowerCase()).firstCharUpperCase().getString();
 
     const optionsMap = () => {
       return fieldOptions.map(e => {
@@ -169,32 +356,39 @@ const CustomClientFields = ({
           key: optionFormatedKey,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 48
+            lineNumber: 58
           },
           __self: undefined
         }, __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_6___default.a, {
           primary: e.toLowerCase(),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 48
+            lineNumber: 58
           },
           __self: undefined
         }));
       });
     };
 
-    return __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3___default.a, {
-      className: classes.card,
+    return __jsx(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9___default.a, {
+      item: true,
       key: _id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 53
+        lineNumber: 63
+      },
+      __self: undefined
+    }, __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3___default.a, {
+      className: classes.card,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 64
       },
       __self: undefined
     }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 54
+        lineNumber: 65
       },
       __self: undefined
     }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -202,7 +396,7 @@ const CustomClientFields = ({
       component: "h3",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 55
+        lineNumber: 66
       },
       __self: undefined
     }, customFieldNameFormated), __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -210,36 +404,70 @@ const CustomClientFields = ({
       color: "textSecondary",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 58
+        lineNumber: 69
       },
       __self: undefined
-    }, "(", customFieldTypeFormated.toLowerCase(), ")"), fieldType === "select" ? __jsx(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_7___default.a, {
+    }, "(", fieldType.toLowerCase(), ")"), fieldType === "select" ? __jsx(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_7___default.a, {
+      className: classes.list,
+      dense: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 61
+        lineNumber: 72
       },
       __self: undefined
-    }, optionsMap()) : null));
+    }, optionsMap()) : null, __jsx("button", {
+      onClick: changeDisplayComponent,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 73
+      },
+      __self: undefined
+    }, "Edit field"), __jsx("button", {
+      onClick: deleteField,
+      id: _id,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 74
+      },
+      __self: undefined
+    }, "Delete field"))));
   });
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 82
     },
     __self: undefined
   }, __jsx("h2", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 69
+      lineNumber: 83
     },
     __self: undefined
-  }, "Custom Client Fields"), __jsx("div", {
+  }, "Custom Client Fields"), __jsx(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    container: true,
+    spacing: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 70
+      lineNumber: 84
     },
     __self: undefined
-  }, customFields));
+  }, customFields), !displayComponent ? __jsx("button", {
+    onClick: changeDisplayComponent,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 87
+    },
+    __self: undefined
+  }, "Add new field") : __jsx(_components_AddOrEditField__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    fieldObject: editedField,
+    changeDisplayComponent: changeDisplayComponent,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 87
+    },
+    __self: undefined
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CustomClientFields);
@@ -408,6 +636,70 @@ const Header = () => {
 
 /***/ }),
 
+/***/ "./components/SelectFieldOptions.tsx":
+/*!*******************************************!*\
+  !*** ./components/SelectFieldOptions.tsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/SelectFieldOptions.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+const SelectFieldOptions = ({
+  options,
+  onChange,
+  onDelete
+}) => {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(options);
+  });
+  let items = options.map(e => {
+    return __jsx("div", {
+      key: e.id,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11
+      },
+      __self: undefined
+    }, __jsx("input", {
+      type: "text",
+      onChange: onChange,
+      id: e.id,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 12
+      },
+      __self: undefined
+    }), __jsx("button", {
+      id: e.id,
+      onClick: onDelete,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 13
+      },
+      __self: undefined
+    }, "X"));
+  });
+  return __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18
+    },
+    __self: undefined
+  }, items);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SelectFieldOptions);
+
+/***/ }),
+
 /***/ "./library/globalVariables.tsx":
 /*!*************************************!*\
   !*** ./library/globalVariables.tsx ***!
@@ -450,7 +742,7 @@ class stringMethods {
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "firstCharUpperCase", () => {
-      this.text = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(this.text).map((e, i) => i === 0 ? e.toUpperCase() : e).join("");
+      this.text = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(this.text).map((e, i) => i === 0 && e.toUpperCase() !== e ? e.toUpperCase() : e).join("");
       return this;
     });
 
@@ -562,6 +854,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-prope
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-property-symbols */ "core-js/library/fn/object/get-own-property-symbols");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js":
 /*!********************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/keys.js ***!
@@ -610,6 +913,49 @@ function _defineProperty(obj, key, value) {
   }
 
   return obj;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectSpread; });
+/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
+/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+
+
+
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    var ownKeys = _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(source);
+
+    if (typeof _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default.a === 'function') {
+      ownKeys = ownKeys.concat(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default()(source).filter(function (sym) {
+        return _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      Object(_defineProperty__WEBPACK_IMPORTED_MODULE_3__["default"])(target, key, source[key]);
+    });
+  }
+
+  return target;
 }
 
 /***/ }),
@@ -2520,54 +2866,69 @@ const Settings = ({
   const {
     0: fields,
     1: setField
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data);
   const {
     0: headingOne,
     1: setHeadingOne
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
+  const {
+    0: initialized,
+    1: setInitialized
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+
+  const deleteField = async event => {
+    const id = event.target.id;
+    const res = await axios__WEBPACK_IMPORTED_MODULE_5___default()({
+      method: "delete",
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_4__["default"].serverURL}/fields/${id}`,
+      responseType: "json"
+    });
+    const data = await res.data;
+    data.msg === "Success" ? setField(fields.filter(e => e._id !== id)) : null;
+  };
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    setField(data);
     setHeadingOne(new _library_stringMethods__WEBPACK_IMPORTED_MODULE_3__["default"](router.pathname).removeSlash().firstCharUpperCase().getString());
-  });
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     const title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_3__["default"](router.pathname).removeSlash().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_4__["default"].titleSubText).getString();
     document.title = title;
-  }, [router]);
+    setInitialized(true);
+  });
 
-  if (fields.length === 0) {
+  if (!initialized) {
     return "Loading...";
   }
 
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 50
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 51
     },
     __self: undefined
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 52
     },
     __self: undefined
   }, headingOne), __jsx(_components_DefaultClientFields__WEBPACK_IMPORTED_MODULE_6__["default"], {
     fields: fields,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 53
     },
     __self: undefined
   }), __jsx(_components_CustomClientFields__WEBPACK_IMPORTED_MODULE_7__["default"], {
     fields: fields,
+    deleteField: deleteField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 54
     },
     __self: undefined
   }));
@@ -2589,7 +2950,7 @@ Settings.getInitialProps = async () => {
 
 /***/ }),
 
-/***/ 7:
+/***/ 5:
 /*!**********************************!*\
   !*** multi ./pages/settings.tsx ***!
   \**********************************/
@@ -2620,6 +2981,17 @@ module.exports = require("@material-ui/core/Card");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/CardContent");
+
+/***/ }),
+
+/***/ "@material-ui/core/Grid":
+/*!*****************************************!*\
+  !*** external "@material-ui/core/Grid" ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Grid");
 
 /***/ }),
 
@@ -2755,6 +3127,17 @@ module.exports = require("core-js/library/fn/object/get-own-property-descriptor"
 
 /***/ }),
 
+/***/ "core-js/library/fn/object/get-own-property-symbols":
+/*!*********************************************************************!*\
+  !*** external "core-js/library/fn/object/get-own-property-symbols" ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/get-own-property-symbols");
+
+/***/ }),
+
 /***/ "core-js/library/fn/object/keys":
 /*!*************************************************!*\
   !*** external "core-js/library/fn/object/keys" ***!
@@ -2818,6 +3201,17 @@ module.exports = require("prop-types-exact");
 /***/ (function(module, exports) {
 
 module.exports = require("react");
+
+/***/ }),
+
+/***/ "uniqid":
+/*!*************************!*\
+  !*** external "uniqid" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("uniqid");
 
 /***/ }),
 

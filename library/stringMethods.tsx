@@ -16,7 +16,7 @@ class stringMethods {
 
   firstCharUpperCase = () => {
     this.text = Array.from(this.text)
-      .map((e, i) => (i === 0 ? e.toUpperCase() : e))
+      .map((e, i) => (i === 0 && e.toUpperCase() !== e ? e.toUpperCase() : e))
       .join("");
 
     return this;

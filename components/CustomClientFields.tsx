@@ -1,20 +1,23 @@
 import stringMethods from "../library/stringMethods";
 import { makeStyles } from "@material-ui/core/styles";
+import { useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import ListItemText from '@material-ui/core/ListItemText';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Grid from '@material-ui/core/Grid';
+import AddOrEditField from "../components/AddOrEditField";
 
 const useStyles = makeStyles({
   card: {
-    minWidth: 275
+    textAlign: "center",
+    height: "100%",
+    minWidth: "300px"
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
+  list: {
+      listStyleType: "disc"
   },
   title: {
     fontSize: 14
@@ -24,18 +27,25 @@ const useStyles = makeStyles({
   }
 });
 
-const CustomClientFields = ({ fields }: any) => {
-  const classes = useStyles();
+const CustomClientFields = ({ fields, deleteField }: any) => {
+  const [displayComponent, setDisplayComponent] = useState(false);
+  const [editedField] = useState({
+    fieldName: "",
+    fieldType: "text",
+    fieldPermanent: false
+  })
+
+  const classes = useStyles({});
+
+  const changeDisplayComponent = () => {
+    displayComponent ? setDisplayComponent(false) : setDisplayComponent(true);
+  }
+
   const customFields = fields
     .filter(({ fieldPermanent }: any) => !fieldPermanent)
     .map(({ fieldName, _id, fieldType, fieldOptions }: any) => {
-      const customFieldNameFormated = new stringMethods(fieldName)
-        .camelStringToText()
+      const customFieldNameFormated = new stringMethods(fieldName.toLowerCase())
         .firstCharUpperCase()
-        .getString();
-
-      const customFieldTypeFormated = new stringMethods(fieldType)
-        .camelStringToText()
         .getString();
 
       const optionsMap = () => {
@@ -50,24 +60,31 @@ const CustomClientFields = ({ fields }: any) => {
       };
 
       return (
-        <Card className={classes.card} key={_id}>
-          <CardContent>
-          <Typography variant="h5" component="h3">
-            {customFieldNameFormated}
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            ({customFieldTypeFormated.toLowerCase()})
-          </Typography>
-            {fieldType === "select" ? <List>{optionsMap()}</List> : null}
-          </CardContent>
-        </Card>
+        <Grid item key={_id}>
+            <Card className={classes.card}>
+            <CardContent>
+            <Typography variant="h5" component="h3">
+                {customFieldNameFormated}
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+                ({fieldType.toLowerCase()})
+            </Typography>
+                {fieldType === "select" ? <List className={classes.list} dense={true}>{optionsMap()}</List> : null}
+            <button onClick={changeDisplayComponent}>Edit field</button>
+            <button onClick={deleteField} id={_id}>Delete field</button>
+            </CardContent>
+            </Card>
+        </Grid>  
       );
     });
 
   return (
     <div>
       <h2>Custom Client Fields</h2>
-      <div>{customFields}</div>
+      <Grid container spacing={2}>
+      {customFields}
+      </Grid>
+      {!displayComponent ? <button onClick={changeDisplayComponent}>Add new field</button> : <AddOrEditField fieldObject={editedField} changeDisplayComponent={changeDisplayComponent} />}
     </div>
   );
 };

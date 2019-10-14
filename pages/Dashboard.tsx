@@ -5,10 +5,12 @@ import { useRouter } from "next/router";
 import ShowRecordsNumber from '../components/RecordsNumber';
 import stringMethods from "../library/stringMethods";
 import globalVars from "../library/globalVariables";
+import EditField from "../components/AddOrEditField";
 
 const Dashboard = (props: any) => {
   const router = useRouter();
   const [headingOne, setHeadingOne] = useState("");
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     setHeadingOne(
@@ -23,14 +25,20 @@ const Dashboard = (props: any) => {
       .addStringToEnd(globalVars.titleSubText)
       .getString();
     document.title = title;
-  }, [router]);
 
+    setInitialized(true);
+  });
+
+  if(!initialized) {
+    return "Loading..."
+  }
 
   return (
     <div>
       <Header/>
       <h1>{headingOne}</h1>
       <ShowRecordsNumber data={props.data} />
+      <EditField />
     </div>
   );
 };

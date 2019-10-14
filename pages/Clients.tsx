@@ -11,23 +11,23 @@ import globalVars from "../library/globalVariables";
 //TODO: PŘIDAT NOVÉHO KLIENTA
 
 
-const Clients = (props: any) => {
+const Clients = ({ data }: any) => {
   const router = useRouter();
 
-  const [clients, setClientList] = useState([]);
+  const [clients] = useState(data);
   const [reverse, setReverseOrder] = useState(false);
   const [sort, setSortBy] = useState("dateAdded");
   const [headingOne, setHeadingOne] = useState("");
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    setClientList(props.data);
     setHeadingOne(
       new stringMethods(router.pathname)
         .removeSlash()
         .firstCharUpperCase()
         .getString()
     );
-  }, [props.data])
+  })
 
   useEffect(() => {
     const title = new stringMethods(router.pathname)
@@ -36,14 +36,16 @@ const Clients = (props: any) => {
       .addStringToEnd(globalVars.titleSubText)
       .getString();
     document.title = title;
-  }, [router]);
+
+    setInitialized(true);
+  });
 
   const sortBy = () => {
     setSortBy("age");
     reverse === false ? setReverseOrder(true) : setReverseOrder(false);
   }
 
-  if (clients.length === 0) {
+  if (!initialized) {
     return "Loading";
   }
   return (
