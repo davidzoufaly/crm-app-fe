@@ -124,13 +124,12 @@ const AddOrEditField = ({
     0: updatedField,
     1: setUpdatedField
   } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(fieldObject);
-  const {
-    0: options,
-    1: setNewOption
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
+    console.log(updatedField);
+  });
 
   const saveField = () => {
-    //todo: post req na fields s editedField
+    //TODO: post req na fields s updatedField objectem
     setUpdatedField({});
     changeDisplayComponent();
   };
@@ -147,32 +146,38 @@ const AddOrEditField = ({
     }));
   };
 
-  const handleInputsSpawn = () => {
-    setNewOption([...options, {
-      id: uniqid__WEBPACK_IMPORTED_MODULE_3___default()(),
-      value: ""
-    }]);
+  const handleOptionSpawn = () => {
+    setUpdatedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, updatedField, {
+      fieldOptions: [...updatedField.fieldOptions, {
+        id: uniqid__WEBPACK_IMPORTED_MODULE_3___default()(),
+        value: ""
+      }]
+    }));
   };
 
   const onChange = event => {
-    setNewOption(options.filter(e => event.target.id === e.id ? e.value = event.target.value : e));
+    setUpdatedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, updatedField, {
+      fieldOptions: updatedField.fieldOptions.filter(e => event.target.id === e.id ? e.value = event.target.value : e)
+    }));
   };
 
   const onDelete = event => {
-    setNewOption(options.filter(e => event.target.id !== e.id ? e : null));
+    setUpdatedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, updatedField, {
+      fieldOptions: updatedField.fieldOptions.filter(e => event.target.id !== e.id ? e : null)
+    }));
   };
 
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 55
     },
     __self: undefined
   }, __jsx("label", {
     htmlFor: "field-name",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 56
     },
     __self: undefined
   }, "Field name"), __jsx("input", {
@@ -182,14 +187,14 @@ const AddOrEditField = ({
     onChange: onNameChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 57
     },
     __self: undefined
   }), __jsx("label", {
     htmlFor: "field-type",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 63
     },
     __self: undefined
   }, "Field type"), __jsx("select", {
@@ -197,58 +202,58 @@ const AddOrEditField = ({
     onChange: onSelectChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 64
     },
     __self: undefined
   }, __jsx("option", {
     value: "text",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 65
     },
     __self: undefined
   }, "Text"), __jsx("option", {
     value: "select",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 66
     },
     __self: undefined
   }, "Select"), __jsx("option", {
     value: "number",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 67
     },
     __self: undefined
   }, "Number")), __jsx(_components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    options: options,
+    options: updatedField.fieldOptions,
     onChange: onChange,
     onDelete: onDelete,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 69
     },
     __self: undefined
   }), updatedField.fieldType === "select" ? __jsx("button", {
-    onClick: handleInputsSpawn,
+    onClick: handleOptionSpawn,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 75
     },
     __self: undefined
   }, "New") : null, __jsx("button", {
     onClick: saveField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 77
     },
     __self: undefined
   }, "Save"), __jsx("button", {
     onClick: changeDisplayComponent,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 78
     },
     __self: undefined
   }, "Cancel"));
@@ -331,12 +336,13 @@ const CustomClientFields = ({
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     fieldName: "",
     fieldType: "text",
-    fieldPermanent: false
+    fieldPermanent: false,
+    fieldOptions: []
   });
   const classes = useStyles({});
 
   const changeDisplayComponent = () => {
-    displayComponent ? setDisplayComponent(false) : setDisplayComponent(true);
+    displayComponent ? setDisplayComponent(false) : setDisplayComponent(true); //TODO: POSÍLAT PO KLIKU NA EDIT FIELD -> OBJEKT S PARAMETRY POLE
   };
 
   const customFields = fields.filter(({
@@ -356,14 +362,14 @@ const CustomClientFields = ({
           key: optionFormatedKey,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 60
           },
           __self: undefined
         }, __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_6___default.a, {
           primary: e.toLowerCase(),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 60
           },
           __self: undefined
         }));
@@ -375,20 +381,20 @@ const CustomClientFields = ({
       key: _id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 63
+        lineNumber: 65
       },
       __self: undefined
     }, __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3___default.a, {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 64
+        lineNumber: 66
       },
       __self: undefined
     }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 65
+        lineNumber: 67
       },
       __self: undefined
     }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -396,7 +402,7 @@ const CustomClientFields = ({
       component: "h3",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 66
+        lineNumber: 68
       },
       __self: undefined
     }, customFieldNameFormated), __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -404,7 +410,7 @@ const CustomClientFields = ({
       color: "textSecondary",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 69
+        lineNumber: 71
       },
       __self: undefined
     }, "(", fieldType.toLowerCase(), ")"), fieldType === "select" ? __jsx(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_7___default.a, {
@@ -412,14 +418,14 @@ const CustomClientFields = ({
       dense: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 72
+        lineNumber: 74
       },
       __self: undefined
     }, optionsMap()) : null, __jsx("button", {
       onClick: changeDisplayComponent,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 73
+        lineNumber: 75
       },
       __self: undefined
     }, "Edit field"), __jsx("button", {
@@ -427,7 +433,7 @@ const CustomClientFields = ({
       id: _id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 74
+        lineNumber: 76
       },
       __self: undefined
     }, "Delete field"))));
@@ -435,13 +441,13 @@ const CustomClientFields = ({
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 84
     },
     __self: undefined
   }, __jsx("h2", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 85
     },
     __self: undefined
   }, "Custom Client Fields"), __jsx(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -449,14 +455,14 @@ const CustomClientFields = ({
     spacing: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 86
     },
     __self: undefined
   }, customFields), !displayComponent ? __jsx("button", {
     onClick: changeDisplayComponent,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 87
+      lineNumber: 89
     },
     __self: undefined
   }, "Add new field") : __jsx(_components_AddOrEditField__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -464,7 +470,7 @@ const CustomClientFields = ({
     changeDisplayComponent: changeDisplayComponent,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 87
+      lineNumber: 89
     },
     __self: undefined
   }));
@@ -651,21 +657,17 @@ var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/SelectFiel
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
-
 const SelectFieldOptions = ({
   options,
   onChange,
   onDelete
 }) => {
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log(options);
-  });
   let items = options.map(e => {
     return __jsx("div", {
       key: e.id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 11
+        lineNumber: 4
       },
       __self: undefined
     }, __jsx("input", {
@@ -674,7 +676,7 @@ const SelectFieldOptions = ({
       id: e.id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 12
+        lineNumber: 5
       },
       __self: undefined
     }), __jsx("button", {
@@ -682,7 +684,7 @@ const SelectFieldOptions = ({
       onClick: onDelete,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 13
+        lineNumber: 6
       },
       __self: undefined
     }, "X"));
@@ -690,7 +692,7 @@ const SelectFieldOptions = ({
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18
+      lineNumber: 13
     },
     __self: undefined
   }, items);

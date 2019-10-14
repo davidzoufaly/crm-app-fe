@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import SelectFieldOptions from "../components/SelectFieldOptions";
 import uniqid from "uniqid";
 
 const AddOrEditField = ({ fieldObject, changeDisplayComponent }: any) => {
   const [updatedField, setUpdatedField] = useState(fieldObject);
-  const [options, setNewOption]: any = useState([]);
+
+  useEffect(() => {
+    console.log(updatedField)
+  })
 
   const saveField = () => {
-    //todo: post req na fields s editedField
+    //TODO: post req na fields s updatedField objectem
     setUpdatedField({});
     changeDisplayComponent();
   };
@@ -23,22 +26,29 @@ const AddOrEditField = ({ fieldObject, changeDisplayComponent }: any) => {
     });
   };
 
-  const handleInputsSpawn = () => {
-    setNewOption([...options, { id: uniqid(), value: "" }]);
+  const handleOptionSpawn = () => {
+    setUpdatedField({
+      ...updatedField,
+      fieldOptions: [...updatedField.fieldOptions, { id: uniqid(), value: "" }]
+    });
   };
 
   const onChange = (event: any) => {
-    setNewOption(
-      options.filter((e: any) =>
+    setUpdatedField({
+      ...updatedField,
+      fieldOptions: updatedField.fieldOptions.filter((e: any) =>
         event.target.id === e.id ? (e.value = event.target.value) : e
       )
-    );
+    });
   };
 
   const onDelete = (event: any) => {
-    setNewOption(
-      options.filter((e: any) => (event.target.id !== e.id ? e : null))
-    );
+    setUpdatedField({
+      ...updatedField,
+      fieldOptions: updatedField.fieldOptions.filter((e: any) =>
+        event.target.id !== e.id ? e : null
+      )
+    });
   };
 
   return (
@@ -56,9 +66,13 @@ const AddOrEditField = ({ fieldObject, changeDisplayComponent }: any) => {
         <option value="select">Select</option>
         <option value="number">Number</option>
       </select>
-      <SelectFieldOptions options={options} onChange={onChange} onDelete={onDelete} />
+      <SelectFieldOptions
+        options={updatedField.fieldOptions}
+        onChange={onChange}
+        onDelete={onDelete}
+      />
       {updatedField.fieldType === "select" ? (
-        <button onClick={handleInputsSpawn}>New</button>
+        <button onClick={handleOptionSpawn}>New</button>
       ) : null}
       <button onClick={saveField}>Save</button>
       <button onClick={changeDisplayComponent}>Cancel</button>

@@ -32,13 +32,15 @@ const CustomClientFields = ({ fields, deleteField }: any) => {
   const [editedField] = useState({
     fieldName: "",
     fieldType: "text",
-    fieldPermanent: false
+    fieldPermanent: false,
+    fieldOptions: []
   })
 
   const classes = useStyles({});
 
   const changeDisplayComponent = () => {
     displayComponent ? setDisplayComponent(false) : setDisplayComponent(true);
+    //TODO: POSÍLAT PO KLIKU NA EDIT FIELD -> OBJEKT S PARAMETRY POLE
   }
 
   const customFields = fields
