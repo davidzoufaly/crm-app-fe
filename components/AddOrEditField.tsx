@@ -1,22 +1,29 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import SelectFieldOptions from "../components/SelectFieldOptions";
 import uniqid from "uniqid";
+import axios from "axios";
+import globalVars from "../library/globalVariables";
 
-const AddOrEditField = ({ fieldObject, changeDisplayComponent }: any) => {
+const AddOrEditField = ({ fieldObject, changeDisplayComponent, refreshList }: any) => {
   const [updatedField, setUpdatedField] = useState(fieldObject);
 
-  useEffect(() => {
-    console.log(updatedField)
-  })
+  const saveField = async () => {
 
-  const saveField = () => {
-    //TODO: post req na fields s updatedField objectem
-    setUpdatedField({});
-    changeDisplayComponent();
+    const res = await axios({
+      method: "post",
+      url: `${globalVars.serverURL}/fields/`,
+      data: updatedField,
+      responseType: "json"
+    });
+    const data = await res.data;
+    data.msg === "Success" ? changeDisplayComponent() : null;
+    console.log(fieldObject);
+    refreshList();
   };
 
   const onNameChange = (event: any) => {
-    setUpdatedField({ ...updatedField, fieldName: event.target.value });
+    setUpdatedField({ ...updatedField, fieldName: event.target.value});
+    console.log(updatedField);
   };
 
   const onSelectChange = (event: any) => {
@@ -61,7 +68,7 @@ const AddOrEditField = ({ fieldObject, changeDisplayComponent }: any) => {
         onChange={onNameChange}
       />
       <label htmlFor="field-type">Field type</label>
-      <select id="field-type" onChange={onSelectChange}>
+      <select id="field-type" onChange={onSelectChange} defaultValue={updatedField.fieldType}> 
         <option value="text">Text</option>
         <option value="select">Select</option>
         <option value="number">Number</option>

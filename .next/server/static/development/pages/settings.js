@@ -108,6 +108,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SelectFieldOptions */ "./components/SelectFieldOptions.tsx");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! uniqid */ "uniqid");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
 
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/AddOrEditField.tsx";
 
@@ -116,28 +119,36 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
+
+
 const AddOrEditField = ({
   fieldObject,
-  changeDisplayComponent
+  changeDisplayComponent,
+  refreshList
 }) => {
   const {
     0: updatedField,
     1: setUpdatedField
   } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(fieldObject);
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
-    console.log(updatedField);
-  });
 
-  const saveField = () => {
-    //TODO: post req na fields s updatedField objectem
-    setUpdatedField({});
-    changeDisplayComponent();
+  const saveField = async () => {
+    const res = await axios__WEBPACK_IMPORTED_MODULE_4___default()({
+      method: "post",
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_5__["default"].serverURL}/fields/`,
+      data: updatedField,
+      responseType: "json"
+    });
+    const data = await res.data;
+    data.msg === "Success" ? changeDisplayComponent() : null;
+    console.log(fieldObject);
+    refreshList();
   };
 
   const onNameChange = event => {
     setUpdatedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, updatedField, {
       fieldName: event.target.value
     }));
+    console.log(updatedField);
   };
 
   const onSelectChange = event => {
@@ -170,14 +181,14 @@ const AddOrEditField = ({
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 62
     },
     __self: undefined
   }, __jsx("label", {
     htmlFor: "field-name",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 63
     },
     __self: undefined
   }, "Field name"), __jsx("input", {
@@ -187,43 +198,44 @@ const AddOrEditField = ({
     onChange: onNameChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 64
     },
     __self: undefined
   }), __jsx("label", {
     htmlFor: "field-type",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 70
     },
     __self: undefined
   }, "Field type"), __jsx("select", {
     id: "field-type",
     onChange: onSelectChange,
+    defaultValue: updatedField.fieldType,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 71
     },
     __self: undefined
   }, __jsx("option", {
     value: "text",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 72
     },
     __self: undefined
   }, "Text"), __jsx("option", {
     value: "select",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 73
     },
     __self: undefined
   }, "Select"), __jsx("option", {
     value: "number",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 74
     },
     __self: undefined
   }, "Number")), __jsx(_components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -232,28 +244,28 @@ const AddOrEditField = ({
     onDelete: onDelete,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 69
+      lineNumber: 76
     },
     __self: undefined
   }), updatedField.fieldType === "select" ? __jsx("button", {
     onClick: handleOptionSpawn,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 82
     },
     __self: undefined
   }, "New") : null, __jsx("button", {
     onClick: saveField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77
+      lineNumber: 84
     },
     __self: undefined
   }, "Save"), __jsx("button", {
     onClick: changeDisplayComponent,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 85
     },
     __self: undefined
   }, "Cancel"));
@@ -267,6 +279,114 @@ const AddOrEditField = ({
 /*!*******************************************!*\
   !*** ./components/CustomClientFields.tsx ***!
   \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_AddOrEditField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AddOrEditField */ "./components/AddOrEditField.tsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+/* harmony import */ var _components_CustomFields__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/CustomFields */ "./components/CustomFields.tsx");
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CustomClientFields.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+
+const CustomClientFields = ({
+  fields,
+  refreshList
+}) => {
+  const {
+    0: displayComponent,
+    1: setDisplayComponent
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const {
+    0: editedField,
+    1: setEditedField
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    fieldName: "",
+    fieldType: "text",
+    fieldPermanent: false,
+    fieldOptions: []
+  });
+
+  const deleteField = async event => {
+    const id = event.target.id;
+    const res = await axios__WEBPACK_IMPORTED_MODULE_2___default()({
+      method: "delete",
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_3__["default"].serverURL}/fields/${id}`,
+      responseType: "json"
+    });
+    const resData = await res.data;
+    resData.msg === "Success" ? refreshList() : null;
+  };
+
+  const setupEditedField = obj => {
+    setEditedField(obj);
+    changeDisplayComponent();
+  };
+
+  const changeDisplayComponent = () => {
+    displayComponent ? setDisplayComponent(false) : setDisplayComponent(true);
+  };
+
+  return __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 38
+    },
+    __self: undefined
+  }, __jsx("h2", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: undefined
+  }, "Custom Client Fields"), __jsx(_components_CustomFields__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    deleteField: deleteField,
+    setupEditedField: setEditedField,
+    fields: fields,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 40
+    },
+    __self: undefined
+  }), !displayComponent ? __jsx("button", {
+    onClick: () => setupEditedField(editedField),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41
+    },
+    __self: undefined
+  }, "Add new field") : __jsx(_components_AddOrEditField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    fieldObject: editedField,
+    setupEditedField: setupEditedField,
+    refreshList: refreshList,
+    changeDisplayComponent: changeDisplayComponent,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41
+    },
+    __self: undefined
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CustomClientFields);
+
+/***/ }),
+
+/***/ "./components/CustomFields.tsx":
+/*!*************************************!*\
+  !*** ./components/CustomFields.tsx ***!
+  \*************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -291,8 +411,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Grid */ "@material-ui/core/Grid");
 /* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _components_AddOrEditField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/AddOrEditField */ "./components/AddOrEditField.tsx");
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CustomClientFields.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CustomFields.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -305,47 +424,29 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-
-const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])({
-  card: {
-    textAlign: "center",
-    height: "100%",
-    minWidth: "300px"
-  },
-  list: {
-    listStyleType: "disc"
-  },
-  title: {
-    fontSize: 14
-  },
-  pos: {
-    marginBottom: 12
-  }
-});
-
-const CustomClientFields = ({
+const CustomFields = ({
   fields,
+  setupEditedField,
   deleteField
 }) => {
-  const {
-    0: displayComponent,
-    1: setDisplayComponent
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
-  const {
-    0: editedField
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    fieldName: "",
-    fieldType: "text",
-    fieldPermanent: false,
-    fieldOptions: []
+  const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])({
+    card: {
+      textAlign: "center",
+      height: "100%",
+      minWidth: "300px"
+    },
+    list: {
+      listStyleType: "disc"
+    },
+    title: {
+      fontSize: 14
+    },
+    pos: {
+      marginBottom: 12
+    }
   });
   const classes = useStyles({});
-
-  const changeDisplayComponent = () => {
-    displayComponent ? setDisplayComponent(false) : setDisplayComponent(true); //TODO: POSÍLAT PO KLIKU NA EDIT FIELD -> OBJEKT S PARAMETRY POLE
-  };
-
-  const customFields = fields.filter(({
+  const separatedCustomFields = fields.filter(({
     fieldPermanent
   }) => !fieldPermanent).map(({
     fieldName,
@@ -357,19 +458,18 @@ const CustomClientFields = ({
 
     const optionsMap = () => {
       return fieldOptions.map(e => {
-        const optionFormatedKey = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](e).textToCamelString().replaceStringDiacritics().getString();
         return __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_8___default.a, {
-          key: optionFormatedKey,
+          key: e.id,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 60
+            lineNumber: 41
           },
           __self: undefined
         }, __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_6___default.a, {
-          primary: e.toLowerCase(),
+          primary: e.value.toLowerCase(),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 60
+            lineNumber: 42
           },
           __self: undefined
         }));
@@ -381,20 +481,20 @@ const CustomClientFields = ({
       key: _id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 65
+        lineNumber: 49
       },
       __self: undefined
     }, __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3___default.a, {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 66
+        lineNumber: 50
       },
       __self: undefined
     }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 67
+        lineNumber: 51
       },
       __self: undefined
     }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -402,7 +502,7 @@ const CustomClientFields = ({
       component: "h3",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 68
+        lineNumber: 52
       },
       __self: undefined
     }, customFieldNameFormated), __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -410,7 +510,7 @@ const CustomClientFields = ({
       color: "textSecondary",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 71
+        lineNumber: 55
       },
       __self: undefined
     }, "(", fieldType.toLowerCase(), ")"), fieldType === "select" ? __jsx(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_7___default.a, {
@@ -418,14 +518,19 @@ const CustomClientFields = ({
       dense: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 74
+        lineNumber: 59
       },
       __self: undefined
     }, optionsMap()) : null, __jsx("button", {
-      onClick: changeDisplayComponent,
+      onClick: () => setupEditedField({
+        fieldName: customFieldNameFormated,
+        fieldType,
+        fieldPermanent: false,
+        fieldOptions
+      }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 75
+        lineNumber: 63
       },
       __self: undefined
     }, "Edit field"), __jsx("button", {
@@ -433,50 +538,23 @@ const CustomClientFields = ({
       id: _id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 76
+        lineNumber: 75
       },
       __self: undefined
     }, "Delete field"))));
   });
-  return __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 84
-    },
-    __self: undefined
-  }, __jsx("h2", {
+  return __jsx(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    container: true,
+    spacing: 2,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 85
     },
     __self: undefined
-  }, "Custom Client Fields"), __jsx(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    container: true,
-    spacing: 2,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 86
-    },
-    __self: undefined
-  }, customFields), !displayComponent ? __jsx("button", {
-    onClick: changeDisplayComponent,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 89
-    },
-    __self: undefined
-  }, "Add new field") : __jsx(_components_AddOrEditField__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    fieldObject: editedField,
-    changeDisplayComponent: changeDisplayComponent,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 89
-    },
-    __self: undefined
-  }));
+  }, separatedCustomFields);
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (CustomClientFields);
+/* harmony default export */ __webpack_exports__["default"] = (CustomFields);
 
 /***/ }),
 
@@ -2878,21 +2956,24 @@ const Settings = ({
     1: setInitialized
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
 
-  const deleteField = async event => {
-    const id = event.target.id;
+  const refreshList = async () => {
+    //get data from DB after change
     const res = await axios__WEBPACK_IMPORTED_MODULE_5___default()({
-      method: "delete",
-      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_4__["default"].serverURL}/fields/${id}`,
+      method: "get",
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_4__["default"].serverURL}/fields/`,
       responseType: "json"
     });
     const data = await res.data;
-    data.msg === "Success" ? setField(fields.filter(e => e._id !== id)) : null;
+    setField(data);
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    setHeadingOne(new _library_stringMethods__WEBPACK_IMPORTED_MODULE_3__["default"](router.pathname).removeSlash().firstCharUpperCase().getString());
+    //H1 from url
+    setHeadingOne(new _library_stringMethods__WEBPACK_IMPORTED_MODULE_3__["default"](router.pathname).removeSlash().firstCharUpperCase().getString()); //title from url
+
     const title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_3__["default"](router.pathname).removeSlash().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_4__["default"].titleSubText).getString();
-    document.title = title;
+    document.title = title; //componendDidMount effect
+
     setInitialized(true);
   });
 
@@ -2903,34 +2984,34 @@ const Settings = ({
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 53
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 54
     },
     __self: undefined
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 55
     },
     __self: undefined
   }, headingOne), __jsx(_components_DefaultClientFields__WEBPACK_IMPORTED_MODULE_6__["default"], {
     fields: fields,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 56
     },
     __self: undefined
   }), __jsx(_components_CustomClientFields__WEBPACK_IMPORTED_MODULE_7__["default"], {
     fields: fields,
-    deleteField: deleteField,
+    refreshList: refreshList,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 57
     },
     __self: undefined
   }));

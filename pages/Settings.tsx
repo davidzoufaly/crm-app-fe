@@ -13,25 +13,26 @@ const Settings = ({ data }: any) => {
   const [headingOne, setHeadingOne] = useState("");
   const [initialized, setInitialized] = useState(false);
 
-  const deleteField = async (event : any) => {
-    const id = event.target.id;
+  const refreshList = async () => {
+    //get data from DB after change
     const res = await axios({
-        method: "delete",
-        url:`${globalVars.serverURL}/fields/${id}`,
-        responseType: "json"
-    })
+      method: "get",
+      url: `${globalVars.serverURL}/fields/`,
+      responseType: "json"
+    });
     const data = await res.data;
-    data.msg === "Success" ? setField(fields.filter((e : any) => e._id !== id)) : null;
+    setField(data);
   }
 
   useEffect(() => {
+    //H1 from url
     setHeadingOne(
       new stringMethods(router.pathname)
         .removeSlash()
         .firstCharUpperCase()
         .getString()
     );
-
+    //title from url
     const title = new stringMethods(router.pathname)
       .removeSlash()
       .firstCharUpperCase()
@@ -40,18 +41,20 @@ const Settings = ({ data }: any) => {
 
     document.title = title;
 
+    //componendDidMount effect
     setInitialized(true);
   });
 
   if (!initialized) {
     return "Loading...";
   }
+
   return (
     <div>
       <Header />
       <h1>{headingOne}</h1>
       <DefaultClientFields fields={fields}/>
-      <CustomClientFields fields={fields} deleteField={deleteField}/>
+      <CustomClientFields fields={fields} refreshList={refreshList}/>
     </div>
   );
 };
