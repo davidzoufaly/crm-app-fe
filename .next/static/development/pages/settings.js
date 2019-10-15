@@ -9,213 +9,122 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/SelectFieldOptions */ "./components/SelectFieldOptions.tsx");
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
-
-
-
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/SelectFieldOptions */ "./components/SelectFieldOptions.tsx");
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/AddOrEditField.tsx";
 
-var __jsx = react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement;
-
-
-
-
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 var AddOrEditField = function AddOrEditField(_ref) {
-  var fieldObject = _ref.fieldObject,
-      changeDisplayComponent = _ref.changeDisplayComponent,
-      refreshList = _ref.refreshList;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(fieldObject),
-      updatedField = _useState[0],
-      setUpdatedField = _useState[1];
-
-  var saveField =
-  /*#__PURE__*/
-  function () {
-    var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
-    /*#__PURE__*/
-    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.mark(function _callee() {
-      var res, data;
-      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_7___default()({
-                method: "post",
-                url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].serverURL, "/fields/"),
-                data: updatedField,
-                responseType: "json"
-              });
-
-            case 2:
-              res = _context.sent;
-              _context.next = 5;
-              return res.data;
-
-            case 5:
-              data = _context.sent;
-              data.msg === "Success" ? changeDisplayComponent() : null;
-              console.log(fieldObject);
-              refreshList();
-
-            case 9:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function saveField() {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
-  var onNameChange = function onNameChange(event) {
-    setUpdatedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, updatedField, {
-      fieldName: event.target.value
-    }));
-    console.log(updatedField);
-  };
-
-  var onSelectChange = function onSelectChange(event) {
-    setUpdatedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, updatedField, {
-      fieldType: event.target.options[event.target.options.selectedIndex].value
-    }));
-  };
-
-  var handleOptionSpawn = function handleOptionSpawn() {
-    setUpdatedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, updatedField, {
-      fieldOptions: [].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(updatedField.fieldOptions), [{
-        id: uniqid__WEBPACK_IMPORTED_MODULE_6___default()(),
-        value: ""
-      }])
-    }));
-  };
-
-  var onChange = function onChange(event) {
-    setUpdatedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, updatedField, {
-      fieldOptions: updatedField.fieldOptions.filter(function (e) {
-        return event.target.id === e.id ? e.value = event.target.value : e;
-      })
-    }));
-  };
-
-  var onDelete = function onDelete(event) {
-    setUpdatedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, updatedField, {
-      fieldOptions: updatedField.fieldOptions.filter(function (e) {
-        return event.target.id !== e.id ? e : null;
-      })
-    }));
-  };
-
-  return __jsx("div", {
+  var editedField = _ref.editedField,
+      onNameChange = _ref.onNameChange,
+      onSelectChange = _ref.onSelectChange,
+      onOptionChange = _ref.onOptionChange,
+      onOptionDelete = _ref.onOptionDelete,
+      handleOptionSpawn = _ref.handleOptionSpawn,
+      saveEditedField = _ref.saveEditedField,
+      displayComponent = _ref.displayComponent,
+      changeDisplayComponent = _ref.changeDisplayComponent;
+  return displayComponent ? __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 6
     },
     __self: this
   }, __jsx("label", {
     htmlFor: "field-name",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 7
     },
     __self: this
   }, "Field name"), __jsx("input", {
     type: "text",
     id: "field-name",
-    defaultValue: updatedField.fieldName,
+    defaultValue: editedField.fieldName,
     onChange: onNameChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 8
     },
     __self: this
   }), __jsx("label", {
     htmlFor: "field-type",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 70
+      lineNumber: 14
     },
     __self: this
   }, "Field type"), __jsx("select", {
     id: "field-type",
     onChange: onSelectChange,
-    defaultValue: updatedField.fieldType,
+    defaultValue: editedField.fieldType,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 71
+      lineNumber: 15
     },
     __self: this
   }, __jsx("option", {
     value: "text",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 72
+      lineNumber: 16
     },
     __self: this
   }, "Text"), __jsx("option", {
-    value: "select",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 73
-    },
-    __self: this
-  }, "Select"), __jsx("option", {
     value: "number",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 17
     },
     __self: this
-  }, "Number")), __jsx(_components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    options: updatedField.fieldOptions,
-    onChange: onChange,
-    onDelete: onDelete,
+  }, "Number"), __jsx("option", {
+    value: "select",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 18
     },
     __self: this
-  }), updatedField.fieldType === "select" ? __jsx("button", {
+  }, "Select")), __jsx(_components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    options: editedField.fieldOptions,
+    onOptionChange: onOptionChange,
+    onOptionDelete: onOptionDelete,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: this
+  }), editedField.fieldType === "select" ? __jsx("button", {
     onClick: handleOptionSpawn,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 26
     },
     __self: this
   }, "New") : null, __jsx("button", {
-    onClick: saveField,
+    onClick: saveEditedField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 28
     },
     __self: this
   }, "Save"), __jsx("button", {
     onClick: changeDisplayComponent,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 29
     },
     __self: this
-  }, "Cancel"));
+  }, "Cancel")) : __jsx("button", {
+    onClick: changeDisplayComponent,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 31
+    },
+    __self: this
+  }, "Add new field");
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AddOrEditField);
@@ -231,21 +140,28 @@ var AddOrEditField = function AddOrEditField(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_AddOrEditField__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/AddOrEditField */ "./components/AddOrEditField.tsx");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
-/* harmony import */ var _components_CustomFields__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/CustomFields */ "./components/CustomFields.tsx");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_AddOrEditField__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/AddOrEditField */ "./components/AddOrEditField.tsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _CustomFieldsList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./CustomFieldsList */ "./components/CustomFieldsList.tsx");
+
+
 
 
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CustomClientFields.tsx";
 
-var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+var __jsx = react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement;
+
 
 
 
@@ -255,64 +171,202 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 var CustomClientFields = function CustomClientFields(_ref) {
   var fields = _ref.fields,
       refreshList = _ref.refreshList;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(false),
-      displayComponent = _useState[0],
-      setDisplayComponent = _useState[1];
-
-  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
+  var blankFieldObject = {
     fieldName: "",
     fieldType: "text",
-    fieldPermanent: false,
     fieldOptions: []
-  }),
-      editedField = _useState2[0],
-      setEditedField = _useState2[1];
+  };
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(blankFieldObject),
+      editedField = _useState[0],
+      setEditedField = _useState[1];
+
+  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(false),
+      displayComponent = _useState2[0],
+      setDisplayComponent = _useState2[1];
+
+  var saveEditedField = function saveEditedField() {
+    var fieldIsUpdated =
+    /*#__PURE__*/
+    function () {
+      var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+      /*#__PURE__*/
+      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.mark(function _callee() {
+        var fieldName, fieldType, fieldOptions, id, res, data;
+        return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                fieldName = editedField.fieldName, fieldType = editedField.fieldType, fieldOptions = editedField.fieldOptions, id = editedField.id;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default()({
+                  method: "put",
+                  url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL, "/fields/").concat(id),
+                  data: {
+                    fieldName: fieldName,
+                    fieldType: fieldType,
+                    fieldOptions: fieldOptions
+                  },
+                  responseType: "json"
+                });
+
+              case 3:
+                res = _context.sent;
+                _context.next = 6;
+                return res.data;
+
+              case 6:
+                data = _context.sent;
+
+                if (data.msg === "Success") {
+                  setDisplayComponent(false);
+                  setEditedField(blankFieldObject);
+                  refreshList();
+                }
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function fieldIsUpdated() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+
+    var fieldIsCreated =
+    /*#__PURE__*/
+    function () {
+      var _ref3 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+      /*#__PURE__*/
+      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.mark(function _callee2() {
+        var res, data;
+        return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default()({
+                  method: "post",
+                  url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL, "/fields/"),
+                  data: editedField,
+                  responseType: "json"
+                });
+
+              case 2:
+                res = _context2.sent;
+                _context2.next = 5;
+                return res.data;
+
+              case 5:
+                data = _context2.sent;
+
+                if (data.msg === "Success") {
+                  refreshList();
+                  setDisplayComponent(false);
+                  setEditedField(blankFieldObject);
+                }
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function fieldIsCreated() {
+        return _ref3.apply(this, arguments);
+      };
+    }();
+
+    !editedField.id ? fieldIsCreated() : fieldIsUpdated();
+  };
 
   var deleteField =
   /*#__PURE__*/
   function () {
-    var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+    var _ref4 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
     /*#__PURE__*/
-    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(event) {
+    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.mark(function _callee3(event) {
       var id, res, resData;
-      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               id = event.target.id;
-              _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default()({
+              _context3.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_6___default()({
                 method: "delete",
-                url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_5__["default"].serverURL, "/fields/").concat(id),
+                url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL, "/fields/").concat(id),
                 responseType: "json"
               });
 
             case 3:
-              res = _context.sent;
-              _context.next = 6;
+              res = _context3.sent;
+              _context3.next = 6;
               return res.data;
 
             case 6:
-              resData = _context.sent;
+              resData = _context3.sent;
               resData.msg === "Success" ? refreshList() : null;
 
             case 8:
             case "end":
-              return _context.stop();
+              return _context3.stop();
           }
         }
-      }, _callee);
+      }, _callee3);
     }));
 
     return function deleteField(_x) {
-      return _ref2.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
 
+  var onNameChange = function onNameChange(event) {
+    setEditedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, editedField, {
+      fieldName: event.target.value
+    }));
+  };
+
+  var onSelectChange = function onSelectChange(event) {
+    setEditedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, editedField, {
+      fieldType: event.target.options[event.target.options.selectedIndex].value
+    }));
+  };
+
+  var handleOptionSpawn = function handleOptionSpawn() {
+    setEditedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, editedField, {
+      fieldOptions: [].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(editedField.fieldOptions), [{
+        id: uniqid__WEBPACK_IMPORTED_MODULE_8___default()(),
+        value: ""
+      }])
+    }));
+  };
+
+  var onOptionChange = function onOptionChange(event) {
+    setEditedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, editedField, {
+      fieldOptions: editedField.fieldOptions.filter(function (e) {
+        return event.target.id === e.id ? e.value = event.target.value : e;
+      })
+    }));
+  };
+
+  var onOptionDelete = function onOptionDelete(event) {
+    setEditedField(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, editedField, {
+      fieldOptions: editedField.fieldOptions.filter(function (e) {
+        return event.target.id !== e.id ? e : null;
+      })
+    }));
+  };
+
   var setupEditedField = function setupEditedField(obj) {
     setEditedField(obj);
-    changeDisplayComponent();
+    setDisplayComponent(true);
   };
 
   var changeDisplayComponent = function changeDisplayComponent() {
@@ -322,41 +376,38 @@ var CustomClientFields = function CustomClientFields(_ref) {
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 109
     },
     __self: this
   }, __jsx("h2", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 110
     },
     __self: this
-  }, "Custom Client Fields"), __jsx(_components_CustomFields__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, "Custom Client Fields"), __jsx(_CustomFieldsList__WEBPACK_IMPORTED_MODULE_9__["default"], {
     deleteField: deleteField,
-    setupEditedField: setEditedField,
     fields: fields,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 40
-    },
-    __self: this
-  }), !displayComponent ? __jsx("button", {
-    onClick: function onClick() {
-      return setupEditedField(editedField);
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 41
-    },
-    __self: this
-  }, "Add new field") : __jsx(_components_AddOrEditField__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    fieldObject: editedField,
     setupEditedField: setupEditedField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 111
+    },
+    __self: this
+  }), __jsx(_components_AddOrEditField__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    editedField: editedField,
     refreshList: refreshList,
+    saveEditedField: saveEditedField,
+    onNameChange: onNameChange,
+    onSelectChange: onSelectChange,
+    handleOptionSpawn: handleOptionSpawn,
+    onOptionChange: onOptionChange,
+    onOptionDelete: onOptionDelete,
+    displayComponent: displayComponent,
     changeDisplayComponent: changeDisplayComponent,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 116
     },
     __self: this
   }));
@@ -366,10 +417,10 @@ var CustomClientFields = function CustomClientFields(_ref) {
 
 /***/ }),
 
-/***/ "./components/CustomFields.tsx":
-/*!*************************************!*\
-  !*** ./components/CustomFields.tsx ***!
-  \*************************************/
+/***/ "./components/CustomFieldsList.tsx":
+/*!*****************************************!*\
+  !*** ./components/CustomFieldsList.tsx ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -386,7 +437,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/List */ "./node_modules/@material-ui/core/esm/List/index.js");
 /* harmony import */ var _material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/ListItem */ "./node_modules/@material-ui/core/esm/ListItem/index.js");
 /* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CustomFields.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CustomFieldsList.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -440,7 +491,7 @@ var CustomFields = function CustomFields(_ref) {
           },
           __self: this
         }, __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_6__["default"], {
-          primary: e.value.toLowerCase(),
+          primary: e.value,
           __source: {
             fileName: _jsxFileName,
             lineNumber: 42
@@ -487,7 +538,7 @@ var CustomFields = function CustomFields(_ref) {
         lineNumber: 55
       },
       __self: this
-    }, "(", fieldType.toLowerCase(), ")"), fieldType === "select" ? __jsx(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }, "(", fieldType.toLowerCase(), ")"), fieldType === "select" && fieldOptions.length > 0 ? __jsx(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_7__["default"], {
       className: classes.list,
       dense: true,
       __source: {
@@ -500,8 +551,8 @@ var CustomFields = function CustomFields(_ref) {
         return setupEditedField({
           fieldName: customFieldNameFormated,
           fieldType: fieldType,
-          fieldPermanent: false,
-          fieldOptions: fieldOptions
+          fieldOptions: fieldOptions,
+          id: _id
         });
       },
       __source: {
@@ -712,8 +763,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 var SelectFieldOptions = function SelectFieldOptions(_ref) {
   var options = _ref.options,
-      onChange = _ref.onChange,
-      onDelete = _ref.onDelete;
+      onOptionChange = _ref.onOptionChange,
+      onOptionDelete = _ref.onOptionDelete;
   var items = options.map(function (e) {
     return __jsx("div", {
       key: e.id,
@@ -724,8 +775,9 @@ var SelectFieldOptions = function SelectFieldOptions(_ref) {
       __self: this
     }, __jsx("input", {
       type: "text",
-      onChange: onChange,
+      onChange: onOptionChange,
       id: e.id,
+      defaultValue: e.value,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 5
@@ -733,7 +785,7 @@ var SelectFieldOptions = function SelectFieldOptions(_ref) {
       __self: this
     }), __jsx("button", {
       id: e.id,
-      onClick: onDelete,
+      onClick: onOptionDelete,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 6

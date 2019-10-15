@@ -1,9 +1,9 @@
-const SelectFieldOptions = ({ options, onChange, onDelete }: any) => {
+const SelectFieldOptions = ({ options, onOptionChange, onOptionDelete }: any) => {
   let items = options.map((e: any) => {
     return (
       <div key={e.id}>
-        <input type="text" onChange={onChange} id={e.id} />
-        <button id={e.id} onClick={onDelete}>
+        <input type="text" onChange={onOptionChange} id={e.id} defaultValue={e.value} />
+        <button id={e.id} onClick={onOptionDelete}>
           X
         </button>
       </div>
