@@ -11,7 +11,6 @@ import Typography from "@material-ui/core/Typography";
 const Settings = ({ data }: any) => {
   const router = useRouter();
   const [fields, setField] = useState(data);
-  const [headingOne, setHeadingOne] = useState("");
   const [initialized, setInitialized] = useState(false);
 
   const refreshList = async () => {
@@ -26,13 +25,6 @@ const Settings = ({ data }: any) => {
   }
 
   useEffect(() => {
-    //H1 from url
-    setHeadingOne(
-      new stringMethods(router.pathname)
-        .removeSlash()
-        .firstCharUpperCase()
-        .getString()
-    );
     //title from url
     const title = new stringMethods(router.pathname)
       .removeSlash()
@@ -46,6 +38,11 @@ const Settings = ({ data }: any) => {
     setInitialized(true);
   });
 
+  const h1 = new stringMethods(router.pathname)
+  .removeSlash()
+  .firstCharUpperCase()
+  .getString()
+
   if (!initialized) {
     return "Loading...";
   }
@@ -53,7 +50,7 @@ const Settings = ({ data }: any) => {
   return (
     <div>
       <Header />
-      <Typography variant="h3" component="h1" gutterBottom>{headingOne}</Typography>
+      <Typography variant="h3" component="h1" gutterBottom>{h1}</Typography>
       <DefaultFields fields={fields}/>
       <CustomFields fields={fields} refreshList={refreshList}/>
     </div>

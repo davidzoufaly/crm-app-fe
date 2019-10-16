@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useReducer, useEffect } from "react";
 import AddOrEditField from "./AddOrEditField";
 import axios from "axios";
 import globalVars from "../library/globalVariables";
@@ -7,8 +7,7 @@ import CustomFieldsList from "./CustomFieldsList";
 import Typography from "@material-ui/core/Typography";
 import SelectFieldOptions from "./SelectFieldOptions";
 
-//TODO: EDIT OPTIONU SE PRERENDEROVAVA
-//TODO: TO much baskspace u optionu uplne odstraní pole
+//TODO: EDIT OPTIONU SE PRERENDEROVAVA -> TO much baskspace u optionu uplne odstraní pole
 
 const CustomClientFields = ({ fields, refreshList }: any) => {
   const blankFieldObject = {
@@ -17,31 +16,102 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
     fieldOptions: []
   };
 
-  const [editedField, setEditedField] = useState<any>(blankFieldObject);
+  useEffect(() => {
+    console.log(editedField);
+  });
+
   const [displayComponent, setDisplayComponent] = useState(false);
+
+  const [editedField, setEditedField] = useReducer((state, action) => {
+    switch (action.type) {
+      case "fieldNameChange":
+        return {
+          ...state,
+          fieldName: action.payload.value
+        };
+      case "selectValueChange":
+        return {
+          ...state,
+          fieldType:
+            action.payload.options[action.payload.options.selectedIndex].value
+        };
+      case "newOptionSpawn":
+        return {
+          ...state,
+          fieldOptions: [...state.fieldOptions, { id: uniqid(), value: ""}]
+        };
+      case "clear":
+        return blankFieldObject;
+      case "optionValueChange":
+        return {
+          ...state,
+          fieldOptions: state.fieldOptions.map((el: any) =>
+            el.id === action.payload.id
+              ? {...el, value: action.payload.value}
+              : el
+          )
+        };
+      case "optionDelete":
+        return {
+          ...state,
+          fieldOptions: state.fieldOptions.filter(
+            (e: any) => action.payload.id !== e.id
+          )
+        };
+      case "setWithPaylod":
+        return action.payload.obj;
+
+      default:
+        return state;
+    }
+  }, blankFieldObject);
 
   const fieldMethods = {
     onNameChange(event: any) {
-      setEditedField({ ...editedField, fieldName: event.target.value });
+      setEditedField({
+        type: "fieldNameChange",
+        payload: { value: event.target.value }
+      });
     },
     onSelectChange(event: any) {
       setEditedField({
-        ...editedField,
-        fieldType:
-          event.target.options[event.target.options.selectedIndex].value
+        type: "selectValueChange",
+        payload: { options: event.target.options }
       });
     },
-    handleOptionSpawn() {
+    handleOptionSpawn(e) {
+      e.preventDefault()
       setEditedField({
-        ...editedField,
-        fieldOptions: [...editedField.fieldOptions, { id: uniqid(), value: "" }]
+        type: "newOptionSpawn"
       });
     },
     toggleDisplayComponent() {
       displayComponent ? setDisplayComponent(false) : setDisplayComponent(true);
-      setEditedField(blankFieldObject);
+      setEditedField({ type: "clear" });
     },
-    saveEditedField() {
+    onOptionDelete(event: any) {
+      setEditedField({
+        type: "optionDelete",
+        payload: { id: event.target.id }
+      });
+    },
+    onOptionChange(id, event) {
+      // console.log(id, event.target.value)
+      setEditedField({
+        type: "optionValueChange",
+        payload: { value : event.target.value, id }
+      });
+    },
+    setupEditedField(obj: any) {
+      setEditedField({
+        type: "setWithPaylod",
+        payload: { obj }
+      });
+      !displayComponent ? setDisplayComponent(true) : null;
+    },
+    saveEditedField(e) {
+      e.preventDefault();
+
       const fieldIsUpdated = async () => {
         const { fieldName, fieldType, fieldOptions, id } = editedField;
         const res = await axios({
@@ -74,7 +144,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
 
   const reset = () => {
     setDisplayComponent(false);
-    setEditedField(blankFieldObject);
+    setEditedField({ type: "clear" });
     refreshList();
   };
 
@@ -88,28 +158,6 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
     resData.msg === "Success" ? refreshList() : null;
   };
 
-  const onOptionChange = (event: any) => {
-    setEditedField({
-      ...editedField,
-      fieldOptions: editedField.fieldOptions.filter((e: any) =>
-        event.target.id === e.id ? (e.value = event.target.value) : e
-      )
-    });
-  };
-
-  const onOptionDelete = (event: any) => {
-    setEditedField({
-      ...editedField,
-      fieldOptions: editedField.fieldOptions.filter((e: any) =>
-        event.target.id !== e.id ? e : null
-      )
-    });
-  };
-
-  const setupEditedField = (obj: any) => {
-    setEditedField(obj);
-    !displayComponent ? setDisplayComponent(true) : null;
-  };
 
   return (
     <div>
@@ -119,7 +167,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
       <CustomFieldsList
         deleteField={deleteField}
         fields={fields}
-        setupEditedField={setupEditedField}
+        setupEditedField={fieldMethods.setupEditedField}
       />
       <AddOrEditField
         editedField={editedField}
@@ -128,8 +176,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
         handleOption={
           <SelectFieldOptions
             options={editedField.fieldOptions}
-            onOptionChange={onOptionChange}
-            onOptionDelete={onOptionDelete}
+            fieldMethods={fieldMethods}
           />
         }
       />

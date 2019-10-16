@@ -17,17 +17,10 @@ const Clients = ({ fieldData, clientData }: any) => {
   const [reverse, setReverseOrder] = useState(false);
   const [sort, setSortBy] = useState("firstName");
   //
-  const [headingOne, setHeadingOne] = useState("");
   const [initialized, setInitialized] = useState(false);
   const [isClientAdded, setIsClientAdded] = useState(false);
 
   useEffect(() => {
-    setHeadingOne(
-      new stringMethods(router.pathname)
-        .removeSlash()
-        .firstCharUpperCase()
-        .getString()
-    );
     const title = new stringMethods(router.pathname)
       .removeSlash()
       .firstCharUpperCase()
@@ -36,6 +29,11 @@ const Clients = ({ fieldData, clientData }: any) => {
     document.title = title;
     setInitialized(true);
   });
+
+  const h1 = new stringMethods(router.pathname)
+  .removeSlash()
+  .firstCharUpperCase()
+  .getString()
 
   const refreshList = async () => {
     //get data from DB after change
@@ -63,7 +61,7 @@ const Clients = ({ fieldData, clientData }: any) => {
   return (
     <div>
       <Header />
-      <h1>{headingOne}</h1>
+      <h1>{h1}</h1>
       <Button variant="contained" color="primary" onClick={() => setIsClientAdded(true)}>
       Add new client
       </Button>

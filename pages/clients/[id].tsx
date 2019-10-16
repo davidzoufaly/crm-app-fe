@@ -7,7 +7,7 @@ import globalVars from "../../library/globalVariables";
 //TODO: SKRÝVÁNÍ POLÍ CO NEJSOU V DB
 
 const Client = (props: any) => {
-  const { name } = props.data;
+  const { firstName, lastName } = props.data;
 
   useEffect(() => {
     document.title = `${name} ${globalVars.titleSubText}`;
@@ -36,7 +36,7 @@ const Client = (props: any) => {
   return (
     <div>
       <Header />
-      <h1>{name}</h1>
+      <h1>{firstName} {lastName}</h1>
       <ul>{showAllProperities()}</ul>
     </div>
   );

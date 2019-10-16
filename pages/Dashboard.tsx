@@ -8,16 +8,9 @@ import globalVars from "../library/globalVariables";
 
 const Dashboard = ({clientData, fieldData} : any) => {
   const router = useRouter();
-  const [headingOne, setHeadingOne] = useState("");
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    setHeadingOne(
-      new stringMethods(router.pathname)
-        .removeSlash()
-        .firstCharUpperCase()
-        .getString()
-    );
     const title = new stringMethods(router.pathname)
       .removeSlash()
       .firstCharUpperCase()
@@ -27,6 +20,11 @@ const Dashboard = ({clientData, fieldData} : any) => {
     setInitialized(true);
   });
 
+  const h1 = new stringMethods(router.pathname)
+  .removeSlash()
+  .firstCharUpperCase()
+  .getString()
+
   if (!initialized) {
     return "Loading...";
   }
@@ -34,7 +32,7 @@ const Dashboard = ({clientData, fieldData} : any) => {
   return (
     <div>
       <Header />
-      <h1>{headingOne}</h1>
+      <h1>{h1}</h1>
       <ShowRecordsNumber data={clientData.data} string={"clients"} link={"/clients"} />
       <ShowRecordsNumber data={fieldData.data} string={"fields"} link={"/settings"}/>
     </div>

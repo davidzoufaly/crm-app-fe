@@ -16,7 +16,7 @@ class StringMethods {
 
   firstCharUpperCase = () => {
     this.text = Array.from(this.text)
-      .map((e, i) => (i === 0 ? e.toUpperCase() : e ))
+      .map((e, i) => (i === 0 ? e.toUpperCase() : e))
       .join("");
 
     return this;
@@ -48,11 +48,11 @@ class StringMethods {
   replaceStringDiacritics = () => {
     this.text = this.text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     return this;
-  }
+  };
 
   getString = () => {
     return this.text;
-  }
+  };
 }
 
 export default StringMethods;

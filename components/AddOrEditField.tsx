@@ -5,7 +5,7 @@ import Fab from '@material-ui/core/Fab';
 const AddOrEditField = ({ editedField, displayComponent, fieldMethods, handleOption }: any) => {
 
   return displayComponent ? (
-    <div>
+    <form onSubmit={fieldMethods.saveEditedField}>
       <h2>{editedField.id ? "Edit custom field" : "New custom field"}</h2>
       <label htmlFor="field-name">Field name</label>
       <input
@@ -20,13 +20,10 @@ const AddOrEditField = ({ editedField, displayComponent, fieldMethods, handleOpt
         <option value="select">Select</option>
         <option value="number">Number</option>
       </select>
-      {handleOption}
-      {editedField.fieldType === "select" ? (
-        <button onClick={fieldMethods.handleOptionSpawn}>New</button>
-      ) : null}
-      <button onClick={fieldMethods.saveEditedField}>Save</button>
+      {editedField.fieldType === "select" ? handleOption : null}
+      <button type="submit">Save</button>
       <button onClick={fieldMethods.toggleDisplayComponent}>Cancel</button>
-    </div>
+    </form>
   ) : (<div><Fab color="primary" aria-label="add" onClick={fieldMethods.toggleDisplayComponent}><AddIcon/></Fab><Typography>Add new field</Typography></div>);
 };
 
