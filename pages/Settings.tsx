@@ -4,8 +4,8 @@ import stringMethods from "../library/stringMethods";
 import globalVars from "../library/globalVariables";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import DefaultClientFields from "../components/DefaultClientFields";
-import CustomClientFields from "../components/CustomClientFields";
+import DefaultFields from "../components/DefaultFields";
+import CustomFields from "../components/CustomFields";
 import Typography from "@material-ui/core/Typography";
 
 const Settings = ({ data }: any) => {
@@ -54,8 +54,8 @@ const Settings = ({ data }: any) => {
     <div>
       <Header />
       <Typography variant="h3" component="h1" gutterBottom>{headingOne}</Typography>
-      <DefaultClientFields fields={fields}/>
-      <CustomClientFields fields={fields} refreshList={refreshList}/>
+      <DefaultFields fields={fields}/>
+      <CustomFields fields={fields} refreshList={refreshList}/>
     </div>
   );
 };

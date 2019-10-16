@@ -1,4 +1,5 @@
 import AddIcon from "@material-ui/icons/Add";
+import Typography from "@material-ui/core/Typography";
 import Fab from '@material-ui/core/Fab';
 
 const AddOrEditField = ({ editedField, displayComponent, fieldMethods, handleOption }: any) => {
@@ -26,7 +27,7 @@ const AddOrEditField = ({ editedField, displayComponent, fieldMethods, handleOpt
       <button onClick={fieldMethods.saveEditedField}>Save</button>
       <button onClick={fieldMethods.toggleDisplayComponent}>Cancel</button>
     </div>
-  ) : (<div><Fab color="primary" aria-label="add" onClick={fieldMethods.toggleDisplayComponent}><AddIcon/></Fab>Add new field</div>);
+  ) : (<div><Fab color="primary" aria-label="add" onClick={fieldMethods.toggleDisplayComponent}><AddIcon/></Fab><Typography>Add new field</Typography></div>);
 };
 
 export default AddOrEditField;

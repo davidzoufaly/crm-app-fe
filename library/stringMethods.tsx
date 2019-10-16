@@ -1,4 +1,4 @@
-class stringMethods {
+class StringMethods {
   private text: string;
 
   constructor(text: string) {
@@ -16,7 +16,7 @@ class stringMethods {
 
   firstCharUpperCase = () => {
     this.text = Array.from(this.text)
-      .map((e, i) => (i === 0 && e.toUpperCase() !== e ? e.toUpperCase() : e))
+      .map((e, i) => (i === 0 ? e.toUpperCase() : e ))
       .join("");
 
     return this;
@@ -55,4 +55,4 @@ class stringMethods {
   }
 }
 
-export default stringMethods;
+export default StringMethods;

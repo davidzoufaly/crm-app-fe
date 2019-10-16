@@ -93,9 +93,9 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "./components/ClientList.tsx":
+/***/ "./components/ClientForm.tsx":
 /*!***********************************!*\
-  !*** ./components/ClientList.tsx ***!
+  !*** ./components/ClientForm.tsx ***!
   \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -104,75 +104,247 @@ module.exports =
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/ClientList.tsx";
+/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../library/stringMethods */ "./library/stringMethods.tsx");
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/ClientForm.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
-const ClientsList = ({
-  clients,
-  reverse,
-  sort
+const ClientForm = ({
+  fields,
+  onChange,
+  newClient
 }) => {
-  reverse ? clients.sort((a, b) => b[sort] > a[sort] ? 1 : -1) : clients.sort((a, b) => b[sort] > a[sort] ? -1 : 1);
-  const tableClients = clients.map(e => __jsx("tr", {
-    key: e._id,
+  const inputs = fields.map(e => {
+    if (e.fieldName !== "dateAdded" && e.fieldName !== "dateModified") {
+      if (e.fieldType === "text") {
+        return __jsx("div", {
+          key: e.fieldName,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 9
+          },
+          __self: undefined
+        }, __jsx("p", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 10
+          },
+          __self: undefined
+        }, new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](e.fieldName).camelStringToText().firstCharUpperCase().getString()), __jsx("input", {
+          type: "text",
+          name: e.fieldName,
+          onChange: () => onChange(e.fieldName, event),
+          value: newClient[e.fieldName],
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 11
+          },
+          __self: undefined
+        }));
+      } else if (e.fieldType === "number") {
+        return __jsx("div", {
+          key: e.fieldName,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 21
+          },
+          __self: undefined
+        }, __jsx("p", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 22
+          },
+          __self: undefined
+        }, e.fieldName), __jsx("input", {
+          type: "number",
+          name: e.fieldName,
+          onChange: () => onChange(e.fieldName, event),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 23
+          },
+          __self: undefined
+        }));
+      } else if (e.fieldType === "select") {
+        return __jsx("div", {
+          key: e.fieldName,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 28
+          },
+          __self: undefined
+        }, __jsx("p", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 29
+          },
+          __self: undefined
+        }, e.fieldName), __jsx("select", {
+          name: e.fieldName,
+          onChange: () => onChange(e.fieldName, event),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 30
+          },
+          __self: undefined
+        }, __jsx("option", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 31
+          },
+          __self: undefined
+        }, "---"), e.fieldOptions.map(e => {
+          return __jsx("option", {
+            value: e.value,
+            key: e.id,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 34
+            },
+            __self: undefined
+          }, e.value);
+        })));
+      }
+    }
+  });
+  return __jsx("form", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 45
     },
     __self: undefined
-  }, __jsx("td", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 16
-    },
-    __self: undefined
-  }, e.dateAdded), __jsx("td", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 17
-    },
-    __self: undefined
-  }, e.name), __jsx("td", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 18
-    },
-    __self: undefined
-  }, e.age), __jsx("td", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 19
-    },
-    __self: undefined
-  }, e.address), __jsx("td", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 20
-    },
-    __self: undefined
-  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/clients/[id]",
-    as: `/clients/${e._id}`,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21
-    },
-    __self: undefined
-  }, __jsx("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22
-    },
-    __self: undefined
-  }, "Go to client")))));
-  return tableClients;
+  }, inputs);
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (ClientsList);
+/* harmony default export */ __webpack_exports__["default"] = (ClientForm);
+
+/***/ }),
+
+/***/ "./components/CreateClient.tsx":
+/*!*************************************!*\
+  !*** ./components/CreateClient.tsx ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Typography */ "@material-ui/core/Typography");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _ClientForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ClientForm */ "./components/ClientForm.tsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+
+
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CreateClient.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
+
+
+
+
+
+
+const CreateClient = ({
+  fields,
+  isClientAdded,
+  toggleIsClientAdded,
+  refreshList
+}) => {
+  const initialNewClintState = fields.map(e => e.fieldName).reduce((o, key) => _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(o, {
+    [key]: ""
+  }), {});
+  const {
+    0: newClient,
+    1: setNewClient
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(initialNewClintState);
+
+  const onChange = (fieldName, event) => {
+    setNewClient(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, newClient, {
+      [fieldName]: event.target.value
+    }));
+  };
+
+  const onSubmit = async () => {
+    const clientRes = await axios__WEBPACK_IMPORTED_MODULE_6___default()({
+      method: "post",
+      data: newClient,
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL}/clients`,
+      responseType: "json"
+    });
+    const clientData = await clientRes.data;
+
+    if (clientData.msg === "Success") {
+      setNewClient(initialNewClintState);
+      toggleIsClientAdded();
+      refreshList();
+    }
+  };
+
+  const onCancel = () => {
+    setNewClient(initialNewClintState);
+    toggleIsClientAdded();
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(() => {
+    console.log(newClient);
+  });
+  return isClientAdded ? __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    variant: "h4",
+    component: "h2",
+    gutterBottom: true,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 45
+    },
+    __self: undefined
+  }, "Add new client"), __jsx(_ClientForm__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    fields: fields,
+    onChange: onChange,
+    newClient: newClient,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48
+    },
+    __self: undefined
+  }), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    variant: "contained",
+    color: "primary",
+    onClick: onSubmit,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: undefined
+  }, "Save"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    variant: "contained",
+    color: "secondary",
+    onClick: onCancel,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 52
+    },
+    __self: undefined
+  }, "Cancel")) : null;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CreateClient);
 
 /***/ }),
 
@@ -271,6 +443,183 @@ const Header = () => {
 
 /***/ }),
 
+/***/ "./components/clientTable/TableBody.tsx":
+/*!**********************************************!*\
+  !*** ./components/clientTable/TableBody.tsx ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uniqid */ "uniqid");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_2__);
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clientTable/TableBody.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+ //TODO Filtrují se i polé které neexistujou na straně body
+
+const TableBody = ({
+  clients,
+  reverse,
+  sort,
+  fields
+}) => {
+  reverse ? clients.sort((a, b) => b[sort] - a[sort]) : clients.sort((a, b) => a[sort] - b[sort]);
+
+  if (reverse) {}
+
+  const fieldNames = [];
+  fields.forEach(e => fieldNames.push(e.fieldName, e.fieldType));
+  const tableClients = clients.map(e => {
+    const tableItem = () => {
+      let items = [];
+
+      for (let key in e) {
+        //show only existing fields clients data
+        e[key] !== e._id && fieldNames.includes(key) ? items.push(__jsx("td", {
+          key: uniqid__WEBPACK_IMPORTED_MODULE_2___default()(),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 30
+          },
+          __self: undefined
+        }, e[key])) : null;
+      }
+
+      return items;
+    };
+
+    return __jsx("tr", {
+      key: e._id,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 36
+      },
+      __self: undefined
+    }, __jsx("td", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 37
+      },
+      __self: undefined
+    }, __jsx("input", {
+      type: "checkbox",
+      id: e._id,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 37
+      },
+      __self: undefined
+    })), tableItem(), __jsx("td", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 39
+      },
+      __self: undefined
+    }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      href: "/clients/[id]",
+      as: `/clients/${e._id}`,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 40
+      },
+      __self: undefined
+    }, __jsx("a", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 41
+      },
+      __self: undefined
+    }, "Go to client"))));
+  });
+  return tableClients;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TableBody);
+
+/***/ }),
+
+/***/ "./components/clientTable/TableHead.tsx":
+/*!**********************************************!*\
+  !*** ./components/clientTable/TableHead.tsx ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../library/stringMethods */ "./library/stringMethods.tsx");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uniqid */ "uniqid");
+/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_2__);
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clientTable/TableHead.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+//TODO: Reverse šipka jen aktivního záhlaví
+const TableHead = ({
+  fields,
+  sortBy,
+  reverse
+}) => {
+  const tableHeadings = fields.map(e => {
+    const tableHeading = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](e.fieldName).camelStringToText().firstCharUpperCase().getString();
+    return __jsx("th", {
+      key: uniqid__WEBPACK_IMPORTED_MODULE_2___default()(),
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 20
+      },
+      __self: undefined
+    }, reverse ? "<" : ">", __jsx("button", {
+      onClick: () => sortBy(e.fieldName),
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 22
+      },
+      __self: undefined
+    }, tableHeading));
+  });
+  return __jsx("thead", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 28
+    },
+    __self: undefined
+  }, __jsx("tr", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 29
+    },
+    __self: undefined
+  }, __jsx("th", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 30
+    },
+    __self: undefined
+  }), tableHeadings, __jsx("th", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 32
+    },
+    __self: undefined
+  }, "Client Profile")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TableHead);
+
+/***/ }),
+
 /***/ "./library/globalVariables.tsx":
 /*!*************************************!*\
   !*** ./library/globalVariables.tsx ***!
@@ -303,7 +652,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class stringMethods {
+class StringMethods {
   constructor(_text) {
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "text", void 0);
 
@@ -313,7 +662,7 @@ class stringMethods {
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "firstCharUpperCase", () => {
-      this.text = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(this.text).map((e, i) => i === 0 && e.toUpperCase() !== e ? e.toUpperCase() : e).join("");
+      this.text = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(this.text).map((e, i) => i === 0 ? e.toUpperCase() : e).join("");
       return this;
     });
 
@@ -355,7 +704,7 @@ class stringMethods {
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (stringMethods);
+/* harmony default export */ __webpack_exports__["default"] = (StringMethods);
 
 /***/ }),
 
@@ -425,6 +774,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-prope
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-property-symbols */ "core-js/library/fn/object/get-own-property-symbols");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js":
 /*!********************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/keys.js ***!
@@ -473,6 +833,49 @@ function _defineProperty(obj, key, value) {
   }
 
   return obj;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectSpread; });
+/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
+/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+
+
+
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    var ownKeys = _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(source);
+
+    if (typeof _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default.a === 'function') {
+      ownKeys = ownKeys.concat(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default()(source).filter(function (sym) {
+        return _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      Object(_defineProperty__WEBPACK_IMPORTED_MODULE_3__["default"])(target, key, source[key]);
+    });
+  }
+
+  return target;
 }
 
 /***/ }),
@@ -2360,9 +2763,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Header */ "./components/Header.tsx");
-/* harmony import */ var _components_ClientList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/ClientList */ "./components/ClientList.tsx");
+/* harmony import */ var _components_clientTable_TableBody__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/clientTable/TableBody */ "./components/clientTable/TableBody.tsx");
 /* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../library/stringMethods */ "./library/stringMethods.tsx");
 /* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+/* harmony import */ var _components_clientTable_TableHead__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/clientTable/TableHead */ "./components/clientTable/TableHead.tsx");
+/* harmony import */ var _components_CreateClient__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/CreateClient */ "./components/CreateClient.tsx");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__);
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/clients.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
@@ -2372,16 +2779,21 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
- //TODO: TABULKA DYNAMICKÉ ZÁHLAVÍ
-//TODO: PŘIDAT NOVÉHO KLIENTA
+
+
+
+
 
 const Clients = ({
-  data
+  fieldData,
+  clientData
 }) => {
   const router = Object(next_router__WEBPACK_IMPORTED_MODULE_1__["useRouter"])();
   const {
-    0: clients
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data);
+    0: clients,
+    1: setClients
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(clientData); //TODO: SPOJIT DO JEDNOHO STATU
+
   const {
     0: reverse,
     1: setReverseOrder
@@ -2389,7 +2801,8 @@ const Clients = ({
   const {
     0: sort,
     1: setSortBy
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("dateAdded");
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("firstName"); //
+
   const {
     0: headingOne,
     1: setHeadingOne
@@ -2398,18 +2811,35 @@ const Clients = ({
     0: initialized,
     1: setInitialized
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const {
+    0: isClientAdded,
+    1: setIsClientAdded
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     setHeadingOne(new _library_stringMethods__WEBPACK_IMPORTED_MODULE_5__["default"](router.pathname).removeSlash().firstCharUpperCase().getString());
-  });
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     const title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_5__["default"](router.pathname).removeSlash().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].titleSubText).getString();
     document.title = title;
     setInitialized(true);
   });
 
-  const sortBy = () => {
-    setSortBy("age");
-    reverse === false ? setReverseOrder(true) : setReverseOrder(false);
+  const refreshList = async () => {
+    //get data from DB after change
+    const res = await axios__WEBPACK_IMPORTED_MODULE_2___default()({
+      method: "get",
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].serverURL}/clients/`,
+      responseType: "json"
+    });
+    const data = await res.data;
+    setClients(data);
+  };
+
+  const sortBy = fieldName => {
+    setSortBy(fieldName);
+    !reverse ? setReverseOrder(true) : setReverseOrder(false);
+  };
+
+  const toggleIsClientAdded = () => {
+    isClientAdded ? setIsClientAdded(false) : setIsClientAdded(true);
   };
 
   if (!initialized) {
@@ -2419,109 +2849,90 @@ const Clients = ({
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 64
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 65
     },
     __self: undefined
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 66
     },
     __self: undefined
-  }, headingOne), __jsx("table", {
+  }, headingOne), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    variant: "contained",
+    color: "primary",
+    onClick: () => setIsClientAdded(true),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 67
     },
     __self: undefined
-  }, __jsx("thead", {
+  }, "Add new client"), __jsx(_components_CreateClient__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    fields: fieldData,
+    isClientAdded: isClientAdded,
+    toggleIsClientAdded: toggleIsClientAdded,
+    refreshList: refreshList,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 70
     },
     __self: undefined
-  }, __jsx("tr", {
+  }), __jsx("table", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 71
     },
     __self: undefined
-  }, __jsx("th", {
+  }, __jsx(_components_clientTable_TableHead__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    fields: fieldData,
+    sortBy: sortBy,
+    reverse: reverse,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 72
     },
     __self: undefined
-  }, __jsx("button", {
+  }), __jsx("tbody", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 73
     },
     __self: undefined
-  }, "Date Added")), __jsx("th", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 59
-    },
-    __self: undefined
-  }, __jsx("button", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 59
-    },
-    __self: undefined
-  }, "Name")), __jsx("th", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 60
-    },
-    __self: undefined
-  }, __jsx("button", {
-    onClick: sortBy,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 60
-    },
-    __self: undefined
-  }, "Age")), __jsx("th", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 61
-    },
-    __self: undefined
-  }, "Address"))), __jsx("tbody", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 64
-    },
-    __self: undefined
-  }, __jsx(_components_ClientList__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, __jsx(_components_clientTable_TableBody__WEBPACK_IMPORTED_MODULE_4__["default"], {
     clients: clients,
+    fields: fieldData,
     sort: sort,
     reverse: reverse,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 74
     },
     __self: undefined
   }))));
 };
 
 Clients.getInitialProps = async () => {
-  const res = await axios__WEBPACK_IMPORTED_MODULE_2___default()({
+  const clientRes = await axios__WEBPACK_IMPORTED_MODULE_2___default()({
     method: "get",
     url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].serverURL}/clients`,
     responseType: "json"
   });
-  const data = await res.data;
+  const clientData = await clientRes.data;
+  const fieldRes = await axios__WEBPACK_IMPORTED_MODULE_2___default()({
+    method: "get",
+    url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].serverURL}/fields`,
+    responseType: "json"
+  });
+  const fieldData = await fieldRes.data;
   return {
-    data
+    clientData,
+    fieldData
   };
 };
 
@@ -2538,6 +2949,28 @@ Clients.getInitialProps = async () => {
 
 module.exports = __webpack_require__(/*! /Users/davidzoufaly/code/dp/crm-app-fe/pages/clients.tsx */"./pages/clients.tsx");
 
+
+/***/ }),
+
+/***/ "@material-ui/core/Button":
+/*!*******************************************!*\
+  !*** external "@material-ui/core/Button" ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Button");
+
+/***/ }),
+
+/***/ "@material-ui/core/Typography":
+/*!***********************************************!*\
+  !*** external "@material-ui/core/Typography" ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Typography");
 
 /***/ }),
 
@@ -2618,6 +3051,17 @@ module.exports = require("core-js/library/fn/object/get-own-property-descriptor"
 
 /***/ }),
 
+/***/ "core-js/library/fn/object/get-own-property-symbols":
+/*!*********************************************************************!*\
+  !*** external "core-js/library/fn/object/get-own-property-symbols" ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/get-own-property-symbols");
+
+/***/ }),
+
 /***/ "core-js/library/fn/object/keys":
 /*!*************************************************!*\
   !*** external "core-js/library/fn/object/keys" ***!
@@ -2681,6 +3125,17 @@ module.exports = require("prop-types-exact");
 /***/ (function(module, exports) {
 
 module.exports = require("react");
+
+/***/ }),
+
+/***/ "uniqid":
+/*!*************************!*\
+  !*** external "uniqid" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("uniqid");
 
 /***/ }),
 
