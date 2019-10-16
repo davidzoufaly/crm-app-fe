@@ -4,7 +4,7 @@ const RecordsNumber = (props : any) => {
   return (
     <div>
       <h2>{numberOfRecords}</h2>
-      <p>Saved {numberOfRecords > 1 ? "records" : "record"}</p>
+      <p>Saved {props.string}</p>
     </div>
   );
 };

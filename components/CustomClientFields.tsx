@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddOrEditField from "../components/AddOrEditField";
 import axios from "axios";
 import globalVars from "../library/globalVariables";
 import uniqid from "uniqid";
 import CustomFieldsList from "./CustomFieldsList";
+import Typography from "@material-ui/core/Typography";
+
+//TODO: EDIT OPTIONU SE PRERENDEROVAVA
 
 const CustomClientFields = ({ fields, refreshList }: any) => {
   const blankFieldObject = {
@@ -12,45 +15,72 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
     fieldOptions: []
   };
 
+  useEffect(() => {
+    console.log(editedField);
+  });
+
   const [editedField, setEditedField] = useState<any>(blankFieldObject);
   const [displayComponent, setDisplayComponent] = useState(false);
 
-  const saveEditedField = () => {
-    const fieldIsUpdated = async () => {
-      const {fieldName, fieldType, fieldOptions, id} = editedField;
-      const res = await axios({
-        method: "put",
-        url: `${globalVars.serverURL}/fields/${id}`,
-        data: {fieldName, fieldType, fieldOptions},
-        responseType: "json"
+  const fieldMethods = {
+    onNameChange(event: any) {
+      setEditedField({ ...editedField, fieldName: event.target.value });
+    },
+    onSelectChange(event: any) {
+      setEditedField({
+        ...editedField,
+        fieldType:
+          event.target.options[event.target.options.selectedIndex].value
       });
-      const data = await res.data;
-      if(data.msg === "Success") {
-        setDisplayComponent(false);
-        setEditedField(blankFieldObject);
-        refreshList();
-      }
-    }
+    },
+    handleOptionSpawn() {
+      setEditedField({
+        ...editedField,
+        fieldOptions: [...editedField.fieldOptions, { id: uniqid(), value: "" }]
+      });
+    },
+    toggleDisplayComponent() {
+      displayComponent ? setDisplayComponent(false) : setDisplayComponent(true);
+      setEditedField(blankFieldObject);
+    },
+    saveEditedField() {
+      const fieldIsUpdated = async () => {
+        const { fieldName, fieldType, fieldOptions, id } = editedField;
+        const res = await axios({
+          method: "put",
+          url: `${globalVars.serverURL}/fields/${id}`,
+          data: { fieldName, fieldType, fieldOptions },
+          responseType: "json"
+        });
+        const data = await res.data;
+        if (data.msg === "Success") {
+          reset();
+        }
+      };
 
-    const fieldIsCreated = async () => {
-      const res = await axios({
-        method: "post",
-        url: `${globalVars.serverURL}/fields/`,
-        data: editedField,
-        responseType: "json"
-      });
-      const data = await res.data;
-      if(data.msg === "Success") {
-        refreshList();
-        setDisplayComponent(false);
-        setEditedField(blankFieldObject);
-      }
+      const fieldIsCreated = async () => {
+        const res = await axios({
+          method: "post",
+          url: `${globalVars.serverURL}/fields/`,
+          data: editedField,
+          responseType: "json"
+        });
+        const data = await res.data;
+        if (data.msg === "Success") {
+          reset();
+        }
+      };
+      !editedField.id ? fieldIsCreated() : fieldIsUpdated();
     }
-    !editedField.id ? fieldIsCreated() : fieldIsUpdated();
   };
 
-  const deleteField = async (event: any) => {
-    const id = event.target.id;
+  const reset = () => {
+    setDisplayComponent(false);
+    setEditedField(blankFieldObject);
+    refreshList();
+  };
+
+  const deleteField = async (id : any) => {
     const res = await axios({
       method: "delete",
       url: `${globalVars.serverURL}/fields/${id}`,
@@ -58,24 +88,6 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
     });
     const resData = await res.data;
     resData.msg === "Success" ? refreshList() : null;
-  };
-
-  const onNameChange = (event: any) => {
-    setEditedField({ ...editedField, fieldName: event.target.value });
-  };
-
-  const onSelectChange = (event: any) => {
-    setEditedField({
-      ...editedField,
-      fieldType: event.target.options[event.target.options.selectedIndex].value
-    });
-  };
-
-  const handleOptionSpawn = () => {
-    setEditedField({
-      ...editedField,
-      fieldOptions: [...editedField.fieldOptions, { id: uniqid(), value: "" }]
-    });
   };
 
   const onOptionChange = (event: any) => {
@@ -96,18 +108,16 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
     });
   };
 
-  const setupEditedField = (obj?: any) => {
+  const setupEditedField = (obj: any) => {
     setEditedField(obj);
-    setDisplayComponent(true);
+    !displayComponent ? setDisplayComponent(true) : null;
   };
-
-  const changeDisplayComponent = () => {
-    displayComponent ? setDisplayComponent(false) : setDisplayComponent(true);
-  }
 
   return (
     <div>
-      <h2>Custom Client Fields</h2>
+      <Typography variant="h4" component="h2" gutterBottom>
+        Custom Client Fields
+      </Typography>
       <CustomFieldsList
         deleteField={deleteField}
         fields={fields}
@@ -115,15 +125,10 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
       />
       <AddOrEditField
         editedField={editedField}
-        refreshList={refreshList}
-        saveEditedField={saveEditedField}
-        onNameChange={onNameChange}
-        onSelectChange={onSelectChange}
-        handleOptionSpawn={handleOptionSpawn}
+        displayComponent={displayComponent}
+        fieldMethods={fieldMethods}
         onOptionChange={onOptionChange}
         onOptionDelete={onOptionDelete}
-        displayComponent={displayComponent}
-        changeDisplayComponent={changeDisplayComponent}
       />
     </div>
   );

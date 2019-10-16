@@ -7,6 +7,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const CustomFields = ({ fields, setupEditedField, deleteField }: any) => {
   const useStyles = makeStyles({
@@ -35,15 +38,13 @@ const CustomFields = ({ fields, setupEditedField, deleteField }: any) => {
         .firstCharUpperCase()
         .getString();
 
-      const optionsMap = () => {
-        return fieldOptions.map((e: any) => {
-          return (
-            <ListItem key={e.id}>
-              <ListItemText primary={e.value} />
-            </ListItem>
-          );
-        });
-      };
+      const options = fieldOptions.map((e: any) => {
+        return (
+          <ListItem key={e.id}>
+            <ListItemText primary={e.value} />
+          </ListItem>
+        );
+      });
 
       return (
         <Grid item key={_id}>
@@ -57,24 +58,34 @@ const CustomFields = ({ fields, setupEditedField, deleteField }: any) => {
               </Typography>
               {fieldType === "select" && fieldOptions.length > 0 ? (
                 <List className={classes.list} dense={true}>
-                  {optionsMap()}
+                  {options}
                 </List>
               ) : null}
-              <button
+              <Button
+                variant="contained"
+                color="primary"
                 onClick={() =>
                   setupEditedField({
                     fieldName: customFieldNameFormated,
                     fieldType,
+                    fieldPermanent: false,
                     fieldOptions,
                     id: _id
                   })
                 }
+                startIcon={<EditIcon />}
+                size="small"
               >
-                Edit field
-              </button>
-              <button onClick={deleteField} id={_id}>
-                Delete field
-              </button>
+                Edit
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => deleteField(_id)}
+                startIcon={<DeleteIcon />}
+                size="small"
+              >
+                Delete
+              </Button>
             </CardContent>
           </Card>
         </Grid>

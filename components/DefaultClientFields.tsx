@@ -1,4 +1,5 @@
 import stringMethods from "../library/stringMethods";
+import Typography from "@material-ui/core/Typography";
 
 const DefaultClientFields = ({ fields }: any) => {
   const defaultFieldNames = fields
@@ -16,7 +17,7 @@ const DefaultClientFields = ({ fields }: any) => {
 
   return (
     <div>
-      <h2>Default client fields</h2>
+      <Typography variant="h4" component="h2" gutterBottom>Default client fields</Typography>
       <div>{defaultFieldNames}</div>
     </div>
   );

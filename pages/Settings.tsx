@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import DefaultClientFields from "../components/DefaultClientFields";
 import CustomClientFields from "../components/CustomClientFields";
+import Typography from "@material-ui/core/Typography";
 
 const Settings = ({ data }: any) => {
   const router = useRouter();
@@ -52,7 +53,7 @@ const Settings = ({ data }: any) => {
   return (
     <div>
       <Header />
-      <h1>{headingOne}</h1>
+      <Typography variant="h3" component="h1" gutterBottom>{headingOne}</Typography>
       <DefaultClientFields fields={fields}/>
       <CustomClientFields fields={fields} refreshList={refreshList}/>
     </div>

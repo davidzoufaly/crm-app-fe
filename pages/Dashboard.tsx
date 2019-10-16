@@ -1,13 +1,12 @@
-import Header from '../components/Header';
-import axios from 'axios';
+import Header from "../components/Header";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import ShowRecordsNumber from '../components/RecordsNumber';
+import ShowRecordsNumber from "../components/RecordsNumber";
 import stringMethods from "../library/stringMethods";
 import globalVars from "../library/globalVariables";
-import EditField from "../components/AddOrEditField";
 
-const Dashboard = (props: any) => {
+const Dashboard = ({clientData, fieldData} : any) => {
   const router = useRouter();
   const [headingOne, setHeadingOne] = useState("");
   const [initialized, setInitialized] = useState(false);
@@ -25,32 +24,38 @@ const Dashboard = (props: any) => {
       .addStringToEnd(globalVars.titleSubText)
       .getString();
     document.title = title;
-
     setInitialized(true);
   });
 
-  if(!initialized) {
-    return "Loading..."
+  if (!initialized) {
+    return "Loading...";
   }
 
   return (
     <div>
-      <Header/>
+      <Header />
       <h1>{headingOne}</h1>
-      <ShowRecordsNumber data={props.data} />
-      <EditField />
+      <ShowRecordsNumber data={clientData.data} string={"clients"} />
+      <ShowRecordsNumber data={fieldData.data} string={"fields"}/>
     </div>
   );
 };
 
 Dashboard.getInitialProps = async () => {
-  const res = await axios({
-      method: "get",
-      url: `${globalVars.serverURL}/clients/count`,
-      responseType: "json"
-    });
-    const data = await res.data;
-    return data;
+  const resClientCount = await axios({
+    method: "get",
+    url: `${globalVars.serverURL}/clients/count`,
+    responseType: "json"
+  });
+  const clientData = await resClientCount.data;
+
+  const resFieldsData = await axios({
+    method: "get",
+    url: `${globalVars.serverURL}/fields/count`,
+    responseType: "json"
+  });
+  const fieldData = await resFieldsData.data;
+  return { clientData, fieldData };
 };
 
 export default Dashboard;
