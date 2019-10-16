@@ -122,23 +122,23 @@ const ClientForm = ({
           key: e.fieldName,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 9
+            lineNumber: 8
           },
           __self: undefined
         }, __jsx("p", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 10
+            lineNumber: 9
           },
           __self: undefined
         }, new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](e.fieldName).camelStringToText().firstCharUpperCase().getString()), __jsx("input", {
           type: "text",
           name: e.fieldName,
-          onChange: () => onChange(e.fieldName, event),
+          onChange: () => onChange(e.fieldName, e.fieldType, event),
           value: newClient[e.fieldName],
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 11
+            lineNumber: 15
           },
           __self: undefined
         }));
@@ -147,22 +147,22 @@ const ClientForm = ({
           key: e.fieldName,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 21
+            lineNumber: 25
           },
           __self: undefined
         }, __jsx("p", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 22
+            lineNumber: 26
           },
           __self: undefined
         }, e.fieldName), __jsx("input", {
           type: "number",
           name: e.fieldName,
-          onChange: () => onChange(e.fieldName, event),
+          onChange: () => onChange(e.fieldName, e.fieldType, event),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 23
+            lineNumber: 27
           },
           __self: undefined
         }));
@@ -171,27 +171,27 @@ const ClientForm = ({
           key: e.fieldName,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 36
           },
           __self: undefined
         }, __jsx("p", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 29
+            lineNumber: 37
           },
           __self: undefined
         }, e.fieldName), __jsx("select", {
           name: e.fieldName,
-          onChange: () => onChange(e.fieldName, event),
+          onChange: () => onChange(e.fieldName, e.fieldType, event),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 30
+            lineNumber: 38
           },
           __self: undefined
         }, __jsx("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 31
+            lineNumber: 42
           },
           __self: undefined
         }, "---"), e.fieldOptions.map(e => {
@@ -200,7 +200,7 @@ const ClientForm = ({
             key: e.id,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 34
+              lineNumber: 45
             },
             __self: undefined
           }, e.value);
@@ -208,10 +208,10 @@ const ClientForm = ({
       }
     }
   });
-  return __jsx("form", {
+  return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 56
     },
     __self: undefined
   }, inputs);
@@ -230,24 +230,27 @@ const ClientForm = ({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Typography */ "@material-ui/core/Typography");
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _ClientForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ClientForm */ "./components/ClientForm.tsx");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/Typography */ "@material-ui/core/Typography");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _ClientForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ClientForm */ "./components/ClientForm.tsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+
 
 
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CreateClient.tsx";
 
-var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
 
 
@@ -261,25 +264,28 @@ const CreateClient = ({
   toggleIsClientAdded,
   refreshList
 }) => {
-  const initialNewClintState = fields.map(e => e.fieldName).reduce((o, key) => _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(o, {
+  const initialNewClintState = fields.map(e => e.fieldName).reduce((o, key) => _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default()(o, {
     [key]: ""
   }), {});
   const {
     0: newClient,
     1: setNewClient
-  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(initialNewClintState);
+  } = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(initialNewClintState);
 
-  const onChange = (fieldName, event) => {
-    setNewClient(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, newClient, {
+  const onChange = (fieldName, fieldType, event) => {
+    fieldType === "number" ? setNewClient(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, newClient, {
+      [fieldName]: _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(event.target.value)
+    })) : setNewClient(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, newClient, {
       [fieldName]: event.target.value
     }));
   };
 
-  const onSubmit = async () => {
-    const clientRes = await axios__WEBPACK_IMPORTED_MODULE_6___default()({
+  const onSubmit = async e => {
+    e.preventDefault();
+    const clientRes = await axios__WEBPACK_IMPORTED_MODULE_7___default()({
       method: "post",
       data: newClient,
-      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL}/clients`,
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].serverURL}/clients`,
       responseType: "json"
     });
     const clientData = await clientRes.data;
@@ -296,52 +302,58 @@ const CreateClient = ({
     toggleIsClientAdded();
   };
 
-  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(() => {
-    console.log(newClient);
+  Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(() => {// console.log(newClient);
   });
   return isClientAdded ? __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 55
     },
     __self: undefined
-  }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4___default.a, {
+  }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default.a, {
     variant: "h4",
     component: "h2",
     gutterBottom: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 56
     },
     __self: undefined
-  }, "Add new client"), __jsx(_ClientForm__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, "Add new client"), __jsx("form", {
+    onSubmit: onSubmit,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 59
+    },
+    __self: undefined
+  }, __jsx(_ClientForm__WEBPACK_IMPORTED_MODULE_6__["default"], {
     fields: fields,
     onChange: onChange,
     newClient: newClient,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 60
     },
     __self: undefined
-  }), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
+  }), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
     variant: "contained",
     color: "primary",
-    onClick: onSubmit,
+    type: "submit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 61
     },
     __self: undefined
-  }, "Save"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
+  }, "Save"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
     variant: "contained",
     color: "secondary",
     onClick: onCancel,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 64
     },
     __self: undefined
-  }, "Cancel")) : null;
+  }, "Cancel"))) : null;
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CreateClient);
@@ -470,9 +482,19 @@ const TableBody = ({
   sort,
   fields
 }) => {
-  reverse ? clients.sort((a, b) => b[sort] - a[sort]) : clients.sort((a, b) => a[sort] - b[sort]);
-
-  if (reverse) {}
+  if (fields.some(e => e.fieldName === sort && e.fieldType === "number")) {
+    if (reverse) {
+      clients.sort((a, b) => b[sort] - a[sort]);
+    } else {
+      clients.sort((a, b) => a[sort] - b[sort]);
+    }
+  } else {
+    if (reverse) {
+      clients.sort((a, b) => b[sort] > a[sort] ? -1 : 1);
+    } else {
+      clients.sort((a, b) => b[sort] < a[sort] ? -1 : 1);
+    }
+  }
 
   const fieldNames = [];
   fields.forEach(e => fieldNames.push(e.fieldName, e.fieldType));
@@ -481,12 +503,12 @@ const TableBody = ({
       let items = [];
 
       for (let key in e) {
-        //show only existing fields clients data
+        //show only clients data with existing fields
         e[key] !== e._id && fieldNames.includes(key) ? items.push(__jsx("td", {
           key: uniqid__WEBPACK_IMPORTED_MODULE_2___default()(),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 30
+            lineNumber: 36
           },
           __self: undefined
         }, e[key])) : null;
@@ -499,13 +521,13 @@ const TableBody = ({
       key: e._id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 36
+        lineNumber: 42
       },
       __self: undefined
     }, __jsx("td", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 37
+        lineNumber: 43
       },
       __self: undefined
     }, __jsx("input", {
@@ -513,13 +535,13 @@ const TableBody = ({
       id: e._id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 37
+        lineNumber: 43
       },
       __self: undefined
     })), tableItem(), __jsx("td", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 39
+        lineNumber: 45
       },
       __self: undefined
     }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
@@ -527,16 +549,16 @@ const TableBody = ({
       as: `/clients/${e._id}`,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 40
+        lineNumber: 46
       },
       __self: undefined
     }, __jsx("a", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 41
+        lineNumber: 47
       },
       __self: undefined
-    }, "Go to client"))));
+    }, "Go"))));
   });
   return tableClients;
 };
@@ -793,6 +815,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-prope
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "core-js/library/fn/object/keys");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/parse-int.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/parse-int */ "core-js/library/fn/parse-int");
 
 /***/ }),
 
@@ -3070,6 +3103,17 @@ module.exports = require("core-js/library/fn/object/get-own-property-symbols");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/object/keys");
+
+/***/ }),
+
+/***/ "core-js/library/fn/parse-int":
+/*!***********************************************!*\
+  !*** external "core-js/library/fn/parse-int" ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/parse-int");
 
 /***/ }),
 

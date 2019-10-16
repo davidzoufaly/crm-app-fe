@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import ShowRecordsNumber from "../components/RecordsNumber";
+import ShowRecordsNumber from "../components/ShowRecordsNumber";
 import stringMethods from "../library/stringMethods";
 import globalVars from "../library/globalVariables";
 
@@ -35,8 +35,8 @@ const Dashboard = ({clientData, fieldData} : any) => {
     <div>
       <Header />
       <h1>{headingOne}</h1>
-      <ShowRecordsNumber data={clientData.data} string={"clients"} />
-      <ShowRecordsNumber data={fieldData.data} string={"fields"}/>
+      <ShowRecordsNumber data={clientData.data} string={"clients"} link={"/clients"} />
+      <ShowRecordsNumber data={fieldData.data} string={"fields"} link={"/settings"}/>
     </div>
   );
 };

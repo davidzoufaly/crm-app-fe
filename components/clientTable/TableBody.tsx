@@ -11,12 +11,18 @@ interface IProps {
 }
 
 const TableBody = ({ clients, reverse, sort, fields}: IProps) => {
-  reverse
-    ? clients.sort((a: any, b: any) => (b[sort] - a[sort]))
-    : clients.sort((a: any, b: any) => (a[sort] - b[sort]));
-
-  if (reverse) {
-
+    if(fields.some(e => e.fieldName === sort && e.fieldType === "number")) {
+      if(reverse) {
+        clients.sort((a: any, b: any) => (b[sort] - a[sort]))
+      } else {
+        clients.sort((a: any, b: any) => (a[sort] - b[sort]));
+      }
+    } else {
+      if(reverse) {
+        clients.sort((a: any, b: any) => (b[sort] > a[sort] ? -1 : 1))
+      } else {
+        clients.sort((a: any, b: any) => (b[sort] < a[sort] ? -1 : 1));
+      }
   }
   
   const fieldNames = [];
@@ -26,7 +32,7 @@ const TableBody = ({ clients, reverse, sort, fields}: IProps) => {
     const tableItem = () => {
       let items = [];
       for (let key in e) {
-        //show only existing fields clients data
+        //show only clients data with existing fields
         e[key] !== e._id && fieldNames.includes(key) ? items.push(<td key={uniqid()}>{e[key]}</td>) : null;
       }
       return items;
@@ -38,7 +44,7 @@ const TableBody = ({ clients, reverse, sort, fields}: IProps) => {
         {tableItem()}
         <td>
           <Link href="/clients/[id]" as={`/clients/${e._id}`}>
-            <a>Go to client</a>
+            <a>Go</a>
           </Link>
         </td>
       </tr>

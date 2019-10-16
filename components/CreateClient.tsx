@@ -1,22 +1,33 @@
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ClientForm from "./ClientForm";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import axios from "axios";
 import globalVars from "../library/globalVariables";
 
-const CreateClient = ({ fields, isClientAdded, toggleIsClientAdded, refreshList }: any) => {
+const CreateClient = ({
+  fields,
+  isClientAdded,
+  toggleIsClientAdded,
+  refreshList
+}: any) => {
   const initialNewClintState = fields
     .map((e: any) => e.fieldName)
     .reduce((o, key) => Object.assign(o, { [key]: "" }), {});
 
   const [newClient, setNewClient] = useState(initialNewClintState);
 
-  const onChange = (fieldName, event) => {
-    setNewClient({ ...newClient, [fieldName]: event.target.value });
+  const onChange = (fieldName, fieldType, event) => {
+    fieldType === "number"
+      ? setNewClient({
+          ...newClient,
+          [fieldName]: parseInt(event.target.value)
+        })
+      : setNewClient({ ...newClient, [fieldName]: event.target.value });
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async(e) => {
+    e.preventDefault();
     const clientRes = await axios({
       method: "post",
       data: newClient,
@@ -37,7 +48,7 @@ const CreateClient = ({ fields, isClientAdded, toggleIsClientAdded, refreshList 
   };
 
   useEffect(() => {
-    console.log(newClient);
+    // console.log(newClient);
   });
 
   return isClientAdded ? (
@@ -45,13 +56,15 @@ const CreateClient = ({ fields, isClientAdded, toggleIsClientAdded, refreshList 
       <Typography variant="h4" component="h2" gutterBottom>
         Add new client
       </Typography>
+      <form onSubmit={onSubmit}>
       <ClientForm fields={fields} onChange={onChange} newClient={newClient} />
-      <Button variant="contained" color="primary" onClick={onSubmit}>
+      <Button variant="contained" color="primary" type="submit">
         Save
       </Button>
       <Button variant="contained" color="secondary" onClick={onCancel}>
         Cancel
       </Button>
+      </form>
     </div>
   ) : null;
 };
