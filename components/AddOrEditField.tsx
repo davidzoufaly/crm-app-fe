@@ -1,8 +1,7 @@
-import SelectFieldOptions from "../components/SelectFieldOptions";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from '@material-ui/core/Fab';
 
-const AddOrEditField = ({ editedField, onOptionChange, onOptionDelete, displayComponent, fieldMethods }: any) => {
+const AddOrEditField = ({ editedField, displayComponent, fieldMethods, handleOption }: any) => {
 
   return displayComponent ? (
     <div>
@@ -20,11 +19,7 @@ const AddOrEditField = ({ editedField, onOptionChange, onOptionDelete, displayCo
         <option value="select">Select</option>
         <option value="number">Number</option>
       </select>
-      <SelectFieldOptions
-        options={editedField.fieldOptions}
-        onOptionChange={onOptionChange}
-        onOptionDelete={onOptionDelete}
-      />
+      {handleOption}
       {editedField.fieldType === "select" ? (
         <button onClick={fieldMethods.handleOptionSpawn}>New</button>
       ) : null}

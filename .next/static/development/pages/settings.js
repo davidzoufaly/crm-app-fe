@@ -11,40 +11,37 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/SelectFieldOptions */ "./components/SelectFieldOptions.tsx");
-/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/icons/Add */ "./node_modules/@material-ui/icons/Add.js");
-/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Fab */ "./node_modules/@material-ui/core/esm/Fab/index.js");
+/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/icons/Add */ "./node_modules/@material-ui/icons/Add.js");
+/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Fab */ "./node_modules/@material-ui/core/esm/Fab/index.js");
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/AddOrEditField.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-
 var AddOrEditField = function AddOrEditField(_ref) {
   var editedField = _ref.editedField,
-      onOptionChange = _ref.onOptionChange,
-      onOptionDelete = _ref.onOptionDelete,
       displayComponent = _ref.displayComponent,
-      fieldMethods = _ref.fieldMethods;
+      fieldMethods = _ref.fieldMethods,
+      handleOption = _ref.handleOption;
   return displayComponent ? __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8
+      lineNumber: 7
     },
     __self: this
   }, __jsx("h2", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 9
+      lineNumber: 8
     },
     __self: this
   }, editedField.id ? "Edit custom field" : "New custom field"), __jsx("label", {
     htmlFor: "field-name",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10
+      lineNumber: 9
     },
     __self: this
   }, "Field name"), __jsx("input", {
@@ -54,14 +51,14 @@ var AddOrEditField = function AddOrEditField(_ref) {
     onChange: fieldMethods.onNameChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 11
+      lineNumber: 10
     },
     __self: this
   }), __jsx("label", {
     htmlFor: "field-type",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17
+      lineNumber: 16
     },
     __self: this
   }, "Field type"), __jsx("select", {
@@ -70,79 +67,70 @@ var AddOrEditField = function AddOrEditField(_ref) {
     value: editedField.fieldType,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18
+      lineNumber: 17
     },
     __self: this
   }, __jsx("option", {
     value: "text",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 18
     },
     __self: this
   }, "Text"), __jsx("option", {
     value: "select",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 19
     },
     __self: this
   }, "Select"), __jsx("option", {
     value: "number",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21
+      lineNumber: 20
     },
     __self: this
-  }, "Number")), __jsx(_components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    options: editedField.fieldOptions,
-    onOptionChange: onOptionChange,
-    onOptionDelete: onOptionDelete,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 23
-    },
-    __self: this
-  }), editedField.fieldType === "select" ? __jsx("button", {
+  }, "Number")), handleOption, editedField.fieldType === "select" ? __jsx("button", {
     onClick: fieldMethods.handleOptionSpawn,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 24
     },
     __self: this
   }, "New") : null, __jsx("button", {
     onClick: fieldMethods.saveEditedField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 26
     },
     __self: this
   }, "Save"), __jsx("button", {
     onClick: fieldMethods.toggleDisplayComponent,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 27
     },
     __self: this
   }, "Cancel")) : __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 29
     },
     __self: this
-  }, __jsx(_material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, __jsx(_material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_2__["default"], {
     color: "primary",
     "aria-label": "add",
     onClick: fieldMethods.toggleDisplayComponent,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 29
     },
     __self: this
-  }, __jsx(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, __jsx(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_1___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 29
     },
     __self: this
   })), "Add new field");
@@ -176,6 +164,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _CustomFieldsList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./CustomFieldsList */ "./components/CustomFieldsList.tsx");
 /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var _components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/SelectFieldOptions */ "./components/SelectFieldOptions.tsx");
 
 
 
@@ -183,6 +172,7 @@ __webpack_require__.r(__webpack_exports__);
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CustomClientFields.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement;
+
 
 
 
@@ -402,7 +392,7 @@ var CustomClientFields = function CustomClientFields(_ref) {
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 117
+      lineNumber: 118
     },
     __self: this
   }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -411,7 +401,7 @@ var CustomClientFields = function CustomClientFields(_ref) {
     gutterBottom: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 118
+      lineNumber: 119
     },
     __self: this
   }, "Custom Client Fields"), __jsx(_CustomFieldsList__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -420,18 +410,26 @@ var CustomClientFields = function CustomClientFields(_ref) {
     setupEditedField: setupEditedField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 121
+      lineNumber: 122
     },
     __self: this
   }), __jsx(_components_AddOrEditField__WEBPACK_IMPORTED_MODULE_5__["default"], {
     editedField: editedField,
     displayComponent: displayComponent,
     fieldMethods: fieldMethods,
-    onOptionChange: onOptionChange,
-    onOptionDelete: onOptionDelete,
+    handleOption: __jsx(_components_SelectFieldOptions__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      options: editedField.fieldOptions,
+      onOptionChange: onOptionChange,
+      onOptionDelete: onOptionDelete,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 132
+      },
+      __self: this
+    }),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 126
+      lineNumber: 127
     },
     __self: this
   }));

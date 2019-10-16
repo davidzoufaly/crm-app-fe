@@ -5,6 +5,7 @@ import globalVars from "../library/globalVariables";
 import uniqid from "uniqid";
 import CustomFieldsList from "./CustomFieldsList";
 import Typography from "@material-ui/core/Typography";
+import SelectFieldOptions from "../components/SelectFieldOptions";
 
 //TODO: EDIT OPTIONU SE PRERENDEROVAVA
 
@@ -80,7 +81,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
     refreshList();
   };
 
-  const deleteField = async (id : any) => {
+  const deleteField = async (id: any) => {
     const res = await axios({
       method: "delete",
       url: `${globalVars.serverURL}/fields/${id}`,
@@ -127,8 +128,13 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
         editedField={editedField}
         displayComponent={displayComponent}
         fieldMethods={fieldMethods}
-        onOptionChange={onOptionChange}
-        onOptionDelete={onOptionDelete}
+        handleOption={
+          <SelectFieldOptions
+            options={editedField.fieldOptions}
+            onOptionChange={onOptionChange}
+            onOptionDelete={onOptionDelete}
+          />
+        }
       />
     </div>
   );
