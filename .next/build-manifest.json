@@ -12,11 +12,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/dashboard": [
+    "/clients": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/settings": [
+    "/clients/[id]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

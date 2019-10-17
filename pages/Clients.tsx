@@ -7,7 +7,7 @@ import stringMethods from "../library/stringMethods";
 import globalVars from "../library/globalVariables";
 import TableHead from "../components/clientTable/TableHead";
 import CreateClient from "../components/CreateClient";
-import Button from "@material-ui/core/Button";
+import Buttons from "../components/clientTable/Buttons";
 
 const Clients = ({ fieldData, clientData }: any) => {
   const router = useRouter();
@@ -21,6 +21,7 @@ const Clients = ({ fieldData, clientData }: any) => {
   const [isClientAdded, setIsClientAdded] = useState(false);
 
   useEffect(() => {
+    console.log("render");
     const title = new stringMethods(router.pathname)
       .removeSlash()
       .firstCharUpperCase()
@@ -31,53 +32,94 @@ const Clients = ({ fieldData, clientData }: any) => {
   });
 
   const h1 = new stringMethods(router.pathname)
-  .removeSlash()
-  .firstCharUpperCase()
-  .getString()
+    .removeSlash()
+    .firstCharUpperCase()
+    .getString();
 
   const refreshList = async () => {
     //get data from DB after change
     const res = await axios({
       method: "get",
-      url: `${globalVars.serverURL}/clients/`,
+      url: `${globalVars.serverURL}/clients`,
       responseType: "json"
     });
     const data = await res.data;
     setClients(data);
-  }
+  };
 
-  const sortBy = (fieldName) => {
+  const sortBy = fieldName => {
     setSortBy(fieldName);
     !reverse ? setReverseOrder(true) : setReverseOrder(false);
-  }
+  };
 
   const toggleIsClientAdded = () => {
     isClientAdded ? setIsClientAdded(false) : setIsClientAdded(true);
-  }
+  };
 
-  if (!initialized) {
-    return "Loading";
-  }
-  return (
+  const handleCheckbox = id => {
+    setClients(
+      clients.map(client => {
+        if (client._id === id) {
+          return client.isChecked === false || client.isChecked === undefined
+            ? { ...client, isChecked: true }
+            : { ...client, isChecked: false };
+        } else {
+          return client;
+        }
+      })
+    );
+  };
+
+  const deleteMultipleClients = async () => {
+    const clientsToDelete = [];
+    clients.map(client =>
+      client.isChecked ? clientsToDelete.push(client._id) : null
+    );
+    const resDelete = await axios({
+      method: "delete",
+      data: clientsToDelete,
+      url: `${globalVars.serverURL}/clients/`,
+      responseType: "json"
+    });
+    const dataDelete = await resDelete.data;
+    dataDelete.msg === "Success" ? refreshList() : console.error("Something went wrong!");
+  };
+
+
+  return !initialized ? "Loading..." : (
     <div>
       <Header />
       <h1>{h1}</h1>
-      <Button variant="contained" color="primary" onClick={() => setIsClientAdded(true)}>
-      Add new client
-      </Button>
-      <CreateClient fields={fieldData} isClientAdded={isClientAdded} toggleIsClientAdded={toggleIsClientAdded} refreshList={refreshList} />
+      <CreateClient
+        fields={fieldData}
+        isClientAdded={isClientAdded}
+        toggleIsClientAdded={toggleIsClientAdded}
+        refreshList={refreshList}
+      />
+      <Buttons
+        disabled={!clients.some(client => client.isChecked)}
+        deleteMultipleClients={deleteMultipleClients}
+        toggleIsClientAdded={toggleIsClientAdded}
+        isClientAdded={isClientAdded}
+      />
       <table>
-          <TableHead fields={fieldData} sortBy={sortBy} reverse={reverse}/>
-          <tbody>
-          <TableBody clients={clients} fields={fieldData} sort={sort} reverse={reverse}/>
-          </tbody>
+        <TableHead fields={fieldData} sortBy={sortBy} reverse={reverse} />
+        <tbody>
+          <TableBody
+            clients={clients}
+            fields={fieldData}
+            sort={sort}
+            reverse={reverse}
+            handleCheckbox={handleCheckbox}
+          />
+        </tbody>
       </table>
-
     </div>
   );
 };
 
 Clients.getInitialProps = async () => {
+  //fetch clients
   const clientRes = await axios({
     method: "get",
     url: `${globalVars.serverURL}/clients`,
@@ -85,15 +127,17 @@ Clients.getInitialProps = async () => {
   });
   const clientData = await clientRes.data;
 
+  //fetch fields
   const fieldRes = await axios({
     method: "get",
     url: `${globalVars.serverURL}/fields`,
     responseType: "json"
-  })
-  const fieldData = await fieldRes.data
+  });
+  const fieldData = await fieldRes.data;
 
   return {
-    clientData, fieldData
+    clientData,
+    fieldData
   };
 };
 

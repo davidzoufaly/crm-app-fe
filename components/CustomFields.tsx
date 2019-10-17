@@ -7,8 +7,6 @@ import CustomFieldsList from "./CustomFieldsList";
 import Typography from "@material-ui/core/Typography";
 import SelectFieldOptions from "./SelectFieldOptions";
 
-//TODO: EDIT OPTIONU SE PRERENDEROVAVA -> TO much baskspace u optionu uplne odstraní pole
-
 const CustomClientFields = ({ fields, refreshList }: any) => {
   const blankFieldObject = {
     fieldName: "",
