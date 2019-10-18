@@ -1,16 +1,18 @@
 import Header from "../components/Header";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import stringMethods from "../library/stringMethods";
 import globalVars from "../library/globalVariables";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import DefaultFields from "../components/DefaultFields";
 import CustomFields from "../components/CustomFields";
 import Typography from "@material-ui/core/Typography";
+import LoadingSpinner from "../components/loadingSpinner";
+import EmailSettings from "../components/settings/EmailSettings";
 
-const Settings = ({ data }: any) => {
+const Settings = ({ dataFields, dataEmailSettings }: any) => {
   const router = useRouter();
-  const [fields, setField] = useState(data);
+  const [fields, setField] = useState(dataFields);
   const [initialized, setInitialized] = useState(false);
 
   const refreshList = async () => {
@@ -22,7 +24,7 @@ const Settings = ({ data }: any) => {
     });
     const data = await res.data;
     setField(data);
-  }
+  };
 
   useEffect(() => {
     //title from url
@@ -36,35 +38,45 @@ const Settings = ({ data }: any) => {
 
     //componendDidMount effect
     setInitialized(true);
-  });
+  }, []);
 
   const h1 = new stringMethods(router.pathname)
-  .removeSlash()
-  .firstCharUpperCase()
-  .getString()
+    .removeSlash()
+    .firstCharUpperCase()
+    .getString();
 
-  if (!initialized) {
-    return "Loading...";
-  }
-
-  return (
+  return !initialized ? (
+    <LoadingSpinner />
+  ) : (
     <div>
       <Header />
-      <Typography variant="h3" component="h1" gutterBottom>{h1}</Typography>
-      <DefaultFields fields={fields}/>
-      <CustomFields fields={fields} refreshList={refreshList}/>
+      <Typography variant="h3" component="h1" gutterBottom>
+        {h1}
+      </Typography>
+      <DefaultFields fields={fields} />
+      <CustomFields fields={fields} refreshList={refreshList} />
+      <EmailSettings data={dataEmailSettings} />
     </div>
   );
 };
 
 Settings.getInitialProps = async () => {
-  const res = await axios({
+  const resFields = await axios({
     method: "get",
     url: `${globalVars.serverURL}/fields`,
     responseType: "json"
   });
-  const data = await res.data;
-  return { data };
+  const dataFields = await resFields.data;
+
+  const resEmailSettings = await axios({
+    method: "get",
+    url: `${globalVars.serverURL}/emails/email-settings`,
+    responseType: "json"
+  })
+
+  const dataEmailSettings = await resEmailSettings.data;
+
+  return { dataFields,  dataEmailSettings };
 };
 
 export default Settings;

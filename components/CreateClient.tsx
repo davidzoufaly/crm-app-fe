@@ -1,15 +1,16 @@
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import ClientForm from "./ClientForm";
+import ClientForm from "./clients/ClientForm";
 import { useEffect, useReducer } from "react";
 import axios from "axios";
 import globalVars from "../library/globalVariables";
+import generateUniqueId from "generate-unique-id";
 
 const CreateClient = ({
   fields,
   isClientAdded,
   toggleIsClientAdded,
-  refreshList
+  addNewClientToState
 }: any) => {
   const initialNewClintState = fields
     .map((e: any) => e.fieldName)
@@ -25,6 +26,9 @@ const CreateClient = ({
               ? parseInt(action.payload.value)
               : action.payload.value
         };
+      case "addId" : 
+        return {...state, _id : generateUniqueId({length: 24, useNumbers: true, useLetters: false, includeSymbols: ["a", "b", "c", "d", "e", "f"]})}
+      
       case "clear":
         return initialNewClintState;
 
@@ -34,6 +38,7 @@ const CreateClient = ({
   }, initialNewClintState);
 
   const onChange = (fieldName, fieldType, event) => {
+    setNewClient({type: "addId"})
     setNewClient({
       type: "onTextChange",
       payload: { fieldName, value: event.target.value, fieldType }
@@ -54,7 +59,7 @@ const CreateClient = ({
         type: "clear"
       });
       toggleIsClientAdded();
-      refreshList();
+      addNewClientToState(newClient);
     }
   };
 

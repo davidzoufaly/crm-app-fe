@@ -3,37 +3,48 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import globalVars from "../../library/globalVariables";
-import SingleClientData from "../../components/SingleClientData";
+import SingleClientData from "../../components/singleClient/SingleClientData";
 import ButtonsSingle from "../../components/singleClient/ButtonsSingle";
-
-//TODO: SKRÝVÁNÍ POLÍ CO NEJSOU V DB
+import LoadingSpinner from "../../components/loadingSpinner";
+import EmailForm from "../../components/EmailForm";
 
 const Client = ({ clientData, fieldsData }: any) => {
   const [client, setClient] = useState(clientData);
-  const { firstName, lastName } = clientData;
+  const [name, setName] = useState(
+    `${clientData.firstName} ${clientData.lastName}`
+  );
   const [initialized, setInitialized] = useState(false);
+  const [isEmailCreated, setIsEmailCreated] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    document.title = `${firstName} ${lastName} ${globalVars.titleSubText}`;
-    // console.log(clientData);
-    // console.log(fieldsData)
+    document.title = `${name} ${globalVars.titleSubText}`;
     setInitialized(true);
-  });
+  }, [name]);
 
-  const onSubmit = async (e) => {
+  const onSave = async e => {
     e.preventDefault();
-    const clientSaveRes = await axios({
-      method: "post",
+    setName(`${client.firstName} ${client.lastName}`);
+
+    await axios({
+      method: "put",
       data: client,
-      url: `${globalVars.serverURL}/client/${router.query}`,
+      url: `${globalVars.serverURL}/clients/${router.query.id}`,
       responseType: "json"
     });
-    const clientSaveData = await clientSaveRes.data;
+  };
 
-    clientSaveData.msg === "Success"
-      ? router.push(router.pathname)
-      : console.error("Something went wrong!");
+  const onDelete = async e => {
+    e.preventDefault();
+    const res = await axios({
+      method: "delete",
+      url: `${globalVars.serverURL}/clients/${router.query.id}`,
+      responseType: "json"
+    });
+    const data = await res.data;
+    (await data.msg) === "Success"
+      ? router.push("/clients")
+      : alert("Something went wrong!");
   };
 
   const onInputChange = e => {
@@ -44,24 +55,34 @@ const Client = ({ clientData, fieldsData }: any) => {
     });
   };
 
+  const toggleIsEmailCreated = () => {
+    setIsEmailCreated(isEmailCreated ? false : true);
+  };
+
   return !initialized ? (
-    "Loading..."
+    <LoadingSpinner />
   ) : (
     <div>
       <Header />
-      <h1>
-        {firstName} {lastName}
-      </h1>
-      <form onSubmit={onSubmit}>
-        <ul>
-          <SingleClientData
-            fieldsData={fieldsData}
-            client={client}
-            onInputChange={onInputChange}
-          />
-        </ul>
+      <h1>{name}</h1>
+      <form>
+        <SingleClientData
+          fieldsData={fieldsData}
+          client={client}
+          onInputChange={onInputChange}
+        />
       </form>
-      <ButtonsSingle />
+        <EmailForm
+          to={[client.email]}
+          isEmailCreated={isEmailCreated}
+          toggleIsEmailCreated={toggleIsEmailCreated}
+        />
+        <ButtonsSingle
+          onSave={onSave}
+          toggleIsEmailCreated={toggleIsEmailCreated}
+          onDelete={onDelete}
+          isEmailCreated={isEmailCreated}
+        />
     </div>
   );
 };

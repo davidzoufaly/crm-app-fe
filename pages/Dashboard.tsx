@@ -5,8 +5,9 @@ import { useRouter } from "next/router";
 import ShowRecordsNumber from "../components/ShowRecordsNumber";
 import stringMethods from "../library/stringMethods";
 import globalVars from "../library/globalVariables";
+import LoadingSpinner from "../components/loadingSpinner";
 
-const Dashboard = ({clientData, fieldData} : any) => {
+const Dashboard = ({ clientData, fieldData }: any) => {
   const router = useRouter();
   const [initialized, setInitialized] = useState(false);
 
@@ -18,23 +19,29 @@ const Dashboard = ({clientData, fieldData} : any) => {
       .getString();
     document.title = title;
     setInitialized(true);
-  });
+  }, []);
 
   const h1 = new stringMethods(router.pathname)
-  .removeSlash()
-  .firstCharUpperCase()
-  .getString()
+    .removeSlash()
+    .firstCharUpperCase()
+    .getString();
 
-  if (!initialized) {
-    return "Loading...";
-  }
-
-  return (
+  return !initialized ? (
+    <LoadingSpinner />
+  ) : (
     <div>
       <Header />
       <h1>{h1}</h1>
-      <ShowRecordsNumber data={clientData.data} string={"clients"} link={"/clients"} />
-      <ShowRecordsNumber data={fieldData.data} string={"fields"} link={"/settings"}/>
+      <ShowRecordsNumber
+        data={clientData.data}
+        string={"clients"}
+        link={"/clients"}
+      />
+      <ShowRecordsNumber
+        data={fieldData.data}
+        string={"fields"}
+        link={"/settings"}
+      />
     </div>
   );
 };

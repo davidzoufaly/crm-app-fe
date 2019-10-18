@@ -1,27 +1,51 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Header from "../components/Header";
-import TableBody from "../components/clientTable/TableBody";
+import TableBody from "../components/clients/TableBody";
 import stringMethods from "../library/stringMethods";
 import globalVars from "../library/globalVariables";
-import TableHead from "../components/clientTable/TableHead";
+import TableHead from "../components/clients/TableHead";
 import CreateClient from "../components/CreateClient";
-import Buttons from "../components/clientTable/Buttons";
+import Buttons from "../components/clients/Buttons";
+import LoadingSpinner from "../components/loadingSpinner";
+import EmailForm from "../components/EmailForm";
+
+//TODO: Po odeslání skrýt komponentu
 
 const Clients = ({ fieldData, clientData }: any) => {
   const router = useRouter();
 
-  const [clients, setClients] = useState(clientData);
+  const [clients, setClients] = useReducer((state, action) => {
+    switch (action.type) {
+      case "handleCheckedClients":
+        return state.map(client =>
+          client._id === action.payload.id
+            ? client.isChecked === false || client.isChecked === undefined
+              ? { ...client, isChecked: true }
+              : { ...client, isChecked: false }
+            : client
+        );
+      case "addClient":
+        return [...state, action.payload.newClient];
+      case "deleteCheckedClients":
+        return state.filter(client => !client.isChecked);
+      case "unCheckAll": 
+        return state.map(client => client = {...client, isChecked: false});
+      default:
+        return state;
+    }
+  }, clientData);
   //TODO: SPOJIT DO JEDNOHO STATU
   const [reverse, setReverseOrder] = useState(false);
   const [sort, setSortBy] = useState("firstName");
   //
   const [initialized, setInitialized] = useState(false);
   const [isClientAdded, setIsClientAdded] = useState(false);
+  const [isEmailCreated, setIsEmailCreated] = useState(false);
 
   useEffect(() => {
-    console.log("render");
+    // set title
     const title = new stringMethods(router.pathname)
       .removeSlash()
       .firstCharUpperCase()
@@ -29,78 +53,92 @@ const Clients = ({ fieldData, clientData }: any) => {
       .getString();
     document.title = title;
     setInitialized(true);
-  });
+  }, []);
 
+  useEffect(() => {
+    // reset email state, when user uncheck all recievers / clients
+    filterCheckedClients().length === 0 && isEmailCreated
+      ? setIsEmailCreated(!isEmailCreated)
+      : null;
+  }, [clients]);
+
+  // create H1
   const h1 = new stringMethods(router.pathname)
     .removeSlash()
     .firstCharUpperCase()
     .getString();
-
-  const refreshList = async () => {
-    //get data from DB after change
-    const res = await axios({
-      method: "get",
-      url: `${globalVars.serverURL}/clients`,
-      responseType: "json"
-    });
-    const data = await res.data;
-    setClients(data);
-  };
 
   const sortBy = fieldName => {
     setSortBy(fieldName);
     !reverse ? setReverseOrder(true) : setReverseOrder(false);
   };
 
-  const toggleIsClientAdded = () => {
+  const handleCheckbox = id => {
+    setClients({
+      type: "handleCheckedClients",
+      payload: { id }
+    });
+  };
+
+  const addNewClientToState = newClient => {
+    setClients({
+      type: "addClient",
+      payload: { newClient }
+    });
+  };
+
+  const filterCheckedClients = () => clients.filter(client => client.isChecked);
+
+  const unCheckAll = () => {
+    setClients({type: "unCheckAll"})
+  }
+
+  const toggleIsEmailCreated = () => {
+    setIsEmailCreated(isEmailCreated ? false : true);
+  };
+
+  const toggleIsClientAdded = () => { 
     isClientAdded ? setIsClientAdded(false) : setIsClientAdded(true);
   };
 
-  const handleCheckbox = id => {
-    setClients(
-      clients.map(client => {
-        if (client._id === id) {
-          return client.isChecked === false || client.isChecked === undefined
-            ? { ...client, isChecked: true }
-            : { ...client, isChecked: false };
-        } else {
-          return client;
-        }
-      })
-    );
-  };
-
   const deleteMultipleClients = async () => {
-    const clientsToDelete = [];
-    clients.map(client =>
-      client.isChecked ? clientsToDelete.push(client._id) : null
-    );
-    const resDelete = await axios({
+    setClients({
+      type: "deleteCheckedClients"
+    });
+
+    await axios({
       method: "delete",
-      data: clientsToDelete,
+      data: filterCheckedClients().map(e => e._id),
       url: `${globalVars.serverURL}/clients/`,
       responseType: "json"
     });
-    const dataDelete = await resDelete.data;
-    dataDelete.msg === "Success" ? refreshList() : console.error("Something went wrong!");
   };
 
-
-  return !initialized ? "Loading..." : (
+  return !initialized ? (
+    <LoadingSpinner />
+  ) : (
     <div>
       <Header />
       <h1>{h1}</h1>
+      <EmailForm
+        to={filterCheckedClients().map(e => e.email)}
+        isEmailCreated={isEmailCreated}
+        toggleIsEmailCreated={toggleIsEmailCreated}
+        unCheckAll={unCheckAll}
+      />
       <CreateClient
         fields={fieldData}
         isClientAdded={isClientAdded}
         toggleIsClientAdded={toggleIsClientAdded}
-        refreshList={refreshList}
+        addNewClientToState={addNewClientToState}
       />
       <Buttons
         disabled={!clients.some(client => client.isChecked)}
         deleteMultipleClients={deleteMultipleClients}
         toggleIsClientAdded={toggleIsClientAdded}
         isClientAdded={isClientAdded}
+        toggleIsEmailCreated={toggleIsEmailCreated}
+        isEmailCreated={isEmailCreated}
       />
       <table>
         <TableHead fields={fieldData} sortBy={sortBy} reverse={reverse} />

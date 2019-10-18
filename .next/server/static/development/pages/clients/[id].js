@@ -88,10 +88,161 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./components/EmailForm.tsx":
+/*!**********************************!*\
+  !*** ./components/EmailForm.tsx ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/EmailForm.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
+
+const EmailForm = ({
+  to,
+  isEmailCreated,
+  toggleIsEmailCreated,
+  unCheckAll
+}) => {
+  const initEmail = {
+    to,
+    subject: "",
+    message: ""
+  };
+  const {
+    0: email,
+    1: setEmail
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(initEmail);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
+    setEmail(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, email, {
+      to: to
+    }));
+  }, [to]);
+
+  const sendEmail = async e => {
+    e.preventDefault();
+    const res = await axios__WEBPACK_IMPORTED_MODULE_2___default()({
+      method: "post",
+      data: email,
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_3__["default"].serverURL}/emails/send`,
+      responseType: "json"
+    });
+    const data = await res.data;
+
+    if (data.msg === "Success") {
+      alert("Your email has been succesfully sent.");
+      setEmail(initEmail); // if email is sending from clients page
+
+      toggleIsEmailCreated();
+      unCheckAll ? unCheckAll() : null;
+    } else {
+      alert("Something went wrong!");
+    }
+  };
+
+  const onChange = e => {
+    setEmail(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, email, {
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  return isEmailCreated && to.length > 0 ? __jsx("form", {
+    onSubmit: sendEmail,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 38
+    },
+    __self: undefined
+  }, __jsx("label", {
+    htmlFor: "email-to",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: undefined
+  }, "To"), __jsx("input", {
+    type: "text",
+    id: "email-to",
+    name: "to",
+    value: email.to,
+    disabled: true,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 40
+    },
+    __self: undefined
+  }), __jsx("label", {
+    htmlFor: "email-subject",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41
+    },
+    __self: undefined
+  }, "Subject"), __jsx("input", {
+    type: "text",
+    id: "email-to",
+    name: "subject",
+    value: email.subject,
+    onChange: onChange,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42
+    },
+    __self: undefined
+  }), __jsx("label", {
+    htmlFor: "email-message",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: undefined
+  }, "Message"), __jsx("textarea", {
+    name: "message",
+    onChange: onChange,
+    value: email.message,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 50
+    },
+    __self: undefined
+  }), __jsx("button", {
+    onClick: toggleIsEmailCreated,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 51
+    },
+    __self: undefined
+  }, "Cancel"), __jsx("button", {
+    type: "submit",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 52
+    },
+    __self: undefined
+  }, "Send")) : null;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (EmailForm);
+
+/***/ }),
 
 /***/ "./components/Header.tsx":
 /*!*******************************!*\
@@ -169,7 +320,7 @@ const Header = () => {
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/settings",
+    href: "/emails",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 18
@@ -181,6 +332,25 @@ const Header = () => {
       lineNumber: 19
     },
     __self: undefined
+  }, "Emails"))), __jsx("li", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22
+    },
+    __self: undefined
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/settings",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
   }, "Settings")))));
 };
 
@@ -188,10 +358,10 @@ const Header = () => {
 
 /***/ }),
 
-/***/ "./components/SingleClientData.tsx":
-/*!*****************************************!*\
-  !*** ./components/SingleClientData.tsx ***!
-  \*****************************************/
+/***/ "./components/loadingSpinner.tsx":
+/*!***************************************!*\
+  !*** ./components/loadingSpinner.tsx ***!
+  \***************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -199,86 +369,22 @@ const Header = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../library/stringMethods */ "./library/stringMethods.tsx");
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/SingleClientData.tsx";
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "@material-ui/core/CircularProgress");
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/loadingSpinner.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
-const SingleClientData = ({
-  fieldsData,
-  client,
-  onInputChange
-}) => fieldsData.map(field => {
-  switch (field.fieldType) {
-    case "text":
-      return __jsx("li", {
-        key: field.fieldName,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 8
-        },
-        __self: undefined
-      }, new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](field.fieldName).camelStringToText().firstCharUpperCase().getString(), __jsx("textarea", {
-        name: field.fieldName,
-        value: client[field.fieldName],
-        onChange: onInputChange,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 13
-        },
-        __self: undefined
-      }));
-
-    case "number":
-      return __jsx("li", {
-        key: field.fieldName,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 18
-        },
-        __self: undefined
-      }, new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](field.fieldName).camelStringToText().firstCharUpperCase().getString(), __jsx("input", {
-        type: "number",
-        name: field.fieldName,
-        value: client[field.fieldName],
-        onChange: onInputChange,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 23
-        },
-        __self: undefined
-      }));
-
-    case "select":
-      return __jsx("li", {
-        key: field.fieldName,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 28
-        },
-        __self: undefined
-      }, new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](field.fieldName).camelStringToText().firstCharUpperCase().getString(), __jsx("select", {
-        name: field.fieldName,
-        value: client[field.fieldName],
-        onChange: onInputChange,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 33
-        },
-        __self: undefined
-      }, field.fieldOptions.map(option => __jsx("option", {
-        key: option.id,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 35
-        },
-        __self: undefined
-      }, option.value))));
-  }
+const LoadingSpinner = () => __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 4
+  },
+  __self: undefined
 });
 
-/* harmony default export */ __webpack_exports__["default"] = (SingleClientData);
+/* harmony default export */ __webpack_exports__["default"] = (LoadingSpinner);
 
 /***/ }),
 
@@ -303,47 +409,156 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-const ButtonsSingle = () => __jsx("div", {
+const ButtonsSingle = ({
+  onDelete,
+  toggleIsEmailCreated,
+  isEmailCreated,
+  onSave
+}) => __jsx("div", {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 5
+    lineNumber: 10
   },
   __self: undefined
 }, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
   color: "primary",
   variant: "contained",
+  disabled: isEmailCreated,
+  onClick: toggleIsEmailCreated,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 6
+    lineNumber: 11
   },
   __self: undefined
-}, "Send E-mail"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
+}, "email"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
   color: "secondary",
   variant: "contained",
+  onClick: onDelete,
   startIcon: __jsx(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 7
+      lineNumber: 23
     },
     __self: undefined
   }),
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 7
+    lineNumber: 19
   },
   __self: undefined
 }, "Delete"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
   color: "primary",
   variant: "contained",
-  type: "submit",
+  onClick: onSave,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 8
+    lineNumber: 27
   },
   __self: undefined
 }, "Save"));
 
 /* harmony default export */ __webpack_exports__["default"] = (ButtonsSingle);
+
+/***/ }),
+
+/***/ "./components/singleClient/SingleClientData.tsx":
+/*!******************************************************!*\
+  !*** ./components/singleClient/SingleClientData.tsx ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../library/stringMethods */ "./library/stringMethods.tsx");
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/singleClient/SingleClientData.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+const SingleClientData = ({
+  fieldsData,
+  client,
+  onInputChange
+}) => fieldsData.map(field => {
+  switch (field.fieldType) {
+    case "text":
+      return __jsx("div", {
+        key: field.fieldName,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 8
+        },
+        __self: undefined
+      }, new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](field.fieldName).camelStringToText().firstCharUpperCase().getString(), __jsx("textarea", {
+        name: field.fieldName,
+        value: client[field.fieldName],
+        onChange: onInputChange,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 13
+        },
+        __self: undefined
+      }));
+
+    case "number":
+      return __jsx("div", {
+        key: field.fieldName,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18
+        },
+        __self: undefined
+      }, new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](field.fieldName).camelStringToText().firstCharUpperCase().getString(), __jsx("input", {
+        type: "number",
+        name: field.fieldName,
+        value: client[field.fieldName],
+        onChange: onInputChange,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 23
+        },
+        __self: undefined
+      }));
+
+    case "select":
+      return __jsx("div", {
+        key: field.fieldName,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 28
+        },
+        __self: undefined
+      }, new _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__["default"](field.fieldName).camelStringToText().firstCharUpperCase().getString(), __jsx("select", {
+        name: field.fieldName,
+        value: client[field.fieldName],
+        onChange: onInputChange,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 33
+        },
+        __self: undefined
+      }, __jsx("option", {
+        key: "---",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 34
+        },
+        __self: undefined
+      }, "---"), field.fieldOptions.map(option => __jsx("option", {
+        key: option.id,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 36
+        },
+        __self: undefined
+      }, option.value))));
+  }
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (SingleClientData);
 
 /***/ }),
 
@@ -2505,8 +2720,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! next/router */ "next/router");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../library/globalVariables */ "./library/globalVariables.tsx");
-/* harmony import */ var _components_SingleClientData__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/SingleClientData */ "./components/SingleClientData.tsx");
+/* harmony import */ var _components_singleClient_SingleClientData__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/singleClient/SingleClientData */ "./components/singleClient/SingleClientData.tsx");
 /* harmony import */ var _components_singleClient_ButtonsSingle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/singleClient/ButtonsSingle */ "./components/singleClient/ButtonsSingle.tsx");
+/* harmony import */ var _components_loadingSpinner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/loadingSpinner */ "./components/loadingSpinner.tsx");
+/* harmony import */ var _components_EmailForm__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/EmailForm */ "./components/EmailForm.tsx");
 
 
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/clients/[id].tsx";
@@ -2518,7 +2735,9 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
- //TODO: SKRÝVÁNÍ POLÍ CO NEJSOU V DB
+
+
+
 
 const Client = ({
   clientData,
@@ -2529,31 +2748,43 @@ const Client = ({
     1: setClient
   } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(clientData);
   const {
-    firstName,
-    lastName
-  } = clientData;
+    0: name,
+    1: setName
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(`${clientData.firstName} ${clientData.lastName}`);
   const {
     0: initialized,
     1: setInitialized
   } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(false);
+  const {
+    0: isEmailCreated,
+    1: setIsEmailCreated
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(false);
   const router = Object(next_router__WEBPACK_IMPORTED_MODULE_5__["useRouter"])();
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(() => {
-    document.title = `${firstName} ${lastName} ${_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].titleSubText}`; // console.log(clientData);
-    // console.log(fieldsData)
-
+    document.title = `${name} ${_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].titleSubText}`;
     setInitialized(true);
-  });
+  }, [name]);
 
-  const onSubmit = async e => {
+  const onSave = async e => {
     e.preventDefault();
-    const clientSaveRes = await axios__WEBPACK_IMPORTED_MODULE_4___default()({
-      method: "post",
+    setName(`${client.firstName} ${client.lastName}`);
+    await axios__WEBPACK_IMPORTED_MODULE_4___default()({
+      method: "put",
       data: client,
-      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].serverURL}/client/${router.query}`,
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].serverURL}/clients/${router.query.id}`,
       responseType: "json"
     });
-    const clientSaveData = await clientSaveRes.data;
-    clientSaveData.msg === "Success" ? router.push(router.pathname) : console.error("Something went wrong!");
+  };
+
+  const onDelete = async e => {
+    e.preventDefault();
+    const res = await axios__WEBPACK_IMPORTED_MODULE_4___default()({
+      method: "delete",
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].serverURL}/clients/${router.query.id}`,
+      responseType: "json"
+    });
+    const data = await res.data;
+    (await data.msg) === "Success" ? router.push("/clients") : alert("Something went wrong!");
   };
 
   const onInputChange = e => {
@@ -2562,50 +2793,66 @@ const Client = ({
     }));
   };
 
-  return !initialized ? "Loading..." : __jsx("div", {
+  const toggleIsEmailCreated = () => {
+    setIsEmailCreated(isEmailCreated ? false : true);
+  };
+
+  return !initialized ? __jsx(_components_loadingSpinner__WEBPACK_IMPORTED_MODULE_9__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 63
+    },
+    __self: undefined
+  }) : __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 65
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 66
     },
     __self: undefined
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 67
     },
     __self: undefined
-  }, firstName, " ", lastName), __jsx("form", {
-    onSubmit: onSubmit,
+  }, name), __jsx("form", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 68
     },
     __self: undefined
-  }, __jsx("ul", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 56
-    },
-    __self: undefined
-  }, __jsx(_components_SingleClientData__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, __jsx(_components_singleClient_SingleClientData__WEBPACK_IMPORTED_MODULE_7__["default"], {
     fieldsData: fieldsData,
     client: client,
     onInputChange: onInputChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 69
     },
     __self: undefined
-  }))), __jsx(_components_singleClient_ButtonsSingle__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  })), __jsx(_components_EmailForm__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    to: [client.email],
+    isEmailCreated: isEmailCreated,
+    toggleIsEmailCreated: toggleIsEmailCreated,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 75
+    },
+    __self: undefined
+  }), __jsx(_components_singleClient_ButtonsSingle__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    onSave: onSave,
+    toggleIsEmailCreated: toggleIsEmailCreated,
+    onDelete: onDelete,
+    isEmailCreated: isEmailCreated,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 80
     },
     __self: undefined
   }));
@@ -2637,7 +2884,7 @@ Client.getInitialProps = async context => {
 
 /***/ }),
 
-/***/ 3:
+/***/ 5:
 /*!**************************************!*\
   !*** multi ./pages/clients/[id].tsx ***!
   \**************************************/
@@ -2657,6 +2904,17 @@ module.exports = __webpack_require__(/*! /Users/davidzoufaly/code/dp/crm-app-fe/
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Button");
+
+/***/ }),
+
+/***/ "@material-ui/core/CircularProgress":
+/*!*****************************************************!*\
+  !*** external "@material-ui/core/CircularProgress" ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/CircularProgress");
 
 /***/ }),
 

@@ -88,15 +88,341 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./components/ClientForm.tsx":
-/*!***********************************!*\
-  !*** ./components/ClientForm.tsx ***!
-  \***********************************/
+/***/ "./components/CreateClient.tsx":
+/*!*************************************!*\
+  !*** ./components/CreateClient.tsx ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/Typography */ "@material-ui/core/Typography");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _clients_ClientForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./clients/ClientForm */ "./components/clients/ClientForm.tsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+/* harmony import */ var generate_unique_id__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! generate-unique-id */ "generate-unique-id");
+/* harmony import */ var generate_unique_id__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(generate_unique_id__WEBPACK_IMPORTED_MODULE_9__);
+
+
+
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CreateClient.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
+
+
+
+
+
+
+
+const CreateClient = ({
+  fields,
+  isClientAdded,
+  toggleIsClientAdded,
+  addNewClientToState
+}) => {
+  const initialNewClintState = fields.map(e => e.fieldName).reduce((o, key) => _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default()(o, {
+    [key]: ""
+  }), {});
+  const {
+    0: newClient,
+    1: setNewClient
+  } = Object(react__WEBPACK_IMPORTED_MODULE_3__["useReducer"])((state, action) => {
+    switch (action.type) {
+      case "onTextChange":
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          [action.payload.fieldName]: action.payload.fieldType === "number" ? _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(action.payload.value) : action.payload.value
+        });
+
+      case "addId":
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          _id: generate_unique_id__WEBPACK_IMPORTED_MODULE_9___default()({
+            length: 24,
+            useNumbers: true,
+            useLetters: false,
+            includeSymbols: ["a", "b", "c", "d", "e", "f"]
+          })
+        });
+
+      case "clear":
+        return initialNewClintState;
+
+      default:
+        return state;
+    }
+  }, initialNewClintState);
+
+  const onChange = (fieldName, fieldType, event) => {
+    setNewClient({
+      type: "addId"
+    });
+    setNewClient({
+      type: "onTextChange",
+      payload: {
+        fieldName,
+        value: event.target.value,
+        fieldType
+      }
+    });
+  };
+
+  const onSubmit = async e => {
+    e.preventDefault();
+    const clientRes = await axios__WEBPACK_IMPORTED_MODULE_7___default()({
+      method: "post",
+      data: newClient,
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].serverURL}/clients`,
+      responseType: "json"
+    });
+    const clientData = await clientRes.data;
+
+    if (clientData.msg === "Success") {
+      setNewClient({
+        type: "clear"
+      });
+      toggleIsClientAdded();
+      addNewClientToState(newClient);
+    }
+  };
+
+  const onCancel = () => {
+    setNewClient({
+      type: "clear"
+    });
+    toggleIsClientAdded();
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(() => {// console.log(newClient);
+  });
+  return isClientAdded ? __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 78
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default.a, {
+    variant: "h4",
+    component: "h2",
+    gutterBottom: true,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 79
+    },
+    __self: undefined
+  }, "Add new client"), __jsx("form", {
+    onSubmit: onSubmit,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 82
+    },
+    __self: undefined
+  }, __jsx(_clients_ClientForm__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    fields: fields,
+    onChange: onChange,
+    newClient: newClient,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 83
+    },
+    __self: undefined
+  }), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    variant: "contained",
+    color: "primary",
+    type: "submit",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 84
+    },
+    __self: undefined
+  }, "Save"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    variant: "contained",
+    color: "secondary",
+    onClick: onCancel,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 87
+    },
+    __self: undefined
+  }, "Cancel"))) : null;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CreateClient);
+
+/***/ }),
+
+/***/ "./components/EmailForm.tsx":
+/*!**********************************!*\
+  !*** ./components/EmailForm.tsx ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/EmailForm.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
+
+const EmailForm = ({
+  to,
+  isEmailCreated,
+  toggleIsEmailCreated,
+  unCheckAll
+}) => {
+  const initEmail = {
+    to,
+    subject: "",
+    message: ""
+  };
+  const {
+    0: email,
+    1: setEmail
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(initEmail);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
+    setEmail(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, email, {
+      to: to
+    }));
+  }, [to]);
+
+  const sendEmail = async e => {
+    e.preventDefault();
+    const res = await axios__WEBPACK_IMPORTED_MODULE_2___default()({
+      method: "post",
+      data: email,
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_3__["default"].serverURL}/emails/send`,
+      responseType: "json"
+    });
+    const data = await res.data;
+
+    if (data.msg === "Success") {
+      alert("Your email has been succesfully sent.");
+      setEmail(initEmail); // if email is sending from clients page
+
+      toggleIsEmailCreated();
+      unCheckAll ? unCheckAll() : null;
+    } else {
+      alert("Something went wrong!");
+    }
+  };
+
+  const onChange = e => {
+    setEmail(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, email, {
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  return isEmailCreated && to.length > 0 ? __jsx("form", {
+    onSubmit: sendEmail,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 38
+    },
+    __self: undefined
+  }, __jsx("label", {
+    htmlFor: "email-to",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: undefined
+  }, "To"), __jsx("input", {
+    type: "text",
+    id: "email-to",
+    name: "to",
+    value: email.to,
+    disabled: true,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 40
+    },
+    __self: undefined
+  }), __jsx("label", {
+    htmlFor: "email-subject",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41
+    },
+    __self: undefined
+  }, "Subject"), __jsx("input", {
+    type: "text",
+    id: "email-to",
+    name: "subject",
+    value: email.subject,
+    onChange: onChange,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42
+    },
+    __self: undefined
+  }), __jsx("label", {
+    htmlFor: "email-message",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: undefined
+  }, "Message"), __jsx("textarea", {
+    name: "message",
+    onChange: onChange,
+    value: email.message,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 50
+    },
+    __self: undefined
+  }), __jsx("button", {
+    onClick: toggleIsEmailCreated,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 51
+    },
+    __self: undefined
+  }, "Cancel"), __jsx("button", {
+    type: "submit",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 52
+    },
+    __self: undefined
+  }, "Send")) : null;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (EmailForm);
+
+/***/ }),
+
+/***/ "./components/Header.tsx":
+/*!*******************************!*\
+  !*** ./components/Header.tsx ***!
+  \*******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -104,8 +430,225 @@ module.exports =
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../library/stringMethods */ "./library/stringMethods.tsx");
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/ClientForm.tsx";
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/Header.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+const Header = () => {
+  return __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5
+    },
+    __self: undefined
+  }, __jsx("ul", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6
+    },
+    __self: undefined
+  }, __jsx("li", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 7
+    },
+    __self: undefined
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/dashboard",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 8
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9
+    },
+    __self: undefined
+  }, "Dashboard"))), __jsx("li", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12
+    },
+    __self: undefined
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/clients",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: undefined
+  }, "Clients"))), __jsx("li", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17
+    },
+    __self: undefined
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/emails",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
+    },
+    __self: undefined
+  }, "Emails"))), __jsx("li", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22
+    },
+    __self: undefined
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/settings",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }, "Settings")))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
+/***/ "./components/clients/Buttons.tsx":
+/*!****************************************!*\
+  !*** ./components/clients/Buttons.tsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/icons/Delete */ "@material-ui/icons/Delete");
+/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/Add */ "@material-ui/icons/Add");
+/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Email */ "@material-ui/icons/Email");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__);
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clients/Buttons.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+
+const Buttons = ({
+  disabled,
+  toggleIsClientAdded,
+  deleteMultipleClients,
+  isClientAdded,
+  isEmailCreated,
+  toggleIsEmailCreated
+}) => {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(isEmailCreated);
+  });
+  return __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    variant: "contained",
+    color: "primary",
+    disabled: isClientAdded,
+    onClick: toggleIsClientAdded,
+    startIcon: __jsx(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_3___default.a, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 26
+      },
+      __self: undefined
+    }),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21
+    },
+    __self: undefined
+  }, "Add new"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    variant: "contained",
+    color: "secondary",
+    disabled: disabled,
+    onClick: deleteMultipleClients,
+    startIcon: __jsx(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 35
+      },
+      __self: undefined
+    }),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 30
+    },
+    __self: undefined
+  }, "Delete"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    variant: "contained",
+    color: "primary",
+    onClick: toggleIsEmailCreated,
+    disabled: disabled || isEmailCreated,
+    startIcon: __jsx(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 43
+      },
+      __self: undefined
+    }),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: undefined
+  }, "Email"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Buttons);
+
+/***/ }),
+
+/***/ "./components/clients/ClientForm.tsx":
+/*!*******************************************!*\
+  !*** ./components/clients/ClientForm.tsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../library/stringMethods */ "./library/stringMethods.tsx");
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clients/ClientForm.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -221,339 +764,10 @@ const ClientForm = ({
 
 /***/ }),
 
-/***/ "./components/CreateClient.tsx":
-/*!*************************************!*\
-  !*** ./components/CreateClient.tsx ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/Typography */ "@material-ui/core/Typography");
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _ClientForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ClientForm */ "./components/ClientForm.tsx");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
-
-
-
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CreateClient.tsx";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
-
-
-
-
-
-
-
-const CreateClient = ({
-  fields,
-  isClientAdded,
-  toggleIsClientAdded,
-  refreshList
-}) => {
-  const initialNewClintState = fields.map(e => e.fieldName).reduce((o, key) => _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default()(o, {
-    [key]: ""
-  }), {});
-  const {
-    0: newClient,
-    1: setNewClient
-  } = Object(react__WEBPACK_IMPORTED_MODULE_3__["useReducer"])((state, action) => {
-    switch (action.type) {
-      case "onTextChange":
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-          [action.payload.fieldName]: action.payload.fieldType === "number" ? _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(action.payload.value) : action.payload.value
-        });
-
-      case "clear":
-        return initialNewClintState;
-
-      default:
-        return state;
-    }
-  }, initialNewClintState);
-
-  const onChange = (fieldName, fieldType, event) => {
-    setNewClient({
-      type: "onTextChange",
-      payload: {
-        fieldName,
-        value: event.target.value,
-        fieldType
-      }
-    });
-  };
-
-  const onSubmit = async e => {
-    e.preventDefault();
-    const clientRes = await axios__WEBPACK_IMPORTED_MODULE_7___default()({
-      method: "post",
-      data: newClient,
-      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].serverURL}/clients`,
-      responseType: "json"
-    });
-    const clientData = await clientRes.data;
-
-    if (clientData.msg === "Success") {
-      setNewClient({
-        type: "clear"
-      });
-      toggleIsClientAdded();
-      refreshList();
-    }
-  };
-
-  const onCancel = () => {
-    setNewClient({
-      type: "clear"
-    });
-    toggleIsClientAdded();
-  };
-
-  Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(() => {// console.log(newClient);
-  });
-  return isClientAdded ? __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 73
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default.a, {
-    variant: "h4",
-    component: "h2",
-    gutterBottom: true,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 74
-    },
-    __self: undefined
-  }, "Add new client"), __jsx("form", {
-    onSubmit: onSubmit,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 77
-    },
-    __self: undefined
-  }, __jsx(_ClientForm__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    fields: fields,
-    onChange: onChange,
-    newClient: newClient,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 78
-    },
-    __self: undefined
-  }), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
-    variant: "contained",
-    color: "primary",
-    type: "submit",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 79
-    },
-    __self: undefined
-  }, "Save"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
-    variant: "contained",
-    color: "secondary",
-    onClick: onCancel,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 82
-    },
-    __self: undefined
-  }, "Cancel"))) : null;
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (CreateClient);
-
-/***/ }),
-
-/***/ "./components/Header.tsx":
-/*!*******************************!*\
-  !*** ./components/Header.tsx ***!
-  \*******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/Header.tsx";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-const Header = () => {
-  return __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 5
-    },
-    __self: undefined
-  }, __jsx("ul", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 6
-    },
-    __self: undefined
-  }, __jsx("li", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 7
-    },
-    __self: undefined
-  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/dashboard",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 8
-    },
-    __self: undefined
-  }, __jsx("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 9
-    },
-    __self: undefined
-  }, "Dashboard"))), __jsx("li", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 12
-    },
-    __self: undefined
-  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/clients",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 13
-    },
-    __self: undefined
-  }, __jsx("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 14
-    },
-    __self: undefined
-  }, "Clients"))), __jsx("li", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 17
-    },
-    __self: undefined
-  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/settings",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 18
-    },
-    __self: undefined
-  }, __jsx("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 19
-    },
-    __self: undefined
-  }, "Settings")))));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Header);
-
-/***/ }),
-
-/***/ "./components/clientTable/Buttons.tsx":
-/*!********************************************!*\
-  !*** ./components/clientTable/Buttons.tsx ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/icons/Delete */ "@material-ui/icons/Delete");
-/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/Add */ "@material-ui/icons/Add");
-/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clientTable/Buttons.tsx";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-
-const Buttons = ({
-  disabled,
-  toggleIsClientAdded,
-  deleteMultipleClients,
-  isClientAdded
-}) => __jsx("div", {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 6
-  },
-  __self: undefined
-}, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
-  variant: "contained",
-  color: "primary",
-  disabled: isClientAdded,
-  onClick: toggleIsClientAdded,
-  startIcon: __jsx(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 7
-    },
-    __self: undefined
-  }),
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 7
-  },
-  __self: undefined
-}, "Add new"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
-  variant: "contained",
-  color: "secondary",
-  disabled: disabled,
-  onClick: deleteMultipleClients,
-  startIcon: __jsx(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 10
-    },
-    __self: undefined
-  }),
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 10
-  },
-  __self: undefined
-}, "Delete"));
-
-/* harmony default export */ __webpack_exports__["default"] = (Buttons);
-
-/***/ }),
-
-/***/ "./components/clientTable/TableBody.tsx":
-/*!**********************************************!*\
-  !*** ./components/clientTable/TableBody.tsx ***!
-  \**********************************************/
+/***/ "./components/clients/TableBody.tsx":
+/*!******************************************!*\
+  !*** ./components/clients/TableBody.tsx ***!
+  \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -565,7 +779,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uniqid */ "uniqid");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clientTable/TableBody.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clients/TableBody.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -670,10 +884,10 @@ const TableBody = ({
 
 /***/ }),
 
-/***/ "./components/clientTable/TableHead.tsx":
-/*!**********************************************!*\
-  !*** ./components/clientTable/TableHead.tsx ***!
-  \**********************************************/
+/***/ "./components/clients/TableHead.tsx":
+/*!******************************************!*\
+  !*** ./components/clients/TableHead.tsx ***!
+  \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -684,7 +898,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../library/stringMethods */ "./library/stringMethods.tsx");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uniqid */ "uniqid");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clientTable/TableHead.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clients/TableHead.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -742,6 +956,36 @@ const TableHead = ({
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TableHead);
+
+/***/ }),
+
+/***/ "./components/loadingSpinner.tsx":
+/*!***************************************!*\
+  !*** ./components/loadingSpinner.tsx ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "@material-ui/core/CircularProgress");
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/loadingSpinner.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+const LoadingSpinner = () => __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 4
+  },
+  __self: undefined
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (LoadingSpinner);
 
 /***/ }),
 
@@ -2900,12 +3144,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Header */ "./components/Header.tsx");
-/* harmony import */ var _components_clientTable_TableBody__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/clientTable/TableBody */ "./components/clientTable/TableBody.tsx");
+/* harmony import */ var _components_clients_TableBody__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/clients/TableBody */ "./components/clients/TableBody.tsx");
 /* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../library/stringMethods */ "./library/stringMethods.tsx");
 /* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
-/* harmony import */ var _components_clientTable_TableHead__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/clientTable/TableHead */ "./components/clientTable/TableHead.tsx");
+/* harmony import */ var _components_clients_TableHead__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/clients/TableHead */ "./components/clients/TableHead.tsx");
 /* harmony import */ var _components_CreateClient__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/CreateClient */ "./components/CreateClient.tsx");
-/* harmony import */ var _components_clientTable_Buttons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/clientTable/Buttons */ "./components/clientTable/Buttons.tsx");
+/* harmony import */ var _components_clients_Buttons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/clients/Buttons */ "./components/clients/Buttons.tsx");
+/* harmony import */ var _components_loadingSpinner__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/loadingSpinner */ "./components/loadingSpinner.tsx");
+/* harmony import */ var _components_EmailForm__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/EmailForm */ "./components/EmailForm.tsx");
 
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/clients.tsx";
 
@@ -2921,6 +3167,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
+ //TODO: Po odeslání skrýt komponentu
+
 const Clients = ({
   fieldData,
   clientData
@@ -2929,7 +3177,30 @@ const Clients = ({
   const {
     0: clients,
     1: setClients
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(clientData); //TODO: SPOJIT DO JEDNOHO STATU
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useReducer"])((state, action) => {
+    switch (action.type) {
+      case "handleCheckedClients":
+        return state.map(client => client._id === action.payload.id ? client.isChecked === false || client.isChecked === undefined ? Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
+          isChecked: true
+        }) : Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
+          isChecked: false
+        }) : client);
+
+      case "addClient":
+        return [...state, action.payload.newClient];
+
+      case "deleteCheckedClients":
+        return state.filter(client => !client.isChecked);
+
+      case "unCheckAll":
+        return state.map(client => client = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
+          isChecked: false
+        }));
+
+      default:
+        return state;
+    }
+  }, clientData); //TODO: SPOJIT DO JEDNOHO STATU
 
   const {
     0: reverse,
@@ -2948,121 +3219,152 @@ const Clients = ({
     0: isClientAdded,
     1: setIsClientAdded
   } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
+  const {
+    0: isEmailCreated,
+    1: setIsEmailCreated
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
-    console.log("render");
+    // set title
     const title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_6__["default"](router.pathname).removeSlash().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].titleSubText).getString();
     document.title = title;
     setInitialized(true);
-  });
-  const h1 = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_6__["default"](router.pathname).removeSlash().firstCharUpperCase().getString();
+  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
+    // reset email state, when user uncheck all recievers / clients
+    filterCheckedClients().length === 0 && isEmailCreated ? setIsEmailCreated(!isEmailCreated) : null;
+  }, [clients]); // create H1
 
-  const refreshList = async () => {
-    //get data from DB after change
-    const res = await axios__WEBPACK_IMPORTED_MODULE_3___default()({
-      method: "get",
-      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL}/clients`,
-      responseType: "json"
-    });
-    const data = await res.data;
-    setClients(data);
-  };
+  const h1 = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_6__["default"](router.pathname).removeSlash().firstCharUpperCase().getString();
 
   const sortBy = fieldName => {
     setSortBy(fieldName);
     !reverse ? setReverseOrder(true) : setReverseOrder(false);
   };
 
+  const handleCheckbox = id => {
+    setClients({
+      type: "handleCheckedClients",
+      payload: {
+        id
+      }
+    });
+  };
+
+  const addNewClientToState = newClient => {
+    setClients({
+      type: "addClient",
+      payload: {
+        newClient
+      }
+    });
+  };
+
+  const filterCheckedClients = () => clients.filter(client => client.isChecked);
+
+  const unCheckAll = () => {
+    setClients({
+      type: "unCheckAll"
+    });
+  };
+
+  const toggleIsEmailCreated = () => {
+    setIsEmailCreated(isEmailCreated ? false : true);
+  };
+
   const toggleIsClientAdded = () => {
     isClientAdded ? setIsClientAdded(false) : setIsClientAdded(true);
   };
 
-  const handleCheckbox = id => {
-    setClients(clients.map(client => {
-      if (client._id === id) {
-        return client.isChecked === false || client.isChecked === undefined ? Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
-          isChecked: true
-        }) : Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
-          isChecked: false
-        });
-      } else {
-        return client;
-      }
-    }));
-  };
-
   const deleteMultipleClients = async () => {
-    const clientsToDelete = [];
-    clients.map(client => client.isChecked ? clientsToDelete.push(client._id) : null);
-    const resDelete = await axios__WEBPACK_IMPORTED_MODULE_3___default()({
+    setClients({
+      type: "deleteCheckedClients"
+    });
+    await axios__WEBPACK_IMPORTED_MODULE_3___default()({
       method: "delete",
-      data: clientsToDelete,
+      data: filterCheckedClients().map(e => e._id),
       url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL}/clients/`,
       responseType: "json"
     });
-    const dataDelete = await resDelete.data;
-    dataDelete.msg === "Success" ? refreshList() : console.error("Something went wrong!");
   };
 
-  return !initialized ? "Loading..." : __jsx("div", {
+  return !initialized ? __jsx(_components_loadingSpinner__WEBPACK_IMPORTED_MODULE_11__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 90
+      lineNumber: 118
+    },
+    __self: undefined
+  }) : __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 120
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 91
+      lineNumber: 121
     },
     __self: undefined
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 92
+      lineNumber: 122
     },
     __self: undefined
-  }, h1), __jsx(_components_CreateClient__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, h1), __jsx(_components_EmailForm__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    to: filterCheckedClients().map(e => e.email),
+    isEmailCreated: isEmailCreated,
+    toggleIsEmailCreated: toggleIsEmailCreated,
+    unCheckAll: unCheckAll,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 123
+    },
+    __self: undefined
+  }), __jsx(_components_CreateClient__WEBPACK_IMPORTED_MODULE_9__["default"], {
     fields: fieldData,
     isClientAdded: isClientAdded,
     toggleIsClientAdded: toggleIsClientAdded,
-    refreshList: refreshList,
+    addNewClientToState: addNewClientToState,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93
+      lineNumber: 129
     },
     __self: undefined
-  }), __jsx(_components_clientTable_Buttons__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), __jsx(_components_clients_Buttons__WEBPACK_IMPORTED_MODULE_10__["default"], {
     disabled: !clients.some(client => client.isChecked),
     deleteMultipleClients: deleteMultipleClients,
     toggleIsClientAdded: toggleIsClientAdded,
     isClientAdded: isClientAdded,
+    toggleIsEmailCreated: toggleIsEmailCreated,
+    isEmailCreated: isEmailCreated,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 99
+      lineNumber: 135
     },
     __self: undefined
   }), __jsx("table", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 105
+      lineNumber: 143
     },
     __self: undefined
-  }, __jsx(_components_clientTable_TableHead__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, __jsx(_components_clients_TableHead__WEBPACK_IMPORTED_MODULE_8__["default"], {
     fields: fieldData,
     sortBy: sortBy,
     reverse: reverse,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 106
+      lineNumber: 144
     },
     __self: undefined
   }), __jsx("tbody", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 107
+      lineNumber: 145
     },
     __self: undefined
-  }, __jsx(_components_clientTable_TableBody__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, __jsx(_components_clients_TableBody__WEBPACK_IMPORTED_MODULE_5__["default"], {
     clients: clients,
     fields: fieldData,
     sort: sort,
@@ -3070,7 +3372,7 @@ const Clients = ({
     handleCheckbox: handleCheckbox,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 108
+      lineNumber: 146
     },
     __self: undefined
   }))));
@@ -3101,7 +3403,7 @@ Clients.getInitialProps = async () => {
 
 /***/ }),
 
-/***/ 7:
+/***/ 3:
 /*!*********************************!*\
   !*** multi ./pages/clients.tsx ***!
   \*********************************/
@@ -3121,6 +3423,17 @@ module.exports = __webpack_require__(/*! /Users/davidzoufaly/code/dp/crm-app-fe/
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Button");
+
+/***/ }),
+
+/***/ "@material-ui/core/CircularProgress":
+/*!*****************************************************!*\
+  !*** external "@material-ui/core/CircularProgress" ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/CircularProgress");
 
 /***/ }),
 
@@ -3154,6 +3467,17 @@ module.exports = require("@material-ui/icons/Add");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/icons/Delete");
+
+/***/ }),
+
+/***/ "@material-ui/icons/Email":
+/*!*******************************************!*\
+  !*** external "@material-ui/icons/Email" ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/icons/Email");
 
 /***/ }),
 
@@ -3275,6 +3599,17 @@ module.exports = require("core-js/library/fn/parse-int");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/promise");
+
+/***/ }),
+
+/***/ "generate-unique-id":
+/*!*************************************!*\
+  !*** external "generate-unique-id" ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("generate-unique-id");
 
 /***/ }),
 
