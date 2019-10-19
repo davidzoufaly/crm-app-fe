@@ -6,7 +6,7 @@ import TableBody from "../components/clients/TableBody";
 import stringMethods from "../library/stringMethods";
 import globalVars from "../library/globalVariables";
 import TableHead from "../components/clients/TableHead";
-import CreateClient from "../components/CreateClient";
+import CreateClient from "../components/clients/CreateClient";
 import Buttons from "../components/clients/Buttons";
 import LoadingSpinner from "../components/loadingSpinner";
 import EmailForm from "../components/EmailForm";
@@ -133,7 +133,7 @@ const Clients = ({ fieldData, clientData }: any) => {
         addNewClientToState={addNewClientToState}
       />
       <Buttons
-        disabled={!clients.some(client => client.isChecked)}
+        clientsAreNotChecked={!clients.some(client => client.isChecked)}
         deleteMultipleClients={deleteMultipleClients}
         toggleIsClientAdded={toggleIsClientAdded}
         isClientAdded={isClientAdded}

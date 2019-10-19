@@ -10,7 +10,7 @@ const SingleClientData = ({ fieldsData, client, onInputChange }: any) =>
               .camelStringToText()
               .firstCharUpperCase()
               .getString()}
-            <textarea name={field.fieldName} value={client[field.fieldName]} onChange={onInputChange}/>
+            <textarea name={field.fieldName} value={client[field.fieldName]} onChange={onInputChange} disabled={field.fieldName === "dateAdded" || field.fieldName === "lastModified"}/>
           </div>
         );
       case "number":

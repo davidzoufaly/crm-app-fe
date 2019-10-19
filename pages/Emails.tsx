@@ -21,12 +21,12 @@ const Emails = ({ data }) => {
         setInitialized(true);
       }, []);
 
-  const tableBody = data.map(email => (
+  const tableBody = data.reverse().map(email => (
     <tr key={generateUniqueId()}>
       <td>{email.date}</td>
       <td>{email.to.map(e => <p key={generateUniqueId()}>{e}</p>)}</td>
       <td>{email.subject}</td>
-      <td>{email.message}</td>
+      <td>{email.message.length > 50 ? `${email.message.slice(0, 50)}...` : email.message}</td>
     </tr>
   ));
 

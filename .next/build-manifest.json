@@ -16,7 +16,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/clients/[id]": [
+    "/dashboard": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

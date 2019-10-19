@@ -7,6 +7,7 @@ import SingleClientData from "../../components/singleClient/SingleClientData";
 import ButtonsSingle from "../../components/singleClient/ButtonsSingle";
 import LoadingSpinner from "../../components/loadingSpinner";
 import EmailForm from "../../components/EmailForm";
+import moment from "moment";
 
 const Client = ({ clientData, fieldsData }: any) => {
   const [client, setClient] = useState(clientData);
@@ -20,19 +21,23 @@ const Client = ({ clientData, fieldsData }: any) => {
   useEffect(() => {
     document.title = `${name} ${globalVars.titleSubText}`;
     setInitialized(true);
+    saveToDb();
   }, [name]);
 
   const onSave = async e => {
     e.preventDefault();
+    setClient({...client, lastModified: moment().format("llll")})
     setName(`${client.firstName} ${client.lastName}`);
+  };
 
+  const saveToDb = async () => {
     await axios({
       method: "put",
       data: client,
       url: `${globalVars.serverURL}/clients/${router.query.id}`,
       responseType: "json"
     });
-  };
+  }
 
   const onDelete = async e => {
     e.preventDefault();

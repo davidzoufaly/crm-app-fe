@@ -1,4 +1,6 @@
 import StringMethods from "../../library/stringMethods";
+import TableRow from "@material-ui/core/TableRow";
+import TableHead from '@material-ui/core/TableHead';
 import uniqid from "uniqid";
 
 interface IProps {
@@ -9,7 +11,7 @@ interface IProps {
 
 //TODO: Reverse šipka jen aktivního záhlaví
 
-const TableHead = ({ fields, sortBy, reverse }: IProps) => {
+const TableHeader = ({ fields, sortBy, reverse }: IProps) => {
   const tableHeadings = fields.map((e: any) => {
     const tableHeading = new StringMethods(e.fieldName)
       .camelStringToText()
@@ -25,14 +27,14 @@ const TableHead = ({ fields, sortBy, reverse }: IProps) => {
   });
 
   return (
-    <thead>
-      <tr>
+    <TableHead>
+      <TableRow>
         <th></th>
         {tableHeadings}
         <th>Client Profile</th>
-      </tr>
-    </thead>
+      </TableRow>
+    </TableHead>
   );
 };
 
-export default TableHead;
+export default TableHeader;

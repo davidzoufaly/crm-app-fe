@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 
 const EmailSettings = ({ data }: any) => {
   const [emailSettings, setEmailSettings] = useState(data);
+  const [isPassShown, setIsPassShown] = useState(false)
   const passEl = useRef(null);
 
   const onSubmit = async (e) => {
@@ -30,6 +31,7 @@ const EmailSettings = ({ data }: any) => {
   const showPass = (e) => {
       e.preventDefault();
       passEl.current.type = "text";
+      setIsPassShown(true);
   }
 
   const onChange = e => {
@@ -56,7 +58,7 @@ const EmailSettings = ({ data }: any) => {
         value={emailSettings.pass}
         onChange={onChange}
       />
-      <Button variant="contained" color="primary" onClick={showPass}>Show Password</Button>
+      <Button variant="contained" color="primary" onClick={showPass} disabled={isPassShown}>Show Password</Button>
       <Button variant="contained" color="primary" type="submit">Save</Button>
     </form>
     </>

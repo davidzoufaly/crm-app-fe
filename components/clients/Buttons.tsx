@@ -2,26 +2,20 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import EmailIcon from '@material-ui/icons/Email';
-import { useEffect } from "react";
 
 const Buttons = ({
-  disabled,
+  clientsAreNotChecked,
   toggleIsClientAdded,
   deleteMultipleClients,
   isClientAdded,
   isEmailCreated,
   toggleIsEmailCreated,
-}: any) => {
-  useEffect(() => {
-    console.log(isEmailCreated);
-  })
-  
-  return(
+}: any) => (
   <div>
     <Button
       variant="contained"
       color="primary"
-      disabled={isClientAdded}
+      disabled={isClientAdded || isEmailCreated}
       onClick={toggleIsClientAdded}
       startIcon={<AddIcon />}
     >
@@ -30,7 +24,7 @@ const Buttons = ({
     <Button
       variant="contained"
       color="secondary"
-      disabled={disabled}
+      disabled={clientsAreNotChecked}
       onClick={deleteMultipleClients}
       startIcon={<DeleteIcon />}
     >
@@ -39,11 +33,11 @@ const Buttons = ({
     <Button variant="contained"
     color="primary"
     onClick={toggleIsEmailCreated}
-    disabled={disabled || isEmailCreated}
+    disabled={clientsAreNotChecked || isEmailCreated || isClientAdded}
     startIcon={<EmailIcon/>}
     >Email
     </Button>
   </div>
-)};
+);
 
 export default Buttons;
