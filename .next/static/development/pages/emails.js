@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/dashboard.js"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/emails.js"],{
 
 /***/ "./components/Header.tsx":
 /*!*******************************!*\
@@ -111,64 +111,6 @@ var Header = function Header() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Header);
-
-/***/ }),
-
-/***/ "./components/ShowRecordsNumber.tsx":
-/*!******************************************!*\
-  !*** ./components/ShowRecordsNumber.tsx ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/ShowRecordsNumber.tsx";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-var ShowRecordsNumber = function ShowRecordsNumber(props) {
-  var numberOfRecords = props.data;
-  return __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 7
-    },
-    __self: this
-  }, __jsx("h2", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 8
-    },
-    __self: this
-  }, numberOfRecords), __jsx("p", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 9
-    },
-    __self: this
-  }, "Saved ", props.string), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: props.link,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 10
-    },
-    __self: this
-  }, __jsx("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 11
-    },
-    __self: this
-  }, "Go to ", props.string)));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (ShowRecordsNumber);
 
 /***/ }),
 
@@ -11457,6 +11399,69 @@ module.exports = Function.prototype.bind || implementation;
 
 /***/ }),
 
+/***/ "./node_modules/generate-unique-id/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/generate-unique-id/index.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function generateUniqueId ({
+  length = 20,
+  useLetters = true,
+  useNumbers = true,
+  includeSymbols = [],
+  excludeSymbols = []
+} = {}) {
+  let letters = 'abcdefghijklmnopqrstuvwxyz'
+  let numbers = '0123456789'
+  let availableChars = []
+  let lettersArr = []
+  let numbersArr = []
+
+  if (useLetters) {
+    if (excludeSymbols.length) letters = filterSymbols(excludeSymbols, letters)
+    lettersArr = letters.split('')
+  }
+
+  if (useNumbers) {
+    if (excludeSymbols.length) numbers = filterSymbols(excludeSymbols, numbers)
+    numbersArr = numbers.split('')
+  }
+
+  availableChars = [...lettersArr, ...numbersArr, ...includeSymbols]
+
+  return createId(availableChars, length)
+}
+
+function createId (availableChars, idLength) {
+  let id = ''
+
+  for (let i = 0; i < idLength; i++) {
+    id += availableChars[getRandomNumber(availableChars.length)]
+  }
+
+  return id
+}
+
+function filterSymbols (excludeSymbols, group) {
+  excludeSymbols.forEach(symbol => (group = group.replace(symbol, '')))
+
+  return group
+}
+
+function getRandomNumber (limit) {
+  return Math.floor(Math.random() * limit).toString()
+}
+
+module.exports = generateUniqueId
+
+
+/***/ }),
+
 /***/ "./node_modules/has-symbols/shams.js":
 /*!*******************************************!*\
   !*** ./node_modules/has-symbols/shams.js ***!
@@ -14827,21 +14832,21 @@ var index = create();
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fdashboard&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Fdashboard.tsx!./":
-/*!**********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fdashboard&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Fdashboard.tsx ***!
-  \**********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Femails&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Femails.tsx!./":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Femails&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Femails.tsx ***!
+  \****************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    (window.__NEXT_P=window.__NEXT_P||[]).push(["/dashboard", function() {
-      var mod = __webpack_require__(/*! ./pages/dashboard.tsx */ "./pages/dashboard.tsx")
+    (window.__NEXT_P=window.__NEXT_P||[]).push(["/emails", function() {
+      var mod = __webpack_require__(/*! ./pages/emails.tsx */ "./pages/emails.tsx")
       if(true) {
-        module.hot.accept(/*! ./pages/dashboard.tsx */ "./pages/dashboard.tsx", function() {
-          if(!next.router.components["/dashboard"]) return
-          var updatedPage = __webpack_require__(/*! ./pages/dashboard.tsx */ "./pages/dashboard.tsx")
-          next.router.update("/dashboard", updatedPage)
+        module.hot.accept(/*! ./pages/emails.tsx */ "./pages/emails.tsx", function() {
+          if(!next.router.components["/emails"]) return
+          var updatedPage = __webpack_require__(/*! ./pages/emails.tsx */ "./pages/emails.tsx")
+          next.router.update("/emails", updatedPage)
         })
       }
       return mod
@@ -20857,10 +20862,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./pages/dashboard.tsx":
-/*!*****************************!*\
-  !*** ./pages/dashboard.tsx ***!
-  \*****************************/
+/***/ "./pages/emails.tsx":
+/*!**************************!*\
+  !*** ./pages/emails.tsx ***!
+  \**************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20872,17 +20877,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Header */ "./components/Header.tsx");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _components_ShowRecordsNumber__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/ShowRecordsNumber */ "./components/ShowRecordsNumber.tsx");
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var generate_unique_id__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! generate-unique-id */ "./node_modules/generate-unique-id/index.js");
+/* harmony import */ var generate_unique_id__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(generate_unique_id__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../library/stringMethods */ "./library/stringMethods.tsx");
-/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
-/* harmony import */ var _components_loadingSpinner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/loadingSpinner */ "./components/loadingSpinner.tsx");
+/* harmony import */ var _components_loadingSpinner__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/loadingSpinner */ "./components/loadingSpinner.tsx");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_9__);
 
 
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/dashboard.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/emails.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
@@ -20894,128 +20900,179 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
-var Dashboard = function Dashboard(_ref) {
-  var clientData = _ref.clientData,
-      fieldData = _ref.fieldData;
-  var router = Object(next_router__WEBPACK_IMPORTED_MODULE_5__["useRouter"])();
+var Emails = function Emails(_ref) {
+  var data = _ref.data;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(false),
       initialized = _useState[0],
       setInitialized = _useState[1];
 
+  var router = Object(next_router__WEBPACK_IMPORTED_MODULE_9__["useRouter"])();
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
-    var title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_7__["default"](router.pathname).removeSlash().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].titleSubText).getString();
+    var title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_7__["default"](router.pathname).removeSlash().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_4__["default"].titleSubText).getString();
     document.title = title;
     setInitialized(true);
   }, []);
+  var tableBody = data.reverse().map(function (email) {
+    return __jsx("tr", {
+      key: generate_unique_id__WEBPACK_IMPORTED_MODULE_6___default()(),
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 25
+      },
+      __self: this
+    }, __jsx("td", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 26
+      },
+      __self: this
+    }, email.date), __jsx("td", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 27
+      },
+      __self: this
+    }, email.to.map(function (e) {
+      return __jsx("p", {
+        key: generate_unique_id__WEBPACK_IMPORTED_MODULE_6___default()(),
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 27
+        },
+        __self: this
+      }, e);
+    })), __jsx("td", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 28
+      },
+      __self: this
+    }, email.subject), __jsx("td", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 29
+      },
+      __self: this
+    }, email.message.length > 50 ? "".concat(email.message.slice(0, 50), "...") : email.message));
+  });
   var h1 = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_7__["default"](router.pathname).removeSlash().firstCharUpperCase().getString();
-  return !initialized ? __jsx(_components_loadingSpinner__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  return !initialized ? __jsx(_components_loadingSpinner__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 38
     },
     __self: this
-  }) : __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 32
-    },
-    __self: this
-  }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 33
-    },
-    __self: this
-  }), __jsx("h1", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 34
-    },
-    __self: this
-  }, h1), __jsx(_components_ShowRecordsNumber__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    data: clientData.data,
-    string: "clients",
-    link: "/clients",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 35
-    },
-    __self: this
-  }), __jsx(_components_ShowRecordsNumber__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    data: fieldData.data,
-    string: "fields",
-    link: "/settings",
+  }) : __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 40
     },
     __self: this
-  }));
+  }), __jsx("h1", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41
+    },
+    __self: this
+  }, h1), __jsx("table", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42
+    },
+    __self: this
+  }, __jsx("thead", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43
+    },
+    __self: this
+  }, __jsx("tr", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44
+    },
+    __self: this
+  }, __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 45
+    },
+    __self: this
+  }, "Date and time"), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 46
+    },
+    __self: this
+  }, "To"), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47
+    },
+    __self: this
+  }, "Subject"), __jsx("td", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48
+    },
+    __self: this
+  }, "Message"))), __jsx("tbody", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 51
+    },
+    __self: this
+  }, tableBody)));
 };
 
-Dashboard.getInitialProps =
+Emails.getInitialProps =
 /*#__PURE__*/
 Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
 /*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-  var resClientCount, clientData, resFieldsData, fieldData;
+  var res, data;
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return axios__WEBPACK_IMPORTED_MODULE_4___default()({
+          return axios__WEBPACK_IMPORTED_MODULE_5___default()({
             method: "get",
-            url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].serverURL, "/clients/count"),
+            url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_4__["default"].serverURL, "/emails"),
             responseType: "json"
           });
 
         case 2:
-          resClientCount = _context.sent;
+          res = _context.sent;
           _context.next = 5;
-          return resClientCount.data;
+          return res.data;
 
         case 5:
-          clientData = _context.sent;
-          _context.next = 8;
-          return axios__WEBPACK_IMPORTED_MODULE_4___default()({
-            method: "get",
-            url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].serverURL, "/fields/count"),
-            responseType: "json"
-          });
-
-        case 8:
-          resFieldsData = _context.sent;
-          _context.next = 11;
-          return resFieldsData.data;
-
-        case 11:
-          fieldData = _context.sent;
+          data = _context.sent;
           return _context.abrupt("return", {
-            clientData: clientData,
-            fieldData: fieldData
+            data: data
           });
 
-        case 13:
+        case 7:
         case "end":
           return _context.stop();
       }
     }
   }, _callee);
 }));
-/* harmony default export */ __webpack_exports__["default"] = (Dashboard);
+/* harmony default export */ __webpack_exports__["default"] = (Emails);
 
 /***/ }),
 
-/***/ 4:
-/*!**************************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fdashboard&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Fdashboard.tsx ***!
-  \**************************************************************************************************************************************************/
+/***/ 2:
+/*!********************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2Femails&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Femails.tsx ***!
+  \********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fdashboard&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Fdashboard.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fdashboard&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Fdashboard.tsx!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Femails&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Femails.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Femails&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Femails.tsx!./");
 
 
 /***/ }),
@@ -21031,5 +21088,5 @@ module.exports = dll_b35e09dc2ca94ac6d9c1;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js"]]]);
-//# sourceMappingURL=dashboard.js.map
+},[[2,"static/runtime/webpack.js"]]]);
+//# sourceMappingURL=emails.js.map

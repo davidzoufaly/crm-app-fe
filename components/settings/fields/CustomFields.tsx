@@ -15,7 +15,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
   };
 
   useEffect(() => {
-    console.log(editedField);
+    // console.log(editedField);
   });
 
   const [displayComponent, setDisplayComponent] = useState(false);
@@ -94,7 +94,6 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
       });
     },
     onOptionChange(id, event) {
-      // console.log(id, event.target.value)
       setEditedField({
         type: "optionValueChange",
         payload: { value : event.target.value, id }
