@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import ShowRecordsNumber from "../components/ShowRecordsNumber";
 import stringMethods from "../library/stringMethods";
 import globalVars from "../library/globalVariables";
-import LoadingSpinner from "../components/loadingSpinner";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Dashboard = ({ clientData, fieldData }: any) => {
   const router = useRouter();
@@ -19,7 +19,7 @@ const Dashboard = ({ clientData, fieldData }: any) => {
       .getString();
     document.title = title;
     setInitialized(true);
-  }, []);
+  }, [router]);
 
   const h1 = new stringMethods(router.pathname)
     .removeSlash()

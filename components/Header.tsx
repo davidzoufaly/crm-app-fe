@@ -1,4 +1,5 @@
 import Link from "next/link";
+import languages from "../library/languages";
 
 const Header = () => {
   return (
@@ -6,22 +7,22 @@ const Header = () => {
       <ul>
         <li>
           <Link href="/dashboard">
-            <a>Dashboard</a>
+            <a>{languages.en.dashboard}</a>
           </Link>
         </li>
         <li>
           <Link href="/clients">
-            <a>Clients</a>
+            <a>{languages.en.clients}</a>
           </Link>
         </li>
         <li>
           <Link href="/emails">
-            <a>Emails</a>
+            <a>{languages.en.emails}</a>
           </Link>
         </li>
         <li>
           <Link href="/settings">
-            <a>Settings</a>
+            <a>{languages.en.settings}</a>
           </Link>
         </li>
       </ul>

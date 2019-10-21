@@ -4,8 +4,9 @@ import axios from "axios";
 import generateUniqueId from "generate-unique-id";
 import stringMethods from "../library/stringMethods";
 import {useEffect, useState} from "react";
-import LoadingSpinner from "../components/loadingSpinner";
+import LoadingSpinner from "../components/LoadingSpinner";
 import {useRouter} from "next/router"
+import languages from "../library/languages";
 
 const Emails = ({ data }) => {
     const [initialized, setInitialized] = useState(false)
@@ -19,16 +20,16 @@ const Emails = ({ data }) => {
           .getString();
         document.title = title;
         setInitialized(true);
-      }, []);
+      }, [router]);
 
-  const tableBody = data.reverse().map(email => (
+  const tableBody = data.map(email => (
     <tr key={generateUniqueId()}>
       <td>{email.date}</td>
       <td>{email.to.map(e => <p key={generateUniqueId()}>{e}</p>)}</td>
       <td>{email.subject}</td>
       <td>{email.message.length > 50 ? `${email.message.slice(0, 50)}...` : email.message}</td>
     </tr>
-  ));
+  )).reverse();
 
   const h1 = new stringMethods(router.pathname)
     .removeSlash()
@@ -42,10 +43,10 @@ const Emails = ({ data }) => {
       <table>
         <thead>
           <tr>
-            <td>Date and time</td>
-            <td>To</td>
-            <td>Subject</td>
-            <td>Message</td>
+            <td>{languages.en.dateAndTime}</td>
+            <td>{languages.en.to}</td>
+            <td>{languages.en.subject}</td>
+            <td>{languages.en.message}</td>
           </tr>
         </thead>
         <tbody>{tableBody}</tbody>

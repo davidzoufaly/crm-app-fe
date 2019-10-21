@@ -8,7 +8,7 @@ import globalVars from "../library/globalVariables";
 import TableHead from "../components/clients/TableHead";
 import CreateClient from "../components/clients/CreateClient";
 import Buttons from "../components/clients/Buttons";
-import LoadingSpinner from "../components/loadingSpinner";
+import LoadingSpinner from "../components/LoadingSpinner";
 import EmailForm from "../components/EmailForm";
 
 //TODO: Po odeslání skrýt komponentu
@@ -53,7 +53,7 @@ const Clients = ({ fieldData, clientData }: any) => {
       .getString();
     document.title = title;
     setInitialized(true);
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     // reset email state, when user uncheck all recievers / clients

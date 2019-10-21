@@ -4,6 +4,7 @@ import ClientForm from "./ClientForm";
 import { useReducer, useEffect, useState } from "react";
 import axios from "axios";
 import globalVars from "../../library/globalVariables";
+import languages from "../../library/languages";
 import generateUniqueId from "generate-unique-id";
 import moment from "moment";
 
@@ -24,7 +25,7 @@ const CreateClient = ({
         return {
           ...state,
           [action.payload.fieldName]:
-            action.payload.fieldType === "number"
+            action.payload.fieldType === globalVars.fieldTypes.number
               ? parseInt(action.payload.value)
               : action.payload.value
         };
@@ -41,7 +42,7 @@ const CreateClient = ({
       case "addDate":
         return {
           ...state,
-           dateAdded: moment().format("llll")
+           ["Date added"]: moment().format("llll")
         }
       case "clear":
         return {
@@ -84,7 +85,7 @@ const CreateClient = ({
       responseType: "json"
     });
     const clientData = await clientRes.data;
-    if (clientData.msg === "Success") {
+    if (clientData.msg === globalVars.msgSuccess) {
       // add client data to clients state for table update
       addNewClientToState(newClient);
       // reset newClient state
@@ -95,6 +96,8 @@ const CreateClient = ({
       toggleIsClientAdded();
       //reset submitting
       setSubmitting(false);
+    } else {
+      alert(languages.en.somethingWentWrong);
     }
   }
 
@@ -108,15 +111,15 @@ const CreateClient = ({
   return isClientAdded ? (
     <div>
       <Typography variant="h4" component="h2" gutterBottom>
-        Add new client
+        {languages.en.addNewClient}
       </Typography>
       <form onSubmit={onSubmit}>
         <ClientForm fields={fields} onChange={onChange} newClient={newClient} />
         <Button variant="contained" color="primary" type="submit">
-          Save
+          {languages.en.save}
         </Button>
         <Button variant="contained" color="secondary" onClick={onCancel}>
-          Cancel
+          {languages.en.cancel}
         </Button>
       </form>
     </div>

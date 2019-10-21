@@ -45,6 +45,11 @@ class StringMethods {
     return this;
   };
 
+  textToHtmlProp = () => {
+    this.text = this.text.toLowerCase().replace(/ /g, '-');
+    return this;
+  }
+
   replaceStringDiacritics = () => {
     this.text = this.text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     return this;

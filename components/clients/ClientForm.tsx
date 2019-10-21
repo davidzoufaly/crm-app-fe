@@ -1,21 +1,18 @@
-import stringMethods from "../../library/stringMethods";
+import globalVars from "../../library/globalVariables";
 
 const ClientForm = ({ fields, onChange, newClient }: any) => {
   const inputs = fields.map((e: any) => {
-    if (e.fieldName !== "dateAdded" && e.fieldName !== "lastModified") {
+    if (e.fieldName !== globalVars.permanentFields.dateAdded && e.fieldName !== globalVars.permanentFields.lastModified) {
       if (e.fieldType === "text") {
         return (
           <div key={e.fieldName}>
             <label htmlFor={e.fieldName}>
-              {new stringMethods(e.fieldName)
-                .camelStringToText()
-                .firstCharUpperCase()
-                .getString()}
+              {e.fieldName}
             </label>
             <input
               type="text"
               id={e.fieldName}
-              autoFocus={e.fieldName === "firstName"}
+              autoFocus={e.fieldName === globalVars.permanentFields.fistName}
               name={e.fieldName}
               onChange={() => onChange(e.fieldType, event)}
               defaultValue={newClient[e.fieldName]}
@@ -25,12 +22,8 @@ const ClientForm = ({ fields, onChange, newClient }: any) => {
       } else if (e.fieldType === "number") {
         return (
           <div key={e.fieldName}>
-            <label htmlFor={e.fieldName}>
-              {" "}
-              {new stringMethods(e.fieldName)
-                .camelStringToText()
-                .firstCharUpperCase()
-                .getString()}
+            <label htmlFor={e.fieldName}> 
+             {e.fieldName} 
             </label>
             <input
               id={e.fieldName}
@@ -45,11 +38,7 @@ const ClientForm = ({ fields, onChange, newClient }: any) => {
         return (
           <div key={e.fieldName}>
             <label htmlFor={e.fieldName}>
-              {" "}
-              {new stringMethods(e.fieldName)
-                .camelStringToText()
-                .firstCharUpperCase()
-                .getString()}
+              {e.fieldName}
             </label>
             <select
               id={e.fieldName}
@@ -57,7 +46,7 @@ const ClientForm = ({ fields, onChange, newClient }: any) => {
               onChange={() => onChange(e.fieldType, event)}
               defaultValue={newClient[e.fieldName]}
             >
-              <option>---</option>
+              <option>{globalVars.blankOption}</option>
               {e.fieldOptions.map((e: any) => {
                 return (
                   <option value={e.value} key={e.id}>

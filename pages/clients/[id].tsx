@@ -1,18 +1,19 @@
-import Header from "../../components/Header";
-import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import moment from "moment";
+import axios from "axios";
+import languages from "../../library/languages";
 import globalVars from "../../library/globalVariables";
+import Header from "../../components/Header";
 import SingleClientData from "../../components/singleClient/SingleClientData";
 import ButtonsSingle from "../../components/singleClient/ButtonsSingle";
-import LoadingSpinner from "../../components/loadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import EmailForm from "../../components/EmailForm";
-import moment from "moment";
 
 const Client = ({ clientData, fieldsData }: any) => {
   const [client, setClient] = useState(clientData);
   const [name, setName] = useState(
-    `${clientData.firstName} ${clientData.lastName}`
+    `${clientData["First name"]} ${clientData["Last name"]}`
   );
   const [initialized, setInitialized] = useState(false);
   const [isEmailCreated, setIsEmailCreated] = useState(false);
@@ -27,7 +28,7 @@ const Client = ({ clientData, fieldsData }: any) => {
   const onSave = async e => {
     e.preventDefault();
     setClient({...client, lastModified: moment().format("llll")})
-    setName(`${client.firstName} ${client.lastName}`);
+    setName(`${client["First name"]} ${client["Last name"]}`);
   };
 
   const saveToDb = async () => {
@@ -49,7 +50,7 @@ const Client = ({ clientData, fieldsData }: any) => {
     const data = await res.data;
     (await data.msg) === "Success"
       ? router.push("/clients")
-      : alert("Something went wrong!");
+      : alert(languages.en.somethingWentWrong);
   };
 
   const onInputChange = e => {
@@ -78,7 +79,7 @@ const Client = ({ clientData, fieldsData }: any) => {
         />
       </form>
         <EmailForm
-          to={[client.email]}
+          to={[client["Email"]]}
           isEmailCreated={isEmailCreated}
           toggleIsEmailCreated={toggleIsEmailCreated}
         />

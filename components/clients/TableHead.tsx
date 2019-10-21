@@ -1,7 +1,7 @@
-import StringMethods from "../../library/stringMethods";
 import TableRow from "@material-ui/core/TableRow";
 import TableHead from '@material-ui/core/TableHead';
 import uniqid from "uniqid";
+import languages from "../../library/languages";
 
 interface IProps {
   sortBy: any;
@@ -13,15 +13,11 @@ interface IProps {
 
 const TableHeader = ({ fields, sortBy, reverse }: IProps) => {
   const tableHeadings = fields.map((e: any) => {
-    const tableHeading = new StringMethods(e.fieldName)
-      .camelStringToText()
-      .firstCharUpperCase()
-      .getString();
 
     return (
       <th key={uniqid()}>
         {reverse ? "<" : ">"}
-        <button onClick={() => sortBy(e.fieldName)}>{tableHeading}</button>
+        <button onClick={() => sortBy(e.fieldName)}>{e.fieldName}</button>
       </th>
     );
   });
@@ -31,7 +27,7 @@ const TableHeader = ({ fields, sortBy, reverse }: IProps) => {
       <TableRow>
         <th></th>
         {tableHeadings}
-        <th>Client Profile</th>
+        <th>{languages.en.clientProfile}</th>
       </TableRow>
     </TableHead>
   );

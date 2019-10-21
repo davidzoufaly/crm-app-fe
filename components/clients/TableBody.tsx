@@ -2,8 +2,7 @@ import Link from "next/link";
 import uniqid from "uniqid";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-
-//TODO Filtrují se i polé které neexistujou na straně body
+import languages from "../../library/languages";
 
 interface IProps {
   clients: any;
@@ -67,7 +66,7 @@ const TableBody = ({
       items.push(
         <TableCell key={uniqid()}>
           <Link href="/clients/[id]" as={`/clients/${client._id}`}>
-            <a>Go</a>
+            <a>{languages.en.go}</a>
           </Link>
         </TableCell>
       );

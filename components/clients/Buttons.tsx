@@ -2,6 +2,7 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import EmailIcon from '@material-ui/icons/Email';
+import languages from "../../library/languages";
 
 const Buttons = ({
   clientsAreNotChecked,
@@ -19,7 +20,7 @@ const Buttons = ({
       onClick={toggleIsClientAdded}
       startIcon={<AddIcon />}
     >
-      Add new
+      {languages.en.addNew}
     </Button>
     <Button
       variant="contained"
@@ -28,14 +29,14 @@ const Buttons = ({
       onClick={deleteMultipleClients}
       startIcon={<DeleteIcon />}
     >
-      Delete
+      {languages.en.delete}
     </Button>
     <Button variant="contained"
     color="primary"
     onClick={toggleIsEmailCreated}
     disabled={clientsAreNotChecked || isEmailCreated || isClientAdded}
     startIcon={<EmailIcon/>}
-    >Email
+    >{languages.en.email}
     </Button>
   </div>
 );
