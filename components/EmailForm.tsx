@@ -10,12 +10,12 @@ const EmailForm = ({
   toggleIsEmailCreated,
   unCheckAll
 }: any) => {
-  const initEmail = { to, subject: "", message: "" };
+  const initEmail = { to : to, subject: "", message: "" };
   const [email, setEmail] = useState(initEmail);
   const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
-    setEmail({ ...email, to });
+    setEmail({ ...email, to : to });
   }, [to]);
 
   const sendEmail = async e => {

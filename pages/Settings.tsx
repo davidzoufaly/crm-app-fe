@@ -1,15 +1,15 @@
 import Header from "../components/Header";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import stringMethods from "../library/stringMethods";
-import globalVars from "../library/globalVariables";
 import axios from "axios";
 import DefaultFields from "../components/settings/DefaultFields";
 import CustomFields from "../components/settings/customFields/CustomFields";
-import Typography from "@material-ui/core/Typography";
 import LoadingSpinner from "../components/LoadingSpinner";
 import EmailSettings from "../components/settings/EmailSettings";
 import WebForm from "../components/settings/webform/WebForm";
+import globalVars from "../library/globalVariables";
+import stringMethods from "../library/stringMethods";
+import Typography from "@material-ui/core/Typography";
 
 const Settings = ({ dataFields, dataEmailSettings }: any) => {
   const router = useRouter();
@@ -50,13 +50,13 @@ const Settings = ({ dataFields, dataEmailSettings }: any) => {
     <LoadingSpinner />
   ) : (
     <div>
-      {/* <Header />
+      <Header />
       <Typography variant="h3" component="h1" gutterBottom>
         {h1}
       </Typography>
       <DefaultFields fields={fields} />
       <CustomFields fields={fields} refreshList={refreshList} />
-      <EmailSettings data={dataEmailSettings} /> */}
+      <EmailSettings data={dataEmailSettings} />
       <WebForm fields={fields} />
     </div>
   );

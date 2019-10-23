@@ -93,6 +93,107 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./components/CountContext.tsx":
+/*!*************************************!*\
+  !*** ./components/CountContext.tsx ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/CountContext.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+const CountContext = props => {
+  const {
+    0: count,
+    1: setCount
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  const Context = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])(count);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const getCounts = async () => {
+      const resClientCount = await axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: "GET",
+        url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_2__["default"].serverURL}/clients/count`,
+        responseType: "json"
+      });
+      const clientData = await resClientCount.data;
+      const resFieldsData = await axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: "GET",
+        url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_2__["default"].serverURL}/fields/count`,
+        responseType: "json"
+      });
+      const fieldData = await resFieldsData.data;
+      const resEmailsCount = await axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: "GET",
+        url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_2__["default"].serverURL}/emails/count`,
+        responseType: "json"
+      });
+      const emailsData = await resEmailsCount.data;
+      setCount({
+        clientData,
+        fieldData,
+        emailsData
+      });
+    };
+
+    getCounts();
+  }, []);
+  return __jsx(Context.Provider, {
+    value: count,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43
+    },
+    __self: undefined
+  }, props.children);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CountContext);
+
+/***/ }),
+
+/***/ "./library/globalVariables.tsx":
+/*!*************************************!*\
+  !*** ./library/globalVariables.tsx ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const globalVars = {
+  titleSubText: "| CRM-APP",
+  serverURL: "http://localhost:8080/api",
+  permanentFields: {
+    fistName: "First name",
+    lastName: "Last name",
+    email: "Email",
+    dateAdded: "Date added",
+    lastModified: "Last modified"
+  },
+  fieldTypes: {
+    text: "text",
+    number: "number",
+    select: "select"
+  },
+  blankOption: "---",
+  msgSuccess: "Success"
+};
+/* harmony default export */ __webpack_exports__["default"] = (globalVars);
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js ***!
@@ -1981,6 +2082,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/CssBaseline */ "@material-ui/core/CssBaseline");
 /* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _src_theme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../src/theme */ "./src/theme.tsx");
+/* harmony import */ var _components_CountContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/CountContext */ "./components/CountContext.tsx");
 
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/_app.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
@@ -1990,10 +2092,11 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
+
 class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
   componentDidMount() {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
+    const jssStyles = document.querySelector("#jss-server-side");
 
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
@@ -2008,41 +2111,47 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
     return __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 21
+        lineNumber: 22
       },
       __self: this
     }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_3___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 22
+        lineNumber: 23
       },
       __self: this
     }, __jsx("title", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 23
+        lineNumber: 24
       },
       __self: this
     }, "My page")), __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_4__["ThemeProvider"], {
       theme: _src_theme__WEBPACK_IMPORTED_MODULE_6__["default"],
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 25
+        lineNumber: 26
       },
       __self: this
-    }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_5___default.a, {
+    }, __jsx(_components_CountContext__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 27
       },
       __self: this
+    }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_5___default.a, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 29
+      },
+      __self: this
     }), __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 28
+        lineNumber: 30
       },
       __self: this
-    }))));
+    })))));
   }
 
 }
@@ -2138,6 +2247,17 @@ module.exports = require("@material-ui/core/styles");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/styles");
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
 
 /***/ }),
 

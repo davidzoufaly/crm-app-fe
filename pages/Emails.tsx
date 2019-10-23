@@ -1,11 +1,11 @@
-import Header from "../components/Header";
-import globalVars from "../library/globalVariables";
+import {useEffect, useState} from "react";
+import {useRouter} from "next/router"
 import axios from "axios";
 import generateUniqueId from "generate-unique-id";
-import stringMethods from "../library/stringMethods";
-import {useEffect, useState} from "react";
+import Header from "../components/Header";
 import LoadingSpinner from "../components/LoadingSpinner";
-import {useRouter} from "next/router"
+import stringMethods from "../library/stringMethods";
+import globalVars from "../library/globalVariables";
 import languages from "../library/languages";
 
 const Emails = ({ data }) => {

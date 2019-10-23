@@ -1,18 +1,19 @@
 import { useState, useReducer, useEffect } from "react";
-import AddOrEditField from "./AddOrEditField";
 import axios from "axios";
-import globalVars from "../../../library/globalVariables";
-import languages from "../../../library/languages";
 import uniqid from "uniqid";
+import AddOrEditField from "./AddOrEditField";
 import CustomFieldsList from "./CustomFieldsList";
-import Typography from "@material-ui/core/Typography";
 import SelectFieldOptions from "./SelectFieldOptions";
+import languages from "../../../library/languages";
+import globalVars from "../../../library/globalVariables";
+import Typography from "@material-ui/core/Typography";
 
 const CustomClientFields = ({ fields, refreshList }: any) => {
   const blankFieldObject = {
     fieldName: "",
     fieldType: "text",
     fieldOptions: [],
+    fieldFormVisible: null
   };
 
   useEffect(() => {
@@ -113,7 +114,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
       const fieldIsUpdated = async () => {
         const { fieldName, fieldType, fieldOptions, id } = editedField;
         const res = await axios({
-          method: "put",
+          method: "PUT",
           url: `${globalVars.serverURL}/fields/${id}`,
           data: { fieldName, fieldType, fieldOptions },
           responseType: "json"
@@ -126,7 +127,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
 
       const fieldIsCreated = async () => {
         const res = await axios({
-          method: "post",
+          method: "POST",
           url: `${globalVars.serverURL}/fields/`,
           data: editedField,
           responseType: "json"
@@ -148,7 +149,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
 
   const deleteField = async (id: any) => {
     const res = await axios({
-      method: "delete",
+      method: "DELETE",
       url: `${globalVars.serverURL}/fields/${id}`,
       responseType: "json"
     });

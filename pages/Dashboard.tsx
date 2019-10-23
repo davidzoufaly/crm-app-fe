@@ -3,11 +3,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import ShowRecordsNumber from "../components/ShowRecordsNumber";
-import stringMethods from "../library/stringMethods";
-import globalVars from "../library/globalVariables";
 import LoadingSpinner from "../components/LoadingSpinner";
+import globalVars from "../library/globalVariables";
+import stringMethods from "../library/stringMethods";
+import languages from "../library/languages";
 
-const Dashboard = ({ clientData, fieldData }: any) => {
+const Dashboard = ({ clientData, fieldData, emailsData }: any) => {
   const router = useRouter();
   const [initialized, setInitialized] = useState(false);
 
@@ -34,13 +35,21 @@ const Dashboard = ({ clientData, fieldData }: any) => {
       <h1>{h1}</h1>
       <ShowRecordsNumber
         data={clientData.data}
-        string={"clients"}
+        string={languages.en.clientsSaved}
+        buttonString={languages.en.clients}
         link={"/clients"}
       />
       <ShowRecordsNumber
-        data={fieldData.data}
-        string={"fields"}
+        data={fieldData}
+        string={languages.en.fieldsSaved}
+        buttonString={languages.en.customClientFields}
         link={"/settings"}
+      />
+      <ShowRecordsNumber
+        data={emailsData}
+        string={languages.en.emailsSent}
+        buttonString={languages.en.emails}
+        link={"/emails"}
       />
     </div>
   );
@@ -48,19 +57,28 @@ const Dashboard = ({ clientData, fieldData }: any) => {
 
 Dashboard.getInitialProps = async () => {
   const resClientCount = await axios({
-    method: "get",
+    method: "GET",
     url: `${globalVars.serverURL}/clients/count`,
     responseType: "json"
   });
   const clientData = await resClientCount.data;
 
   const resFieldsData = await axios({
-    method: "get",
+    method: "GET",
     url: `${globalVars.serverURL}/fields/count`,
     responseType: "json"
   });
   const fieldData = await resFieldsData.data;
-  return { clientData, fieldData };
+
+  const resEmailsCount = await axios({
+    method: "GET",
+    url: `${globalVars.serverURL}/emails/count`,
+    responseType: "json"
+  })
+  const emailsData = await resEmailsCount.data;
+
+
+  return { clientData, fieldData, emailsData };
 };
 
 export default Dashboard;

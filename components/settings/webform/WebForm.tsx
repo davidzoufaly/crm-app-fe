@@ -1,16 +1,18 @@
-import { useReducer, useEffect, useState } from "react";
+import { useReducer, useState, useEffect } from "react";
+import axios from "axios";
 import WebFormSelect from "./WebFormSelect";
 import WebFormList from "./WebFormList";
-import WebFormOptionSelect from "./WebFormOptionSelect";
-import WebFormOptions from "./WebFormOptions";
-import languages from "../../../library/languages";
-
-//TODO: STRINGY DO LANGUAGES
-//TODO: GENERATE A SAVE BUTTONS
-//TODO: POST REQUEST NA BE
+import WebFormVisibleOrNot from "./WebFormVisibleOrNot";
+import WebFormFieldOptions from "./WebFormFieldOptions";
+import WebFormSubSelect from "./WebFormSubSelect";
+import WebFormButtons from "./WebFormButtons";
+import globalVars from "../../../library/globalVariables"
 
 const WebForm = ({ fields }) => {
-  const [counter, setCounter] = useState(0);
+
+  const initCounterValue = fields.map(e => e.order).sort((a,b) => b > a ? 1 : -1)[0];
+
+  const [counter, setCounter] = useState(initCounterValue);
   const [webFields, setWebFields] = useReducer((state, action) => {
     switch (action.type) {
       case "add":
@@ -33,13 +35,22 @@ const WebForm = ({ fields }) => {
             : field
         );
 
+      case "addNotVisibleValue":
+        return state.map(field =>
+          field.pause
+            ? {
+                ...field,
+                fieldFormVisible: false
+              }
+            : field
+        );
+
       case "addHiddenSelect":
         return state.map(field =>
           field.pause
             ? {
                 ...field,
                 fieldInForm: true,
-                fieldFormVisible: false,
                 pause: false,
                 order: counter,
                 fieldOptions: field.fieldOptions.map(option =>
@@ -64,11 +75,9 @@ const WebForm = ({ fields }) => {
             ? {
                 ...field,
                 fieldInForm: false,
-                fieldFormVisible: false,
+                fieldFormVisible: null,
                 fieldOptions: field.fieldOptions.map(option =>
-                  option.preselected
-                    ? { ...option, preselected: false }
-                    : option
+                  option.preselected ? { ...option, preselected: null } : option
                 )
               }
             : field
@@ -121,26 +130,46 @@ const WebForm = ({ fields }) => {
     });
   };
 
+  const showOptionsOnClick = () => {
+    setWebFields({
+      type: "addNotVisibleValue"
+    });
+  };
+
   useEffect(() => {
-    // console.log(webFields);
-  }, [webFields]);
+    //save fields (form) on change
+    const saveFormAuto = async () => {
+      await axios({
+            method: "PUT",
+            url: `${globalVars.serverURL}/fields`,
+            data: webFields,
+            responseType: "json"
+        })
+    }
+    saveFormAuto();
+}, [webFields])
+
 
   return (
     <>
-      <h3>{languages.en.selectField}:</h3>
+      <h2>Web form</h2>
       <WebFormSelect webFields={webFields} addNotSelect={addNotSelect} />
-      <WebFormOptionSelect
+      <WebFormVisibleOrNot
         webFields={webFields}
         addVisibleSelect={addVisibleSelect}
-        WebFormOptions={
-          <WebFormOptions
+        showOptionsOnClick={showOptionsOnClick}
+      />
+      <WebFormSubSelect
+        webFields={webFields}
+        addHiddenSelect={addHiddenSelect}
+        webFormOptions={
+          <WebFormFieldOptions
             webFields={webFields}
-            addHiddenSelect={addHiddenSelect}
           />
         }
       />
-      <h3>{languages.en.selectedFields}:</h3>
       <WebFormList webFields={webFields} removeFromList={removeFromList} />
+      <WebFormButtons webFields={webFields}/>
     </>
   );
 };

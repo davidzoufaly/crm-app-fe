@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -128,7 +128,7 @@ const EmailForm = ({
   unCheckAll
 }) => {
   const initEmail = {
-    to,
+    to: to,
     subject: "",
     message: ""
   };
@@ -142,7 +142,7 @@ const EmailForm = ({
   } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
     setEmail(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, email, {
-      to
+      to: to
     }));
   }, [to]);
 
@@ -1145,7 +1145,7 @@ const languages = {
     clientProfile: "Client profile",
     customClientFields: "Custom client fields",
     edit: "Edit",
-    defaultClientFields: "Default Client Fields",
+    defaultClientFields: "Default client fields",
     emailSettingsUpdatedSuccess: "Your email settings has been successfully changed!",
     somethingWentWrong: "Something went wrong!",
     emailAccount: "Email account",
@@ -1167,7 +1167,20 @@ const languages = {
     go: "Go",
     dateAndTime: "Date and time",
     selectField: "Select field",
-    selectedFields: "Selected fields"
+    selectedFields: "Selected fields",
+    visibleInForm: "visible in form",
+    hiddenInForm: "hidden in form with",
+    asPreselected: "as preselected",
+    shouldBe: "Should be",
+    yes: "yes",
+    no: "no",
+    pleaseSelectOption: "Please select option, that will be auto assigned to clients from this form.",
+    allFieldsSelected: "All fields are already selected",
+    noFieldsSelected: "No fields selected",
+    donwloadForm: "Download form",
+    clientsSaved: "Saved clients",
+    emailsSent: "Emails sent",
+    fieldsSaved: "Fields saved"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (languages);
@@ -3340,7 +3353,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
- //TODO: Po odeslání skrýt komponentu
+
 
 const Clients = ({
   fieldData,
@@ -3463,35 +3476,35 @@ const Clients = ({
   return !initialized ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_11__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 118
+      lineNumber: 116
     },
     __self: undefined
   }) : __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 120
+      lineNumber: 118
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 121
+      lineNumber: 119
     },
     __self: undefined
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 120
     },
     __self: undefined
   }, h1), __jsx(_components_EmailForm__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    to: filterCheckedClients().map(e => e.email),
+    to: filterCheckedClients().map(e => e["Email"]),
     isEmailCreated: isEmailCreated,
     toggleIsEmailCreated: toggleIsEmailCreated,
     unCheckAll: unCheckAll,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123
+      lineNumber: 121
     },
     __self: undefined
   }), __jsx(_components_clients_CreateClient__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -3501,7 +3514,7 @@ const Clients = ({
     addNewClientToState: addNewClientToState,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 129
+      lineNumber: 127
     },
     __self: undefined
   }), __jsx(_components_clients_Buttons__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -3513,13 +3526,13 @@ const Clients = ({
     isEmailCreated: isEmailCreated,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 133
     },
     __self: undefined
   }), __jsx("table", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 143
+      lineNumber: 141
     },
     __self: undefined
   }, __jsx(_components_clients_TableHead__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -3528,13 +3541,13 @@ const Clients = ({
     reverse: reverse,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 144
+      lineNumber: 142
     },
     __self: undefined
   }), __jsx("tbody", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 145
+      lineNumber: 143
     },
     __self: undefined
   }, __jsx(_components_clients_TableBody__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3545,7 +3558,7 @@ const Clients = ({
     handleCheckbox: handleCheckbox,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 146
+      lineNumber: 144
     },
     __self: undefined
   }))));
@@ -3576,7 +3589,7 @@ Clients.getInitialProps = async () => {
 
 /***/ }),
 
-/***/ 6:
+/***/ 8:
 /*!*********************************!*\
   !*** multi ./pages/clients.tsx ***!
   \*********************************/

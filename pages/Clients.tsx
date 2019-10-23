@@ -11,8 +11,6 @@ import Buttons from "../components/clients/Buttons";
 import LoadingSpinner from "../components/LoadingSpinner";
 import EmailForm from "../components/EmailForm";
 
-//TODO: Po odeslání skrýt komponentu
-
 const Clients = ({ fieldData, clientData }: any) => {
   const router = useRouter();
 
@@ -121,7 +119,7 @@ const Clients = ({ fieldData, clientData }: any) => {
       <Header />
       <h1>{h1}</h1>
       <EmailForm
-        to={filterCheckedClients().map(e => e.email)}
+        to={filterCheckedClients().map(e => e["Email"])}
         isEmailCreated={isEmailCreated}
         toggleIsEmailCreated={toggleIsEmailCreated}
         unCheckAll={unCheckAll}

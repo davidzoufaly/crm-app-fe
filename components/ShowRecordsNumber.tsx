@@ -1,15 +1,14 @@
 import Link from "next/link";
 import languages from "../library/languages";
 
-const ShowRecordsNumber = (props : any) => {
-  const numberOfRecords = props.data;
+const ShowRecordsNumber = ({data, string, buttonString, link } : any) => {
 
   return (
     <div>
-      <h2>{numberOfRecords}</h2>
-      <p>{languages.en.saved} {props.string}</p>
-      <Link href={props.link}>
-        <a>{languages.en.goTo} {props.string}</a>
+      <h2>{data}</h2>
+      <p>{string}</p>
+      <Link href={link}>
+        <a>{languages.en.goTo} {buttonString.toLowerCase()}</a>
       </Link>
     </div>
   );

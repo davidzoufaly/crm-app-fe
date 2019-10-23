@@ -1136,7 +1136,7 @@ var languages = {
     clientProfile: "Client profile",
     customClientFields: "Custom client fields",
     edit: "Edit",
-    defaultClientFields: "Default Client Fields",
+    defaultClientFields: "Default client fields",
     emailSettingsUpdatedSuccess: "Your email settings has been successfully changed!",
     somethingWentWrong: "Something went wrong!",
     emailAccount: "Email account",
@@ -1158,7 +1158,20 @@ var languages = {
     go: "Go",
     dateAndTime: "Date and time",
     selectField: "Select field",
-    selectedFields: "Selected fields"
+    selectedFields: "Selected fields",
+    visibleInForm: "visible in form",
+    hiddenInForm: "hidden in form with",
+    asPreselected: "as preselected",
+    shouldBe: "Should be",
+    yes: "yes",
+    no: "no",
+    pleaseSelectOption: "Please select option, that will be auto assigned to clients from this form.",
+    allFieldsSelected: "All fields are already selected",
+    noFieldsSelected: "No fields selected",
+    donwloadForm: "Download form",
+    clientsSaved: "Saved clients",
+    emailsSent: "Emails sent",
+    fieldsSaved: "Fields saved"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (languages);
@@ -44742,7 +44755,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement;
 
 
 
- //TODO: Po odeslání skrýt komponentu
+
 
 var Clients = function Clients(_ref) {
   var fieldData = _ref.fieldData,
@@ -44899,37 +44912,37 @@ var Clients = function Clients(_ref) {
   return !initialized ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_14__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 118
+      lineNumber: 116
     },
     __self: this
   }) : __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 120
+      lineNumber: 118
     },
     __self: this
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_7__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 121
+      lineNumber: 119
     },
     __self: this
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 120
     },
     __self: this
   }, h1), __jsx(_components_EmailForm__WEBPACK_IMPORTED_MODULE_15__["default"], {
     to: filterCheckedClients().map(function (e) {
-      return e.email;
+      return e["Email"];
     }),
     isEmailCreated: isEmailCreated,
     toggleIsEmailCreated: toggleIsEmailCreated,
     unCheckAll: unCheckAll,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123
+      lineNumber: 121
     },
     __self: this
   }), __jsx(_components_clients_CreateClient__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -44939,7 +44952,7 @@ var Clients = function Clients(_ref) {
     addNewClientToState: addNewClientToState,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 129
+      lineNumber: 127
     },
     __self: this
   }), __jsx(_components_clients_Buttons__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -44953,13 +44966,13 @@ var Clients = function Clients(_ref) {
     isEmailCreated: isEmailCreated,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 133
     },
     __self: this
   }), __jsx("table", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 143
+      lineNumber: 141
     },
     __self: this
   }, __jsx(_components_clients_TableHead__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -44968,13 +44981,13 @@ var Clients = function Clients(_ref) {
     reverse: reverse,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 144
+      lineNumber: 142
     },
     __self: this
   }), __jsx("tbody", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 145
+      lineNumber: 143
     },
     __self: this
   }, __jsx(_components_clients_TableBody__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -44985,7 +44998,7 @@ var Clients = function Clients(_ref) {
     handleCheckbox: handleCheckbox,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 146
+      lineNumber: 144
     },
     __self: this
   }))));
@@ -45045,7 +45058,7 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(f
 
 /***/ }),
 
-/***/ 3:
+/***/ 5:
 /*!**********************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fclients&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Fclients.tsx ***!
   \**********************************************************************************************************************************************/
@@ -45068,5 +45081,5 @@ module.exports = dll_b35e09dc2ca94ac6d9c1;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js"]]]);
+},[[5,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=clients.js.map

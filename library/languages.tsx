@@ -17,7 +17,7 @@ const languages = {
         clientProfile: "Client profile",
         customClientFields: "Custom client fields",
         edit: "Edit",
-        defaultClientFields: "Default Client Fields",
+        defaultClientFields: "Default client fields",
         emailSettingsUpdatedSuccess: "Your email settings has been successfully changed!",
         somethingWentWrong: "Something went wrong!",
         emailAccount: "Email account",
@@ -39,9 +39,20 @@ const languages = {
         go: "Go",
         dateAndTime: "Date and time",
         selectField: "Select field",
-        selectedFields: "Selected fields"
-        
-
+        selectedFields: "Selected fields",
+        visibleInForm: "visible in form",
+        hiddenInForm: "hidden in form with",
+        asPreselected: "as preselected",
+        shouldBe: "Should be",
+        yes: "yes",
+        no: "no",
+        pleaseSelectOption: "Please select option, that will be auto assigned to clients from this form.",
+        allFieldsSelected: "All fields are already selected",
+        noFieldsSelected: "No fields selected",
+        donwloadForm: "Download form",
+        clientsSaved: "Saved clients",
+        emailsSent: "Emails sent",
+        fieldsSaved: "Fields saved"
     }
 }
 

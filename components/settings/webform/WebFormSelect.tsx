@@ -1,4 +1,5 @@
 import globalVars from "../../../library/globalVariables";
+import languages from "../../../library/languages";
 
 const WebFormSelect = ({ webFields, addNotSelect }) => {
   const selectOptions = webFields.map(field => {
@@ -13,12 +14,13 @@ const WebFormSelect = ({ webFields, addNotSelect }) => {
 
   return selectOptions.some(field => field !== null) ? (
     <>
+      <h3>{languages.en.selectField}:</h3>
       <select name="fields" onChange={addNotSelect} disabled={webFields.some(e => e.pause)}>
         <option key={globalVars.blankOption}>{globalVars.blankOption}</option>
         {selectOptions}
       </select>
     </>
-  ) : <p>All fields selected</p>;
+  ) : <p>{languages.en.allFieldsSelected}</p>;
 };
 
 export default WebFormSelect;
