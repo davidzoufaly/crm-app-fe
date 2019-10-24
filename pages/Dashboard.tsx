@@ -1,16 +1,25 @@
 import Header from "../components/Header";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 import ShowRecordsNumber from "../components/ShowRecordsNumber";
 import LoadingSpinner from "../components/LoadingSpinner";
+import UserContext from "../components/UserContext";
+import CountContext from "../components/CountContext";
 import globalVars from "../library/globalVariables";
 import stringMethods from "../library/stringMethods";
 import languages from "../library/languages";
 
-const Dashboard = ({ clientData, fieldData, emailsData }: any) => {
+const Dashboard = ({lastCampaign, clientsLastWeek} : any) => {
   const router = useRouter();
   const [initialized, setInitialized] = useState(false);
+  const user = useContext(UserContext);
+
+  const { 
+    emailsCounter,
+    clientCounter, 
+    fieldCounter 
+  } = useContext(CountContext);
 
   useEffect(() => {
     const title = new stringMethods(router.pathname)
@@ -20,6 +29,7 @@ const Dashboard = ({ clientData, fieldData, emailsData }: any) => {
       .getString();
     document.title = title;
     setInitialized(true);
+    user.checkUser();
   }, [router]);
 
   const h1 = new stringMethods(router.pathname)
@@ -27,58 +37,58 @@ const Dashboard = ({ clientData, fieldData, emailsData }: any) => {
     .firstCharUpperCase()
     .getString();
 
-  return !initialized ? (
+  const campaignStr = `${languages.en.last} ${languages.en.sent} ${lastCampaign[0].date} ${languages.en.to.toLowerCase()} ${lastCampaign[0].to.length} ${lastCampaign[0].to.length > 1 ? languages.en.clients : languages.en.client}`
+
+  const lastWeekStr = `${clientsLastWeek > 0 ? "+" : null} ${clientsLastWeek} ${languages.en.lastWeek}`
+
+  return !initialized  && !user.user.signedIn ? (
     <LoadingSpinner />
   ) : (
     <div>
       <Header />
       <h1>{h1}</h1>
       <ShowRecordsNumber
-        data={clientData.data}
+        data={clientCounter}
         string={languages.en.clientsSaved}
         buttonString={languages.en.clients}
+        subData={lastWeekStr}
         link={"/clients"}
       />
       <ShowRecordsNumber
-        data={fieldData}
-        string={languages.en.fieldsSaved}
+        data={fieldCounter.custom}
+        string={languages.en.customClientFields}
         buttonString={languages.en.customClientFields}
+        subData={`${fieldCounter.permanent + fieldCounter.custom} ${languages.en.total}`}
         link={"/settings"}
       />
       <ShowRecordsNumber
-        data={emailsData}
+        data={emailsCounter}
         string={languages.en.emailsSent}
         buttonString={languages.en.emails}
+        subData={campaignStr}
         link={"/emails"}
       />
     </div>
   );
 };
 
-Dashboard.getInitialProps = async () => {
-  const resClientCount = await axios({
+Dashboard.getInitialProps = async () => {
+  const resLastCampaign = await axios({
     method: "GET",
-    url: `${globalVars.serverURL}/clients/count`,
+    url: `${globalVars.serverURL}/emails/last`,
     responseType: "json"
-  });
-  const clientData = await resClientCount.data;
+  }) 
+  const lastCampaign = await resLastCampaign.data;
 
-  const resFieldsData = await axios({
+  const resLastWeekNumber = await axios({
     method: "GET",
-    url: `${globalVars.serverURL}/fields/count`,
-    responseType: "json"
-  });
-  const fieldData = await resFieldsData.data;
-
-  const resEmailsCount = await axios({
-    method: "GET",
-    url: `${globalVars.serverURL}/emails/count`,
+    url: `${globalVars.serverURL}/clients/last-week`,
     responseType: "json"
   })
-  const emailsData = await resEmailsCount.data;
 
-
-  return { clientData, fieldData, emailsData };
-};
+  const clientsLastWeek = await resLastWeekNumber.data;
+  
+  return {lastCampaign, clientsLastWeek};
+}
 
 export default Dashboard;

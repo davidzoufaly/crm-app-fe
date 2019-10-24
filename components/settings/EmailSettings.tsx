@@ -55,6 +55,7 @@ const EmailSettings = ({ data }: any) => {
           id="acc-name"
           type="text"
           name="username"
+          autoComplete="email"
           value={emailSettings.username}
           onChange={onChange}
         />
@@ -62,6 +63,7 @@ const EmailSettings = ({ data }: any) => {
         <input
           id="acc-pass"
           type="password"
+          autoComplete="current-password"
           name="pass"
           ref={passEl}
           value={emailSettings.pass}

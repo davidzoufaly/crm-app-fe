@@ -1,20 +1,23 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import moment from "moment";
 import axios from "axios";
-import languages from "../../library/languages";
-import globalVars from "../../library/globalVariables";
 import Header from "../../components/Header";
 import SingleClientData from "../../components/singleClient/SingleClientData";
 import ButtonsSingle from "../../components/singleClient/ButtonsSingle";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import UserContext from "../../components/UserContext";
 import EmailForm from "../../components/EmailForm";
+import languages from "../../library/languages";
+import globalVars from "../../library/globalVariables";
 
 const Client = ({ clientData, fieldsData }: any) => {
   const [client, setClient] = useState(clientData);
   const [name, setName] = useState(
     `${clientData["First name"]} ${clientData["Last name"]}`
   );
+
+  const user = useContext(UserContext);
   const [initialized, setInitialized] = useState(false);
   const [isEmailCreated, setIsEmailCreated] = useState(false);
   const router = useRouter();
@@ -24,6 +27,10 @@ const Client = ({ clientData, fieldsData }: any) => {
     setInitialized(true);
     saveToDb();
   }, [name]);
+
+  useEffect(() => {
+    user.checkUser();
+  }, [])
 
   const onSave = async e => {
     e.preventDefault();
@@ -65,7 +72,7 @@ const Client = ({ clientData, fieldsData }: any) => {
     setIsEmailCreated(isEmailCreated ? false : true);
   };
 
-  return !initialized ? (
+  return !user.user.signedIn && !initialized ? (
     <LoadingSpinner />
   ) : (
     <div>
@@ -113,3 +120,4 @@ Client.getInitialProps = async (context: any) => {
 };
 
 export default Client;
+

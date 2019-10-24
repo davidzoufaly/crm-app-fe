@@ -93,6 +93,23 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./components/CountContext.tsx":
+/*!*************************************!*\
+  !*** ./components/CountContext.tsx ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const CountContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])(null);
+/* harmony default export */ __webpack_exports__["default"] = (CountContext);
+
+/***/ }),
+
 /***/ "./components/Header.tsx":
 /*!*******************************!*\
   !*** ./components/Header.tsx ***!
@@ -107,102 +124,119 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../library/languages */ "./library/languages.tsx");
+/* harmony import */ var _UserContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserContext */ "./components/UserContext.tsx");
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/Header.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+
+
 const Header = () => {
+  const user = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_UserContext__WEBPACK_IMPORTED_MODULE_3__["default"]);
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 6
+      lineNumber: 10
     },
     __self: undefined
   }, __jsx("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 7
+      lineNumber: 11
     },
     __self: undefined
   }, __jsx("li", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8
+      lineNumber: 12
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/dashboard",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 9
+      lineNumber: 13
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10
+      lineNumber: 14
     },
     __self: undefined
   }, _library_languages__WEBPACK_IMPORTED_MODULE_2__["default"].en.dashboard))), __jsx("li", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13
+      lineNumber: 17
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/clients",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14
+      lineNumber: 18
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 19
     },
     __self: undefined
   }, _library_languages__WEBPACK_IMPORTED_MODULE_2__["default"].en.clients))), __jsx("li", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18
+      lineNumber: 22
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/emails",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 23
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 24
     },
     __self: undefined
   }, _library_languages__WEBPACK_IMPORTED_MODULE_2__["default"].en.emails))), __jsx("li", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23
+      lineNumber: 27
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/settings",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24
+      lineNumber: 28
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 29
     },
     __self: undefined
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_2__["default"].en.settings)))));
+  }, _library_languages__WEBPACK_IMPORTED_MODULE_2__["default"].en.settings))), __jsx("li", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 32
+    },
+    __self: undefined
+  }, __jsx("button", {
+    onClick: () => user.logoutUser(),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 33
+    },
+    __self: undefined
+  }, _library_languages__WEBPACK_IMPORTED_MODULE_2__["default"].en.logout))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Header);
@@ -263,7 +297,8 @@ const ShowRecordsNumber = ({
   data,
   string,
   buttonString,
-  link
+  link,
+  subData
 }) => {
   return __jsx("div", {
     __source: {
@@ -283,23 +318,46 @@ const ShowRecordsNumber = ({
       lineNumber: 9
     },
     __self: undefined
-  }, string), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: link,
+  }, string), __jsx("p", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 10
     },
     __self: undefined
-  }, __jsx("a", {
+  }, subData), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: link,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 11
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12
     },
     __self: undefined
   }, _library_languages__WEBPACK_IMPORTED_MODULE_2__["default"].en.goTo, " ", buttonString.toLowerCase())));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ShowRecordsNumber);
+
+/***/ }),
+
+/***/ "./components/UserContext.tsx":
+/*!************************************!*\
+  !*** ./components/UserContext.tsx ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const UserContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])(null);
+/* harmony default export */ __webpack_exports__["default"] = (UserContext);
 
 /***/ }),
 
@@ -376,6 +434,7 @@ const languages = {
     message: "Message",
     send: "Send",
     dashboard: "Dashboard",
+    client: "client",
     clients: "Clients",
     emails: "Emails",
     settings: "Settings",
@@ -397,7 +456,12 @@ const languages = {
     donwloadForm: "Download form",
     clientsSaved: "Saved clients",
     emailsSent: "Emails sent",
-    fieldsSaved: "Fields saved"
+    fieldsSaved: "Fields saved",
+    last: "Last",
+    sent: "sent",
+    lastWeek: "last week",
+    total: "total",
+    logout: "logout"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (languages);
@@ -2477,15 +2541,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Header */ "./components/Header.tsx");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/router */ "next/router");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_ShowRecordsNumber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/ShowRecordsNumber */ "./components/ShowRecordsNumber.tsx");
 /* harmony import */ var _components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/LoadingSpinner */ "./components/LoadingSpinner.tsx");
-/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
-/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../library/stringMethods */ "./library/stringMethods.tsx");
-/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../library/languages */ "./library/languages.tsx");
+/* harmony import */ var _components_UserContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/UserContext */ "./components/UserContext.tsx");
+/* harmony import */ var _components_CountContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/CountContext */ "./components/CountContext.tsx");
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../library/stringMethods */ "./library/stringMethods.tsx");
+/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../library/languages */ "./library/languages.tsx");
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/dashboard.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
@@ -2499,102 +2565,108 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+
+
 const Dashboard = ({
-  clientData,
-  fieldData,
-  emailsData
+  lastCampaign,
+  clientsLastWeek
 }) => {
-  const router = Object(next_router__WEBPACK_IMPORTED_MODULE_3__["useRouter"])();
+  const router = Object(next_router__WEBPACK_IMPORTED_MODULE_2__["useRouter"])();
   const {
     0: initialized,
     1: setInitialized
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const user = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_components_UserContext__WEBPACK_IMPORTED_MODULE_6__["default"]);
+  const {
+    emailsCounter,
+    clientCounter,
+    fieldCounter
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_components_CountContext__WEBPACK_IMPORTED_MODULE_7__["default"]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    const title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_7__["default"](router.pathname).removeSlash().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].titleSubText).getString();
+    const title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_9__["default"](router.pathname).removeSlash().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].titleSubText).getString();
     document.title = title;
     setInitialized(true);
+    user.checkUser();
   }, [router]);
-  const h1 = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_7__["default"](router.pathname).removeSlash().firstCharUpperCase().getString();
-  return !initialized ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  const h1 = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_9__["default"](router.pathname).removeSlash().firstCharUpperCase().getString();
+  const campaignStr = `${_library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.last} ${_library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.sent} ${lastCampaign[0].date} ${_library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.to.toLowerCase()} ${lastCampaign[0].to.length} ${lastCampaign[0].to.length > 1 ? _library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.clients : _library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.client}`;
+  const lastWeekStr = `${clientsLastWeek > 0 ? "+" : null} ${clientsLastWeek} ${_library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.lastWeek}`;
+  return !initialized && !user.user.signedIn ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 45
     },
     __self: undefined
   }) : __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 47
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 48
     },
     __self: undefined
   }), __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 49
     },
     __self: undefined
   }, h1), __jsx(_components_ShowRecordsNumber__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    data: clientData.data,
-    string: _library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.clientsSaved,
-    buttonString: _library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.clients,
+    data: clientCounter,
+    string: _library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.clientsSaved,
+    buttonString: _library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.clients,
+    subData: lastWeekStr,
     link: "/clients",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 50
     },
     __self: undefined
   }), __jsx(_components_ShowRecordsNumber__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    data: fieldData,
-    string: _library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.fieldsSaved,
-    buttonString: _library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.customClientFields,
+    data: fieldCounter.custom,
+    string: _library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.customClientFields,
+    buttonString: _library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.customClientFields,
+    subData: `${fieldCounter.permanent + fieldCounter.custom} ${_library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.total}`,
     link: "/settings",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 57
     },
     __self: undefined
   }), __jsx(_components_ShowRecordsNumber__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    data: emailsData,
-    string: _library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.emailsSent,
-    buttonString: _library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.emails,
+    data: emailsCounter,
+    string: _library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.emailsSent,
+    buttonString: _library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.emails,
+    subData: campaignStr,
     link: "/emails",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 64
     },
     __self: undefined
   }));
 };
 
 Dashboard.getInitialProps = async () => {
-  const resClientCount = await axios__WEBPACK_IMPORTED_MODULE_2___default()({
+  const resLastCampaign = await axios__WEBPACK_IMPORTED_MODULE_3___default()({
     method: "GET",
-    url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].serverURL}/clients/count`,
+    url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].serverURL}/emails/last`,
     responseType: "json"
   });
-  const clientData = await resClientCount.data;
-  const resFieldsData = await axios__WEBPACK_IMPORTED_MODULE_2___default()({
+  const lastCampaign = await resLastCampaign.data;
+  const resLastWeekNumber = await axios__WEBPACK_IMPORTED_MODULE_3___default()({
     method: "GET",
-    url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].serverURL}/fields/count`,
+    url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].serverURL}/clients/last-week`,
     responseType: "json"
   });
-  const fieldData = await resFieldsData.data;
-  const resEmailsCount = await axios__WEBPACK_IMPORTED_MODULE_2___default()({
-    method: "GET",
-    url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_6__["default"].serverURL}/emails/count`,
-    responseType: "json"
-  });
-  const emailsData = await resEmailsCount.data;
+  const clientsLastWeek = await resLastWeekNumber.data;
   return {
-    clientData,
-    fieldData,
-    emailsData
+    lastCampaign,
+    clientsLastWeek
   };
 };
 

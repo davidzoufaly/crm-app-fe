@@ -1,7 +1,8 @@
 import Header from "../components/Header";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import UserContext from "../components/UserContext";
 import DefaultFields from "../components/settings/DefaultFields";
 import CustomFields from "../components/settings/customFields/CustomFields";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -15,6 +16,7 @@ const Settings = ({ dataFields, dataEmailSettings }: any) => {
   const router = useRouter();
   const [fields, setField] = useState(dataFields);
   const [initialized, setInitialized] = useState(false);
+  const user = useContext(UserContext);
 
   const refreshList = async () => {
     //get data from DB after change
@@ -34,11 +36,10 @@ const Settings = ({ dataFields, dataEmailSettings }: any) => {
       .firstCharUpperCase()
       .addStringToEnd(globalVars.titleSubText)
       .getString();
-
     document.title = title;
-
     //componendDidMount effect
     setInitialized(true);
+    user.checkUser();
   }, [router]);
 
   const h1 = new stringMethods(router.pathname)
@@ -46,7 +47,7 @@ const Settings = ({ dataFields, dataEmailSettings }: any) => {
     .firstCharUpperCase()
     .getString();
 
-  return !initialized ? (
+  return !user.user.signedIn && !initialized ? (
     <LoadingSpinner />
   ) : (
     <div>
@@ -57,7 +58,7 @@ const Settings = ({ dataFields, dataEmailSettings }: any) => {
       <DefaultFields fields={fields} />
       <CustomFields fields={fields} refreshList={refreshList} />
       <EmailSettings data={dataEmailSettings} />
-      <WebForm fields={fields} />
+      <WebForm fields={fields} />
     </div>
   );
 };
@@ -74,11 +75,11 @@ Settings.getInitialProps = async () => {
     method: "get",
     url: `${globalVars.serverURL}/emails/email-settings`,
     responseType: "json"
-  })
+  });
 
   const dataEmailSettings = await resEmailSettings.data;
 
-  return { dataFields,  dataEmailSettings };
+  return { dataFields, dataEmailSettings };
 };
 
 export default Settings;

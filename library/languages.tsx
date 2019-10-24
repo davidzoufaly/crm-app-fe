@@ -31,6 +31,7 @@ const languages = {
         message: "Message",
         send: "Send",
         dashboard: "Dashboard",
+        client: "client",
         clients: "Clients",
         emails: "Emails",
         settings: "Settings",
@@ -52,7 +53,12 @@ const languages = {
         donwloadForm: "Download form",
         clientsSaved: "Saved clients",
         emailsSent: "Emails sent",
-        fieldsSaved: "Fields saved"
+        fieldsSaved: "Fields saved",
+        last: "Last",
+        sent: "sent",
+        lastWeek: "last week",
+        total: "total",
+        logout: "logout"
     }
 }
 

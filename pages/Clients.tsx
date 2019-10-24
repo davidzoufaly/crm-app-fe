@@ -1,8 +1,10 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useReducer, useContext } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Header from "../components/Header";
 import TableBody from "../components/clients/TableBody";
+import CountContext from "../components/CountContext";
+import UserContext from "../components/UserContext";
 import stringMethods from "../library/stringMethods";
 import globalVars from "../library/globalVariables";
 import TableHead from "../components/clients/TableHead";
@@ -13,7 +15,9 @@ import EmailForm from "../components/EmailForm";
 
 const Clients = ({ fieldData, clientData }: any) => {
   const router = useRouter();
-
+  const { clientCounter } = useContext(CountContext);
+  const user = useContext(UserContext);
+  
   const [clients, setClients] = useReducer((state, action) => {
     switch (action.type) {
       case "handleCheckedClients":
@@ -34,6 +38,7 @@ const Clients = ({ fieldData, clientData }: any) => {
         return state;
     }
   }, clientData);
+
   //TODO: SPOJIT DO JEDNOHO STATU
   const [reverse, setReverseOrder] = useState(false);
   const [sort, setSortBy] = useState("firstName");
@@ -43,7 +48,7 @@ const Clients = ({ fieldData, clientData }: any) => {
   const [isEmailCreated, setIsEmailCreated] = useState(false);
 
   useEffect(() => {
-    // set title
+    // set page title
     const title = new stringMethods(router.pathname)
       .removeSlash()
       .firstCharUpperCase()
@@ -51,6 +56,7 @@ const Clients = ({ fieldData, clientData }: any) => {
       .getString();
     document.title = title;
     setInitialized(true);
+    user.checkUser();
   }, [router]);
 
   useEffect(() => {
@@ -105,19 +111,20 @@ const Clients = ({ fieldData, clientData }: any) => {
     });
 
     await axios({
-      method: "delete",
+      method: "DELETE",
       data: filterCheckedClients().map(e => e._id),
       url: `${globalVars.serverURL}/clients/`,
       responseType: "json"
     });
   };
 
-  return !initialized ? (
+  return !user.user.signedIn && !initialized ? (
     <LoadingSpinner />
   ) : (
     <div>
       <Header />
       <h1>{h1}</h1>
+      <p>{clientCounter}</p>
       <EmailForm
         to={filterCheckedClients().map(e => e["Email"])}
         isEmailCreated={isEmailCreated}
