@@ -1,5 +1,6 @@
-import { useReducer, useState, useEffect } from "react";
+import { useReducer, useState, useEffect, useContext } from "react";
 import axios from "axios";
+import UserContext from "../../UserContext";
 import WebFormSelect from "./WebFormSelect";
 import WebFormList from "./WebFormList";
 import WebFormVisibleOrNot from "./WebFormVisibleOrNot";
@@ -12,6 +13,7 @@ const WebForm = ({ fields }) => {
 
   const initCounterValue = fields.map(e => e.order).sort((a,b) => b > a ? 1 : -1)[0];
 
+  const user = useContext(UserContext);
   const [counter, setCounter] = useState(initCounterValue);
   const [webFields, setWebFields] = useReducer((state, action) => {
     switch (action.type) {
@@ -142,6 +144,7 @@ const WebForm = ({ fields }) => {
       await axios({
             method: "PUT",
             url: `${globalVars.serverURL}/fields`,
+            params: {key: user.user.userkey},
             data: webFields,
             responseType: "json"
         })

@@ -127,37 +127,6 @@ const UserContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])(
 
 /***/ }),
 
-/***/ "./library/globalVariables.tsx":
-/*!*************************************!*\
-  !*** ./library/globalVariables.tsx ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-const globalVars = {
-  titleSubText: "| CRM-APP",
-  serverURL: "http://localhost:8080/api",
-  permanentFields: {
-    fistName: "First name",
-    lastName: "Last name",
-    email: "Email",
-    dateAdded: "Date added",
-    lastModified: "Last modified"
-  },
-  fieldTypes: {
-    text: "text",
-    number: "number",
-    select: "select"
-  },
-  blankOption: "---",
-  msgSuccess: "Success"
-};
-/* harmony default export */ __webpack_exports__["default"] = (globalVars);
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js ***!
@@ -2129,23 +2098,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/router */ "next/router");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _components_CountContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/CountContext */ "./components/CountContext.tsx");
-/* harmony import */ var _components_UserContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/UserContext */ "./components/UserContext.tsx");
-/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
-/* harmony import */ var _src_theme__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../src/theme */ "./src/theme.tsx");
-/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/styles */ "@material-ui/styles");
-/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_styles__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/CssBaseline */ "@material-ui/core/CssBaseline");
-/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _components_CountContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/CountContext */ "./components/CountContext.tsx");
+/* harmony import */ var _components_UserContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/UserContext */ "./components/UserContext.tsx");
+/* harmony import */ var _src_theme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../src/theme */ "./src/theme.tsx");
+/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/styles */ "@material-ui/styles");
+/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_styles__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/CssBaseline */ "@material-ui/core/CssBaseline");
+/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/_app.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
-
-
 
 
 
@@ -2166,55 +2130,33 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_4___default.a {
         fieldCounter: ""
       },
       user: {
-        username: "",
+        userkey: "",
         signedIn: false
       }
     });
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "getCounts", async () => {
-      const resClientCount = await axios__WEBPACK_IMPORTED_MODULE_7___default()({
-        method: "GET",
-        url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_10__["default"].serverURL}/clients/count`,
-        responseType: "json"
-      });
-      const clientCounter = await resClientCount.data;
-      const resFieldsData = await axios__WEBPACK_IMPORTED_MODULE_7___default()({
-        method: "GET",
-        url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_10__["default"].serverURL}/fields/count`,
-        responseType: "json"
-      });
-      const fieldCounter = await resFieldsData.data;
-      const resEmailsCount = await axios__WEBPACK_IMPORTED_MODULE_7___default()({
-        method: "GET",
-        url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_10__["default"].serverURL}/emails/count`,
-        responseType: "json"
-      });
-      const emailsCounter = await resEmailsCount.data;
-      this.setState(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, this.state, {
-        counters: {
-          clientCounter,
-          fieldCounter,
-          emailsCounter
-        }
-      }));
-    });
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "setUser", username => {
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "setUser", userkey => {
       this.setState(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, this.state, {
         user: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, this.state.user, {
-          username,
+          userkey,
           signedIn: true
         })
       }));
-      sessionStorage.setItem("user", this.state.user.username);
+      sessionStorage.setItem("userkey", this.state.user.userkey);
       sessionStorage.setItem("signedIn", this.state.user.signedIn.toString());
-      next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push("/dashboard");
+      next_router__WEBPACK_IMPORTED_MODULE_6___default.a.query;
+      next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push({
+        pathname: "/dashboard",
+        query: {
+          Api_KEY: this.state.user.userkey
+        }
+      });
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "checkUser", () => {
       sessionStorage.getItem("signedIn") === "false" ? next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push("/") : this.setState(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, this.state, {
         user: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, this.state.user, {
-          username: sessionStorage.getItem("user"),
+          userkey: sessionStorage.getItem("userkey"),
           signedIn: true
         })
       }));
@@ -2223,14 +2165,20 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_4___default.a {
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "logoutUser", () => {
       this.setState(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, this.state, {
         user: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, this.state.user, {
-          username: "",
+          userkey: "",
           signedIn: false
         })
       }), () => {
-        sessionStorage.setItem("user", this.state.user.username);
+        sessionStorage.setItem("userkey", this.state.user.userkey);
         sessionStorage.setItem("signedIn", this.state.user.signedIn.toString());
       });
       next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push("/");
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "setCounters", data => {
+      this.setState(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, this.state, {
+        counters: data
+      }));
     });
   }
 
@@ -2240,12 +2188,10 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_4___default.a {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
-
-    this.getCounts();
   }
 
   componentDidUpdate() {
-    console.log(this.state.user);
+    console.log(this.state);
   }
 
   render() {
@@ -2256,22 +2202,22 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_4___default.a {
     return __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 103
+        lineNumber: 83
       },
       __self: this
     }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_5___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 104
+        lineNumber: 84
       },
       __self: this
     }, __jsx("title", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 105
+        lineNumber: 85
       },
       __self: this
-    }, "CRM APP")), __jsx(_components_UserContext__WEBPACK_IMPORTED_MODULE_9__["default"].Provider, {
+    }, "CRM APP")), __jsx(_components_UserContext__WEBPACK_IMPORTED_MODULE_8__["default"].Provider, {
       value: {
         setUser: this.setUser,
         logoutUser: this.logoutUser,
@@ -2280,33 +2226,36 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_4___default.a {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 107
+        lineNumber: 87
       },
       __self: this
-    }, __jsx(_components_CountContext__WEBPACK_IMPORTED_MODULE_8__["default"].Provider, {
-      value: this.state.counters,
+    }, __jsx(_components_CountContext__WEBPACK_IMPORTED_MODULE_7__["default"].Provider, {
+      value: {
+        setCounters: this.setCounters,
+        counters: this.state.counters
+      },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 115
+        lineNumber: 95
       },
       __self: this
-    }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_12__["ThemeProvider"], {
-      theme: _src_theme__WEBPACK_IMPORTED_MODULE_11__["default"],
+    }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_10__["ThemeProvider"], {
+      theme: _src_theme__WEBPACK_IMPORTED_MODULE_9__["default"],
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 116
+        lineNumber: 101
       },
       __self: this
-    }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_13___default.a, {
+    }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_11___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 117
+        lineNumber: 102
       },
       __self: this
     }), __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 118
+        lineNumber: 103
       },
       __self: this
     }))))));
@@ -2405,17 +2354,6 @@ module.exports = require("@material-ui/core/styles");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/styles");
-
-/***/ }),
-
-/***/ "axios":
-/*!************************!*\
-  !*** external "axios" ***!
-  \************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("axios");
 
 /***/ }),
 

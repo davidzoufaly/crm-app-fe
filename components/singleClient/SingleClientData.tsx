@@ -7,7 +7,7 @@ const SingleClientData = ({ fieldsData, client, onInputChange }: any) =>
         return (
           <div key={field.fieldName}>
             {field.fieldName}
-            <textarea name={field.fieldName} value={client[field.fieldName]} onChange={onInputChange} disabled={field.fieldName === "dateAdded" || field.fieldName === "lastModified"}/>
+            <textarea name={field.fieldName} value={client[field.fieldName]} onChange={onInputChange} disabled={field.fieldName === "Date added" || field.fieldName === "Last modified"}/>
           </div>
         );
       case "number":

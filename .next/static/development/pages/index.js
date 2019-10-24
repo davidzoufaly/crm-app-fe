@@ -17,10 +17,10 @@ var UserContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])(nu
 
 /***/ }),
 
-/***/ "./components/homepage/LoginButton.tsx":
-/*!*********************************************!*\
-  !*** ./components/homepage/LoginButton.tsx ***!
-  \*********************************************/
+/***/ "./components/homepage/Button.tsx":
+/*!****************************************!*\
+  !*** ./components/homepage/Button.tsx ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -28,21 +28,22 @@ var UserContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])(nu
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/homepage/LoginButton.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/homepage/Button.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 var LoginButton = function LoginButton(_ref) {
-  var onLogin = _ref.onLogin;
+  var onClick = _ref.onClick,
+      text = _ref.text;
   return __jsx("button", {
     type: "button",
-    onClick: onLogin,
+    onClick: onClick,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 2
     },
     __self: this
-  }, "Login");
+  }, text);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (LoginButton);
@@ -67,16 +68,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _UserContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../UserContext */ "./components/UserContext.tsx");
-/* harmony import */ var _UsernameInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./UsernameInput */ "./components/homepage/UsernameInput.tsx");
-/* harmony import */ var _PasswordInput__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./PasswordInput */ "./components/homepage/PasswordInput.tsx");
-/* harmony import */ var _LoginButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./LoginButton */ "./components/homepage/LoginButton.tsx");
-/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../library/globalVariables */ "./library/globalVariables.tsx");
+/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./TextInput */ "./components/homepage/TextInput.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Button */ "./components/homepage/Button.tsx");
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../library/globalVariables */ "./library/globalVariables.tsx");
+/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../library/languages */ "./library/languages.tsx");
+/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../library/stringMethods */ "./library/stringMethods.tsx");
 
 
 
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/homepage/LoginForm.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
 
 
 
@@ -118,7 +121,7 @@ var LoginForm = function LoginForm() {
               return axios__WEBPACK_IMPORTED_MODULE_4___default()({
                 method: "POST",
                 data: user,
-                url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_9__["default"].serverURL, "/users"),
+                url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].serverURL, "/users/authenticate-user"),
                 responseType: "json"
               });
 
@@ -131,9 +134,9 @@ var LoginForm = function LoginForm() {
               userData = _context.sent;
 
               if (userData.msg === "Success") {
-                userContext.setUser(user.username);
+                userContext.setUser(userData.key);
               } else {
-                alert("Incorrect username or password");
+                alert(_library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.somethingWentWrong);
               }
 
             case 7:
@@ -149,33 +152,46 @@ var LoginForm = function LoginForm() {
     };
   }();
 
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, __jsx("form", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 36
-    },
-    __self: this
-  }, __jsx(_UsernameInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    onChange: onChange,
-    username: user.username,
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, __jsx("h2", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 37
     },
     __self: this
-  }), __jsx(_PasswordInput__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    onChange: onChange,
-    password: user.password,
+  }, "Login"), __jsx("form", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 38
     },
     __self: this
-  }), __jsx(_LoginButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    onLogin: onLogin,
+  }, __jsx(_TextInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    onChange: onChange,
+    type: "text",
+    value: user.username,
+    text: "username",
+    title: new _library_stringMethods__WEBPACK_IMPORTED_MODULE_10__["default"](_library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.username).firstCharUpperCase().getString(),
     __source: {
       fileName: _jsxFileName,
       lineNumber: 39
+    },
+    __self: this
+  }), __jsx(_TextInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    onChange: onChange,
+    type: "password",
+    value: user.password,
+    text: "password",
+    title: _library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.password,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 46
+    },
+    __self: this
+  }), __jsx(_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    onClick: onLogin,
+    text: _library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.login,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53
     },
     __self: this
   })));
@@ -185,54 +201,191 @@ var LoginForm = function LoginForm() {
 
 /***/ }),
 
-/***/ "./components/homepage/PasswordInput.tsx":
-/*!***********************************************!*\
-  !*** ./components/homepage/PasswordInput.tsx ***!
-  \***********************************************/
+/***/ "./components/homepage/RegisterForm.tsx":
+/*!**********************************************!*\
+  !*** ./components/homepage/RegisterForm.tsx ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/homepage/PasswordInput.tsx";
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TextInput */ "./components/homepage/TextInput.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Button */ "./components/homepage/Button.tsx");
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../library/globalVariables */ "./library/globalVariables.tsx");
+/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../library/languages */ "./library/languages.tsx");
+/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../library/stringMethods */ "./library/stringMethods.tsx");
 
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
-var UsernameInput = function UsernameInput(_ref) {
-  var onChange = _ref.onChange,
-      password = _ref.password;
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("label", {
-    htmlFor: "password",
+
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/homepage/RegisterForm.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
+
+
+
+
+
+
+
+var RegisterForm = function RegisterForm() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])({
+    username: "",
+    password: "",
+    repeatPassword: ""
+  }),
+      regUser = _useState[0],
+      setRegUser = _useState[1];
+
+  var onChange = function onChange(e) {
+    switch (e.target.name) {
+      case "username":
+        return setRegUser(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__["default"])({}, regUser, {
+          username: e.target.value
+        }));
+
+      case "password":
+        return setRegUser(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__["default"])({}, regUser, {
+          password: e.target.value
+        }));
+
+      case "repeat-password":
+        return setRegUser(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__["default"])({}, regUser, {
+          repeatPassword: e.target.value
+        }));
+    }
+  };
+
+  var sentFormToBe =
+  /*#__PURE__*/
+  function () {
+    var _ref = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+    /*#__PURE__*/
+    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var username, password, userRes, userData;
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              username = regUser.username, password = regUser.password;
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default()({
+                method: "POST",
+                data: {
+                  username: username,
+                  password: password
+                },
+                url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL, "/users"),
+                responseType: "json"
+              });
+
+            case 3:
+              userRes = _context.sent;
+              _context.next = 6;
+              return userRes.data;
+
+            case 6:
+              userData = _context.sent;
+              console.log(userRes);
+
+              if (userData.msg === "Success") {
+                alert(_library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.success);
+              } else if (userData.msg === "Exist") {
+                alert(_library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.userAlreadyExists);
+              } else {
+                alert(_library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.somethingWentWrong);
+              }
+
+            case 9:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function sentFormToBe() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var onRegister = function onRegister() {
+    regUser.password === regUser.repeatPassword ? sentFormToBe() : alert(_library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.passwordsDoesNotMatch);
+  };
+
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, __jsx("h2", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 3
+      lineNumber: 55
     },
     __self: this
-  }, "Password"), __jsx("input", {
-    type: "password",
-    autoComplete: "current-password",
-    name: "password",
-    id: "password",
+  }, "Register"), __jsx("form", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 56
+    },
+    __self: this
+  }, __jsx(_TextInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onChange: onChange,
-    value: password,
+    type: "text",
+    value: regUser.username,
+    text: "username",
+    title: new _library_stringMethods__WEBPACK_IMPORTED_MODULE_9__["default"](_library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.username).firstCharUpperCase().getString(),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 4
+      lineNumber: 57
     },
     __self: this
-  }));
+  }), __jsx(_TextInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    onChange: onChange,
+    type: "password",
+    value: regUser.password,
+    text: "password",
+    title: _library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.password,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 66
+    },
+    __self: this
+  }), __jsx(_TextInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    onChange: onChange,
+    type: "password",
+    value: regUser.repeatPassword,
+    text: "repeat-password",
+    title: new _library_stringMethods__WEBPACK_IMPORTED_MODULE_9__["default"](_library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.repeatPassword).firstCharUpperCase().getString(),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 73
+    },
+    __self: this
+  }), __jsx(_Button__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    onClick: onRegister,
+    text: _library_languages__WEBPACK_IMPORTED_MODULE_8__["default"].en.register,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 82
+    },
+    __self: this
+  })));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (UsernameInput);
+/* harmony default export */ __webpack_exports__["default"] = (RegisterForm);
 
 /***/ }),
 
-/***/ "./components/homepage/UsernameInput.tsx":
-/*!***********************************************!*\
-  !*** ./components/homepage/UsernameInput.tsx ***!
-  \***********************************************/
+/***/ "./components/homepage/TextInput.tsx":
+/*!*******************************************!*\
+  !*** ./components/homepage/TextInput.tsx ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -240,27 +393,30 @@ var UsernameInput = function UsernameInput(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/homepage/UsernameInput.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/homepage/TextInput.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
-var UsernameInput = function UsernameInput(_ref) {
+var TextInput = function TextInput(_ref) {
   var onChange = _ref.onChange,
-      username = _ref.username;
+      text = _ref.text,
+      value = _ref.value,
+      type = _ref.type,
+      title = _ref.title;
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("label", {
-    htmlFor: "username",
+    htmlFor: text,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 3
     },
     __self: this
-  }, "Username"), __jsx("input", {
-    type: "text",
-    autoComplete: "username",
-    name: "username",
-    id: "username",
+  }, title), __jsx("input", {
+    type: type,
+    autoComplete: text,
+    name: text,
+    id: text,
     onChange: onChange,
-    value: username,
+    value: value,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 4
@@ -269,7 +425,7 @@ var UsernameInput = function UsernameInput(_ref) {
   }));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (UsernameInput);
+/* harmony default export */ __webpack_exports__["default"] = (TextInput);
 
 /***/ }),
 
@@ -373,10 +529,111 @@ var languages = {
     sent: "sent",
     lastWeek: "last week",
     total: "total",
-    logout: "logout"
+    logout: "logout",
+    username: "username",
+    repeatPassword: "repeat password",
+    login: "login",
+    register: "register",
+    success: "success",
+    passwordsDoesNotMatch: "Passwords do not match",
+    userAlreadyExists: "User already exists"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (languages);
+
+/***/ }),
+
+/***/ "./library/stringMethods.tsx":
+/*!***********************************!*\
+  !*** ./library/stringMethods.tsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/array/from */ "./node_modules/@babel/runtime-corejs2/core-js/array/from.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+
+
+
+
+var StringMethods = function StringMethods(_text) {
+  var _this = this;
+
+  Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, StringMethods);
+
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "text", void 0);
+
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "camelStringToText", function () {
+    _this.text = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(_this.text).map(function (e) {
+      return e === e.toUpperCase() ? e = "%-%".concat(e.toLowerCase()) : e;
+    }).join("").replace(/%-%/g, " ");
+    return _this;
+  });
+
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "firstCharUpperCase", function () {
+    _this.text = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(_this.text).map(function (e, i) {
+      return i === 0 ? e.toUpperCase() : e;
+    }).join("");
+    return _this;
+  });
+
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "removeSlash", function () {
+    _this.text = _this.text.replace("/", "");
+    return _this;
+  });
+
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "addStringToEnd", function (text) {
+    _this.text = _this.text + " " + text;
+    return _this;
+  });
+
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "textToCamelString", function () {
+    var array = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(_this.text.toLowerCase());
+
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === " ") {
+        array[i + 1] = array[i + 1].toUpperCase();
+        array.splice(i, 1);
+      }
+    }
+
+    _this.text = array.join("");
+    return _this;
+  });
+
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "textToHtmlProp", function () {
+    _this.text = _this.text.toLowerCase().replace(/ /g, '-');
+    return _this;
+  });
+
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "replaceStringDiacritics", function () {
+    _this.text = _this.text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return _this;
+  });
+
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "getString", function () {
+    return _this.text;
+  });
+
+  this.text = _text;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (StringMethods);
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/array/from.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/array/from.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/array/from */ "./node_modules/core-js/library/fn/array/from.js");
 
 /***/ }),
 
@@ -770,6 +1027,24 @@ function _asyncToGenerator(fn) {
       _next(undefined);
     });
   };
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _classCallCheck; });
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
 }
 
 /***/ }),
@@ -2893,6 +3168,20 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/core-js/library/fn/array/from.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/library/fn/array/from.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ../../modules/es6.string.iterator */ "./node_modules/core-js/library/modules/es6.string.iterator.js");
+__webpack_require__(/*! ../../modules/es6.array.from */ "./node_modules/core-js/library/modules/es6.array.from.js");
+module.exports = __webpack_require__(/*! ../../modules/_core */ "./node_modules/core-js/library/modules/_core.js").Array.from;
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/library/fn/array/is-array.js":
 /*!***********************************************************!*\
   !*** ./node_modules/core-js/library/fn/array/is-array.js ***!
@@ -3666,6 +3955,26 @@ module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
 
 var core = module.exports = { version: '2.6.9' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/modules/_create-property.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/library/modules/_create-property.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $defineProperty = __webpack_require__(/*! ./_object-dp */ "./node_modules/core-js/library/modules/_object-dp.js");
+var createDesc = __webpack_require__(/*! ./_property-desc */ "./node_modules/core-js/library/modules/_property-desc.js");
+
+module.exports = function (object, index, value) {
+  if (index in object) $defineProperty.f(object, index, createDesc(0, value));
+  else object[index] = value;
+};
 
 
 /***/ }),
@@ -5464,6 +5773,55 @@ module.exports = __webpack_require__(/*! ./_core */ "./node_modules/core-js/libr
   if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
   return anObject(iterFn.call(it));
 };
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/modules/es6.array.from.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/library/modules/es6.array.from.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var ctx = __webpack_require__(/*! ./_ctx */ "./node_modules/core-js/library/modules/_ctx.js");
+var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/library/modules/_export.js");
+var toObject = __webpack_require__(/*! ./_to-object */ "./node_modules/core-js/library/modules/_to-object.js");
+var call = __webpack_require__(/*! ./_iter-call */ "./node_modules/core-js/library/modules/_iter-call.js");
+var isArrayIter = __webpack_require__(/*! ./_is-array-iter */ "./node_modules/core-js/library/modules/_is-array-iter.js");
+var toLength = __webpack_require__(/*! ./_to-length */ "./node_modules/core-js/library/modules/_to-length.js");
+var createProperty = __webpack_require__(/*! ./_create-property */ "./node_modules/core-js/library/modules/_create-property.js");
+var getIterFn = __webpack_require__(/*! ./core.get-iterator-method */ "./node_modules/core-js/library/modules/core.get-iterator-method.js");
+
+$export($export.S + $export.F * !__webpack_require__(/*! ./_iter-detect */ "./node_modules/core-js/library/modules/_iter-detect.js")(function (iter) { Array.from(iter); }), 'Array', {
+  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
+  from: function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
+    var O = toObject(arrayLike);
+    var C = typeof this == 'function' ? this : Array;
+    var aLen = arguments.length;
+    var mapfn = aLen > 1 ? arguments[1] : undefined;
+    var mapping = mapfn !== undefined;
+    var index = 0;
+    var iterFn = getIterFn(O);
+    var length, result, step, iterator;
+    if (mapping) mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
+    // if object isn't iterable or it's array with default iterator - use simple case
+    if (iterFn != undefined && !(C == Array && isArrayIter(iterFn))) {
+      for (iterator = iterFn.call(O), result = new C(); !(step = iterator.next()).done; index++) {
+        createProperty(result, index, mapping ? call(iterator, mapfn, [step.value, index], true) : step.value);
+      }
+    } else {
+      length = toLength(O.length);
+      for (result = new C(length); length > index; index++) {
+        createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
+      }
+    }
+    result.length = index;
+    return result;
+  }
+});
 
 
 /***/ }),
@@ -12737,8 +13095,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_homepage_LoginForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/homepage/LoginForm */ "./components/homepage/LoginForm.tsx");
-/* harmony import */ var _components_UserContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/UserContext */ "./components/UserContext.tsx");
-/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../library/languages */ "./library/languages.tsx");
+/* harmony import */ var _components_homepage_RegisterForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/homepage/RegisterForm */ "./components/homepage/RegisterForm.tsx");
+/* harmony import */ var _components_UserContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/UserContext */ "./components/UserContext.tsx");
+/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../library/languages */ "./library/languages.tsx");
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/index.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
@@ -12748,49 +13107,57 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+
 var Index = function Index() {
-  var user = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_components_UserContext__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  var user = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_components_UserContext__WEBPACK_IMPORTED_MODULE_4__["default"]);
   return !user.user.signedIn ? __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 12
-    },
-    __self: this
-  }, __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 13
     },
     __self: this
-  }, "Welcome in my CRM-APP"), __jsx(_components_homepage_LoginForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 14
     },
     __self: this
-  })) : __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/dashboard",
+  }, "Welcome in my CRM-APP"), __jsx(_components_homepage_LoginForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 15
+    },
+    __self: this
+  }), __jsx(_components_homepage_RegisterForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16
+    },
+    __self: this
+  })) : __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/dashboard",
+    as: "/dashboard?Api_KEY=".concat(user.user.userkey),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21
     },
     __self: this
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 22
     },
     __self: this
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.goTo, " ", _library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.dashboard)), __jsx("button", {
+  }, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.goTo, " ", _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.dashboard)), __jsx("button", {
     onClick: function onClick() {
       return user.logoutUser();
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22
+      lineNumber: 24
     },
     __self: this
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.logout));
+  }, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.logout));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);

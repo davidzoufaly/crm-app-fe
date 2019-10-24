@@ -1,3 +1,4 @@
+import languages from "../../library/languages";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -14,7 +15,7 @@ const ButtonsSingle = ({
       disabled={isEmailCreated}
       onClick={toggleIsEmailCreated}
     >
-      email
+      {languages.en.email}
     </Button>
     <Button
       color="secondary"
@@ -22,10 +23,10 @@ const ButtonsSingle = ({
       onClick={onDelete}
       startIcon={<DeleteIcon />}
     >
-      Delete
+      {languages.en.delete}
     </Button>
     <Button color="primary" variant="contained" onClick={onSave}>
-      Save
+      {languages.en.save}
     </Button>
   </div>
 );

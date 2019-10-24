@@ -1,12 +1,13 @@
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import ClientForm from "./ClientForm";
-import { useReducer, useEffect, useState } from "react";
+import { useReducer, useEffect, useState, useContext } from "react";
+import moment from "moment";
 import axios from "axios";
+import generateUniqueId from "generate-unique-id";
+import UserContext from "../UserContext";
+import ClientForm from "./ClientForm";
 import globalVars from "../../library/globalVariables";
 import languages from "../../library/languages";
-import generateUniqueId from "generate-unique-id";
-import moment from "moment";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 const CreateClient = ({
   fields,
@@ -18,6 +19,7 @@ const CreateClient = ({
     .map((e: any) => e.fieldName)
     .reduce((o, key) => Object.assign(o, { [key]: "" }), {});
 
+  const user = useContext(UserContext);
   const [submitting, setSubmitting] = useState(false);
   const [newClient, setNewClient] = useReducer((state, action) => {
     switch (action.type) {
@@ -59,7 +61,6 @@ const CreateClient = ({
       type: "onTextChange",
       payload: { fieldName : event.target.name, value: event.target.value, fieldType }
     });
-
   };
 
   useEffect(() => {
@@ -81,6 +82,7 @@ const CreateClient = ({
     const clientRes = await axios({
       method: "post",
       data: newClient,
+      params: {key: user.user.userkey},
       url: `${globalVars.serverURL}/clients`,
       responseType: "json"
     });
@@ -107,6 +109,10 @@ const CreateClient = ({
     });
     toggleIsClientAdded();
   };
+
+  useEffect(() => {
+    console.log(fields);
+  }, [])
 
   return isClientAdded ? (
     <div>

@@ -1,23 +1,25 @@
 import axios from "axios";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import UserContext from "../UserContext";
 import globalVars from "../../library/globalVariables";
 import languages from "../../library/languages";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-const EmailSettings = ({ data }: any) => {
-  const [emailSettings, setEmailSettings] = useState(data);
+const EmailSettings = ({username, pass}: any) => {
+  const [emailSettings, setEmailSettings] = useState({username, pass});
   const [isPassShown, setIsPassShown] = useState(false);
   const passEl = useRef(null);
+  const user = useContext(UserContext);
+
 
   const onSubmit = async e => {
     e.preventDefault();
 
-    const { username, pass } = emailSettings;
-
     const res = await axios({
       method: "post",
       url: `${globalVars.serverURL}/emails`,
+      params: {key: user.user.userkey},
       data: { username, pass },
       responseType: "json"
     });
@@ -38,12 +40,12 @@ const EmailSettings = ({ data }: any) => {
       passEl.current.type = "password";
       setIsPassShown(false);
     }
-  
   };
 
   const onChange = e => {
     setEmailSettings({ ...emailSettings, [e.target.name]: e.target.value });
   };
+
   return (
     <>
       <Typography variant="h4" component="h2" gutterBottom>
@@ -56,7 +58,7 @@ const EmailSettings = ({ data }: any) => {
           type="text"
           name="username"
           autoComplete="email"
-          value={emailSettings.username}
+          value={username}
           onChange={onChange}
         />
         <label htmlFor="acc-pass">{languages.en.password}</label>
@@ -66,7 +68,7 @@ const EmailSettings = ({ data }: any) => {
           autoComplete="current-password"
           name="pass"
           ref={passEl}
-          value={emailSettings.pass}
+          value={pass}
           onChange={onChange}
         />
         <Button

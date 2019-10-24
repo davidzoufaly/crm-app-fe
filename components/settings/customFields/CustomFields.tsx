@@ -1,7 +1,8 @@
-import { useState, useReducer, useEffect } from "react";
+import { useState, useReducer, useContext } from "react";
 import axios from "axios";
 import uniqid from "uniqid";
 import AddOrEditField from "./AddOrEditField";
+import UserContext from "../../UserContext";
 import CustomFieldsList from "./CustomFieldsList";
 import SelectFieldOptions from "./SelectFieldOptions";
 import languages from "../../../library/languages";
@@ -16,10 +17,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
     fieldFormVisible: null
   };
 
-  useEffect(() => {
-    // console.log(fields);
-  });
-
+  const user = useContext(UserContext);
   const [displayComponent, setDisplayComponent] = useState(false);
 
   const [editedField, setEditedField] = useReducer((state, action) => {
@@ -116,6 +114,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
         const res = await axios({
           method: "PUT",
           url: `${globalVars.serverURL}/fields/${id}`,
+          params: {key: user.user.userkey},
           data: { fieldName, fieldType, fieldOptions },
           responseType: "json"
         });
@@ -128,6 +127,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
       const fieldIsCreated = async () => {
         const res = await axios({
           method: "POST",
+          params: {key: user.user.userkey},
           url: `${globalVars.serverURL}/fields/`,
           data: editedField,
           responseType: "json"
@@ -150,6 +150,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
   const deleteField = async (id: any) => {
     const res = await axios({
       method: "DELETE",
+      params: {key: user.user.userkey},
       url: `${globalVars.serverURL}/fields/${id}`,
       responseType: "json"
     });

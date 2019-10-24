@@ -58,7 +58,14 @@ const languages = {
         sent: "sent",
         lastWeek: "last week",
         total: "total",
-        logout: "logout"
+        logout: "logout",
+        username: "username",
+        repeatPassword: "repeat password",
+        login: "login",
+        register: "register",
+        success: "success",
+        passwordsDoesNotMatch: "Passwords do not match",
+        userAlreadyExists: "User already exists"
     }
 }
 

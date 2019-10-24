@@ -15,7 +15,7 @@ import EmailForm from "../components/EmailForm";
 
 const Clients = ({ fieldData, clientData }: any) => {
   const router = useRouter();
-  const { clientCounter } = useContext(CountContext);
+  const counters = useContext(CountContext);
   const user = useContext(UserContext);
   
   const [clients, setClients] = useReducer((state, action) => {
@@ -124,7 +124,7 @@ const Clients = ({ fieldData, clientData }: any) => {
     <div>
       <Header />
       <h1>{h1}</h1>
-      <p>{clientCounter}</p>
+      <p>{counters.counters.clientCounter}</p>
       <EmailForm
         to={filterCheckedClients().map(e => e["Email"])}
         isEmailCreated={isEmailCreated}
@@ -161,19 +161,20 @@ const Clients = ({ fieldData, clientData }: any) => {
   );
 };
 
-Clients.getInitialProps = async () => {
+Clients.getInitialProps = async (context : any) => {
   //fetch clients
   const clientRes = await axios({
-    method: "get",
-    url: `${globalVars.serverURL}/clients`,
+    method: "GET",
+    url: `${globalVars.serverURL}/clients/Api_KEY=${context.query.Api_KEY}`,
     responseType: "json"
   });
   const clientData = await clientRes.data;
 
   //fetch fields
   const fieldRes = await axios({
-    method: "get",
+    method: "GET",
     url: `${globalVars.serverURL}/fields`,
+    params: { key: context.query.Api_KEY },
     responseType: "json"
   });
   const fieldData = await fieldRes.data;

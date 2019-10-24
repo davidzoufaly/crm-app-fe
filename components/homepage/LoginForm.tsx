@@ -1,45 +1,59 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 import UserContext from "../UserContext";
-import UsernameInput from "./UsernameInput";
-import PasswordInput from "./PasswordInput";
-import LoginButton from "./LoginButton";
+import TextInput from "./TextInput";
+import LoginButton from "./Button";
 import globalVars from "../../library/globalVariables";
+import languages from "../../library/languages";
+import stringMethods from "../../library/stringMethods";
 
 const LoginForm = () => {
-    const [user, setUser] = useState({username : "", password : "" });
-    const userContext = useContext(UserContext);
+  const [user, setUser] = useState({ username: "", password: "" });
+  const userContext = useContext(UserContext);
 
-    const onChange = (e) => {
-        e.target.name === "username"
-            ? setUser({...user, username: e.target.value})
-            : setUser({...user, password: e.target.value})
+  const onChange = e => {
+    e.target.name === "username"
+      ? setUser({ ...user, username: e.target.value })
+      : setUser({ ...user, password: e.target.value });
+  };
+
+  const onLogin = async () => {
+    const userRes = await axios({
+      method: "POST",
+      data: user,
+      url: `${globalVars.serverURL}/users/authenticate-user`,
+      responseType: "json"
+    });
+    const userData = await userRes.data;
+    if (userData.msg === "Success") {
+      userContext.setUser(userData.key);
+    } else {
+      alert(languages.en.somethingWentWrong);
     }
+  };
 
-    const onLogin = async() => {
-        const userRes = await axios({
-            method: "POST",
-            data: user,
-            url: `${globalVars.serverURL}/users`,
-            responseType: "json"
-        })
-        const userData = await userRes.data;
-        if(userData.msg === "Success") {
-            userContext.setUser(user.username);
-        } else {
-            alert("Incorrect username or password")
-        }
-    }
-
-    return (
-        <>  
-            <form>
-                <UsernameInput onChange={onChange} username={user.username}/>
-                <PasswordInput onChange={onChange} password={user.password}/>
-                <LoginButton onLogin={onLogin} />
-            </form>
-        </>
-    )
-}
+  return (
+    <>
+      <h2>Login</h2>
+      <form>
+        <TextInput
+          onChange={onChange}
+          type="text"
+          value={user.username}
+          text="username"
+          title={new stringMethods(languages.en.username).firstCharUpperCase().getString()}
+        />
+        <TextInput
+          onChange={onChange}
+          type="password"
+          value={user.password}
+          text="password"
+          title={languages.en.password}
+        />
+        <LoginButton onClick={onLogin} text={languages.en.login} />
+      </form>
+    </>
+  );
+};
 
 export default LoginForm;

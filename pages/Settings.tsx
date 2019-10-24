@@ -12,7 +12,7 @@ import globalVars from "../library/globalVariables";
 import stringMethods from "../library/stringMethods";
 import Typography from "@material-ui/core/Typography";
 
-const Settings = ({ dataFields, dataEmailSettings }: any) => {
+const Settings = ({ dataFields, username, pass }: any) => {
   const router = useRouter();
   const [fields, setField] = useState(dataFields);
   const [initialized, setInitialized] = useState(false);
@@ -57,29 +57,32 @@ const Settings = ({ dataFields, dataEmailSettings }: any) => {
       </Typography>
       <DefaultFields fields={fields} />
       <CustomFields fields={fields} refreshList={refreshList} />
-      <EmailSettings data={dataEmailSettings} />
+      <EmailSettings username={username} pass={pass} />
       <WebForm fields={fields} />
     </div>
   );
 };
 
-Settings.getInitialProps = async () => {
+Settings.getInitialProps = async (context : any) => {
   const resFields = await axios({
-    method: "get",
+    method: "GET",
+    params: {key: context.query.Api_KEY},
     url: `${globalVars.serverURL}/fields`,
     responseType: "json"
   });
   const dataFields = await resFields.data;
 
   const resEmailSettings = await axios({
-    method: "get",
+    method: "GET",
+    params: {key: context.query.Api_KEY},
     url: `${globalVars.serverURL}/emails/email-settings`,
     responseType: "json"
   });
 
   const dataEmailSettings = await resEmailSettings.data;
+  const {username, pass} = await dataEmailSettings;
 
-  return { dataFields, dataEmailSettings };
+  return { dataFields, username, pass };
 };
 
 export default Settings;

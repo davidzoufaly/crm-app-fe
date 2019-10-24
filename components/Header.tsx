@@ -10,22 +10,22 @@ const Header = () => {
     <div>
       <ul>
         <li>
-          <Link href="/dashboard">
+          <Link href="/dashboard" as={`/dashboard?Api_KEY=${user.user.userkey}`}>
             <a>{languages.en.dashboard}</a>
           </Link>
         </li>
         <li>
-          <Link href="/clients">
+          <Link href="/clients" as={`/clients?Api_KEY=${user.user.userkey}`}>
             <a>{languages.en.clients}</a>
           </Link>
         </li>
         <li>
-          <Link href="/emails">
+          <Link href="/emails" as={`/emails?Api_KEY=${user.user.userkey}`}>
             <a>{languages.en.emails}</a>
           </Link>
         </li>
         <li>
-          <Link href="/settings">
+          <Link href="/settings" as={`/settings?Api_KEY=${user.user.userkey}`}>
             <a>{languages.en.settings}</a>
           </Link>
         </li>

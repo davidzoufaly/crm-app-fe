@@ -41,8 +41,9 @@ const Client = ({ clientData, fieldsData }: any) => {
   const saveToDb = async () => {
     await axios({
       method: "put",
-      data: client,
       url: `${globalVars.serverURL}/clients/${router.query.id}`,
+      params: {key: user.user.userkey},
+      data: client,
       responseType: "json"
     });
   }
@@ -52,6 +53,7 @@ const Client = ({ clientData, fieldsData }: any) => {
     const res = await axios({
       method: "delete",
       url: `${globalVars.serverURL}/clients/${router.query.id}`,
+      params: {key: user.user.userkey},
       responseType: "json"
     });
     const data = await res.data;
@@ -101,17 +103,18 @@ const Client = ({ clientData, fieldsData }: any) => {
 };
 
 Client.getInitialProps = async (context: any) => {
-  const { id } = context.query;
   const resClient = await axios({
-    method: "get",
-    url: `${globalVars.serverURL}/clients/${id}`,
+    method: "GET",
+    url: `${globalVars.serverURL}/clients/${context.query.id}`,
+    params: {key: context.query.Api_KEY},
     responseType: "json"
   });
   const clientData = await resClient.data;
 
   const resFields = await axios({
-    method: "get",
+    method: "GET",
     url: `${globalVars.serverURL}/fields`,
+    params: {key: context.query.Api_KEY},
     responseType: "json"
   });
   const fieldsData = await resFields.data;

@@ -10,16 +10,11 @@ import globalVars from "../library/globalVariables";
 import stringMethods from "../library/stringMethods";
 import languages from "../library/languages";
 
-const Dashboard = ({lastCampaign, clientsLastWeek} : any) => {
+const Dashboard = ({lastCampaign, clientsLastWeek, clientCounter, fieldCounter, emailsCounter} : any) => {
   const router = useRouter();
   const [initialized, setInitialized] = useState(false);
   const user = useContext(UserContext);
-
-  const { 
-    emailsCounter,
-    clientCounter, 
-    fieldCounter 
-  } = useContext(CountContext);
+  const counter = useContext(CountContext);
 
   useEffect(() => {
     const title = new stringMethods(router.pathname)
@@ -30,6 +25,7 @@ const Dashboard = ({lastCampaign, clientsLastWeek} : any) => {
     document.title = title;
     setInitialized(true);
     user.checkUser();
+    counter.setCounters({clientCounter, fieldCounter, emailsCounter});
   }, [router]);
 
   const h1 = new stringMethods(router.pathname)
@@ -37,9 +33,9 @@ const Dashboard = ({lastCampaign, clientsLastWeek} : any) => {
     .firstCharUpperCase()
     .getString();
 
-  const campaignStr = `${languages.en.last} ${languages.en.sent} ${lastCampaign[0].date} ${languages.en.to.toLowerCase()} ${lastCampaign[0].to.length} ${lastCampaign[0].to.length > 1 ? languages.en.clients : languages.en.client}`
+  const campaignStr = lastCampaign.length > 0  ? `${languages.en.last} ${languages.en.sent} ${lastCampaign[0].date} ${languages.en.to.toLowerCase()} ${lastCampaign[0].to.length} ${lastCampaign[0].to.length > 1 ? languages.en.clients : languages.en.client}` : ""
 
-  const lastWeekStr = `${clientsLastWeek > 0 ? "+" : null} ${clientsLastWeek} ${languages.en.lastWeek}`
+  const lastWeekStr = `${clientsLastWeek > 0 ? "+" : ""} ${clientsLastWeek} ${languages.en.lastWeek}`
 
   return !initialized  && !user.user.signedIn ? (
     <LoadingSpinner />
@@ -72,9 +68,10 @@ const Dashboard = ({lastCampaign, clientsLastWeek} : any) => {
   );
 };
 
-Dashboard.getInitialProps = async () => {
+Dashboard.getInitialProps = async (context: any) => {
   const resLastCampaign = await axios({
     method: "GET",
+    params: {key: context.query.Api_KEY},
     url: `${globalVars.serverURL}/emails/last`,
     responseType: "json"
   }) 
@@ -82,13 +79,38 @@ Dashboard.getInitialProps = async () => {
 
   const resLastWeekNumber = await axios({
     method: "GET",
+    params: {key: context.query.Api_KEY},
     url: `${globalVars.serverURL}/clients/last-week`,
     responseType: "json"
   })
 
   const clientsLastWeek = await resLastWeekNumber.data;
-  
-  return {lastCampaign, clientsLastWeek};
+
+    const resClientCount = await axios({
+      method: "GET",
+      url: `${globalVars.serverURL}/clients/count`,
+      params: {key: context.query.Api_KEY},
+      responseType: "json"
+    });
+    const clientCounter = await resClientCount.data;
+
+    const resFieldsData = await axios({
+      method: "GET",
+      url: `${globalVars.serverURL}/fields/count`,
+      params: {key: context.query.Api_KEY},
+      responseType: "json"
+    });
+    const fieldCounter = await resFieldsData.data;
+
+    const resEmailsCount = await axios({
+      method: "GET",
+      url: `${globalVars.serverURL}/emails/count`,
+      params: {key: context.query.Api_KEY},
+      responseType: "json"
+    });
+    const emailsCounter = await resEmailsCount.data;
+
+  return {lastCampaign, clientsLastWeek, clientCounter, fieldCounter, emailsCounter};
 }
 
 export default Dashboard;

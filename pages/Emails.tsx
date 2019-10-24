@@ -11,7 +11,7 @@ import globalVars from "../library/globalVariables";
 import languages from "../library/languages";
 
 const Emails = props => {
-  const { emailsCounter } = useContext(CountContext);
+  const counters = useContext(CountContext);
   const [initialized, setInitialized] = useState(false);
   const router = useRouter();
   const user = useContext(UserContext);
@@ -57,7 +57,7 @@ const Emails = props => {
     <>
       <Header />
       <h1>{h1}</h1>
-      <p>{emailsCounter}</p>
+      <p>{counters.counters.emailsCounter}</p>
       <table>
         <thead>
           <tr>
@@ -73,9 +73,10 @@ const Emails = props => {
   );
 };
 
-Emails.getInitialProps = async () => {
+Emails.getInitialProps = async (context : any) => {
   const res = await axios({
     method: "get",
+    params: {key: context.query.Api_KEY},
     url: `${globalVars.serverURL}/emails`,
     responseType: "json"
   });

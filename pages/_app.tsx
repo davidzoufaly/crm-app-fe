@@ -2,10 +2,8 @@ import React from "react";
 import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
-import axios from "axios";
 import CountContext from "../components/CountContext";
 import UserContext from "../components/UserContext";
-import globalVars from "../library/globalVariables";
 import theme from "../src/theme";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,7 +12,7 @@ export default class MyApp extends App {
   state = {
     counters: { clientCounter: "", emailsCounter: "", fieldCounter: "" },
     user: {
-      username: "",
+      userkey: "",
       signedIn: false
     }
   };
@@ -24,45 +22,20 @@ export default class MyApp extends App {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
-    this.getCounts();
   }
 
-  getCounts = async () => {
-    const resClientCount = await axios({
-      method: "GET",
-      url: `${globalVars.serverURL}/clients/count`,
-      responseType: "json"
-    });
-    const clientCounter = await resClientCount.data;
-
-    const resFieldsData = await axios({
-      method: "GET",
-      url: `${globalVars.serverURL}/fields/count`,
-      responseType: "json"
-    });
-    const fieldCounter = await resFieldsData.data;
-
-    const resEmailsCount = await axios({
-      method: "GET",
-      url: `${globalVars.serverURL}/emails/count`,
-      responseType: "json"
-    });
-    const emailsCounter = await resEmailsCount.data;
-
+  setUser = userkey => {
     this.setState({
       ...this.state,
-      counters: { clientCounter, fieldCounter, emailsCounter }
+      user: { ...this.state.user, userkey, signedIn: true }
     });
-  };
-
-  setUser = username => {
-    this.setState({
-      ...this.state,
-      user: { ...this.state.user, username, signedIn: true }
-    });
-    sessionStorage.setItem("user", this.state.user.username);
+    sessionStorage.setItem("userkey", this.state.user.userkey);
     sessionStorage.setItem("signedIn", this.state.user.signedIn.toString());
-    Router.push("/dashboard");
+    Router.query;
+    Router.push({
+      pathname: "/dashboard",
+      query: { Api_KEY: this.state.user.userkey }
+    });
   };
 
   checkUser = () => {
@@ -72,7 +45,7 @@ export default class MyApp extends App {
           ...this.state,
           user: {
             ...this.state.user,
-            username: sessionStorage.getItem("user"),
+            userkey: sessionStorage.getItem("userkey"),
             signedIn: true
           }
         });
@@ -82,18 +55,25 @@ export default class MyApp extends App {
     this.setState(
       {
         ...this.state,
-        user: { ...this.state.user, username: "", signedIn: false }
+        user: { ...this.state.user, userkey: "", signedIn: false }
       },
       () => {
-        sessionStorage.setItem("user", this.state.user.username);
+        sessionStorage.setItem("userkey", this.state.user.userkey);
         sessionStorage.setItem("signedIn", this.state.user.signedIn.toString());
       }
     );
     Router.push("/");
   };
 
+  setCounters = (data) => {
+    this.setState({
+      ...this.state,
+      counters: data
+    });
+  };
+
   componentDidUpdate() {
-    console.log(this.state.user);
+    console.log(this.state);
   }
 
   render() {
@@ -112,7 +92,12 @@ export default class MyApp extends App {
             user: this.state.user
           }}
         >
-          <CountContext.Provider value={this.state.counters}>
+          <CountContext.Provider
+            value={{
+              setCounters: this.setCounters,
+              counters: this.state.counters
+            }}
+          >
             <ThemeProvider theme={theme}>
               <CssBaseline />
               <Component {...pageProps} />

@@ -1,13 +1,18 @@
 import axios from "axios";
+import UserContext from "../../UserContext";
 import globalVars from "../../../library/globalVariables";
 import languages from "../../../library/languages";
+import { useContext } from "react";
 
 const WebFormButtons = ({ webFields }: any) => {
+
+  const user = useContext(UserContext);
 
   const onDownload = async () => {
     const res = await axios({
       method: "GET",
       url: `${globalVars.serverURL}/webform/`,
+      params: {key: user.user.userkey},
       data: webFields,
       responseType: "blob"
     });

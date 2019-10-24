@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import UserContext from "./UserContext";
 import languages from "../library/languages";
 import globalVars from "../library/globalVariables";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -13,6 +14,7 @@ const EmailForm = ({
   const initEmail = { to : to, subject: "", message: "" };
   const [email, setEmail] = useState(initEmail);
   const [spinner, setSpinner] = useState(false);
+  const user = useContext(UserContext);
 
   useEffect(() => {
     setEmail({ ...email, to : to });
@@ -26,6 +28,7 @@ const EmailForm = ({
       method: "post",
       data: email,
       url: `${globalVars.serverURL}/emails/send`,
+      params: {key: user.user.userkey},
       responseType: "json"
     });
 
