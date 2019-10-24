@@ -132,6 +132,7 @@ var LoginForm = function LoginForm() {
 
             case 5:
               userData = _context.sent;
+              console.log(userData);
 
               if (userData.msg === "Success") {
                 userContext.setUser(userData.key);
@@ -139,7 +140,7 @@ var LoginForm = function LoginForm() {
                 alert(_library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.somethingWentWrong);
               }
 
-            case 7:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -155,13 +156,13 @@ var LoginForm = function LoginForm() {
   return __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, __jsx("h2", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 38
     },
     __self: this
   }, "Login"), __jsx("form", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 39
     },
     __self: this
   }, __jsx(_TextInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -172,7 +173,7 @@ var LoginForm = function LoginForm() {
     title: new _library_stringMethods__WEBPACK_IMPORTED_MODULE_10__["default"](_library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.username).firstCharUpperCase().getString(),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 40
     },
     __self: this
   }), __jsx(_TextInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -183,7 +184,7 @@ var LoginForm = function LoginForm() {
     title: _library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.password,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 47
     },
     __self: this
   }), __jsx(_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -191,7 +192,7 @@ var LoginForm = function LoginForm() {
     text: _library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.login,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 54
     },
     __self: this
   })));

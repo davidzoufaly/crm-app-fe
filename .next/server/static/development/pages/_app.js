@@ -2136,6 +2136,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_4___default.a {
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "setUser", userkey => {
+      console.log(userkey);
       this.setState(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, this.state, {
         user: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, this.state.user, {
           userkey,
@@ -2144,12 +2145,8 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_4___default.a {
       }));
       sessionStorage.setItem("userkey", this.state.user.userkey);
       sessionStorage.setItem("signedIn", this.state.user.signedIn.toString());
-      next_router__WEBPACK_IMPORTED_MODULE_6___default.a.query;
       next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push({
-        pathname: "/dashboard",
-        query: {
-          Api_KEY: this.state.user.userkey
-        }
+        pathname: `/emails/${this.state.user.userkey}`
       });
     });
 
@@ -2202,19 +2199,19 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_4___default.a {
     return __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 83
+        lineNumber: 82
       },
       __self: this
     }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_5___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 84
+        lineNumber: 83
       },
       __self: this
     }, __jsx("title", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 85
+        lineNumber: 84
       },
       __self: this
     }, "CRM APP")), __jsx(_components_UserContext__WEBPACK_IMPORTED_MODULE_8__["default"].Provider, {
@@ -2226,7 +2223,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_4___default.a {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 87
+        lineNumber: 86
       },
       __self: this
     }, __jsx(_components_CountContext__WEBPACK_IMPORTED_MODULE_7__["default"].Provider, {
@@ -2236,26 +2233,26 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_4___default.a {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 95
+        lineNumber: 94
       },
       __self: this
     }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_10__["ThemeProvider"], {
       theme: _src_theme__WEBPACK_IMPORTED_MODULE_9__["default"],
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 101
+        lineNumber: 100
       },
       __self: this
     }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_11___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 102
+        lineNumber: 101
       },
       __self: this
     }), __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 103
+        lineNumber: 102
       },
       __self: this
     }))))));

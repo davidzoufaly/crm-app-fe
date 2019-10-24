@@ -25,16 +25,15 @@ export default class MyApp extends App {
   }
 
   setUser = userkey => {
+    console.log(userkey);
     this.setState({
       ...this.state,
       user: { ...this.state.user, userkey, signedIn: true }
     });
     sessionStorage.setItem("userkey", this.state.user.userkey);
     sessionStorage.setItem("signedIn", this.state.user.signedIn.toString());
-    Router.query;
     Router.push({
-      pathname: "/dashboard",
-      query: { Api_KEY: this.state.user.userkey }
+      pathname: `/emails/${this.state.user.userkey}`,
     });
   };
 

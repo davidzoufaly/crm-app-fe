@@ -19370,6 +19370,8 @@ function (_App) {
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "setUser", function (userkey) {
+      console.log(userkey);
+
       _this.setState(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _this.state, {
         user: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _this.state.user, {
           userkey: userkey,
@@ -19379,12 +19381,8 @@ function (_App) {
 
       sessionStorage.setItem("userkey", _this.state.user.userkey);
       sessionStorage.setItem("signedIn", _this.state.user.signedIn.toString());
-      next_router__WEBPACK_IMPORTED_MODULE_12___default.a.query;
       next_router__WEBPACK_IMPORTED_MODULE_12___default.a.push({
-        pathname: "/dashboard",
-        query: {
-          Api_KEY: _this.state.user.userkey
-        }
+        pathname: "/emails/".concat(_this.state.user.userkey)
       });
     });
 
@@ -19443,19 +19441,19 @@ function (_App) {
       return __jsx(react__WEBPACK_IMPORTED_MODULE_9___default.a.Fragment, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 83
+          lineNumber: 82
         },
         __self: this
       }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_11___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 84
+          lineNumber: 83
         },
         __self: this
       }, __jsx("title", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 85
+          lineNumber: 84
         },
         __self: this
       }, "CRM APP")), __jsx(_components_UserContext__WEBPACK_IMPORTED_MODULE_14__["default"].Provider, {
@@ -19467,7 +19465,7 @@ function (_App) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 87
+          lineNumber: 86
         },
         __self: this
       }, __jsx(_components_CountContext__WEBPACK_IMPORTED_MODULE_13__["default"].Provider, {
@@ -19477,26 +19475,26 @@ function (_App) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 95
+          lineNumber: 94
         },
         __self: this
       }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_16__["ThemeProvider"], {
         theme: _src_theme__WEBPACK_IMPORTED_MODULE_15__["default"],
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 101
+          lineNumber: 100
         },
         __self: this
       }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_17__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 102
+          lineNumber: 101
         },
         __self: this
       }), __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 103
+          lineNumber: 102
         },
         __self: this
       }))))));

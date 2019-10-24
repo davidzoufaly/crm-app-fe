@@ -69,7 +69,7 @@ const TableBody = ({
       // add profile link at last position
       items.push(
         <TableCell key={uniqid()}>
-          <Link href="/clients/[id]" as={`/clients/${client._id}?Api_KEY=${user.user.userkey}`}>
+          <Link href="/clients/[id]" as={`/clients/${client._id}`}>
             <a>{languages.en.go}</a>
           </Link>
         </TableCell>

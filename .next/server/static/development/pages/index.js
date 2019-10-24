@@ -201,6 +201,7 @@ const LoginForm = () => {
       responseType: "json"
     });
     const userData = await userRes.data;
+    console.log(userData);
 
     if (userData.msg === "Success") {
       userContext.setUser(userData.key);
@@ -212,13 +213,13 @@ const LoginForm = () => {
   return __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx("h2", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 38
     },
     __self: undefined
   }, "Login"), __jsx("form", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 39
     },
     __self: undefined
   }, __jsx(_TextInput__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -229,7 +230,7 @@ const LoginForm = () => {
     title: new _library_stringMethods__WEBPACK_IMPORTED_MODULE_8__["default"](_library_languages__WEBPACK_IMPORTED_MODULE_7__["default"].en.username).firstCharUpperCase().getString(),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 40
     },
     __self: undefined
   }), __jsx(_TextInput__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -240,7 +241,7 @@ const LoginForm = () => {
     title: _library_languages__WEBPACK_IMPORTED_MODULE_7__["default"].en.password,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 47
     },
     __self: undefined
   }), __jsx(_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -248,7 +249,7 @@ const LoginForm = () => {
     text: _library_languages__WEBPACK_IMPORTED_MODULE_7__["default"].en.login,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 54
     },
     __self: undefined
   })));
