@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1375,26 +1375,26 @@ const WebForm = ({
     });
   };
 
+  const saveFormAuto = async () => {
+    await axios__WEBPACK_IMPORTED_MODULE_2___default()({
+      method: "PUT",
+      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_10__["default"].serverURL}/fields`,
+      params: {
+        key: user.user.userkey
+      },
+      data: webFields,
+      responseType: "json"
+    });
+  };
+
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
     //save fields (form) on change
-    const saveFormAuto = async () => {
-      await axios__WEBPACK_IMPORTED_MODULE_2___default()({
-        method: "PUT",
-        url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_10__["default"].serverURL}/fields`,
-        params: {
-          key: user.user.userkey
-        },
-        data: webFields,
-        responseType: "json"
-      });
-    };
-
-    saveFormAuto();
+    webFields !== fields ? saveFormAuto() : null;
   }, [webFields]);
   return __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx("h2", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 158
+      lineNumber: 160
     },
     __self: undefined
   }, "Web form"), __jsx(_WebFormSelect__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -1402,7 +1402,7 @@ const WebForm = ({
     addNotSelect: addNotSelect,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 159
+      lineNumber: 161
     },
     __self: undefined
   }), __jsx(_WebFormVisibleOrNot__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -1411,7 +1411,7 @@ const WebForm = ({
     showOptionsOnClick: showOptionsOnClick,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 160
+      lineNumber: 162
     },
     __self: undefined
   }), __jsx(_WebFormSubSelect__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -1421,13 +1421,13 @@ const WebForm = ({
       webFields: webFields,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 169
+        lineNumber: 171
       },
       __self: undefined
     }),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 165
+      lineNumber: 167
     },
     __self: undefined
   }), __jsx(_WebFormList__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -1435,14 +1435,14 @@ const WebForm = ({
     removeFromList: removeFromList,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 174
+      lineNumber: 176
     },
     __self: undefined
   }), __jsx(_WebFormButtons__WEBPACK_IMPORTED_MODULE_9__["default"], {
     webFields: webFields,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 175
+      lineNumber: 177
     },
     __self: undefined
   }));
@@ -2005,12 +2005,18 @@ class StringMethods {
       return this;
     });
 
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "removeSlashAndTextAfter", () => {
+      this.text = this.text.substring(0, this.text.indexOf("/"));
+      return this;
+    });
+
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "getString", () => {
       return this.text;
     });
 
     this.text = _text;
-  }
+  } // thisIsText -> This is text
+
 
 }
 
@@ -4129,29 +4135,29 @@ const Settings = ({
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     //title from url
-    const title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_11__["default"](router.pathname).removeSlash().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_10__["default"].titleSubText).getString();
+    const title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_11__["default"](router.pathname).removeSlash().removeSlashAndTextAfter().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_10__["default"].titleSubText).getString();
     document.title = title; //componendDidMount effect
 
     setInitialized(true);
     user.checkUser();
   }, [router]);
-  const h1 = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_11__["default"](router.pathname).removeSlash().firstCharUpperCase().getString();
+  const h1 = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_11__["default"](router.pathname).removeSlash().removeSlashAndTextAfter().firstCharUpperCase().getString();
   return !user.user.signedIn && !initialized ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 51
-    },
-    __self: undefined
-  }) : __jsx("div", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 53
     },
     __self: undefined
+  }) : __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 56
     },
     __self: undefined
   }), __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -4160,14 +4166,14 @@ const Settings = ({
     gutterBottom: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 57
     },
     __self: undefined
   }, h1), __jsx(_components_settings_DefaultFields__WEBPACK_IMPORTED_MODULE_5__["default"], {
     fields: fields,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 60
     },
     __self: undefined
   }), __jsx(_components_settings_customFields_CustomFields__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -4175,7 +4181,7 @@ const Settings = ({
     refreshList: refreshList,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 61
     },
     __self: undefined
   }), __jsx(_components_settings_EmailSettings__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -4183,14 +4189,14 @@ const Settings = ({
     pass: pass,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 62
     },
     __self: undefined
   }), __jsx(_components_settings_webform_WebForm__WEBPACK_IMPORTED_MODULE_9__["default"], {
     fields: fields,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 63
     },
     __self: undefined
   }));
@@ -4230,7 +4236,7 @@ Settings.getInitialProps = async context => {
 
 /***/ }),
 
-/***/ 6:
+/***/ 9:
 /*!****************************************!*\
   !*** multi ./pages/settings/[key].tsx ***!
   \****************************************/

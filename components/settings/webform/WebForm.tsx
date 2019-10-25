@@ -84,7 +84,6 @@ const WebForm = ({ fields }) => {
               }
             : field
         );
-
       default:
         return state;
     }
@@ -138,18 +137,21 @@ const WebForm = ({ fields }) => {
     });
   };
 
+  const saveFormAuto = async () => {
+    await axios({
+          method: "PUT",
+          url: `${globalVars.serverURL}/fields`,
+          params: {key: user.user.userkey},
+          data: webFields,
+          responseType: "json"
+      })
+  }
+
   useEffect(() => {
     //save fields (form) on change
-    const saveFormAuto = async () => {
-      await axios({
-            method: "PUT",
-            url: `${globalVars.serverURL}/fields`,
-            params: {key: user.user.userkey},
-            data: webFields,
-            responseType: "json"
-        })
-    }
-    saveFormAuto();
+    webFields !== fields
+    ? saveFormAuto()
+    : null
 }, [webFields])
 
 

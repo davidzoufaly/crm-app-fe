@@ -33,6 +33,7 @@ const Settings = ({ dataFields, username, pass }: any) => {
     //title from url
     const title = new stringMethods(router.pathname)
       .removeSlash()
+      .removeSlashAndTextAfter()
       .firstCharUpperCase()
       .addStringToEnd(globalVars.titleSubText)
       .getString();
@@ -44,6 +45,7 @@ const Settings = ({ dataFields, username, pass }: any) => {
 
   const h1 = new stringMethods(router.pathname)
     .removeSlash()
+    .removeSlashAndTextAfter()
     .firstCharUpperCase()
     .getString();
 

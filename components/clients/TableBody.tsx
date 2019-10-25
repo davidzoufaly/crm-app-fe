@@ -21,12 +21,16 @@ const TableBody = ({
   fields,
   handleCheckbox
 }: IProps) => {
+
+  const user = useContext(UserContext);
+
   if (fields.some(e => e.fieldName === sort && e.fieldType === "number")) {
     if (reverse) {
       clients.sort((a: any, b: any) => b[sort] - a[sort]);
     } else {
       clients.sort((a: any, b: any) => a[sort] - b[sort]);
     }
+    //! otestovat jestli není zbytečné ->
   } else {
     if (reverse) {
       clients.sort((a: any, b: any) => (b[sort] > a[sort] ? -1 : 1));
@@ -34,8 +38,6 @@ const TableBody = ({
       clients.sort((a: any, b: any) => (b[sort] < a[sort] ? -1 : 1));
     }
   }
-
-  const user = useContext(UserContext);
 
   const fieldNames = [];
   fields.forEach((e: any) => fieldNames.push(e.fieldName));
@@ -69,7 +71,7 @@ const TableBody = ({
       // add profile link at last position
       items.push(
         <TableCell key={uniqid()}>
-          <Link href="/clients/[id]" as={`/clients/${client._id}`}>
+          <Link href={`/clients/client/[id]/?key=${user.user.userkey}`} as={`/clients/client/${client._id}/?key=${user.user.userkey}`}>
             <a>{languages.en.go}</a>
           </Link>
         </TableCell>

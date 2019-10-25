@@ -80,10 +80,10 @@ const CreateClient = ({
   const submitNewClient = async () => {
     //post req to DB
     const clientRes = await axios({
-      method: "post",
+      method: "POST",
       data: newClient,
-      params: {key: user.user.userkey},
       url: `${globalVars.serverURL}/clients`,
+      params: {key: user.user.userkey},
       responseType: "json"
     });
     const clientData = await clientRes.data;
@@ -109,10 +109,6 @@ const CreateClient = ({
     });
     toggleIsClientAdded();
   };
-
-  useEffect(() => {
-    console.log(fields);
-  }, [])
 
   return isClientAdded ? (
     <div>

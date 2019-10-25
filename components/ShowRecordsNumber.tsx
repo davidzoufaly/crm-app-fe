@@ -11,7 +11,7 @@ const ShowRecordsNumber = ({data, string, buttonString, link, subData } : any) =
       <h2>{data}</h2>
       <p>{string}</p>
       <p>{subData}</p>
-      <Link href={link} as={`${link}?Api_KEY=${user.user.userkey}`}>
+      <Link href={`${link}/[key]`} as={`${link}/${user.user.userkey}`}>
         <a>{languages.en.goTo} {buttonString.toLowerCase()}</a>
       </Link>
     </div>

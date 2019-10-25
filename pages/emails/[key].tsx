@@ -19,6 +19,7 @@ const Emails = props => {
   useEffect(() => {
     const title = new stringMethods(router.pathname)
       .removeSlash()
+      .removeSlashAndTextAfter()
       .firstCharUpperCase()
       .addStringToEnd(globalVars.titleSubText)
       .getString();
@@ -48,6 +49,7 @@ const Emails = props => {
 
   const h1 = new stringMethods(router.pathname)
     .removeSlash()
+    .removeSlashAndTextAfter()
     .firstCharUpperCase()
     .getString();
 

@@ -1423,48 +1423,48 @@ var WebForm = function WebForm(_ref) {
     });
   };
 
+  var saveFormAuto =
+  /*#__PURE__*/
+  function () {
+    var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+    /*#__PURE__*/
+    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default()({
+                method: "PUT",
+                url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_12__["default"].serverURL, "/fields"),
+                params: {
+                  key: user.user.userkey
+                },
+                data: webFields,
+                responseType: "json"
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function saveFormAuto() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     //save fields (form) on change
-    var saveFormAuto =
-    /*#__PURE__*/
-    function () {
-      var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
-      /*#__PURE__*/
-      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default()({
-                  method: "PUT",
-                  url: "".concat(_library_globalVariables__WEBPACK_IMPORTED_MODULE_12__["default"].serverURL, "/fields"),
-                  params: {
-                    key: user.user.userkey
-                  },
-                  data: webFields,
-                  responseType: "json"
-                });
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      return function saveFormAuto() {
-        return _ref2.apply(this, arguments);
-      };
-    }();
-
-    saveFormAuto();
+    webFields !== fields ? saveFormAuto() : null;
   }, [webFields]);
   return __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, __jsx("h2", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 158
+      lineNumber: 160
     },
     __self: this
   }, "Web form"), __jsx(_WebFormSelect__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -1472,7 +1472,7 @@ var WebForm = function WebForm(_ref) {
     addNotSelect: addNotSelect,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 159
+      lineNumber: 161
     },
     __self: this
   }), __jsx(_WebFormVisibleOrNot__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -1481,7 +1481,7 @@ var WebForm = function WebForm(_ref) {
     showOptionsOnClick: showOptionsOnClick,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 160
+      lineNumber: 162
     },
     __self: this
   }), __jsx(_WebFormSubSelect__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -1491,13 +1491,13 @@ var WebForm = function WebForm(_ref) {
       webFields: webFields,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 169
+        lineNumber: 171
       },
       __self: this
     }),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 165
+      lineNumber: 167
     },
     __self: this
   }), __jsx(_WebFormList__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -1505,14 +1505,14 @@ var WebForm = function WebForm(_ref) {
     removeFromList: removeFromList,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 174
+      lineNumber: 176
     },
     __self: this
   }), __jsx(_WebFormButtons__WEBPACK_IMPORTED_MODULE_11__["default"], {
     webFields: webFields,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 175
+      lineNumber: 177
     },
     __self: this
   }));
@@ -2131,12 +2131,18 @@ var StringMethods = function StringMethods(_text) {
     return _this;
   });
 
+  Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "removeSlashAndTextAfter", function () {
+    _this.text = _this.text.substring(0, _this.text.indexOf("/"));
+    return _this;
+  });
+
   Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(this, "getString", function () {
     return _this.text;
   });
 
   this.text = _text;
-};
+} // thisIsText -> This is text
+;
 
 /* harmony default export */ __webpack_exports__["default"] = (StringMethods);
 
@@ -29523,29 +29529,29 @@ var Settings = function Settings(_ref) {
 
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
     //title from url
-    var title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_13__["default"](router.pathname).removeSlash().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_12__["default"].titleSubText).getString();
+    var title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_13__["default"](router.pathname).removeSlash().removeSlashAndTextAfter().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_12__["default"].titleSubText).getString();
     document.title = title; //componendDidMount effect
 
     setInitialized(true);
     user.checkUser();
   }, [router]);
-  var h1 = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_13__["default"](router.pathname).removeSlash().firstCharUpperCase().getString();
+  var h1 = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_13__["default"](router.pathname).removeSlash().removeSlashAndTextAfter().firstCharUpperCase().getString();
   return !user.user.signedIn && !initialized ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 51
-    },
-    __self: this
-  }) : __jsx("div", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 53
     },
     __self: this
+  }) : __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: this
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 56
     },
     __self: this
   }), __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -29554,14 +29560,14 @@ var Settings = function Settings(_ref) {
     gutterBottom: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 57
     },
     __self: this
   }, h1), __jsx(_components_settings_DefaultFields__WEBPACK_IMPORTED_MODULE_7__["default"], {
     fields: fields,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 60
     },
     __self: this
   }), __jsx(_components_settings_customFields_CustomFields__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -29569,7 +29575,7 @@ var Settings = function Settings(_ref) {
     refreshList: refreshList,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 61
     },
     __self: this
   }), __jsx(_components_settings_EmailSettings__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -29577,14 +29583,14 @@ var Settings = function Settings(_ref) {
     pass: pass,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 62
     },
     __self: this
   }), __jsx(_components_settings_webform_WebForm__WEBPACK_IMPORTED_MODULE_11__["default"], {
     fields: fields,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 63
     },
     __self: this
   }));
@@ -29666,7 +29672,7 @@ function () {
 
 /***/ }),
 
-/***/ 3:
+/***/ 6:
 /*!************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fsettings%2F%5Bkey%5D&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Fsettings%2F%5Bkey%5D.tsx ***!
   \************************************************************************************************************************************************************************/
@@ -29689,5 +29695,5 @@ module.exports = dll_b35e09dc2ca94ac6d9c1;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js"]]]);
+},[[6,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=[key].js.map

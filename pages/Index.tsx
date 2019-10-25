@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link"
 import LoginForm from "../components/homepage/LoginForm";
 import RegisterForm from "../components/homepage/RegisterForm";
@@ -7,6 +8,11 @@ import languages from "../library/languages";
 
 const Index = () => {
   const user = useContext(UserContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    document.title = "CRM-APP - Where your business gets efficiency";
+  }, [router])
 
   return !user.user.signedIn
     ? (

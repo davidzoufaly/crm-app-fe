@@ -1,6 +1,5 @@
 import React from "react";
 import App from "next/app";
-import Head from "next/head";
 import Router from "next/router";
 import CountContext from "../components/CountContext";
 import UserContext from "../components/UserContext";
@@ -32,16 +31,13 @@ export default class MyApp extends App {
     });
     sessionStorage.setItem("userkey", this.state.user.userkey);
     sessionStorage.setItem("signedIn", this.state.user.signedIn.toString());
-    Router.push({
-      pathname: `/emails/${this.state.user.userkey}`,
-    });
+    Router.push(`/dashboard/${this.state.user.userkey}`);
   };
 
   checkUser = () => {
     sessionStorage.getItem("signedIn") === "false"
       ? Router.push("/")
       : this.setState({
-          ...this.state,
           user: {
             ...this.state.user,
             userkey: sessionStorage.getItem("userkey"),
@@ -66,7 +62,6 @@ export default class MyApp extends App {
 
   setCounters = (data) => {
     this.setState({
-      ...this.state,
       counters: data
     });
   };
@@ -80,9 +75,6 @@ export default class MyApp extends App {
 
     return (
       <React.Fragment>
-        <Head>
-          <title>CRM APP</title>
-        </Head>
         <UserContext.Provider
           value={{
             setUser: this.setUser,

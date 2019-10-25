@@ -4,7 +4,7 @@ class StringMethods {
   constructor(text: string) {
     this.text = text;
   }
-
+  // thisIsText -> This is text
   camelStringToText = () => {
     this.text = Array.from(this.text)
       .map(e => (e === e.toUpperCase() ? (e = `%-%${e.toLowerCase()}`) : e))
@@ -32,6 +32,7 @@ class StringMethods {
     return this;
   };
 
+  // This is text -> thisIsText
   textToCamelString = () => {
     let array = Array.from(this.text.toLowerCase());
 
@@ -45,15 +46,23 @@ class StringMethods {
     return this;
   };
 
+  // This is text -> this-is-text
   textToHtmlProp = () => {
     this.text = this.text.toLowerCase().replace(/ /g, '-');
     return this;
   }
 
+  // čřěř.. -> crer
   replaceStringDiacritics = () => {
     this.text = this.text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     return this;
   };
+
+  // settings/12415 -> settings
+  removeSlashAndTextAfter = () => {
+    this.text = this.text.substring(0, this.text.indexOf("/"));
+    return this;
+  }
 
   getString = () => {
     return this.text;

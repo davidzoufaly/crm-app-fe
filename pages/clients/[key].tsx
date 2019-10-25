@@ -51,6 +51,7 @@ const Clients = ({ fieldData, clientData }: any) => {
     // set page title
     const title = new stringMethods(router.pathname)
       .removeSlash()
+      .removeSlashAndTextAfter()      
       .firstCharUpperCase()
       .addStringToEnd(globalVars.titleSubText)
       .getString();
@@ -69,6 +70,7 @@ const Clients = ({ fieldData, clientData }: any) => {
   // create H1
   const h1 = new stringMethods(router.pathname)
     .removeSlash()
+    .removeSlashAndTextAfter()
     .firstCharUpperCase()
     .getString();
 
@@ -165,7 +167,8 @@ Clients.getInitialProps = async (context : any) => {
   //fetch clients
   const clientRes = await axios({
     method: "GET",
-    url: `${globalVars.serverURL}/clients/Api_KEY=${context.query.Api_KEY}`,
+    url: `${globalVars.serverURL}/clients/`,
+    params: {key: context.query.key},
     responseType: "json"
   });
   const clientData = await clientRes.data;
@@ -174,7 +177,7 @@ Clients.getInitialProps = async (context : any) => {
   const fieldRes = await axios({
     method: "GET",
     url: `${globalVars.serverURL}/fields`,
-    params: { key: context.query.Api_KEY },
+    params: {key: context.query.key},
     responseType: "json"
   });
   const fieldData = await fieldRes.data;
