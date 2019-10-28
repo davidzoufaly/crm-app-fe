@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from \"react\";\nvar __jsx = React.createElement;\nimport CircularProgress from '@material-ui/core/CircularProgress';\n\nconst LoadingSpinner = () => __jsx(CircularProgress, null);\n\nexport default LoadingSpinner;","map":null,"metadata":{},"sourceType":"module"}
