@@ -56,7 +56,7 @@ const ClientForm = ({ fields, onChange, newClient }: any) => {
                 name={e.fieldName}
                 id={e.fieldName}
                 onChange={onChange}
-                value={newClient[e.fieldName] ? newClient[e.fieldName] : ""}
+                value={newClient[e.fieldName] || ""}
               >
                 <MenuItem value="" key={globalVars.blankOption}>
                   {globalVars.blankOption}

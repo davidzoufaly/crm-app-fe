@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -5092,9 +5092,6 @@ const Settings = ({
     }));
   };
 
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {// console.log(fields);
-  }, [fields]);
-
   const addField = obj => {
     setField(fields.some(field => field._id === obj._id) ? fields.map(field => field._id === obj._id ? obj : field) : [...fields, obj]);
   };
@@ -5115,19 +5112,19 @@ const Settings = ({
   return !user.user.signedIn && !initialized ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 64
     },
     __self: undefined
   }) : __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 70
+      lineNumber: 66
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 71
+      lineNumber: 67
     },
     __self: undefined
   }), __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_13___default.a, {
@@ -5136,7 +5133,7 @@ const Settings = ({
     gutterBottom: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 72
+      lineNumber: 68
     },
     __self: undefined
   }, h1), __jsx(_components_settings_DefaultFieldsSection__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -5145,7 +5142,7 @@ const Settings = ({
     sections: sections,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 71
     },
     __self: undefined
   }), __jsx(_components_settings_customFields_CustomFieldsSection__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -5156,7 +5153,7 @@ const Settings = ({
     toggleSection: toggleSection,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 76
     },
     __self: undefined
   }), __jsx(_components_settings_emailSettings_EmailSettingsSection__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -5166,7 +5163,7 @@ const Settings = ({
     sections: sections,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 87
+      lineNumber: 83
     },
     __self: undefined
   }), __jsx(_components_settings_webform_WebFormSection__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -5175,7 +5172,7 @@ const Settings = ({
     sections: sections,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93
+      lineNumber: 89
     },
     __self: undefined
   }));
@@ -5215,7 +5212,7 @@ Settings.getInitialProps = async context => {
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!****************************************!*\
   !*** multi ./pages/settings/[key].tsx ***!
   \****************************************/

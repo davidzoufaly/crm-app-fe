@@ -19,7 +19,7 @@ const SingleClientData = ({ fieldsData, client, onInputChange }: any) =>
               label={field.fieldName}
               fullWidth
               margin="normal"
-              value={client[field.fieldName]}
+              value={client[field.fieldName] || ""}
               onChange={onInputChange}
               disabled={
                 field.fieldName === "Date added" ||
@@ -35,7 +35,7 @@ const SingleClientData = ({ fieldsData, client, onInputChange }: any) =>
               label={field.fieldName}
               type="number"
               name={field.fieldName}
-              value={client[field.fieldName] ? client[field.fieldName] : ""}
+              value={client[field.fieldName] || ""}
               onChange={onInputChange}
             />
         );
@@ -48,7 +48,7 @@ const SingleClientData = ({ fieldsData, client, onInputChange }: any) =>
             <InputLabel htmlFor={fieldNameAsHtml}>{field.fieldName}</InputLabel>
             <Select
               name={field.fieldName}
-              value={client[field.fieldName] ? client[field.fieldName] : ""}
+              value={client[field.fieldName] || ""}
               onChange={onInputChange}
               id={fieldNameAsHtml}
             >

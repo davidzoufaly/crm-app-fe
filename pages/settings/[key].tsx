@@ -26,10 +26,6 @@ const Settings = ({ dataFields, username, pass }: any) => {
     });
   };
 
-  useEffect(() => {
-    // console.log(fields);
-  }, [fields]);
-
   const addField = obj => {
     setField(
       fields.some(field => field._id === obj._id)
