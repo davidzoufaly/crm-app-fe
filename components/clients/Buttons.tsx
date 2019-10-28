@@ -1,8 +1,9 @@
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
-import EmailIcon from '@material-ui/icons/Email';
+import EmailIcon from "@material-ui/icons/Email";
 import languages from "../../library/languages";
+import { Box } from "@material-ui/core";
 
 const Buttons = ({
   clientsAreNotChecked,
@@ -10,9 +11,15 @@ const Buttons = ({
   deleteMultipleClients,
   isClientAdded,
   isEmailCreated,
-  toggleIsEmailCreated,
+  toggleIsEmailCreated
 }: any) => (
-  <div>
+  <Box
+    my="1rem"
+    display="flex"
+    width="370px"
+    maxWidth="1"
+    justifyContent="space-between"
+  >
     <Button
       variant="contained"
       color="primary"
@@ -24,6 +31,15 @@ const Buttons = ({
     </Button>
     <Button
       variant="contained"
+      color="primary"
+      onClick={toggleIsEmailCreated}
+      disabled={clientsAreNotChecked || isEmailCreated || isClientAdded}
+      startIcon={<EmailIcon />}
+    >
+      {languages.en.email}
+    </Button>
+    <Button
+      variant="contained"
       color="secondary"
       disabled={clientsAreNotChecked}
       onClick={deleteMultipleClients}
@@ -31,14 +47,7 @@ const Buttons = ({
     >
       {languages.en.delete}
     </Button>
-    <Button variant="contained"
-    color="primary"
-    onClick={toggleIsEmailCreated}
-    disabled={clientsAreNotChecked || isEmailCreated || isClientAdded}
-    startIcon={<EmailIcon/>}
-    >{languages.en.email}
-    </Button>
-  </div>
+  </Box>
 );
 
 export default Buttons;

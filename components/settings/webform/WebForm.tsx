@@ -4,15 +4,35 @@ import UserContext from "../../UserContext";
 import WebFormSelect from "./WebFormSelect";
 import WebFormList from "./WebFormList";
 import WebFormVisibleOrNot from "./WebFormVisibleOrNot";
-import WebFormFieldOptions from "./WebFormFieldOptions";
 import WebFormSubSelect from "./WebFormSubSelect";
 import WebFormButtons from "./WebFormButtons";
 import globalVars from "../../../library/globalVariables"
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    formWrapper: {
+      marginTop: theme.spacing(3),
+      borderRadius: theme.spacing(1),
+      boxShadow: theme.shadows["1"],
+      padding: theme.spacing(3),
+      backgroundColor: theme.palette.grey["200"],
+      width: "50%",
+      [theme.breakpoints.down("sm")]: {
+        width: "100%"
+      }
+    },
+    textField: {
+      marginTop: theme.spacing(2)
+    }
+  })
+);
 
 const WebForm = ({ fields }) => {
-
+  
   const initCounterValue = fields.map(e => e.order).sort((a,b) => b > a ? 1 : -1)[0];
-
+  const classes = useStyles({});
   const user = useContext(UserContext);
   const [counter, setCounter] = useState(initCounterValue);
   const [webFields, setWebFields] = useReducer((state, action) => {
@@ -111,7 +131,7 @@ const WebForm = ({ fields }) => {
   const addVisibleSelect = e => {
     setWebFields({
       type: "addVisibleSelect",
-      payload: { fieldName: e.target.id }
+      payload: { fieldName: e.currentTarget.id }
     });
     setCounter(prevCount => prevCount + 1);
   };
@@ -127,7 +147,7 @@ const WebForm = ({ fields }) => {
   const removeFromList = e => {
     setWebFields({
       type: "remove",
-      payload: { fieldName: e.target.id }
+      payload: { fieldName: e.currentTarget.id }
     });
   };
 
@@ -156,8 +176,8 @@ const WebForm = ({ fields }) => {
 
 
   return (
-    <>
-      <h2>Web form</h2>
+    <Box className={classes.formWrapper}>
+    <form>
       <WebFormSelect webFields={webFields} addNotSelect={addNotSelect} />
       <WebFormVisibleOrNot
         webFields={webFields}
@@ -167,15 +187,11 @@ const WebForm = ({ fields }) => {
       <WebFormSubSelect
         webFields={webFields}
         addHiddenSelect={addHiddenSelect}
-        webFormOptions={
-          <WebFormFieldOptions
-            webFields={webFields}
-          />
-        }
       />
       <WebFormList webFields={webFields} removeFromList={removeFromList} />
       <WebFormButtons webFields={webFields}/>
-    </>
+    </form>
+    </Box>
   );
 };
 

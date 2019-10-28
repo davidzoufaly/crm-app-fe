@@ -10,7 +10,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
     "preserveConstEnums": true,
     "removeComments": false,
@@ -29,6 +29,6 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx", "next.config.ts"
   ]
 }

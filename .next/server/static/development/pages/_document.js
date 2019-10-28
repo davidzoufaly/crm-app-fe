@@ -1506,7 +1506,22 @@ const theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["crea
       main: _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_1__["red"].A400
     },
     background: {
-      default: '#fff'
+      default: '#FAFAFA'
+    }
+  },
+  overrides: {
+    MuiCardContent: {
+      root: {
+        padding: 16,
+        '&:last-child': {
+          paddingBottom: 16
+        }
+      }
+    },
+    MuiTypography: {
+      gutterBottom: {
+        marginBottom: "1em"
+      }
     }
   }
 });

@@ -1,4 +1,6 @@
-const LoginButton = ({onClick, text}) => (
-    <button type="button" onClick={onClick}>{text}</button>
+import StyledButton from "@material-ui/core/Button";
+
+const Button = ({onClick, text, variant}) => (
+    <StyledButton type="button" color="primary" variant={variant} onClick={onClick}>{text}</StyledButton>
 )
-export default LoginButton;
+export default Button;

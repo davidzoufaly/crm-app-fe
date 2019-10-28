@@ -14,9 +14,24 @@ const theme = createMuiTheme({
         main: red.A400,
       },
       background: {
-        default: '#fff',
+        default: '#FAFAFA',
       },
     },
+    overrides: {
+      MuiCardContent: {
+            root: {
+              padding: 16,
+              '&:last-child': {
+                paddingBottom: 16,
+              },
+            },
+          },
+      MuiTypography: {
+        gutterBottom: {
+          marginBottom: "1em"
+        }
+      }
+        }
   });
   
   export default theme;

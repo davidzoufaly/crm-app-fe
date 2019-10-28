@@ -3,21 +3,23 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Header from "../../components/Header";
 import TableBody from "../../components/clients/TableBody";
-import CountContext from "../../components/CountContext";
 import UserContext from "../../components/UserContext";
 import stringMethods from "../../library/stringMethods";
 import globalVars from "../../library/globalVariables";
 import TableHead from "../../components/clients/TableHead";
 import CreateClient from "../../components/clients/CreateClient";
+import EmailForm from "../../components/EmailForm";
 import Buttons from "../../components/clients/Buttons";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import EmailForm from "../../components/EmailForm";
+import {Table, Typography} from '@material-ui/core';
+import TableBodyMui from "@material-ui/core/TableBody"
+import languages from "../../library/languages";
+
 
 const Clients = ({ fieldData, clientData }: any) => {
   const router = useRouter();
-  const counters = useContext(CountContext);
   const user = useContext(UserContext);
-  
+
   const [clients, setClients] = useReducer((state, action) => {
     switch (action.type) {
       case "handleCheckedClients":
@@ -39,10 +41,11 @@ const Clients = ({ fieldData, clientData }: any) => {
     }
   }, clientData);
 
-  //TODO: SPOJIT DO JEDNOHO STATU
-  const [reverse, setReverseOrder] = useState(false);
-  const [sort, setSortBy] = useState("firstName");
-  //
+  const [sort, setSort] = useState({
+    sortBy: "First name",
+    reverse: true
+  })
+  
   const [initialized, setInitialized] = useState(false);
   const [isClientAdded, setIsClientAdded] = useState(false);
   const [isEmailCreated, setIsEmailCreated] = useState(false);
@@ -75,8 +78,15 @@ const Clients = ({ fieldData, clientData }: any) => {
     .getString();
 
   const sortBy = fieldName => {
-    setSortBy(fieldName);
-    !reverse ? setReverseOrder(true) : setReverseOrder(false);
+    setSort({...sort, 
+        sortBy: fieldName,
+        reverse: fieldName === sort.sortBy 
+                  // if clicked again on same field -> reverse sort based on current reverse state
+                  ? !sort.reverse 
+                      ? true : false
+                  // if new field being clicked -> set reverse true to immediately sort column ASC 
+                  : true
+    });
   };
 
   const handleCheckbox = id => {
@@ -108,6 +118,7 @@ const Clients = ({ fieldData, clientData }: any) => {
   };
 
   const deleteMultipleClients = async () => {
+
     setClients({
       type: "deleteCheckedClients"
     });
@@ -116,6 +127,7 @@ const Clients = ({ fieldData, clientData }: any) => {
       method: "DELETE",
       data: filterCheckedClients().map(e => e._id),
       url: `${globalVars.serverURL}/clients/`,
+      params: {key: user.user.userkey},
       responseType: "json"
     });
   };
@@ -125,8 +137,8 @@ const Clients = ({ fieldData, clientData }: any) => {
   ) : (
     <div>
       <Header />
-      <h1>{h1}</h1>
-      <p>{counters.counters.clientCounter}</p>
+      <Typography component="h1" variant="h3">{h1}</Typography>
+      <Typography variant="h5" gutterBottom>{languages.en.saved} {clients.length}</Typography>
       <EmailForm
         to={filterCheckedClients().map(e => e["Email"])}
         isEmailCreated={isEmailCreated}
@@ -147,18 +159,17 @@ const Clients = ({ fieldData, clientData }: any) => {
         toggleIsEmailCreated={toggleIsEmailCreated}
         isEmailCreated={isEmailCreated}
       />
-      <table>
-        <TableHead fields={fieldData} sortBy={sortBy} reverse={reverse} />
-        <tbody>
+        <Table aria-label="clients table" size="small" style={{backgroundColor: "white", border: "1px solid #e0e0e0"}}>
+        <TableHead fields={fieldData} sortBy={sortBy} sort={sort} />
+        <TableBodyMui>
           <TableBody
             clients={clients}
             fields={fieldData}
             sort={sort}
-            reverse={reverse}
             handleCheckbox={handleCheckbox}
           />
-        </tbody>
-      </table>
+        </TableBodyMui>
+      </Table>
     </div>
   );
 };
@@ -181,6 +192,12 @@ Clients.getInitialProps = async (context : any) => {
     responseType: "json"
   });
   const fieldData = await fieldRes.data;
+
+  //? fetch clients counter -> unsued takes number from main clients
+  // const resClientCount = await axios(
+  //   `${globalVars.serverURL}/clients/count?key=${context.query.key}`
+  // );
+  // const clientCount = await resClientCount.data
 
   return {
     clientData,

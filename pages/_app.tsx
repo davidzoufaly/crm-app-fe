@@ -1,15 +1,15 @@
 import React from "react";
 import App from "next/app";
 import Router from "next/router";
-import CountContext from "../components/CountContext";
 import UserContext from "../components/UserContext";
 import theme from "../src/theme";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
 
 export default class MyApp extends App {
   state = {
-    counters: { clientCounter: "", emailsCounter: "", fieldCounter: "" },
     user: {
       userkey: "",
       signedIn: false
@@ -24,14 +24,13 @@ export default class MyApp extends App {
   }
 
   setUser = userkey => {
-    console.log(userkey);
     this.setState({
       ...this.state,
       user: { ...this.state.user, userkey, signedIn: true }
     });
+    Router.push(`/dashboard/${this.state.user.userkey}`);
     sessionStorage.setItem("userkey", this.state.user.userkey);
     sessionStorage.setItem("signedIn", this.state.user.signedIn.toString());
-    Router.push(`/dashboard/${this.state.user.userkey}`);
   };
 
   checkUser = () => {
@@ -60,16 +59,6 @@ export default class MyApp extends App {
     Router.push("/");
   };
 
-  setCounters = (data) => {
-    this.setState({
-      counters: data
-    });
-  };
-
-  componentDidUpdate() {
-    console.log(this.state);
-  }
-
   render() {
     const { Component, pageProps } = this.props;
 
@@ -83,17 +72,14 @@ export default class MyApp extends App {
             user: this.state.user
           }}
         >
-          <CountContext.Provider
-            value={{
-              setCounters: this.setCounters,
-              counters: this.state.counters
-            }}
-          >
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              <Component {...pageProps} />
+              <Container maxWidth="lg">
+              <Box py="7rem">
+                <Component {...pageProps} />
+              </Box>
+              </Container>
             </ThemeProvider>
-          </CountContext.Provider>
         </UserContext.Provider>
       </React.Fragment>
     );

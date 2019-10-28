@@ -5,9 +5,8 @@ import AddOrEditField from "./AddOrEditField";
 import UserContext from "../../UserContext";
 import CustomFieldsList from "./CustomFieldsList";
 import SelectFieldOptions from "./SelectFieldOptions";
-import languages from "../../../library/languages";
 import globalVars from "../../../library/globalVariables";
-import Typography from "@material-ui/core/Typography";
+import { Box } from "@material-ui/core";
 
 const CustomClientFields = ({ fields, refreshList }: any) => {
   const blankFieldObject = {
@@ -30,13 +29,12 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
       case "selectValueChange":
         return {
           ...state,
-          fieldType:
-            action.payload.options[action.payload.options.selectedIndex].value
+          fieldType: action.payload.value
         };
       case "newOptionSpawn":
         return {
           ...state,
-          fieldOptions: [...state.fieldOptions, { id: uniqid(), value: ""}]
+          fieldOptions: [...state.fieldOptions, { id: uniqid(), value: "" }]
         };
       case "clear":
         return blankFieldObject;
@@ -45,7 +43,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
           ...state,
           fieldOptions: state.fieldOptions.map((el: any) =>
             el.id === action.payload.id
-              ? {...el, value: action.payload.value}
+              ? { ...el, value: action.payload.value }
               : el
           )
         };
@@ -74,11 +72,11 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
     onSelectChange(event: any) {
       setEditedField({
         type: "selectValueChange",
-        payload: { options: event.target.options }
+        payload: { value: event.target.value }
       });
     },
     handleOptionSpawn(e) {
-      e.preventDefault()
+      e.preventDefault();
       setEditedField({
         type: "newOptionSpawn"
       });
@@ -90,13 +88,13 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
     onOptionDelete(event: any) {
       setEditedField({
         type: "optionDelete",
-        payload: { id: event.target.id }
+        payload: { id: event.currentTarget.id }
       });
     },
     onOptionChange(id, event) {
       setEditedField({
         type: "optionValueChange",
-        payload: { value : event.target.value, id }
+        payload: { value: event.target.value, id }
       });
     },
     setupEditedField(obj: any) {
@@ -114,7 +112,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
         const res = await axios({
           method: "PUT",
           url: `${globalVars.serverURL}/fields/${id}`,
-          params: {key: user.user.userkey},
+          params: { key: user.user.userkey },
           data: { fieldName, fieldType, fieldOptions },
           responseType: "json"
         });
@@ -127,7 +125,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
       const fieldIsCreated = async () => {
         const res = await axios({
           method: "POST",
-          params: {key: user.user.userkey},
+          params: { key: user.user.userkey },
           url: `${globalVars.serverURL}/fields/`,
           data: editedField,
           responseType: "json"
@@ -150,7 +148,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
   const deleteField = async (id: any) => {
     const res = await axios({
       method: "DELETE",
-      params: {key: user.user.userkey},
+      params: { key: user.user.userkey },
       url: `${globalVars.serverURL}/fields/${id}`,
       responseType: "json"
     });
@@ -158,12 +156,8 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
     resData.msg === globalVars.msgSuccess ? refreshList() : null;
   };
 
-
   return (
-    <div>
-      <Typography variant="h4" component="h2" gutterBottom>
-        {languages.en.customClientFields}
-      </Typography>
+    <Box mt="1rem" mb="5rem">
       <CustomFieldsList
         deleteField={deleteField}
         fields={fields}
@@ -180,7 +174,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
           />
         }
       />
-    </div>
+    </Box>
   );
 };
 

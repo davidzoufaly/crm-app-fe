@@ -9,7 +9,6 @@ const languages = {
         number: "Number",
         save: "Save",
         cancel: "Cancel",
-        addNewField: "Add new field",
         addNew: "Add new",
         delete: "Delete",
         email: "Email",
@@ -56,7 +55,7 @@ const languages = {
         fieldsSaved: "Fields saved",
         last: "Last",
         sent: "sent",
-        lastWeek: "last week",
+        pastSevenDays: "past seven days",
         total: "total",
         logout: "logout",
         username: "username",
@@ -65,7 +64,16 @@ const languages = {
         register: "register",
         success: "success",
         passwordsDoesNotMatch: "Passwords do not match",
-        userAlreadyExists: "User already exists"
+        userAlreadyExists: "User already exists",
+        indexTitle: "CRM-APP - Where your business gets efficiency",
+        welcomeH1: "Welcome in lightweight CRM-APP built with next.js, react.js, Material UI, typescript, express and Mongo DB",
+        webForm: "Web form",
+        onlyGoogleAcc: "Only google accounts are supported.",
+        setupeLessSecure: "You also need to provide access to less secure apps in your google settings.",
+        setupYourEmailSettings: "Please setup your emails settings first",
+        option: "Option",
+        deleteOption: "Delete option",
+        field: "Field"
     }
 }
 

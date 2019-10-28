@@ -7,14 +7,36 @@ import ClientForm from "./ClientForm";
 import globalVars from "../../library/globalVariables";
 import languages from "../../library/languages";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    formWrapper: {
+      marginTop: theme.spacing(3),
+      borderRadius: theme.spacing(1),
+      padding: theme.spacing(3),
+      backgroundColor: theme.palette.grey["200"],
+      boxShadow: theme.shadows["1"],
+      width: "50%",
+      [theme.breakpoints.down("sm")]: {
+        width: "100%"
+      }
+    },
+    textField: {
+      marginTop: theme.spacing(2)
+    }
+  })
+);
 
 const CreateClient = ({
   fields,
   isClientAdded,
   toggleIsClientAdded,
-  addNewClientToState,
+  addNewClientToState
 }: any) => {
+  const classes = useStyles({});
   const initialNewClientState = fields
     .map((e: any) => e.fieldName)
     .reduce((o, key) => Object.assign(o, { [key]: "" }), {});
@@ -23,10 +45,10 @@ const CreateClient = ({
   const [submitting, setSubmitting] = useState(false);
   const [newClient, setNewClient] = useReducer((state, action) => {
     switch (action.type) {
-      case "onTextChange":
+      case "onChange":
         return {
           ...state,
-          [action.payload.fieldName]:
+          [action.payload.fieldName as string]:
             action.payload.fieldType === globalVars.fieldTypes.number
               ? parseInt(action.payload.value)
               : action.payload.value
@@ -44,11 +66,11 @@ const CreateClient = ({
       case "addDate":
         return {
           ...state,
-           ["Date added"]: moment().format("llll")
-        }
+          ["Date added"]: moment().format("llll")
+        };
       case "clear":
         return {
-          initialNewClientState  
+          initialNewClientState
         };
 
       default:
@@ -56,25 +78,29 @@ const CreateClient = ({
     }
   }, initialNewClientState);
 
-  const onChange = (fieldType, event) => {
+  const onChange = event => {
     setNewClient({
-      type: "onTextChange",
-      payload: { fieldName : event.target.name, value: event.target.value, fieldType }
+      type: "onChange",
+      payload: {
+        fieldName: event.target.name,
+        value: event.target.value,
+        fieldType: event.target.type
+      }
     });
   };
 
-  useEffect(() => {
+  useEffect(() => {
     //trigger side effect when submitting state is changed and its is true
     submitting ? submitNewClient() : null;
-  }, [submitting])
+  }, [submitting]);
 
   const onSubmit = e => {
-      // on Button Click prepare client object to be ready to send
-      e.preventDefault();
-      setNewClient({type: "addDate"});
-      setNewClient({ type: "addId" });
-      // change submitting state to trigger effect with POST req.
-      setSubmitting(true);
+    // on Button Click prepare client object to be ready to send
+    e.preventDefault();
+    setNewClient({ type: "addDate" });
+    setNewClient({ type: "addId" });
+    // change submitting state to trigger effect with POST req.
+    setSubmitting(true);
   };
 
   const submitNewClient = async () => {
@@ -83,7 +109,7 @@ const CreateClient = ({
       method: "POST",
       data: newClient,
       url: `${globalVars.serverURL}/clients`,
-      params: {key: user.user.userkey},
+      params: { key: user.user.userkey },
       responseType: "json"
     });
     const clientData = await clientRes.data;
@@ -101,7 +127,7 @@ const CreateClient = ({
     } else {
       alert(languages.en.somethingWentWrong);
     }
-  }
+  };
 
   const onCancel = () => {
     setNewClient({
@@ -111,20 +137,27 @@ const CreateClient = ({
   };
 
   return isClientAdded ? (
-    <div>
+    <Box className={classes.formWrapper}>
       <Typography variant="h4" component="h2" gutterBottom>
         {languages.en.addNewClient}
       </Typography>
       <form onSubmit={onSubmit}>
         <ClientForm fields={fields} onChange={onChange} newClient={newClient} />
-        <Button variant="contained" color="primary" type="submit">
-          {languages.en.save}
-        </Button>
-        <Button variant="contained" color="secondary" onClick={onCancel}>
-          {languages.en.cancel}
-        </Button>
+        <Box display="flex" justifyContent="flex-end" mt="2rem">
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{ marginRight: "1rem" }}
+            onClick={onCancel}
+          >
+            {languages.en.cancel}
+          </Button>
+          <Button variant="contained" color="primary" type="submit">
+            {languages.en.save}
+          </Button>
+        </Box>
       </form>
-    </div>
+    </Box>
   ) : null;
 };
 

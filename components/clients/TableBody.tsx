@@ -1,42 +1,29 @@
+import { useContext } from "react";
 import Link from "next/link";
 import uniqid from "uniqid";
 import UserContext from "../UserContext";
 import languages from "../../library/languages";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
-import { useContext } from "react";
+import PersonIcon from '@material-ui/icons/Person';
+import {TableCell, TableRow, Checkbox, Button, Typography} from '@material-ui/core';
 
-interface IProps {
-  clients: any;
-  reverse: boolean;
-  sort: string;
-  fields: any;
-  handleCheckbox: any;
-}
-
-const TableBody = ({
-  clients,
-  reverse,
-  sort,
-  fields,
-  handleCheckbox
-}: IProps) => {
-
+const TableBody = ({ clients, sort, fields, handleCheckbox }: any) => {
+  const { sortBy, reverse } = sort;
   const user = useContext(UserContext);
-
-  if (fields.some(e => e.fieldName === sort && e.fieldType === "number")) {
-    if (reverse) {
-      clients.sort((a: any, b: any) => b[sort] - a[sort]);
-    } else {
-      clients.sort((a: any, b: any) => a[sort] - b[sort]);
-    }
-    //! otestovat jestli není zbytečné ->
+  // field we want to filter is type number -> return true and filter it correctly -> 23 > 4
+  if (fields.some(e => e.fieldName === sortBy && e.fieldType === "number")) {
+    clients.sort((a: any, b: any) =>
+      reverse ? b[sortBy] - a[sortBy] : a[sortBy] - b[sortBy]
+    );
   } else {
-    if (reverse) {
-      clients.sort((a: any, b: any) => (b[sort] > a[sort] ? -1 : 1));
-    } else {
-      clients.sort((a: any, b: any) => (b[sort] < a[sort] ? -1 : 1));
-    }
+    clients.sort((a: any, b: any) =>
+      reverse
+        ? b[sortBy] > a[sortBy]
+          ? -1
+          : 1
+        : b[sortBy] < a[sortBy]
+        ? -1
+        : 1
+    );
   }
 
   const fieldNames = [];
@@ -58,31 +45,39 @@ const TableBody = ({
           );
         }
       }
-      // add checkbox at first position
+      // add put checkbox at first position
       items.unshift(
         <TableCell padding="checkbox" key={uniqid()}>
-          <input
-            type="checkbox"
-            checked={client.isChecked === undefined ? false : client.isChecked}
-            onChange={() => handleCheckbox(client._id)}
-          />
-        </TableCell>
+        <Checkbox
+        color="primary"
+        checked={client.isChecked === undefined ? false : client.isChecked}
+        onChange={() => handleCheckbox(client._id)}
+        inputProps={{
+          'aria-label': 'primary checkbox',
+        }}
+      />
+      </TableCell>
       );
-      // add profile link at last position
+      // add put profile link at last position
       items.push(
         <TableCell key={uniqid()}>
-          <Link href={`/clients/client/[id]/?key=${user.user.userkey}`} as={`/clients/client/${client._id}/?key=${user.user.userkey}`}>
-            <a>{languages.en.go}</a>
+          <Link
+            href={`/client/[id]/?key=${user.user.userkey}`}
+            as={`/client/${client._id}/?key=${user.user.userkey}`}
+          >
+            <Button startIcon={<PersonIcon/>}>{languages.en.go}</Button>
           </Link>
         </TableCell>
       );
 
-      items = items.map(e => (e === null ?  <TableCell key={uniqid()}></TableCell> : e));
+      items = items.map(e =>
+        e === null ? <TableCell key={uniqid()}></TableCell> : e
+      );
 
       return items;
     };
 
-    return <TableRow key={client._id}>{tableItem()}</TableRow>;
+    return <TableRow key={client._id} hover={true}>{tableItem()}</TableRow>;
   });
   return tableClients;
 };

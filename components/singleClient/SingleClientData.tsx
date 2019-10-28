@@ -1,33 +1,63 @@
 import globalVars from "../../library/globalVariables";
+import stringMethods from "../../library/stringMethods";
+import {
+  TextField,
+  Select,
+  FormControl,
+  MenuItem,
+  InputLabel
+} from "@material-ui/core";
 
 const SingleClientData = ({ fieldsData, client, onInputChange }: any) =>
   fieldsData.map(field => {
     switch (field.fieldType) {
       case "text":
         return (
-          <div key={field.fieldName}>
-            {field.fieldName}
-            <textarea name={field.fieldName} value={client[field.fieldName]} onChange={onInputChange} disabled={field.fieldName === "Date added" || field.fieldName === "Last modified"}/>
-          </div>
+            <TextField
+              key={field.fieldName}
+              name={field.fieldName}
+              label={field.fieldName}
+              fullWidth
+              margin="normal"
+              value={client[field.fieldName]}
+              onChange={onInputChange}
+              disabled={
+                field.fieldName === "Date added" ||
+                field.fieldName === "Last modified"
+              }
+            />
         );
       case "number":
         return (
-          <div key={field.fieldName}>
-            {field.fieldName}
-            <input type="number" name={field.fieldName} value={client[field.fieldName]} onChange={onInputChange}/>
-          </div>
+            <TextField
+              fullWidth
+              key={field.fieldName}
+              label={field.fieldName}
+              type="number"
+              name={field.fieldName}
+              value={client[field.fieldName] ? client[field.fieldName] : ""}
+              onChange={onInputChange}
+            />
         );
       case "select":
+        const fieldNameAsHtml = new stringMethods(field.fieldName)
+          .textToHtmlProp()
+          .getString();
         return (
-          <div key={field.fieldName}>
-            {field.fieldName}
-            <select name={field.fieldName} value={client[field.fieldName]} onChange={onInputChange}>
-                <option key="---">{globalVars.blankOption}</option>
+          <FormControl key={field.fieldName} fullWidth margin="normal">
+            <InputLabel htmlFor={fieldNameAsHtml}>{field.fieldName}</InputLabel>
+            <Select
+              name={field.fieldName}
+              value={client[field.fieldName] ? client[field.fieldName] : ""}
+              onChange={onInputChange}
+              id={fieldNameAsHtml}
+            >
+              <MenuItem key={globalVars.blankOption} value="">{globalVars.blankOption}</MenuItem>
               {field.fieldOptions.map(option => (
-                <option key={option.id}>{option.value}</option>
+                <MenuItem key={option.id} value={option.value}>{option.value}</MenuItem>
               ))}
-            </select>
-          </div>
+            </Select>
+          </FormControl>
         );
     }
   });

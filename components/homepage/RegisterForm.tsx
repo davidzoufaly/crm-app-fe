@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import TextInput from "./TextInput";
-import LoginButton from "./Button";
+import Button from "./Button";
 import globalVars from "../../library/globalVariables";
 import languages from "../../library/languages";
 import stringMethods from "../../library/stringMethods";
+import { Typography, Box } from '@material-ui/core';
 
-const RegisterForm = () => {
+const RegisterForm = ({ changeToLogin }) => {
   const [regUser, setRegUser] = useState({
     username: "",
     password: "",
@@ -14,45 +15,47 @@ const RegisterForm = () => {
   });
 
   const onChange = e => {
-    switch (e.target.name) {
-      case "username":
-        return setRegUser({ ...regUser, username: e.target.value });
-      case "password":
-        return setRegUser({ ...regUser, password: e.target.value });
-      case "repeat-password":
-        return setRegUser({ ...regUser, repeatPassword: e.target.value });
-    }
+    setRegUser({ ...regUser, [e.target.name]: e.target.value });
   };
 
   const sentFormToBe = async () => {
-    const {username, password } = regUser;
+    const { username, password } = regUser;
 
     const userRes = await axios({
       method: "POST",
-      data: {username, password},
+      data: { username, password },
       url: `${globalVars.serverURL}/users`,
       responseType: "json"
     });
     const userData = await userRes.data;
-    console.log(userRes);
-    if (userData.msg === "Success") {
-      alert(languages.en.success);
-    } else if(userData.msg === "Exist"){
-      alert(languages.en.userAlreadyExists);
-    } else {
-      alert(languages.en.somethingWentWrong);
+
+    switch (userData.msg) {
+      case globalVars.msgSuccess:
+        alert(languages.en.success);
+        changeToLogin();
+        break;
+      case "Exist":
+        alert(languages.en.userAlreadyExists);
+        break;
+      default:
+        alert(languages.en.somethingWentWrong);
     }
   };
 
   const onRegister = () => {
-      regUser.password === regUser.repeatPassword
-        ? sentFormToBe()
-        : alert(languages.en.passwordsDoesNotMatch)
+    regUser.password === regUser.repeatPassword
+      ? sentFormToBe()
+      : alert(languages.en.passwordsDoesNotMatch);
   };
 
   return (
     <>
-      <h2>Register</h2>
+      <Typography component="h2" variant="h4" gutterBottom>
+        {new stringMethods(languages.en.register)
+          .firstCharUpperCase()
+          .getString()
+        }
+      </Typography>
       <form>
         <TextInput
           onChange={onChange}
@@ -74,12 +77,14 @@ const RegisterForm = () => {
           onChange={onChange}
           type="password"
           value={regUser.repeatPassword}
-          text="repeat-password"
+          text="repeatPassword"
           title={new stringMethods(languages.en.repeatPassword)
             .firstCharUpperCase()
             .getString()}
         />
-        <LoginButton onClick={onRegister} text={languages.en.register} />
+        <Box display="flex" justifyContent="flex-end" mt="2rem">
+          <Button onClick={onRegister} text={languages.en.register} variant="contained" />
+        </Box>
       </form>
     </>
   );
