@@ -26,16 +26,23 @@ const Settings = ({ dataFields, username, pass }: any) => {
     });
   };
 
-  const refreshList = async () => {
-    //get data from DB after change
-    const res = await axios({
-      method: "get",
-      url: `${globalVars.serverURL}/fields/`,
-      responseType: "json"
-    });
-    const data = await res.data;
-    setField(data);
+  useEffect(() => {
+    // console.log(fields);
+  }, [fields]);
+
+  const addField = obj => {
+    setField(
+      fields.some(field => field._id === obj._id)
+        ? fields.map(field => (field._id === obj._id ? obj : field))
+        : [...fields, obj]
+    );
   };
+
+  const removeField = id => {
+    setField(
+      fields.filter(field => field._id !== id)
+    )
+  }
 
   useEffect(() => {
     //title from url
@@ -72,7 +79,8 @@ const Settings = ({ dataFields, username, pass }: any) => {
       />
       <CustomFieldsSection
         fields={fields}
-        refreshList={refreshList}
+        removeField={removeField}
+        addField={addField}
         sections={sections}
         toggleSection={toggleSection}
       />

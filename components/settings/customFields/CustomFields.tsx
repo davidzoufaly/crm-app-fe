@@ -1,6 +1,7 @@
 import { useState, useReducer, useContext } from "react";
 import axios from "axios";
 import uniqid from "uniqid";
+import generateUniqueId from "generate-unique-id";
 import AddOrEditField from "./AddOrEditField";
 import UserContext from "../../UserContext";
 import CustomFieldsList from "./CustomFieldsList";
@@ -8,12 +9,18 @@ import SelectFieldOptions from "./SelectFieldOptions";
 import globalVars from "../../../library/globalVariables";
 import { Box } from "@material-ui/core";
 
-const CustomClientFields = ({ fields, refreshList }: any) => {
+const CustomClientFields = ({ fields, addField, removeField }: any) => {
   const blankFieldObject = {
     fieldName: "",
     fieldType: "text",
     fieldOptions: [],
-    fieldFormVisible: null
+    fieldFormVisible: null,
+    _id: generateUniqueId({
+      length: 24,
+      useNumbers: true,
+      useLetters: false,
+      includeSymbols: ["a", "b", "c", "d", "e", "f"]
+    })
   };
 
   const user = useContext(UserContext);
@@ -108,10 +115,10 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
       e.preventDefault();
 
       const fieldIsUpdated = async () => {
-        const { fieldName, fieldType, fieldOptions, id } = editedField;
+        const { fieldName, fieldType, fieldOptions, _id } = editedField;
         const res = await axios({
           method: "PUT",
-          url: `${globalVars.serverURL}/fields/${id}`,
+          url: `${globalVars.serverURL}/fields/${_id}`,
           params: { key: user.user.userkey },
           data: { fieldName, fieldType, fieldOptions },
           responseType: "json"
@@ -135,14 +142,16 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
           reset();
         }
       };
-      !editedField.id ? fieldIsCreated() : fieldIsUpdated();
+      fields.some(field => field._id === editedField._id)
+      ? fieldIsUpdated()
+      : fieldIsCreated()
     }
   };
 
   const reset = () => {
     setDisplayComponent(false);
+    addField(editedField);
     setEditedField({ type: "clear" });
-    refreshList();
   };
 
   const deleteField = async (id: any) => {
@@ -153,7 +162,7 @@ const CustomClientFields = ({ fields, refreshList }: any) => {
       responseType: "json"
     });
     const resData = await res.data;
-    resData.msg === globalVars.msgSuccess ? refreshList() : null;
+    resData.msg === globalVars.msgSuccess ? removeField(id) : null;
   };
 
   return (

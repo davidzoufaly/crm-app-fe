@@ -92,7 +92,7 @@ const CustomFields = ({ fields, setupEditedField, deleteField }: any) => {
                             fieldType,
                             fieldPermanent: false,
                             fieldOptions,
-                            id: _id
+                            _id: _id
                           })
                         }
                       >

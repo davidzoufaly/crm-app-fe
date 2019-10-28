@@ -34,6 +34,7 @@ const WebForm = ({ fields }) => {
   const initCounterValue = fields.map(e => e.order).sort((a,b) => b > a ? 1 : -1)[0];
   const classes = useStyles({});
   const user = useContext(UserContext);
+
   const [counter, setCounter] = useState(initCounterValue);
   const [webFields, setWebFields] = useReducer((state, action) => {
     switch (action.type) {
@@ -108,6 +109,7 @@ const WebForm = ({ fields }) => {
         return state;
     }
   }, fields);
+
 
   const addNotSelect = e => {
     webFields.map(field => {
