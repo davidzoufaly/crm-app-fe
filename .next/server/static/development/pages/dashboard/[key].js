@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -578,11 +578,10 @@ const ShowRecordsNumber = ({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-// https://crm-app-be.herokuapp.com/
-// http://localhost:8080
 const globalVars = {
   titleSubText: "| CRM-APP",
   serverURL: "http://localhost:8080/api",
+  // serverURL: "https://crm-app-be.herokuapp.com/api",
   permanentFields: {
     fistName: "First name",
     lastName: "Last name",
@@ -2939,7 +2938,7 @@ Dashboard.getInitialProps = async context => {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!*****************************************!*\
   !*** multi ./pages/dashboard/[key].tsx ***!
   \*****************************************/
