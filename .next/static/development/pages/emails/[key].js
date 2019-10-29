@@ -384,11 +384,10 @@ var UserContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])(nu
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-// https://crm-app-be.herokuapp.com/
-// http://localhost:8080
 var globalVars = {
   titleSubText: "| CRM-APP",
-  serverURL: "http://localhost:8080/api",
+  // serverURL: "http://localhost:8080/api",
+  serverURL: "https://crm-app-be.herokuapp.com/api",
   permanentFields: {
     fistName: "First name",
     lastName: "Last name",
@@ -59541,7 +59540,7 @@ function () {
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!********************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Femails%2F%5Bkey%5D&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Femails%2F%5Bkey%5D.tsx ***!
   \********************************************************************************************************************************************************************/
@@ -59564,5 +59563,5 @@ module.exports = dll_b35e09dc2ca94ac6d9c1;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js"]]]);
+},[[2,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=[key].js.map

@@ -494,11 +494,10 @@ const TextInput = ({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-// https://crm-app-be.herokuapp.com/
-// http://localhost:8080
 const globalVars = {
   titleSubText: "| CRM-APP",
-  serverURL: "https://crm-app-be.herokuapp.com/",
+  // serverURL: "http://localhost:8080/api",
+  serverURL: "https://crm-app-be.herokuapp.com/api",
   permanentFields: {
     fistName: "First name",
     lastName: "Last name",

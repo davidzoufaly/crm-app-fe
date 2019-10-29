@@ -4,15 +4,15 @@
     "static/development/dll/dll_f5e771ca4390fecd21bd.js.map"
   ],
   "pages": {
+    "/": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/_app": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
     "/_error": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/clients/[key]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
@@ -24,7 +24,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/settings/[key]": [
+    "/index": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

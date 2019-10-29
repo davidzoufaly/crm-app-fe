@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -475,11 +475,10 @@ const UserContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])(
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-// https://crm-app-be.herokuapp.com/
-// http://localhost:8080
 const globalVars = {
   titleSubText: "| CRM-APP",
-  serverURL: "http://localhost:8080/api",
+  // serverURL: "http://localhost:8080/api",
+  serverURL: "https://crm-app-be.herokuapp.com/api",
   permanentFields: {
     fistName: "First name",
     lastName: "Last name",
@@ -2898,7 +2897,7 @@ Emails.getInitialProps = async context => {
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!**************************************!*\
   !*** multi ./pages/emails/[key].tsx ***!
   \**************************************/
