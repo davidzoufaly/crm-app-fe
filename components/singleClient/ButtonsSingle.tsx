@@ -22,6 +22,11 @@ const ButtonsSingle = ({
       </Button>
     </Grid>
     <Grid item>
+      <Button color="primary" variant="contained" onClick={onSave}>
+        {languages.en.save}
+      </Button>
+    </Grid>
+    <Grid item>
       <Button
         color="secondary"
         variant="contained"
@@ -29,11 +34,6 @@ const ButtonsSingle = ({
         startIcon={<DeleteIcon />}
       >
         {languages.en.delete}
-      </Button>
-    </Grid>
-    <Grid item>
-      <Button color="primary" variant="contained" onClick={onSave}>
-        {languages.en.save}
       </Button>
     </Grid>
   </Grid>

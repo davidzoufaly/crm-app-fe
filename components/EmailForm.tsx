@@ -55,8 +55,6 @@ const EmailForm = ({
       responseType: "json"
     });
 
-    console.log(res);
-
     const data = await res.data;
     data ? setSpinner(false) : null;
     if (

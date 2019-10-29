@@ -15,7 +15,8 @@ import {
   Typography,
   Table,
   TableCell,
-  TableRow
+  TableRow,
+  Box
 } from "@material-ui/core";
 
 const Emails = ({ data, emailsCount }) => {
@@ -70,10 +71,11 @@ const Emails = ({ data, emailsCount }) => {
       <Typography component="h1" variant="h3">
         {h1}
       </Typography>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" gutterBottom style={{color: "#535658"}}>
         {new stringMethods(languages.en.sent).firstCharUpperCase().getString()}{" "}
         {emailsCount}
       </Typography>
+      <Box width="1" overflow="auto">
       <Table
         size="small"
         style={{ backgroundColor: "white", border: "1px solid #e0e0e0" }}
@@ -98,6 +100,7 @@ const Emails = ({ data, emailsCount }) => {
         </TableHead>
         <TableBody>{tableBody}</TableBody>
       </Table>
+      </Box>
     </>
   );
 };

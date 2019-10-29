@@ -25,8 +25,12 @@ import CloseIcon from "@material-ui/icons/Close";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     menuButton: {
-      marginRight: theme.spacing(2),
-      color: "white"
+      color: theme.palette.grey["50"],
+      padding: "0.5rem 1.5rem",
+      margin: theme.spacing(1)
+    },
+    active: {
+
     },
     title: {
       flexGrow: 1
@@ -35,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: 0
     },
     mobilMenuButton: {
-      color: "white",
+      color: theme.palette.grey["50"],
       display: "none",
       [theme.breakpoints.down("sm")]: {
         display: "block"
@@ -83,7 +87,7 @@ const Header = () => {
 
   return (
     <AppBar position="fixed">
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Toolbar className={classes.toolBar} style={{position: "relative"}}>
           <Box display="flex" width="100%" justifyContent="space-between">
             <IconButton

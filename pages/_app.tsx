@@ -74,7 +74,7 @@ export default class MyApp extends App {
         >
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              <Container maxWidth="lg">
+              <Container maxWidth="xl">
               <Box py="7rem">
                 <Component {...pageProps} />
               </Box>

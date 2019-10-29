@@ -2194,7 +2194,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_4___default.a {
       },
       __self: this
     }), __jsx(_material_ui_core_Container__WEBPACK_IMPORTED_MODULE_10___default.a, {
-      maxWidth: "lg",
+      maxWidth: "xl",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 77

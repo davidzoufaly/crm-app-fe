@@ -57,9 +57,11 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["makeStyles"])(function (theme) {
   return Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["createStyles"])({
     menuButton: {
-      marginRight: theme.spacing(2),
-      color: "white"
+      color: theme.palette.grey["50"],
+      padding: "0.5rem 1.5rem",
+      margin: theme.spacing(1)
     },
+    active: {},
     title: {
       flexGrow: 1
     },
@@ -67,7 +69,7 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["ma
       padding: 0
     },
     mobilMenuButton: Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({
-      color: "white",
+      color: theme.palette.grey["50"],
       display: "none"
     }, theme.breakpoints.down("sm"), {
       display: "block"
@@ -119,14 +121,14 @@ var Header = function Header() {
     position: "fixed",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 89
     },
     __self: this
   }, __jsx(_material_ui_core_Container__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    maxWidth: "lg",
+    maxWidth: "xl",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 86
+      lineNumber: 90
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Toolbar"], {
@@ -136,7 +138,7 @@ var Header = function Header() {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 87
+      lineNumber: 91
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Box"], {
@@ -145,7 +147,7 @@ var Header = function Header() {
     justifyContent: "space-between",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 88
+      lineNumber: 92
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["IconButton"], {
@@ -153,19 +155,19 @@ var Header = function Header() {
     className: classes.mobilMenuButton,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 89
+      lineNumber: 93
     },
     __self: this
   }, !mobilMenu ? __jsx(_material_ui_icons_Menu__WEBPACK_IMPORTED_MODULE_14___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93
+      lineNumber: 97
     },
     __self: this
   }) : __jsx(_material_ui_icons_Close__WEBPACK_IMPORTED_MODULE_15___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93
+      lineNumber: 97
     },
     __self: this
   })), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Box"], {
@@ -173,7 +175,7 @@ var Header = function Header() {
     className: mobilMenu ? classes.navMobil : classes.navDesktop,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95
+      lineNumber: 99
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Grid"], {
@@ -182,14 +184,14 @@ var Header = function Header() {
     justify: "center",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 99
+      lineNumber: 103
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Grid"], {
     item: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 104
+      lineNumber: 108
     },
     __self: this
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
@@ -197,28 +199,28 @@ var Header = function Header() {
     as: "/dashboard/".concat(user.user.userkey),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 105
+      lineNumber: 109
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Button"], {
     startIcon: __jsx(_material_ui_icons_Dashboard__WEBPACK_IMPORTED_MODULE_7___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 110
+        lineNumber: 114
       },
       __self: this
     }),
     className: classes.menuButton,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 109
+      lineNumber: 113
     },
     __self: this
   }, _library_languages__WEBPACK_IMPORTED_MODULE_3__["default"].en.dashboard))), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Grid"], {
     item: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 117
+      lineNumber: 121
     },
     __self: this
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
@@ -226,28 +228,28 @@ var Header = function Header() {
     as: "/clients/".concat(user.user.userkey),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 118
+      lineNumber: 122
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Button"], {
     startIcon: __jsx(_material_ui_icons_PeopleAlt__WEBPACK_IMPORTED_MODULE_8___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 123
+        lineNumber: 127
       },
       __self: this
     }),
     className: classes.menuButton,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 126
     },
     __self: this
   }, _library_languages__WEBPACK_IMPORTED_MODULE_3__["default"].en.clients))), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Grid"], {
     item: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 130
+      lineNumber: 134
     },
     __self: this
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
@@ -255,28 +257,28 @@ var Header = function Header() {
     as: "/emails/".concat(user.user.userkey),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 131
+      lineNumber: 135
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Button"], {
     startIcon: __jsx(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_9___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 136
+        lineNumber: 140
       },
       __self: this
     }),
     className: classes.menuButton,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 139
     },
     __self: this
   }, _library_languages__WEBPACK_IMPORTED_MODULE_3__["default"].en.emails))), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Grid"], {
     item: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 143
+      lineNumber: 147
     },
     __self: this
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
@@ -284,21 +286,21 @@ var Header = function Header() {
     as: "/settings/".concat(user.user.userkey),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 144
+      lineNumber: 148
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Button"], {
     startIcon: __jsx(_material_ui_icons_Settings__WEBPACK_IMPORTED_MODULE_11___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 149
+        lineNumber: 153
       },
       __self: this
     }),
     className: classes.menuButton,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 148
+      lineNumber: 152
     },
     __self: this
   }, _library_languages__WEBPACK_IMPORTED_MODULE_3__["default"].en.settings)))))), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__["Button"], {
@@ -309,13 +311,13 @@ var Header = function Header() {
     startIcon: __jsx(_material_ui_icons_ExitToApp__WEBPACK_IMPORTED_MODULE_12___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 162
+        lineNumber: 166
       },
       __self: this
     }),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 159
+      lineNumber: 163
     },
     __self: this
   }, _library_languages__WEBPACK_IMPORTED_MODULE_3__["default"].en.logout))));
@@ -436,6 +438,9 @@ var ShowRecordsNumber = function ShowRecordsNumber(_ref) {
     __self: this
   }, data), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Typography"], {
     gutterBottom: true,
+    style: {
+      color: "#535658"
+    },
     __source: {
       fileName: _jsxFileName,
       lineNumber: 33
@@ -480,6 +485,8 @@ var ShowRecordsNumber = function ShowRecordsNumber(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+// https://crm-app-be.herokuapp.com/
+// http://localhost:8080
 var globalVars = {
   titleSubText: "| CRM-APP",
   serverURL: "http://localhost:8080/api",
@@ -579,7 +586,7 @@ var languages = {
     passwordsDoesNotMatch: "Passwords do not match",
     userAlreadyExists: "User already exists",
     indexTitle: "CRM-APP - Where your business gets efficiency",
-    welcomeH1: "Welcome in lightweight CRM-APP built with next.js, react.js, Material UI, typescript, express and Mongo DB",
+    welcomeH1: "Welcome in lightweight CRM-APP built on Next.js, React.js, Material UI, Typescript, Express and Mongo DB",
     webForm: "Web form",
     onlyGoogleAcc: "Only google accounts are supported.",
     setupeLessSecure: "You also need to provide access to less secure apps in your google settings.",
@@ -59530,7 +59537,7 @@ function () {
 
 /***/ }),
 
-/***/ 1:
+/***/ 0:
 /*!**************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fdashboard%2F%5Bkey%5D&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Fdashboard%2F%5Bkey%5D.tsx ***!
   \**************************************************************************************************************************************************************************/
@@ -59553,5 +59560,5 @@ module.exports = dll_b35e09dc2ca94ac6d9c1;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js"]]]);
+},[[0,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=[key].js.map

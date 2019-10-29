@@ -66,7 +66,7 @@ const languages = {
         passwordsDoesNotMatch: "Passwords do not match",
         userAlreadyExists: "User already exists",
         indexTitle: "CRM-APP - Where your business gets efficiency",
-        welcomeH1: "Welcome in lightweight CRM-APP built with next.js, react.js, Material UI, typescript, express and Mongo DB",
+        welcomeH1: "Welcome in lightweight CRM-APP built on Next.js, React.js, Material UI, Typescript, Express and Mongo DB",
         webForm: "Web form",
         onlyGoogleAcc: "Only google accounts are supported.",
         setupeLessSecure: "You also need to provide access to less secure apps in your google settings.",

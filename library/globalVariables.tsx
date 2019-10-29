@@ -1,3 +1,6 @@
+// https://crm-app-be.herokuapp.com/
+// http://localhost:8080
+
 const globalVars = {
     titleSubText: "| CRM-APP",
     serverURL: "http://localhost:8080/api",

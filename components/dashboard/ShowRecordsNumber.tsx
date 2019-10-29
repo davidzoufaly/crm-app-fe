@@ -30,7 +30,7 @@ const ShowRecordsNumber = ({
         <Typography component="h2" variant="h2">
           {data}
         </Typography>
-        <Typography gutterBottom>{subData}</Typography>
+        <Typography gutterBottom style={{color: "#535658"}}>{subData}</Typography>
         <Typography variant="h5" gutterBottom>
           {string}
         </Typography>
