@@ -3,7 +3,7 @@
 
 const globalVars = {
     titleSubText: "| CRM-APP",
-    serverURL: "http://localhost:8080/api",
+    serverURL: "https://crm-app-be.herokuapp.com/",
     permanentFields: {
         fistName: "First name",
         lastName: "Last name",
