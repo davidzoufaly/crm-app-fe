@@ -6,11 +6,11 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
 const DefaultClientFieldsSection = ({
-  fields,
+  state,
   toggleSection,
   sections
 }: any) => {
-  const defaultFieldNames = fields
+  const defaultFieldNames = state
     .filter(({ fieldPermanent }: any) => fieldPermanent === true)
     .map(({ fieldName, _id }: any) => {
       return (

@@ -1,7 +1,8 @@
 import Header from "../../components/Header";
 import { useRouter } from "next/router";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useReducer } from "react";
 import axios from "axios";
+import fieldsReducer from "../../reducers/fieldsReducer";
 import UserContext from "../../components/UserContext";
 import DefaultFieldsSection from "../../components/settings/DefaultFieldsSection";
 import CustomFieldsSection from "../../components/settings/customFields/CustomFieldsSection";
@@ -14,10 +15,11 @@ import Typography from "@material-ui/core/Typography";
 
 const Settings = ({ dataFields, username, pass }: any) => {
   const router = useRouter();
-  const [fields, setField] = useState(dataFields);
   const [initialized, setInitialized] = useState(false);
   const [sections, setSection] = useState({});
   const user = useContext(UserContext);
+
+  const [state, dispatch] = useReducer(fieldsReducer, dataFields);
 
   const toggleSection = e => {
     setSection({
@@ -25,20 +27,6 @@ const Settings = ({ dataFields, username, pass }: any) => {
       [e.target.name]: e.target.checked
     });
   };
-
-  const addField = obj => {
-    setField(
-      fields.some(field => field._id === obj._id)
-        ? fields.map(field => (field._id === obj._id ? obj : field))
-        : [...fields, obj]
-    );
-  };
-
-  const removeField = id => {
-    setField(
-      fields.filter(field => field._id !== id)
-    )
-  }
 
   useEffect(() => {
     //title from url
@@ -69,14 +57,13 @@ const Settings = ({ dataFields, username, pass }: any) => {
         {h1}
       </Typography>
       <DefaultFieldsSection
-        fields={fields}
+        state={state}
         toggleSection={toggleSection}
         sections={sections}
       />
       <CustomFieldsSection
-        fields={fields}
-        removeField={removeField}
-        addField={addField}
+        state={state}
+        dispatch={dispatch}
         sections={sections}
         toggleSection={toggleSection}
       />
@@ -87,7 +74,8 @@ const Settings = ({ dataFields, username, pass }: any) => {
         sections={sections}
       />
       <WebFormSection
-        fields={fields}
+        state={state}
+        dispatch={dispatch}
         toggleSection={toggleSection}
         sections={sections}
       />
