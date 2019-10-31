@@ -110,8 +110,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserContext */ "./components/UserContext.tsx");
 /* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../library/languages */ "./library/languages.tsx");
 /* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
+<<<<<<< HEAD
 /* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "@material-ui/core/CircularProgress");
 /* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_6__);
+=======
+/* harmony import */ var _LoadingSpinner__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./LoadingSpinner */ "./components/LoadingSpinner.tsx");
+>>>>>>> dev
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
@@ -324,7 +328,13 @@ const EmailForm = ({
       lineNumber: 127
     },
     __self: undefined
+<<<<<<< HEAD
   }, spinner ? __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_6___default.a, {
+=======
+  }, spinner ? __jsx(_LoadingSpinner__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    margin: "r",
+    level: 2,
+>>>>>>> dev
     __source: {
       fileName: _jsxFileName,
       lineNumber: 128
@@ -346,6 +356,10 @@ const EmailForm = ({
     type: "submit",
     color: "primary",
     variant: "contained",
+<<<<<<< HEAD
+=======
+    disabled: spinner,
+>>>>>>> dev
     startIcon: __jsx(_material_ui_icons_Send__WEBPACK_IMPORTED_MODULE_9___default.a, {
       __source: {
         fileName: _jsxFileName,
@@ -702,13 +716,21 @@ const Header = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+<<<<<<< HEAD
 /* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "@material-ui/core/CircularProgress");
 /* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1__);
+=======
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Box */ "@material-ui/core/Box");
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "@material-ui/core/CircularProgress");
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_2__);
+>>>>>>> dev
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/LoadingSpinner.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
+<<<<<<< HEAD
 const LoadingSpinner = () => __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1___default.a, {
   __source: {
     fileName: _jsxFileName,
@@ -716,6 +738,53 @@ const LoadingSpinner = () => __jsx(_material_ui_core_CircularProgress__WEBPACK_I
   },
   __self: undefined
 });
+=======
+
+const LoadingSpinner = ({
+  margin,
+  level
+}) => {
+  const styleSpinner = (p, l) => {
+    switch (p) {
+      case `r`:
+        return {
+          marginRight: `${l}rem`
+        };
+
+      case `l`:
+        return {
+          marginLeft: `${l}rem`
+        };
+
+      case `t`:
+        return {
+          marginTop: `${l}rem`
+        };
+
+      case `b`:
+        return {
+          marginBottom: `${l}rem`
+        };
+    }
+  };
+
+  return __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    style: styleSpinner(margin, level),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    size: 30,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: undefined
+  }));
+};
+>>>>>>> dev
 
 /* harmony default export */ __webpack_exports__["default"] = (LoadingSpinner);
 
@@ -1521,8 +1590,13 @@ const TableHeader = ({
 __webpack_require__.r(__webpack_exports__);
 const globalVars = {
   titleSubText: "| CRM-APP",
+<<<<<<< HEAD
   // serverURL: "http://localhost:8080/api",
   serverURL: "https://crm-app-be.herokuapp.com/api",
+=======
+  serverURL: "http://localhost:8080/api",
+  // serverURL: "https://crm-app-be.herokuapp.com/api",
+>>>>>>> dev
   permanentFields: {
     fistName: "First name",
     lastName: "Last name",

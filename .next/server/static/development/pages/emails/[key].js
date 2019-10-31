@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -430,20 +430,60 @@ const Header = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "@material-ui/core/CircularProgress");
-/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Box */ "@material-ui/core/Box");
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "@material-ui/core/CircularProgress");
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_2__);
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/LoadingSpinner.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
-const LoadingSpinner = () => __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1___default.a, {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 4
-  },
-  __self: undefined
-});
+
+const LoadingSpinner = ({
+  margin,
+  level
+}) => {
+  const styleSpinner = (p, l) => {
+    switch (p) {
+      case `r`:
+        return {
+          marginRight: `${l}rem`
+        };
+
+      case `l`:
+        return {
+          marginLeft: `${l}rem`
+        };
+
+      case `t`:
+        return {
+          marginTop: `${l}rem`
+        };
+
+      case `b`:
+        return {
+          marginBottom: `${l}rem`
+        };
+    }
+  };
+
+  return __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    style: styleSpinner(margin, level),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    size: 30,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: undefined
+  }));
+};
 
 /* harmony default export */ __webpack_exports__["default"] = (LoadingSpinner);
 
@@ -2897,7 +2937,7 @@ Emails.getInitialProps = async context => {
 
 /***/ }),
 
-/***/ 5:
+/***/ 7:
 /*!**************************************!*\
   !*** multi ./pages/emails/[key].tsx ***!
   \**************************************/
@@ -2917,6 +2957,17 @@ module.exports = __webpack_require__(/*! /Users/davidzoufaly/code/dp/crm-app-fe/
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core");
+
+/***/ }),
+
+/***/ "@material-ui/core/Box":
+/*!****************************************!*\
+  !*** external "@material-ui/core/Box" ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Box");
 
 /***/ }),
 

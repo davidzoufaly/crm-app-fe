@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./UserContext */ "./components/UserContext.tsx");
 /* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../library/languages */ "./library/languages.tsx");
 /* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
-/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
+/* harmony import */ var _LoadingSpinner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./LoadingSpinner */ "./components/LoadingSpinner.tsx");
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 /* harmony import */ var _material_ui_icons_Send__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/icons/Send */ "./node_modules/@material-ui/icons/Send.js");
@@ -264,7 +264,9 @@ var EmailForm = function EmailForm(_ref) {
       lineNumber: 127
     },
     __self: this
-  }, spinner ? __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, spinner ? __jsx(_LoadingSpinner__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    margin: "r",
+    level: 2,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 128
@@ -286,6 +288,7 @@ var EmailForm = function EmailForm(_ref) {
     type: "submit",
     color: "primary",
     variant: "contained",
+    disabled: spinner,
     startIcon: __jsx(_material_ui_icons_Send__WEBPACK_IMPORTED_MODULE_12___default.a, {
       __source: {
         fileName: _jsxFileName,
@@ -643,20 +646,57 @@ var Header = function Header() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
 var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/LoadingSpinner.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
-var LoadingSpinner = function LoadingSpinner() {
-  return __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1__["default"], {
+
+var LoadingSpinner = function LoadingSpinner(_ref) {
+  var margin = _ref.margin,
+      level = _ref.level;
+
+  var styleSpinner = function styleSpinner(p, l) {
+    switch (p) {
+      case "r":
+        return {
+          marginRight: "".concat(l, "rem")
+        };
+
+      case "l":
+        return {
+          marginLeft: "".concat(l, "rem")
+        };
+
+      case "t":
+        return {
+          marginTop: "".concat(l, "rem")
+        };
+
+      case "b":
+        return {
+          marginBottom: "".concat(l, "rem")
+        };
+    }
+  };
+
+  return __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    style: styleSpinner(margin, level),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 4
+      lineNumber: 24
     },
     __self: this
-  });
+  }, __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    size: 30,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: this
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (LoadingSpinner);
@@ -672,8 +712,40 @@ var LoadingSpinner = function LoadingSpinner() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+<<<<<<< HEAD:.next/static/development/pages/index.js
+var globalVars = {
+  titleSubText: "| CRM-APP",
+  // serverURL: "http://localhost:8080/api",
+  serverURL: "https://crm-app-be.herokuapp.com/api",
+  permanentFields: {
+    fistName: "First name",
+    lastName: "Last name",
+    email: "Email",
+    dateAdded: "Date added",
+    lastModified: "Last modified"
+  },
+  fieldTypes: {
+    text: "text",
+    number: "number",
+    select: "select"
+  },
+  blankOption: "---",
+  msgSuccess: "Success"
+};
+/* harmony default export */ __webpack_exports__["default"] = (globalVars);
+
+/***/ }),
+
+/***/ "./library/languages.tsx":
+/*!*******************************!*\
+  !*** ./library/languages.tsx ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+=======
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+>>>>>>> dev:.next/static/development/pages/clients/[key].js
 
 var UserContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])(null);
 /* harmony default export */ __webpack_exports__["default"] = (UserContext);
@@ -1496,8 +1568,8 @@ var TableHeader = function TableHeader(_ref) {
 __webpack_require__.r(__webpack_exports__);
 var globalVars = {
   titleSubText: "| CRM-APP",
-  // serverURL: "http://localhost:8080/api",
-  serverURL: "https://crm-app-be.herokuapp.com/api",
+  serverURL: "http://localhost:8080/api",
+  // serverURL: "https://crm-app-be.herokuapp.com/api",
   permanentFields: {
     fistName: "First name",
     lastName: "Last name",

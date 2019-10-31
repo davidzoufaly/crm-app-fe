@@ -3,7 +3,7 @@ import axios from "axios";
 import UserContext from "./UserContext";
 import languages from "../library/languages";
 import globalVars from "../library/globalVariables";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import LoadingSpinner from "./LoadingSpinner";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Box, Typography, TextField, Button, Grid } from "@material-ui/core";
 import SendIcon from '@material-ui/icons/Send';
@@ -125,7 +125,7 @@ const EmailForm = ({
           </Grid>
           <Grid item xs={12}>
             <Box display="flex" justifyContent="flex-end" mt="2rem">
-              {spinner ? <CircularProgress /> : null}
+              {spinner ? <LoadingSpinner margin={"r"} level={2} /> : null}
               <Button
                 onClick={toggleIsEmailCreated}
                 color="secondary"
@@ -134,7 +134,7 @@ const EmailForm = ({
               >
                 {languages.en.cancel}
               </Button>
-              <Button type="submit" color="primary" variant="contained" startIcon={<SendIcon/>}>
+              <Button type="submit" color="primary" variant="contained" disabled={spinner} startIcon={<SendIcon/>}>
                 {languages.en.send}
               </Button>
             </Box>
