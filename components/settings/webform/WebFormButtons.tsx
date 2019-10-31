@@ -3,7 +3,7 @@ import UserContext from "../../UserContext";
 import globalVars from "../../../library/globalVariables";
 import languages from "../../../library/languages";
 import { useContext } from "react";
-import {Button, Box} from "@material-ui/core"
+import {Button, Box, Typography} from "@material-ui/core"
 import GetAppIcon from '@material-ui/icons/GetApp';
 
 const WebFormButtons = ({ webFields }: any) => {
@@ -27,9 +27,12 @@ const WebFormButtons = ({ webFields }: any) => {
   };
 
   return (
-    <Box display="flex" justifyContent="flex-end">
-      <Button onClick={onDownload} variant="contained" color="primary" startIcon={<GetAppIcon/>}>{languages.en.donwloadForm}</Button>
-    </Box>
+    <>
+      <Box display="flex" justifyContent="flex-end">
+        <Button onClick={onDownload} variant="contained" color="primary" startIcon={<GetAppIcon/>}>{languages.en.donwloadForm}</Button>
+      </Box>
+      <Typography>{languages.en.webFormTip}</Typography>
+    </>
   );
 };
 

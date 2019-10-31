@@ -73,7 +73,8 @@ const languages = {
         setupYourEmailSettings: "Please setup your emails settings first",
         option: "Option",
         deleteOption: "Delete option",
-        field: "Field"
+        field: "Field",
+        webFormTip: "Downloaded script add to your website and create element with id '#crm-form-hook' where you want form to display. Form takes 100% width of the parent."
     }
 }
 
