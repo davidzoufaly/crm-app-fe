@@ -6,7 +6,7 @@ import { useContext, useRef } from "react";
 import {Button, Box, Typography} from "@material-ui/core"
 import GetAppIcon from '@material-ui/icons/GetApp';
 
-const WebFormButtons = ({ webFields }: any) => {
+const WebFormButtons = ({ state }: any) => {
 
   const user = useContext(UserContext);
   const showTip = useRef(null);
@@ -16,7 +16,7 @@ const WebFormButtons = ({ webFields }: any) => {
       method: "GET",
       url: `${globalVars.serverURL}/webform/`,
       params: {key: user.user.userkey},
-      data: webFields,
+      data: state,
       responseType: "blob"
     });
     const url = await window.URL.createObjectURL(new Blob([res.data]));

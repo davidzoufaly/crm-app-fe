@@ -12,6 +12,10 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
+    "/dashboard/[key]": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/settings/[key]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"

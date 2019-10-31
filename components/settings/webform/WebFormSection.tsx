@@ -4,7 +4,7 @@ import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import { Checkbox, Typography, FormControlLabel, Box } from "@material-ui/core";
 
-const WebFormSection = ({ fields, toggleSection, sections }: any) => (
+const WebFormSection = ({ state, dispatch, toggleSection, sections }: any) => (
   <Box my="2rem">
     <FormControlLabel
       control={
@@ -23,7 +23,7 @@ const WebFormSection = ({ fields, toggleSection, sections }: any) => (
         </Typography>
       }
     />
-    {sections.webForm || sections.webForm === undefined ? <WebForm fields={fields} /> : null}
+    {sections.webForm || sections.webForm === undefined ? <WebForm state={state} dispatch={dispatch} /> : null}
   </Box>
 );
 

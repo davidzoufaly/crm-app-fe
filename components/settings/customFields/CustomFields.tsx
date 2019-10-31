@@ -8,8 +8,9 @@ import CustomFieldsList from "./CustomFieldsList";
 import SelectFieldOptions from "./SelectFieldOptions";
 import globalVars from "../../../library/globalVariables";
 import { Box } from "@material-ui/core";
+import { addField, deleteField } from "../../../actions/fieldsAction";
 
-const CustomClientFields = ({ fields, addField, deleteField }: any) => {
+const CustomFields = ({ state, dispatch }: any) => {
   const blankFieldObject = {
     fieldName: "",
     fieldType: "text",
@@ -55,12 +56,24 @@ const CustomClientFields = ({ fields, addField, deleteField }: any) => {
           )
         };
       case "optionDelete":
-        return {
-          ...state,
-          fieldOptions: state.fieldOptions.filter(
-            (e: any) => action.payload.id !== e.id
+        // if option with preselected in form being delete, remove field from form
+        return state.fieldInForm &&
+          state.fieldOptions.some(
+            el => el.id === action.payload.id && el.preselected
           )
-        };
+          ? {
+              ...state,
+              fieldInForm: false,
+              fieldOptions: state.fieldOptions.filter(
+                e => e.id !== action.payload.id
+              )
+            }
+          : {
+              ...state,
+              fieldOptions: state.fieldOptions.filter(
+                e => e.id !== action.payload.id
+              )
+            };
       case "setWithPaylod":
         return action.payload.obj;
 
@@ -142,15 +155,15 @@ const CustomClientFields = ({ fields, addField, deleteField }: any) => {
           reset();
         }
       };
-      fields.some(field => field._id === editedField._id)
-      ? fieldIsUpdated()
-      : fieldIsCreated()
+      state.some(field => field._id === editedField._id)
+        ? fieldIsUpdated()
+        : fieldIsCreated();
     }
   };
 
   const reset = () => {
     setDisplayComponent(false);
-    addField(editedField);
+    addField(dispatch, editedField);
     setEditedField({ type: "clear" });
   };
 
@@ -162,14 +175,14 @@ const CustomClientFields = ({ fields, addField, deleteField }: any) => {
       responseType: "json"
     });
     const resData = await res.data;
-    resData.msg === globalVars.msgSuccess ? deleteField(id) : null;
+    resData.msg === globalVars.msgSuccess ? deleteField(dispatch, id) : null;
   };
 
   return (
     <Box mt="1rem" mb="5rem">
       <CustomFieldsList
         deleteFieldRes={deleteFieldRes}
-        fields={fields}
+        state={state}
         setupEditedField={fieldMethods.setupEditedField}
       />
       <AddOrEditField
@@ -187,4 +200,4 @@ const CustomClientFields = ({ fields, addField, deleteField }: any) => {
   );
 };
 
-export default CustomClientFields;
+export default CustomFields;

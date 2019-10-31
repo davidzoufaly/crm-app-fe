@@ -1,4 +1,5 @@
 import languages from "../../../library/languages";
+import {handleAddingToWF} from "../../../actions/fieldsAction";
 import {
   Typography,
   Select,
@@ -8,8 +9,8 @@ import {
   Box
 } from "@material-ui/core";
 
-const WebFormSelect = ({ webFields, addNotSelect }) => {
-  const selectOptions = webFields.map(field => {
+const WebFormSelect = ({ state, dispatch, counter, setCounter }) => {
+  const selectOptions = state.map(field => {
     return !field.fieldInForm &&
       field.fieldName !== "Date added" &&
       field.fieldName !== "Last modified" ? (
@@ -25,14 +26,14 @@ const WebFormSelect = ({ webFields, addNotSelect }) => {
         {languages.en.selectField}
       </Typography>
       {selectOptions.some(field => field !== null) ? (
-        <FormControl fullWidth disabled={webFields.some(e => e.pause)}>
+        <FormControl fullWidth disabled={state.some(e => e.pause)}>
           <InputLabel htmlFor="field-select">
             {languages.en.fieldName}
           </InputLabel>
           <Select
             name="fields"
             id="field-select"
-            onChange={addNotSelect}
+            onChange={() => handleAddingToWF(dispatch, state, counter, setCounter, event)}
             value=""
           >
             {selectOptions}

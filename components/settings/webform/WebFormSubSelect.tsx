@@ -1,4 +1,5 @@
 import languages from "../../../library/languages";
+import { addHiddenSelect } from "../../../actions/fieldsAction";
 import {
   Typography,
   Select,
@@ -8,10 +9,13 @@ import {
   MenuItem
 } from "@material-ui/core";
 
-const WebFormSubSelect = ({ webFields, addHiddenSelect }: any) => {
-  return webFields.some(e => e.fieldFormVisible === false && e.pause) ? (
+const WebFormSubSelect = ({ state, dispatch, setCounter, counter}: any) => {
+  return state.some(e => e.fieldFormVisible === false && e.pause) ? (
     <Box mb="2rem">
-      <Typography component="h4" variant="h6" gutterBottom>
+      <Typography component="h4" variant="h6">
+        {state.filter(el => el.pause).map(el => el.fieldName)}
+      </Typography>
+      <Typography gutterBottom>
         {languages.en.pleaseSelectOption}
       </Typography>
       <Box width="50%">
@@ -19,8 +23,8 @@ const WebFormSubSelect = ({ webFields, addHiddenSelect }: any) => {
           <InputLabel htmlFor="field-sub-select">
             {languages.en.fieldName}
           </InputLabel>
-          <Select id="field-sub-select" onChange={addHiddenSelect} value="">
-            {webFields.map(field =>
+          <Select id="field-sub-select" onChange={() => addHiddenSelect(dispatch, setCounter, counter, event)} value="">
+            {state.map(field =>
               field.pause
                 ? field.fieldOptions.map(option => (
                     <MenuItem key={option.id} value={option.value}>

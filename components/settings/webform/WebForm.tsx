@@ -1,4 +1,4 @@
-import { useReducer, useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import UserContext from "../../UserContext";
 import WebFormSelect from "./WebFormSelect";
@@ -6,11 +6,9 @@ import WebFormList from "./WebFormList";
 import WebFormVisibleOrNot from "./WebFormVisibleOrNot";
 import WebFormSubSelect from "./WebFormSubSelect";
 import WebFormButtons from "./WebFormButtons";
-import WebFormReducer from "../../../reducers/webFormReducer";
 import globalVars from "../../../library/globalVariables";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
-
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,63 +29,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const WebForm = ({ fields }) => {
-  const initCounterValue = fields
+const WebForm = ({state, dispatch }) => {
+  const initCounterValue = state
     .map(e => e.order)
     .sort((a, b) => (b > a ? 1 : -1))[0];
   const classes = useStyles({});
   const user = useContext(UserContext);
-
-  const [state, dispatch] = useReducer(WebFormReducer, fields);
-  const [counter, setCounter] = useState(initCounterValue);
-
-  const addNotSelect = e => {
-    state.map(field => {
-      if (field.fieldName === e.target.value) {
-        if (field.fieldType !== "select") {
-          dispatch({
-            type: "add",
-            payload: { fieldName: e.target.value, counter }
-          });
-          setCounter(prevCount => prevCount + 1);
-        } else {
-          dispatch({
-            type: "pauseSelect",
-            payload: { fieldName: e.target.value }
-          });
-        }
-      }
-    });
-  };
-
-  const addVisibleSelect = e => {
-    dispatch({
-      type: "addVisibleSelect",
-      payload: { fieldName: e.currentTarget.id, counter }
-    });
-    setCounter(prevCount => prevCount + 1);
-  };
-
-  const addHiddenSelect = e => {
-    dispatch({
-      type: "addHiddenSelect",
-      payload: { optionValue: e.target.value, counter }
-    });
-    setCounter(prevCount => prevCount + 1);
-  };
-
-  const removeFromList = e => {
-    dispatch({
-      type: "remove",
-      payload: { fieldName: e.currentTarget.id }
-    });
-  };
-
-  const showOptionsOnClick = () => {
-    dispatch({
-      type: "addNotVisibleValue"
-    });
-  };
+  const [counter, setCounter] = useState(initCounterValue + 1);
 
   const saveFormAuto = async () => {
     await axios({
@@ -100,24 +48,32 @@ const WebForm = ({ fields }) => {
   };
 
   useEffect(() => {
-    //save fields (form) on change
-    state !== fields ? saveFormAuto() : null;
+    // save fields (form) on change
+    saveFormAuto();
   }, [state]);
 
   return (
     <Box className={classes.formWrapper}>
       <form>
-        <WebFormSelect webFields={state} addNotSelect={addNotSelect} />
+        <WebFormSelect
+          state={state}
+          counter={counter}
+          setCounter={setCounter}
+          dispatch={dispatch}
+        />
         <WebFormVisibleOrNot
-          webFields={state}
-          addVisibleSelect={addVisibleSelect}
-          showOptionsOnClick={showOptionsOnClick}
-        />
+          state={state}
+          dispatch={dispatch}
+          counter={counter}
+          setCounter={setCounter}
+          />
         <WebFormSubSelect
-          webFields={state}
-          addHiddenSelect={addHiddenSelect}
+          state={state}
+          dispatch={dispatch}
+          counter={counter}
+          setCounter={setCounter}
         />
-        <WebFormList webFields={state} removeFromList={removeFromList} />
+        <WebFormList state={state} dispatch={dispatch} />
         <WebFormButtons state={state} />
       </form>
     </Box>

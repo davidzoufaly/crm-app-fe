@@ -2,6 +2,7 @@ import Header from "../../components/Header";
 import { useRouter } from "next/router";
 import { useState, useEffect, useContext, useReducer } from "react";
 import axios from "axios";
+import fieldsReducer from "../../reducers/fieldsReducer";
 import UserContext from "../../components/UserContext";
 import DefaultFieldsSection from "../../components/settings/DefaultFieldsSection";
 import CustomFieldsSection from "../../components/settings/customFields/CustomFieldsSection";
@@ -18,43 +19,12 @@ const Settings = ({ dataFields, username, pass }: any) => {
   const [sections, setSection] = useState({});
   const user = useContext(UserContext);
 
-  const [fields, setField] = useReducer((state, action) => {
-    switch (action.type) {
-      case "addNewField":
-        return state.some(field => field._id === action.payload.obj._id)
-          ? state.map(field =>
-              field._id === action.payload.obj._id ? action.payload.obj : field
-            )
-          : [...state, action.payload.obj];
-      case "deleteField":
-          return state.filter(field => field._id !== action.payload.id);
-      default:
-        return state;
-    }
-  }, dataFields);
-
-  useEffect(() => {
-    console.log(fields);
-  }, [fields])
+  const [state, dispatch] = useReducer(fieldsReducer, dataFields);
 
   const toggleSection = e => {
     setSection({
       ...sections,
       [e.target.name]: e.target.checked
-    });
-  };
-
-  const addField = obj => {
-    setField({
-        type: "addNewField",
-        payload: { obj } 
-    });
-  };
-
-  const deleteField = id => {
-    setField({
-      type: "deleteField",
-      payload: {id}
     });
   };
 
@@ -87,14 +57,13 @@ const Settings = ({ dataFields, username, pass }: any) => {
         {h1}
       </Typography>
       <DefaultFieldsSection
-        fields={fields}
+        state={state}
         toggleSection={toggleSection}
         sections={sections}
       />
       <CustomFieldsSection
-        fields={fields}
-        deleteField={deleteField}
-        addField={addField}
+        state={state}
+        dispatch={dispatch}
         sections={sections}
         toggleSection={toggleSection}
       />
@@ -105,7 +74,8 @@ const Settings = ({ dataFields, username, pass }: any) => {
         sections={sections}
       />
       <WebFormSection
-        fields={fields}
+        state={state}
+        dispatch={dispatch}
         toggleSection={toggleSection}
         sections={sections}
       />

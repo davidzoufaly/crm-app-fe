@@ -46,12 +46,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const CustomFields = ({ fields, setupEditedField, deleteFieldRes }: any) => {
+const CustomFields = ({ setupEditedField, deleteFieldRes, state}: any) => {
   const classes = useStyles({});
 
-  const separatedCustomFields = fields
+  const separatedCustomFields = state
     .filter(({ fieldPermanent }: any) => !fieldPermanent)
-    .map(({ fieldName, _id, fieldType, fieldOptions }: any) => {
+    .map(({ fieldName, _id, fieldType, fieldOptions, fieldInForm, fieldFormVisible, order }: any) => {
       const options = fieldOptions.map((e: any) => {
         return (
           <ListItem key={e.id}>
@@ -91,7 +91,10 @@ const CustomFields = ({ fields, setupEditedField, deleteFieldRes }: any) => {
                             fieldName,
                             fieldType,
                             fieldPermanent: false,
+                            fieldInForm,
+                            fieldFormVisible,
                             fieldOptions,
+                            order,
                             _id: _id
                           })
                         }

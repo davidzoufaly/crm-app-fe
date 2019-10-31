@@ -6,10 +6,9 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const CustomFieldsSection = ({
   toggleSection,
-  addField,
-  deleteField,
   sections,
-  fields
+  dispatch,
+  state
 }: any) => (
   <Box my="2rem">
     <FormControlLabel
@@ -31,7 +30,7 @@ const CustomFieldsSection = ({
       }
     />
     {sections.customFields || sections.customFields === undefined ? (
-      <CustomFields fields={fields} addField={addField} deleteField={deleteField}/>
+      <CustomFields state={state} dispatch={dispatch}/>
     ) : null}
   </Box>
 );
