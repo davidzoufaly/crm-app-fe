@@ -23,7 +23,7 @@ const WebFormSubSelect = ({ state, dispatch, setCounter, counter}: any) => {
           <InputLabel htmlFor="field-sub-select">
             {languages.en.fieldName}
           </InputLabel>
-          <Select id="field-sub-select" onChange={() => addHiddenSelect(dispatch, setCounter, counter, event)} value="">
+          <Select id="field-sub-select" onChange={(event) => addHiddenSelect(dispatch, setCounter, counter, event)} value="">
             {state.map(field =>
               field.pause
                 ? field.fieldOptions.map(option => (

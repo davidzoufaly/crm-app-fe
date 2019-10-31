@@ -64,6 +64,7 @@ const CustomFields = ({ state, dispatch }: any) => {
           ? {
               ...state,
               fieldInForm: false,
+              fieldFormVisible: null,
               fieldOptions: state.fieldOptions.filter(
                 e => e.id !== action.payload.id
               )
