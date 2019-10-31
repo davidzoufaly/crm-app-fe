@@ -6,10 +6,11 @@ import WebFormList from "./WebFormList";
 import WebFormVisibleOrNot from "./WebFormVisibleOrNot";
 import WebFormSubSelect from "./WebFormSubSelect";
 import WebFormButtons from "./WebFormButtons";
-import globalVars from "../../../library/globalVariables"
+import WebFormReducer from "../../../reducers/webFormReducer";
+import globalVars from "../../../library/globalVariables";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
-import languages from "../../../library/languages";
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,98 +32,26 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const WebForm = ({ fields }) => {
-  
-  const initCounterValue = fields.map(e => e.order).sort((a,b) => b > a ? 1 : -1)[0];
+  const initCounterValue = fields
+    .map(e => e.order)
+    .sort((a, b) => (b > a ? 1 : -1))[0];
   const classes = useStyles({});
   const user = useContext(UserContext);
 
+  const [state, dispatch] = useReducer(WebFormReducer, fields);
   const [counter, setCounter] = useState(initCounterValue);
-  const [webFields, setWebFields] = useReducer((state, action) => {
-    switch (action.type) {
-      case "add":
-        return state.map(field =>
-          field.fieldName === action.payload.fieldName
-            ? { ...field, fieldInForm: true, order: counter }
-            : field
-        );
-
-      case "addVisibleSelect":
-        return state.map(field =>
-          field.fieldName === action.payload.fieldName
-            ? {
-                ...field,
-                fieldInForm: true,
-                fieldFormVisible: true,
-                pause: false,
-                order: counter
-              }
-            : field
-        );
-
-      case "addNotVisibleValue":
-        return state.map(field =>
-          field.pause
-            ? {
-                ...field,
-                fieldFormVisible: false
-              }
-            : field
-        );
-
-      case "addHiddenSelect":
-        return state.map(field =>
-          field.pause
-            ? {
-                ...field,
-                fieldInForm: true,
-                pause: false,
-                order: counter,
-                fieldOptions: field.fieldOptions.map(option =>
-                  option.value === action.payload.optionValue
-                    ? { ...option, preselected: true }
-                    : option
-                )
-              }
-            : field
-        );
-
-      case "pauseSelect":
-        return state.map(field =>
-          field.fieldName === action.payload.fieldName
-            ? { ...field, pause: true }
-            : field
-        );
-
-      case "remove":
-        return state.map(field =>
-          field.fieldName === action.payload.fieldName
-            ? {
-                ...field,
-                fieldInForm: false,
-                fieldFormVisible: null,
-                fieldOptions: field.fieldOptions.map(option =>
-                  option.preselected ? { ...option, preselected: null } : option
-                )
-              }
-            : field
-        );
-      default:
-        return state;
-    }
-  }, fields);
-
 
   const addNotSelect = e => {
-    webFields.map(field => {
+    state.map(field => {
       if (field.fieldName === e.target.value) {
         if (field.fieldType !== "select") {
-          setWebFields({
+          dispatch({
             type: "add",
-            payload: { fieldName: e.target.value }
+            payload: { fieldName: e.target.value, counter }
           });
           setCounter(prevCount => prevCount + 1);
         } else {
-          setWebFields({
+          dispatch({
             type: "pauseSelect",
             payload: { fieldName: e.target.value }
           });
@@ -132,68 +61,65 @@ const WebForm = ({ fields }) => {
   };
 
   const addVisibleSelect = e => {
-    setWebFields({
+    dispatch({
       type: "addVisibleSelect",
-      payload: { fieldName: e.currentTarget.id }
+      payload: { fieldName: e.currentTarget.id, counter }
     });
     setCounter(prevCount => prevCount + 1);
   };
 
   const addHiddenSelect = e => {
-    setWebFields({
+    dispatch({
       type: "addHiddenSelect",
-      payload: { optionValue: e.target.value }
+      payload: { optionValue: e.target.value, counter }
     });
     setCounter(prevCount => prevCount + 1);
   };
 
   const removeFromList = e => {
-    setWebFields({
+    dispatch({
       type: "remove",
       payload: { fieldName: e.currentTarget.id }
     });
   };
 
   const showOptionsOnClick = () => {
-    setWebFields({
+    dispatch({
       type: "addNotVisibleValue"
     });
   };
 
-  const saveFormAuto = async () => {
+  const saveFormAuto = async () => {
     await axios({
-          method: "PUT",
-          url: `${globalVars.serverURL}/fields`,
-          params: {key: user.user.userkey},
-          data: webFields,
-          responseType: "json"
-      })
-  }
+      method: "PUT",
+      url: `${globalVars.serverURL}/fields`,
+      params: { key: user.user.userkey },
+      data: state,
+      responseType: "json"
+    });
+  };
 
   useEffect(() => {
     //save fields (form) on change
-    webFields !== fields
-    ? saveFormAuto()
-    : null
-}, [webFields])
-
+    state !== fields ? saveFormAuto() : null;
+  }, [state]);
 
   return (
     <Box className={classes.formWrapper}>
-    <form>
-      <WebFormSelect webFields={webFields} addNotSelect={addNotSelect} />
-      <WebFormVisibleOrNot
-        webFields={webFields}
-        addVisibleSelect={addVisibleSelect}
-        showOptionsOnClick={showOptionsOnClick}
-      />
-      <WebFormSubSelect
-        webFields={webFields}
-        addHiddenSelect={addHiddenSelect}
-      />
-      <WebFormList webFields={webFields} removeFromList={removeFromList} />
-      <WebFormButtons webFields={webFields}/>
-    </form>
+      <form>
+        <WebFormSelect webFields={state} addNotSelect={addNotSelect} />
+        <WebFormVisibleOrNot
+          webFields={state}
+          addVisibleSelect={addVisibleSelect}
+          showOptionsOnClick={showOptionsOnClick}
+        />
+        <WebFormSubSelect
+          webFields={state}
+          addHiddenSelect={addHiddenSelect}
+        />
+        <WebFormList webFields={state} removeFromList={removeFromList} />
+        <WebFormButtons state={state} />
+      </form>
     </Box>
   );
 };

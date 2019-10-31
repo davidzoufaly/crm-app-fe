@@ -9,7 +9,7 @@ import SelectFieldOptions from "./SelectFieldOptions";
 import globalVars from "../../../library/globalVariables";
 import { Box } from "@material-ui/core";
 
-const CustomClientFields = ({ fields, addField, removeField }: any) => {
+const CustomClientFields = ({ fields, addField, deleteField }: any) => {
   const blankFieldObject = {
     fieldName: "",
     fieldType: "text",
@@ -154,7 +154,7 @@ const CustomClientFields = ({ fields, addField, removeField }: any) => {
     setEditedField({ type: "clear" });
   };
 
-  const deleteField = async (id: any) => {
+  const deleteFieldRes = async (id: any) => {
     const res = await axios({
       method: "DELETE",
       params: { key: user.user.userkey },
@@ -162,13 +162,13 @@ const CustomClientFields = ({ fields, addField, removeField }: any) => {
       responseType: "json"
     });
     const resData = await res.data;
-    resData.msg === globalVars.msgSuccess ? removeField(id) : null;
+    resData.msg === globalVars.msgSuccess ? deleteField(id) : null;
   };
 
   return (
     <Box mt="1rem" mb="5rem">
       <CustomFieldsList
-        deleteField={deleteField}
+        deleteFieldRes={deleteFieldRes}
         fields={fields}
         setupEditedField={fieldMethods.setupEditedField}
       />

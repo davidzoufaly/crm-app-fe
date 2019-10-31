@@ -7,7 +7,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 const CustomFieldsSection = ({
   toggleSection,
   addField,
-  removeField,
+  deleteField,
   sections,
   fields
 }: any) => (
@@ -31,7 +31,7 @@ const CustomFieldsSection = ({
       }
     />
     {sections.customFields || sections.customFields === undefined ? (
-      <CustomFields fields={fields} addField={addField} removeField={removeField}/>
+      <CustomFields fields={fields} addField={addField} deleteField={deleteField}/>
     ) : null}
   </Box>
 );

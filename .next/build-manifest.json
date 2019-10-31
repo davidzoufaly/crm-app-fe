@@ -12,11 +12,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/clients/[key]": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/emails/[key]": [
+    "/settings/[key]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

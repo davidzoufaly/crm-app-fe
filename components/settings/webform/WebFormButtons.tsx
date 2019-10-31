@@ -2,13 +2,14 @@ import axios from "axios";
 import UserContext from "../../UserContext";
 import globalVars from "../../../library/globalVariables";
 import languages from "../../../library/languages";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import {Button, Box, Typography} from "@material-ui/core"
 import GetAppIcon from '@material-ui/icons/GetApp';
 
 const WebFormButtons = ({ webFields }: any) => {
 
   const user = useContext(UserContext);
+  const showTip = useRef(null);
 
   const onDownload = async () => {
     const res = await axios({
@@ -24,14 +25,16 @@ const WebFormButtons = ({ webFields }: any) => {
     link.setAttribute("download", "crm-form.js");
     document.body.appendChild(link);
     link.click();
+
+    showTip.current.style.display = "block";
   };
 
   return (
     <>
+      <Typography ref={showTip} style={{display: "none"}}>{languages.en.webFormTip}</Typography>
       <Box display="flex" justifyContent="flex-end">
         <Button onClick={onDownload} variant="contained" color="primary" startIcon={<GetAppIcon/>}>{languages.en.donwloadForm}</Button>
       </Box>
-      <Typography>{languages.en.webFormTip}</Typography>
     </>
   );
 };

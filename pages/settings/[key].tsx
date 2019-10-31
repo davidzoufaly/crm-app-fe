@@ -1,6 +1,6 @@
 import Header from "../../components/Header";
 import { useRouter } from "next/router";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useReducer } from "react";
 import axios from "axios";
 import UserContext from "../../components/UserContext";
 import DefaultFieldsSection from "../../components/settings/DefaultFieldsSection";
@@ -14,10 +14,28 @@ import Typography from "@material-ui/core/Typography";
 
 const Settings = ({ dataFields, username, pass }: any) => {
   const router = useRouter();
-  const [fields, setField] = useState(dataFields);
   const [initialized, setInitialized] = useState(false);
   const [sections, setSection] = useState({});
   const user = useContext(UserContext);
+
+  const [fields, setField] = useReducer((state, action) => {
+    switch (action.type) {
+      case "addNewField":
+        return state.some(field => field._id === action.payload.obj._id)
+          ? state.map(field =>
+              field._id === action.payload.obj._id ? action.payload.obj : field
+            )
+          : [...state, action.payload.obj];
+      case "deleteField":
+          return state.filter(field => field._id !== action.payload.id);
+      default:
+        return state;
+    }
+  }, dataFields);
+
+  useEffect(() => {
+    console.log(fields);
+  }, [fields])
 
   const toggleSection = e => {
     setSection({
@@ -27,18 +45,18 @@ const Settings = ({ dataFields, username, pass }: any) => {
   };
 
   const addField = obj => {
-    setField(
-      fields.some(field => field._id === obj._id)
-        ? fields.map(field => (field._id === obj._id ? obj : field))
-        : [...fields, obj]
-    );
+    setField({
+        type: "addNewField",
+        payload: { obj } 
+    });
   };
 
-  const removeField = id => {
-    setField(
-      fields.filter(field => field._id !== id)
-    )
-  }
+  const deleteField = id => {
+    setField({
+      type: "deleteField",
+      payload: {id}
+    });
+  };
 
   useEffect(() => {
     //title from url
@@ -75,7 +93,7 @@ const Settings = ({ dataFields, username, pass }: any) => {
       />
       <CustomFieldsSection
         fields={fields}
-        removeField={removeField}
+        deleteField={deleteField}
         addField={addField}
         sections={sections}
         toggleSection={toggleSection}

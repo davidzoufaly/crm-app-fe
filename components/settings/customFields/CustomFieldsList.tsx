@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const CustomFields = ({ fields, setupEditedField, deleteField }: any) => {
+const CustomFields = ({ fields, setupEditedField, deleteFieldRes }: any) => {
   const classes = useStyles({});
 
   const separatedCustomFields = fields
@@ -103,7 +103,7 @@ const CustomFields = ({ fields, setupEditedField, deleteField }: any) => {
                       <Fab
                         size="small"
                         color="secondary"
-                        onClick={() => deleteField(_id)}
+                        onClick={() => deleteFieldRes(_id)}
                       >
                         <DeleteIcon />
                       </Fab>
