@@ -13,31 +13,32 @@ const SingleClientData = ({ fieldsData, client, onInputChange }: any) =>
     switch (field.fieldType) {
       case "text":
         return (
-            <TextField
-              key={field.fieldName}
-              name={field.fieldName}
-              label={field.fieldName}
-              fullWidth
-              margin="normal"
-              value={client[field.fieldName] || ""}
-              onChange={onInputChange}
-              disabled={
-                field.fieldName === "Date added" ||
-                field.fieldName === "Last modified"
-              }
-            />
+          <TextField
+            key={field.fieldName}
+            name={field.fieldName}
+            label={field.fieldName}
+            fullWidth
+            margin="normal"
+            value={client[field.fieldName] || ""}
+            onChange={onInputChange}
+            disabled={
+              field.fieldName === "Date added" ||
+              field.fieldName === "Last modified"
+            }
+          />
         );
       case "number":
         return (
-            <TextField
-              fullWidth
-              key={field.fieldName}
-              label={field.fieldName}
-              type="number"
-              name={field.fieldName}
-              value={client[field.fieldName] || ""}
-              onChange={onInputChange}
-            />
+          <TextField
+            fullWidth
+            key={field.fieldName}
+            label={field.fieldName}
+            type="number"
+            margin="normal"
+            name={field.fieldName}
+            value={client[field.fieldName] || ""}
+            onChange={onInputChange}
+          />
         );
       case "select":
         const fieldNameAsHtml = new stringMethods(field.fieldName)
@@ -52,9 +53,13 @@ const SingleClientData = ({ fieldsData, client, onInputChange }: any) =>
               onChange={onInputChange}
               id={fieldNameAsHtml}
             >
-              <MenuItem key={globalVars.blankOption} value="">{globalVars.blankOption}</MenuItem>
+              <MenuItem key={globalVars.blankOption} value="">
+                {globalVars.blankOption}
+              </MenuItem>
               {field.fieldOptions.map(option => (
-                <MenuItem key={option.id} value={option.value}>{option.value}</MenuItem>
+                <MenuItem key={option.id} value={option.value}>
+                  {option.value}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>

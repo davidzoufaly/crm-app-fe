@@ -3,6 +3,7 @@ import axios from "axios";
 import UserContext from "../UserContext";
 import TextInput from "./TextInput";
 import Button from "./Button";
+import LoadingSpinner from "../LoadingSpinner";
 import globalVars from "../../library/globalVariables";
 import languages from "../../library/languages";
 import stringMethods from "../../library/stringMethods";
@@ -11,6 +12,7 @@ import { Typography, Box } from "@material-ui/core";
 const LoginForm = () => {
   const [user, setUser] = useState({ username: "", password: "" });
   const userContext = useContext(UserContext);
+  const [logging, setLogging] = useState(false);
 
   const onChange = e => {
     e.target.name === "username"
@@ -19,6 +21,7 @@ const LoginForm = () => {
   };
 
   const onLogin = async () => {
+    setLogging(true);
     const userRes = await axios({
       method: "POST",
       data: user,
@@ -26,6 +29,7 @@ const LoginForm = () => {
       responseType: "json"
     });
     const userData = await userRes.data;
+    userData ? setLogging(false) : null;
     if (userData.msg === "Success") {
       userContext.setUser(userData.key);
     } else {
@@ -56,7 +60,13 @@ const LoginForm = () => {
           title={languages.en.password}
         />
         <Box mt="2rem" display="flex" justifyContent="flex-end">
-          <Button onClick={onLogin} text={languages.en.login} variant="contained" />
+          {logging ? <LoadingSpinner margin={"r"} level={1} /> : null}
+          <Button
+            onClick={onLogin}
+            text={languages.en.login}
+            variant={"contained"}
+            disabled={logging}
+          />
         </Box>
       </form>
     </>
