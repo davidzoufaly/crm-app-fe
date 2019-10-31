@@ -33,7 +33,7 @@ const WebFormSelect = ({ state, dispatch, counter, setCounter }) => {
           <Select
             name="fields"
             id="field-select"
-            onChange={() => handleAddingToWF(dispatch, state, counter, setCounter, event)}
+            onChange={(event) => handleAddingToWF(dispatch, state, counter, setCounter, event)}
             value=""
           >
             {selectOptions}

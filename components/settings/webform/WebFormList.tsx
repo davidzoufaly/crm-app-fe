@@ -44,7 +44,7 @@ const WebFormList = ({ state, dispatch }) => {
             <Typography>
               <IconButton
                 id={fieldName}
-                onClick={() => removeFromList(dispatch, event)}
+                onClick={(event) => removeFromList(dispatch, event)}
                 color="secondary"
                 aria-label="delete"
                 style={{ marginRight: "1rem" }}

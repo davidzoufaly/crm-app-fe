@@ -32,14 +32,14 @@ var deleteField = function deleteField(dispatch, id) {
     }
   });
 };
-var handleAddingToWF = function handleAddingToWF(dispatch, state, counter, setCounter, e) {
+var handleAddingToWF = function handleAddingToWF(dispatch, state, counter, setCounter, event) {
   state.map(function (field) {
-    if (field.fieldName === e.target.getAttribute("data-value")) {
+    if (field.fieldName === event.target.value) {
       if (field.fieldType !== "select") {
         dispatch({
           type: "addToWF",
           payload: {
-            fieldName: e.target.getAttribute("data-value"),
+            fieldName: event.target.value,
             counter: counter
           }
         });
@@ -50,7 +50,7 @@ var handleAddingToWF = function handleAddingToWF(dispatch, state, counter, setCo
         dispatch({
           type: "pauseSelect",
           payload: {
-            fieldName: e.target.getAttribute("data-value")
+            fieldName: event.target.value
           }
         });
       }
@@ -68,11 +68,11 @@ var addVisibleSelect = function addVisibleSelect(dispatch, setCounter, counter) 
     return prevCount + 1;
   });
 };
-var addHiddenSelect = function addHiddenSelect(dispatch, setCounter, counter, e) {
+var addHiddenSelect = function addHiddenSelect(dispatch, setCounter, counter, event) {
   dispatch({
     type: "addHiddenSelectWF",
     payload: {
-      optionValue: e.target.getAttribute("data-value"),
+      optionValue: event.target.value,
       counter: counter
     }
   });
@@ -80,13 +80,11 @@ var addHiddenSelect = function addHiddenSelect(dispatch, setCounter, counter, e)
     return prevCount + 1;
   });
 };
-var removeFromList = function removeFromList(dispatch, e) {
-  console.log(e.target);
-  console.log(e.currentTarget);
+var removeFromList = function removeFromList(dispatch, event) {
   dispatch({
     type: "removeFromWF",
     payload: {
-      fieldName: e.target.id
+      fieldName: event.currentTarget.id
     }
   });
 };
@@ -991,6 +989,7 @@ var CustomFields = function CustomFields(_ref) {
           return el.id === action.payload.id && el.preselected;
         }) ? Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_3__["default"])({}, state, {
           fieldInForm: false,
+          fieldFormVisible: null,
           fieldOptions: state.fieldOptions.filter(function (e) {
             return e.id !== action.payload.id;
           })
@@ -1230,7 +1229,7 @@ var CustomFields = function CustomFields(_ref) {
     mb: "5rem",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 182
+      lineNumber: 183
     },
     __self: this
   }, __jsx(_CustomFieldsList__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -1239,7 +1238,7 @@ var CustomFields = function CustomFields(_ref) {
     setupEditedField: fieldMethods.setupEditedField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 183
+      lineNumber: 184
     },
     __self: this
   }), __jsx(_AddOrEditField__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -1251,13 +1250,13 @@ var CustomFields = function CustomFields(_ref) {
       fieldMethods: fieldMethods,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 193
+        lineNumber: 194
       },
       __self: this
     }),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 188
+      lineNumber: 189
     },
     __self: this
   }));
@@ -2507,7 +2506,7 @@ var WebFormList = function WebFormList(_ref) {
       __self: this
     }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["IconButton"], {
       id: fieldName,
-      onClick: function onClick() {
+      onClick: function onClick(event) {
         return Object(_actions_fieldsAction__WEBPACK_IMPORTED_MODULE_4__["removeFromList"])(dispatch, event);
       },
       color: "secondary",
@@ -2748,7 +2747,7 @@ var WebFormSelect = function WebFormSelect(_ref) {
   }, _library_languages__WEBPACK_IMPORTED_MODULE_1__["default"].en.fieldName), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Select"], {
     name: "fields",
     id: "field-select",
-    onChange: function onChange() {
+    onChange: function onChange(event) {
       return Object(_actions_fieldsAction__WEBPACK_IMPORTED_MODULE_2__["handleAddingToWF"])(dispatch, state, counter, setCounter, event);
     },
     value: "",
@@ -2847,7 +2846,7 @@ var WebFormSubSelect = function WebFormSubSelect(_ref) {
     __self: this
   }, _library_languages__WEBPACK_IMPORTED_MODULE_1__["default"].en.fieldName), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Select"], {
     id: "field-sub-select",
-    onChange: function onChange() {
+    onChange: function onChange(event) {
       return Object(_actions_fieldsAction__WEBPACK_IMPORTED_MODULE_2__["addHiddenSelect"])(dispatch, setCounter, counter, event);
     },
     value: "",
@@ -62674,7 +62673,7 @@ var fieldsReducer = function fieldsReducer(state, action) {
 
 /***/ }),
 
-/***/ 0:
+/***/ 2:
 /*!************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fsettings%2F%5Bkey%5D&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Fsettings%2F%5Bkey%5D.tsx ***!
   \************************************************************************************************************************************************************************/
@@ -62697,5 +62696,5 @@ module.exports = dll_b35e09dc2ca94ac6d9c1;
 
 /***/ })
 
-},[[0,"static/runtime/webpack.js"]]]);
+},[[2,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=[key].js.map

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -125,14 +125,14 @@ const deleteField = (dispatch, id) => {
     }
   });
 };
-const handleAddingToWF = (dispatch, state, counter, setCounter, e) => {
+const handleAddingToWF = (dispatch, state, counter, setCounter, event) => {
   state.map(field => {
-    if (field.fieldName === e.target.getAttribute("data-value")) {
+    if (field.fieldName === event.target.value) {
       if (field.fieldType !== "select") {
         dispatch({
           type: "addToWF",
           payload: {
-            fieldName: e.target.getAttribute("data-value"),
+            fieldName: event.target.value,
             counter
           }
         });
@@ -141,7 +141,7 @@ const handleAddingToWF = (dispatch, state, counter, setCounter, e) => {
         dispatch({
           type: "pauseSelect",
           payload: {
-            fieldName: e.target.getAttribute("data-value")
+            fieldName: event.target.value
           }
         });
       }
@@ -157,23 +157,21 @@ const addVisibleSelect = (dispatch, setCounter, counter) => {
   });
   setCounter(prevCount => prevCount + 1);
 };
-const addHiddenSelect = (dispatch, setCounter, counter, e) => {
+const addHiddenSelect = (dispatch, setCounter, counter, event) => {
   dispatch({
     type: "addHiddenSelectWF",
     payload: {
-      optionValue: e.target.getAttribute("data-value"),
+      optionValue: event.target.value,
       counter
     }
   });
   setCounter(prevCount => prevCount + 1);
 };
-const removeFromList = (dispatch, e) => {
-  console.log(e.target);
-  console.log(e.currentTarget);
+const removeFromList = (dispatch, event) => {
   dispatch({
     type: "removeFromWF",
     payload: {
-      fieldName: e.target.id
+      fieldName: event.currentTarget.id
     }
   });
 };
@@ -1077,6 +1075,7 @@ const CustomFields = ({
         // if option with preselected in form being delete, remove field from form
         return state.fieldInForm && state.fieldOptions.some(el => el.id === action.payload.id && el.preselected) ? Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
           fieldInForm: false,
+          fieldFormVisible: null,
           fieldOptions: state.fieldOptions.filter(e => e.id !== action.payload.id)
         }) : Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
           fieldOptions: state.fieldOptions.filter(e => e.id !== action.payload.id)
@@ -1229,7 +1228,7 @@ const CustomFields = ({
     mb: "5rem",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 182
+      lineNumber: 183
     },
     __self: undefined
   }, __jsx(_CustomFieldsList__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -1238,7 +1237,7 @@ const CustomFields = ({
     setupEditedField: fieldMethods.setupEditedField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 183
+      lineNumber: 184
     },
     __self: undefined
   }), __jsx(_AddOrEditField__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -1250,13 +1249,13 @@ const CustomFields = ({
       fieldMethods: fieldMethods,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 193
+        lineNumber: 194
       },
       __self: undefined
     }),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 188
+      lineNumber: 189
     },
     __self: undefined
   }));
@@ -2410,7 +2409,7 @@ const WebFormList = ({
       __self: undefined
     }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["IconButton"], {
       id: fieldName,
-      onClick: () => Object(_actions_fieldsAction__WEBPACK_IMPORTED_MODULE_4__["removeFromList"])(dispatch, event),
+      onClick: event => Object(_actions_fieldsAction__WEBPACK_IMPORTED_MODULE_4__["removeFromList"])(dispatch, event),
       color: "secondary",
       "aria-label": "delete",
       style: {
@@ -2645,7 +2644,7 @@ const WebFormSelect = ({
   }, _library_languages__WEBPACK_IMPORTED_MODULE_1__["default"].en.fieldName), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Select"], {
     name: "fields",
     id: "field-select",
-    onChange: () => Object(_actions_fieldsAction__WEBPACK_IMPORTED_MODULE_2__["handleAddingToWF"])(dispatch, state, counter, setCounter, event),
+    onChange: event => Object(_actions_fieldsAction__WEBPACK_IMPORTED_MODULE_2__["handleAddingToWF"])(dispatch, state, counter, setCounter, event),
     value: "",
     __source: {
       fileName: _jsxFileName,
@@ -2738,7 +2737,7 @@ const WebFormSubSelect = ({
     __self: undefined
   }, _library_languages__WEBPACK_IMPORTED_MODULE_1__["default"].en.fieldName), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Select"], {
     id: "field-sub-select",
-    onChange: () => Object(_actions_fieldsAction__WEBPACK_IMPORTED_MODULE_2__["addHiddenSelect"])(dispatch, setCounter, counter, event),
+    onChange: event => Object(_actions_fieldsAction__WEBPACK_IMPORTED_MODULE_2__["addHiddenSelect"])(dispatch, setCounter, counter, event),
     value: "",
     __source: {
       fileName: _jsxFileName,
@@ -5348,7 +5347,7 @@ const fieldsReducer = (state, action) => {
 
 /***/ }),
 
-/***/ 3:
+/***/ 5:
 /*!****************************************!*\
   !*** multi ./pages/settings/[key].tsx ***!
   \****************************************/
