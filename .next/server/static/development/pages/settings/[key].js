@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2108,9 +2108,9 @@ const EmailSettingsSection = ({
 
 /***/ }),
 
-/***/ "./components/settings/webform/WebForm.tsx":
+/***/ "./components/settings/webForm/WebForm.tsx":
 /*!*************************************************!*\
-  !*** ./components/settings/webform/WebForm.tsx ***!
+  !*** ./components/settings/webForm/WebForm.tsx ***!
   \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -2122,17 +2122,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _UserContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../UserContext */ "./components/UserContext.tsx");
-/* harmony import */ var _WebFormSelect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./WebFormSelect */ "./components/settings/webform/WebFormSelect.tsx");
-/* harmony import */ var _WebFormList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./WebFormList */ "./components/settings/webform/WebFormList.tsx");
-/* harmony import */ var _WebFormVisibleOrNot__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./WebFormVisibleOrNot */ "./components/settings/webform/WebFormVisibleOrNot.tsx");
-/* harmony import */ var _WebFormSubSelect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./WebFormSubSelect */ "./components/settings/webform/WebFormSubSelect.tsx");
-/* harmony import */ var _WebFormButtons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./WebFormButtons */ "./components/settings/webform/WebFormButtons.tsx");
+/* harmony import */ var _WebFormSelect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./WebFormSelect */ "./components/settings/webForm/WebFormSelect.tsx");
+/* harmony import */ var _WebFormList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./WebFormList */ "./components/settings/webForm/WebFormList.tsx");
+/* harmony import */ var _WebFormVisibleOrNot__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./WebFormVisibleOrNot */ "./components/settings/webForm/WebFormVisibleOrNot.tsx");
+/* harmony import */ var _WebFormSubSelect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./WebFormSubSelect */ "./components/settings/webForm/WebFormSubSelect.tsx");
+/* harmony import */ var _WebFormButtons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./WebFormButtons */ "./components/settings/webForm/WebFormButtons.tsx");
 /* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../library/globalVariables */ "./library/globalVariables.tsx");
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webform/WebForm.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webForm/WebForm.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -2256,9 +2256,9 @@ const WebForm = ({
 
 /***/ }),
 
-/***/ "./components/settings/webform/WebFormButtons.tsx":
+/***/ "./components/settings/webForm/WebFormButtons.tsx":
 /*!********************************************************!*\
-  !*** ./components/settings/webform/WebFormButtons.tsx ***!
+  !*** ./components/settings/webForm/WebFormButtons.tsx ***!
   \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -2276,7 +2276,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _material_ui_icons_GetApp__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/icons/GetApp */ "@material-ui/icons/GetApp");
 /* harmony import */ var _material_ui_icons_GetApp__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_GetApp__WEBPACK_IMPORTED_MODULE_6__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webform/WebFormButtons.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webForm/WebFormButtons.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -2353,9 +2353,9 @@ const WebFormButtons = ({
 
 /***/ }),
 
-/***/ "./components/settings/webform/WebFormList.tsx":
+/***/ "./components/settings/webForm/WebFormList.tsx":
 /*!*****************************************************!*\
-  !*** ./components/settings/webform/WebFormList.tsx ***!
+  !*** ./components/settings/webForm/WebFormList.tsx ***!
   \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -2370,7 +2370,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_HighlightOff__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/HighlightOff */ "@material-ui/icons/HighlightOff");
 /* harmony import */ var _material_ui_icons_HighlightOff__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_HighlightOff__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _actions_fieldsAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/fieldsAction */ "./actions/fieldsAction.tsx");
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webform/WebFormList.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webForm/WebFormList.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -2476,9 +2476,9 @@ const WebFormList = ({
 
 /***/ }),
 
-/***/ "./components/settings/webform/WebFormSection.tsx":
+/***/ "./components/settings/webForm/WebFormSection.tsx":
 /*!********************************************************!*\
-  !*** ./components/settings/webform/WebFormSection.tsx ***!
+  !*** ./components/settings/webForm/WebFormSection.tsx ***!
   \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -2487,7 +2487,7 @@ const WebFormList = ({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _WebForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WebForm */ "./components/settings/webform/WebForm.tsx");
+/* harmony import */ var _WebForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WebForm */ "./components/settings/webForm/WebForm.tsx");
 /* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../library/languages */ "./library/languages.tsx");
 /* harmony import */ var _material_ui_icons_KeyboardArrowRight__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/KeyboardArrowRight */ "@material-ui/icons/KeyboardArrowRight");
 /* harmony import */ var _material_ui_icons_KeyboardArrowRight__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_KeyboardArrowRight__WEBPACK_IMPORTED_MODULE_3__);
@@ -2495,7 +2495,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_KeyboardArrowDown__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_KeyboardArrowDown__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webform/WebFormSection.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webForm/WebFormSection.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -2570,9 +2570,9 @@ const WebFormSection = ({
 
 /***/ }),
 
-/***/ "./components/settings/webform/WebFormSelect.tsx":
+/***/ "./components/settings/webForm/WebFormSelect.tsx":
 /*!*******************************************************!*\
-  !*** ./components/settings/webform/WebFormSelect.tsx ***!
+  !*** ./components/settings/webForm/WebFormSelect.tsx ***!
   \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -2585,7 +2585,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_fieldsAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/fieldsAction */ "./actions/fieldsAction.tsx");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webform/WebFormSelect.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webForm/WebFormSelect.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -2664,9 +2664,9 @@ const WebFormSelect = ({
 
 /***/ }),
 
-/***/ "./components/settings/webform/WebFormSubSelect.tsx":
+/***/ "./components/settings/webForm/WebFormSubSelect.tsx":
 /*!**********************************************************!*\
-  !*** ./components/settings/webform/WebFormSubSelect.tsx ***!
+  !*** ./components/settings/webForm/WebFormSubSelect.tsx ***!
   \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -2679,7 +2679,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_fieldsAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/fieldsAction */ "./actions/fieldsAction.tsx");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webform/WebFormSubSelect.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webForm/WebFormSubSelect.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -2759,9 +2759,9 @@ const WebFormSubSelect = ({
 
 /***/ }),
 
-/***/ "./components/settings/webform/WebFormVisibleOrNot.tsx":
+/***/ "./components/settings/webForm/WebFormVisibleOrNot.tsx":
 /*!*************************************************************!*\
-  !*** ./components/settings/webform/WebFormVisibleOrNot.tsx ***!
+  !*** ./components/settings/webForm/WebFormVisibleOrNot.tsx ***!
   \*************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -2774,7 +2774,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../library/languages */ "./library/languages.tsx");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webform/WebFormVisibleOrNot.tsx";
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/settings/webForm/WebFormVisibleOrNot.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -5113,7 +5113,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_settings_customFields_CustomFieldsSection__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/settings/customFields/CustomFieldsSection */ "./components/settings/customFields/CustomFieldsSection.tsx");
 /* harmony import */ var _components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/LoadingSpinner */ "./components/LoadingSpinner.tsx");
 /* harmony import */ var _components_settings_emailSettings_EmailSettingsSection__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/settings/emailSettings/EmailSettingsSection */ "./components/settings/emailSettings/EmailSettingsSection.tsx");
-/* harmony import */ var _components_settings_webform_WebFormSection__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/settings/webform/WebFormSection */ "./components/settings/webform/WebFormSection.tsx");
+/* harmony import */ var _components_settings_webForm_WebFormSection__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/settings/webForm/WebFormSection */ "./components/settings/webForm/WebFormSection.tsx");
 /* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../library/globalVariables */ "./library/globalVariables.tsx");
 /* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../library/stringMethods */ "./library/stringMethods.tsx");
 /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/Typography */ "@material-ui/core/Typography");
@@ -5228,7 +5228,7 @@ const Settings = ({
       lineNumber: 70
     },
     __self: undefined
-  }), __jsx(_components_settings_webform_WebFormSection__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }), __jsx(_components_settings_webForm_WebFormSection__WEBPACK_IMPORTED_MODULE_11__["default"], {
     state: state,
     dispatch: dispatch,
     toggleSection: toggleSection,
@@ -5347,7 +5347,7 @@ const fieldsReducer = (state, action) => {
 
 /***/ }),
 
-/***/ 5:
+/***/ 8:
 /*!****************************************!*\
   !*** multi ./pages/settings/[key].tsx ***!
   \****************************************/

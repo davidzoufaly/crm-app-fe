@@ -8,7 +8,7 @@ import DefaultFieldsSection from "../../components/settings/DefaultFieldsSection
 import CustomFieldsSection from "../../components/settings/customFields/CustomFieldsSection";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import EmailSettingsSection from "../../components/settings/emailSettings/EmailSettingsSection";
-import WebFormSection from "../../components/settings/webform/WebFormSection";
+import WebFormSection from "../../components/settings/webForm/WebFormSection";
 import globalVars from "../../library/globalVariables";
 import stringMethods from "../../library/stringMethods";
 import Typography from "@material-ui/core/Typography";

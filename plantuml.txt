@@ -1,0 +1,138 @@
+@startuml
+class Clients << (P,yellow) page>> {
+  ==props==
+  #clientData:object
+  #fieldData:object
+  ==state==
+  #initialized:boolean
+  #isClientAdded:boolean
+  #isEmailCreated:boolean
+  #clients:object
+  #sort:object
+  +user:object
+  ==methods==
+  #filterCheckedClients()
+  +sortBy()
+  +handleCheckbox(id:string)
+  +addNewClientToState()
+  +unCheckAll()
+  +toggleIsEmailCreated()
+  +toggleIsClientAdded()
+  +deleteMultipleClients()
+}
+
+class stringMethods << (H,red) helper class>> {
+  ==attributes==
+  + string : string
+  ==methods==
+  + camelStringToText():this
+  + firstCharUpperCase():this
+  + removeSlash():this
+  + addStringToEnd():this
+  + textToCamelString():this
+  + textToHtmlProp():this
+  + replaceStringDiacritics():this
+  + removeSlashAndTextAfter():this
+  + getString():this
+}
+
+class TableBody << (C, blue) component >> {
+  ==props==
+  #clients:object
+  #sort:object
+  #fields:object
+  #handleCheckbox()
+  ==methods==
+  +handleCheckbox(id:string)
+  #tableItem()
+}
+
+class TableHead << (c, blue) component >> {
+  ==props==
+  #fields:object
+  #sort:object
+  #sortBy()
+  ==methods==
+  +sortBy(fieldName:string)
+}
+
+class CreateClient << (C, blue) component >> {
+  ==props==
+  #fields:object
+  #isClientAdded:boolean
+  #toggleIsClientAdded()
+  #addNewClientToState()
+  ==state==
+  #submitting:boolean
+  +user:object
+  +newClient:object
+  ==methods==
+  +onChange(e)
+  #onSubmit(e)
+  #submitNewClient()
+  #onCancel()
+  #toggleIsClientAdded()
+  #addNewClientToState(newClient:object)
+}
+
+class ClientForm << (C, blue) component >> {
+    ==props==
+    #fields
+    #newClient
+    #onChange()
+    ==methods==
+    +onChange()
+}
+
+class EmailForm << (C, blue) component >> {
+  ==props==
+  #to:array
+  #isEmailCreated:boolean
+  #toggleIsEmailCreated()
+  #unCheckAll()
+  ==state==
+  #email:object
+  #spinner:boolean
+  +user:object
+  ==methods==
+  #sendEmail(email:object)
+  #onChange(e)
+  + toggleIsEmailCreated()
+  + unCheckAll()
+}
+
+class Buttons << (C, blue) component >> {
+  ==props==
+  #clientsAreNotChecked:boolean
+  #isClientAdded:boolean
+  #isEmailCreated:boolean
+  #deleteMultipleClients()
+  #toggleIsClientAdded()
+  #toggleIsEmailCreated()
+  ==methods==
+  +toggleIsEmailCreated()
+  +deleteMultipleClients()
+  +toggleIsClientAdded()
+}
+
+Clients "toggleIsEmailCreated, unCheckAll" <.. EmailForm
+Clients o-- EmailForm
+
+Clients "toggleIsClientAdded, deleteMultipleClients, toggleIsEmailCreated" <.. Buttons
+Clients o-- Buttons
+
+CreateClient "onChange" <.. ClientForm
+CreateClient o-- ClientForm
+
+Clients "toggleIsClientAdded, addNewClientToState" <.. CreateClient
+Clients o-- CreateClient
+
+Clients "handleChekcbox" <.. TableBody
+Clients o-- TableBody
+
+stringMethods ..> Clients
+
+Clients "sortBy" <.. TableHead
+Clients o-- TableHead
+
+
