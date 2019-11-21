@@ -29,7 +29,7 @@ const LoginForm = () => {
       responseType: "json"
     });
     const userData = await userRes.data;
-    userData ? setLogging(false) : null;
+    setLogging(!!!userData) 
     if (userData.msg === "Success") {
       userContext.setUser(userData.key);
     } else {

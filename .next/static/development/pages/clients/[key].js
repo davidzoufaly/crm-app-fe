@@ -760,7 +760,7 @@ var Buttons = function Buttons(_ref) {
   return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Box"], {
     my: "1rem",
     display: "flex",
-    width: "370px",
+    width: "320px",
     maxWidth: "1",
     justifyContent: "space-between",
     __source: {
@@ -785,7 +785,7 @@ var Buttons = function Buttons(_ref) {
       lineNumber: 23
     },
     __self: this
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.addNew), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.add), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
     variant: "contained",
     color: "primary",
     onClick: toggleIsEmailCreated,
@@ -78604,7 +78604,8 @@ var Clients = function Clients(_ref) {
       setClients = _useReducer[1];
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])({
-    sortBy: "First name",
+    //default sort by "date added"
+    sortBy: "Date added",
     reverse: true
   }),
       sort = _useState[0],
@@ -78725,19 +78726,19 @@ var Clients = function Clients(_ref) {
   return !user.user.signedIn && !initialized ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_16__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 137
+      lineNumber: 138
     },
     __self: this
   }) : __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 139
+      lineNumber: 140
     },
     __self: this
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_7__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 140
+      lineNumber: 141
     },
     __self: this
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_17__["Typography"], {
@@ -78745,7 +78746,7 @@ var Clients = function Clients(_ref) {
     variant: "h3",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 141
+      lineNumber: 142
     },
     __self: this
   }, h1), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_17__["Typography"], {
@@ -78756,7 +78757,7 @@ var Clients = function Clients(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 144
+      lineNumber: 145
     },
     __self: this
   }, _library_languages__WEBPACK_IMPORTED_MODULE_19__["default"].en.saved, " ", clients.length), __jsx(_components_EmailForm__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -78768,7 +78769,7 @@ var Clients = function Clients(_ref) {
     unCheckAll: unCheckAll,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 147
+      lineNumber: 148
     },
     __self: this
   }), __jsx(_components_clients_CreateClient__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -78778,7 +78779,7 @@ var Clients = function Clients(_ref) {
     addNewClientToState: addNewClientToState,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 153
+      lineNumber: 154
     },
     __self: this
   }), __jsx(_components_clients_Buttons__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -78792,7 +78793,7 @@ var Clients = function Clients(_ref) {
     isEmailCreated: isEmailCreated,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 159
+      lineNumber: 160
     },
     __self: this
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_17__["Box"], {
@@ -78800,7 +78801,7 @@ var Clients = function Clients(_ref) {
     overflow: "auto",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 167
+      lineNumber: 168
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_17__["Table"], {
@@ -78812,7 +78813,7 @@ var Clients = function Clients(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 168
+      lineNumber: 169
     },
     __self: this
   }, __jsx(_components_clients_TableHead__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -78821,13 +78822,13 @@ var Clients = function Clients(_ref) {
     sort: sort,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 173
+      lineNumber: 174
     },
     __self: this
   }), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_18__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 174
+      lineNumber: 175
     },
     __self: this
   }, __jsx(_components_clients_TableBody__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -78837,7 +78838,7 @@ var Clients = function Clients(_ref) {
     handleCheckbox: handleCheckbox,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 175
+      lineNumber: 176
     },
     __self: this
   })))));

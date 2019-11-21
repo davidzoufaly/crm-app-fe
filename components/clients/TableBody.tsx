@@ -4,7 +4,7 @@ import uniqid from "uniqid";
 import UserContext from "../UserContext";
 import languages from "../../library/languages";
 import PersonIcon from '@material-ui/icons/Person';
-import {TableCell, TableRow, Checkbox, Button, Typography} from '@material-ui/core';
+import {TableCell, TableRow, Checkbox, Button } from '@material-ui/core';
 
 const TableBody = ({ clients, sort, fields, handleCheckbox }: any) => {
   const { sortBy, reverse } = sort;

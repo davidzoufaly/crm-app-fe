@@ -41,7 +41,8 @@ const Clients = ({ fieldData, clientData }: any) => {
   }, clientData);
 
   const [sort, setSort] = useState({
-    sortBy: "First name",
+    //default sort by "date added"
+    sortBy: "Date added",
     reverse: true
   });
 

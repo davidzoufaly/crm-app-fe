@@ -16,7 +16,7 @@ const Buttons = ({
   <Box
     my="1rem"
     display="flex"
-    width="370px"
+    width="320px"
     maxWidth="1"
     justifyContent="space-between"
   >
@@ -27,7 +27,7 @@ const Buttons = ({
       onClick={toggleIsClientAdded}
       startIcon={<AddIcon />}
     >
-      {languages.en.addNew}
+      {languages.en.add}
     </Button>
     <Button
       variant="contained"

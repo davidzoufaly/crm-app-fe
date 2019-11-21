@@ -822,7 +822,7 @@ const Buttons = ({
 }) => __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Box"], {
   my: "1rem",
   display: "flex",
-  width: "370px",
+  width: "320px",
   maxWidth: "1",
   justifyContent: "space-between",
   __source: {
@@ -847,7 +847,7 @@ const Buttons = ({
     lineNumber: 23
   },
   __self: undefined
-}, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.addNew), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
+}, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.add), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
   variant: "contained",
   color: "primary",
   onClick: toggleIsEmailCreated,
@@ -3897,7 +3897,8 @@ const Clients = ({
     0: sort,
     1: setSort
   } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
-    sortBy: "First name",
+    //default sort by "date added"
+    sortBy: "Date added",
     reverse: true
   });
   const {
@@ -3987,19 +3988,19 @@ const Clients = ({
   return !user.user.signedIn && !initialized ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_13__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 137
+      lineNumber: 138
     },
     __self: undefined
   }) : __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 139
+      lineNumber: 140
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 140
+      lineNumber: 141
     },
     __self: undefined
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["Typography"], {
@@ -4007,7 +4008,7 @@ const Clients = ({
     variant: "h3",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 141
+      lineNumber: 142
     },
     __self: undefined
   }, h1), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["Typography"], {
@@ -4018,7 +4019,7 @@ const Clients = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 144
+      lineNumber: 145
     },
     __self: undefined
   }, _library_languages__WEBPACK_IMPORTED_MODULE_16__["default"].en.saved, " ", clients.length), __jsx(_components_EmailForm__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -4028,7 +4029,7 @@ const Clients = ({
     unCheckAll: unCheckAll,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 147
+      lineNumber: 148
     },
     __self: undefined
   }), __jsx(_components_clients_CreateClient__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -4038,7 +4039,7 @@ const Clients = ({
     addNewClientToState: addNewClientToState,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 153
+      lineNumber: 154
     },
     __self: undefined
   }), __jsx(_components_clients_Buttons__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -4050,7 +4051,7 @@ const Clients = ({
     isEmailCreated: isEmailCreated,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 159
+      lineNumber: 160
     },
     __self: undefined
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["Box"], {
@@ -4058,7 +4059,7 @@ const Clients = ({
     overflow: "auto",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 167
+      lineNumber: 168
     },
     __self: undefined
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["Table"], {
@@ -4070,7 +4071,7 @@ const Clients = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 168
+      lineNumber: 169
     },
     __self: undefined
   }, __jsx(_components_clients_TableHead__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -4079,13 +4080,13 @@ const Clients = ({
     sort: sort,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 173
+      lineNumber: 174
     },
     __self: undefined
   }), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_15___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 174
+      lineNumber: 175
     },
     __self: undefined
   }, __jsx(_components_clients_TableBody__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -4095,7 +4096,7 @@ const Clients = ({
     handleCheckbox: handleCheckbox,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 175
+      lineNumber: 176
     },
     __self: undefined
   })))));
