@@ -88,284 +88,10 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "./components/EmailForm.tsx":
-/*!**********************************!*\
-  !*** ./components/EmailForm.tsx ***!
-  \**********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _UserContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserContext */ "./components/UserContext.tsx");
-/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../library/languages */ "./library/languages.tsx");
-/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../library/globalVariables */ "./library/globalVariables.tsx");
-/* harmony import */ var _LoadingSpinner__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./LoadingSpinner */ "./components/LoadingSpinner.tsx");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _material_ui_icons_Send__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/icons/Send */ "@material-ui/icons/Send");
-/* harmony import */ var _material_ui_icons_Send__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Send__WEBPACK_IMPORTED_MODULE_9__);
-
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/EmailForm.tsx";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
-
-
-
-
-
-
-
-
-
-const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__["makeStyles"])(theme => Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__["createStyles"])({
-  formWrapper: {
-    marginTop: theme.spacing(3),
-    borderRadius: theme.spacing(1),
-    padding: theme.spacing(3),
-    boxShadow: theme.shadows["1"],
-    backgroundColor: theme.palette.grey["200"],
-    width: "50%",
-    [theme.breakpoints.down("sm")]: {
-      width: "100%"
-    }
-  },
-  textField: {
-    marginTop: theme.spacing(2)
-  }
-}));
-
-const EmailForm = ({
-  to,
-  isEmailCreated,
-  toggleIsEmailCreated,
-  unCheckAll
-}) => {
-  const initEmail = {
-    to: to,
-    subject: "",
-    message: ""
-  };
-  const {
-    0: email,
-    1: setEmail
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(initEmail);
-  const {
-    0: spinner,
-    1: setSpinner
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
-  const user = Object(react__WEBPACK_IMPORTED_MODULE_1__["useContext"])(_UserContext__WEBPACK_IMPORTED_MODULE_3__["default"]);
-  const classes = useStyles({});
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
-    setEmail(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, email, {
-      to: to
-    }));
-  }, [to]);
-
-  const sendEmail = async e => {
-    e.preventDefault();
-    setSpinner(true);
-    const res = await axios__WEBPACK_IMPORTED_MODULE_2___default()({
-      method: "post",
-      data: email,
-      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_5__["default"].serverURL}/emails/send`,
-      params: {
-        key: user.user.userkey
-      },
-      responseType: "json"
-    });
-    const data = await res.data;
-    data ? setSpinner(false) : null;
-
-    if (data === _library_globalVariables__WEBPACK_IMPORTED_MODULE_5__["default"].msgSuccess || data === "Setup your email settings first") {
-      setEmail(initEmail);
-      toggleIsEmailCreated(); // if email is sending from clients page
-
-      unCheckAll ? unCheckAll() : null;
-      data === _library_globalVariables__WEBPACK_IMPORTED_MODULE_5__["default"].msgSuccess ? alert(_library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.yourEmailSentSucces) : alert(_library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.setupYourEmailSettings);
-    } else {
-      alert(_library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.somethingWentWrong);
-    }
-  };
-
-  const onChange = e => {
-    setEmail(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, email, {
-      [e.target.name]: e.target.value
-    }));
-  };
-
-  return isEmailCreated && to.length > 0 ? __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Box"], {
-    className: classes.formWrapper,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 81
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Typography"], {
-    component: "h2",
-    variant: "h4",
-    gutterBottom: true,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 82
-    },
-    __self: undefined
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.email), __jsx("form", {
-    onSubmit: sendEmail,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 85
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Grid"], {
-    container: true,
-    spacing: 2,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 86
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Grid"], {
-    item: true,
-    xs: 12,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 87
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
-    type: "text",
-    id: "email-to",
-    margin: "normal",
-    fullWidth: true,
-    multiline: true,
-    label: _library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.to,
-    name: "to",
-    value: email.to,
-    disabled: true,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 88
-    },
-    __self: undefined
-  })), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Grid"], {
-    item: true,
-    xs: 12,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 100
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
-    type: "text",
-    id: "email-subject",
-    name: "subject",
-    margin: "normal",
-    fullWidth: true,
-    label: _library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.subject,
-    autoFocus: true,
-    value: email.subject,
-    onChange: onChange,
-    disabled: spinner,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 101
-    },
-    __self: undefined
-  })), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Grid"], {
-    item: true,
-    xs: 12,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 114
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
-    name: "message",
-    multiline: true,
-    rows: "4",
-    fullWidth: true,
-    label: _library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.message,
-    onChange: onChange,
-    value: email.message,
-    disabled: spinner,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 115
-    },
-    __self: undefined
-  })), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Grid"], {
-    item: true,
-    xs: 12,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 126
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Box"], {
-    display: "flex",
-    justifyContent: "flex-end",
-    mt: "2rem",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 127
-    },
-    __self: undefined
-  }, spinner ? __jsx(_LoadingSpinner__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    margin: "r",
-    level: 2,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 128
-    },
-    __self: undefined
-  }) : null, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Button"], {
-    onClick: toggleIsEmailCreated,
-    color: "secondary",
-    variant: "contained",
-    style: {
-      marginRight: "1rem"
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 129
-    },
-    __self: undefined
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.cancel), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Button"], {
-    type: "submit",
-    color: "primary",
-    variant: "contained",
-    disabled: spinner,
-    startIcon: __jsx(_material_ui_icons_Send__WEBPACK_IMPORTED_MODULE_9___default.a, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 137
-      },
-      __self: undefined
-    }),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 137
-    },
-    __self: undefined
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.send)))))) : null;
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (EmailForm);
-
-/***/ }),
 
 /***/ "./components/Header.tsx":
 /*!*******************************!*\
@@ -780,525 +506,10 @@ const UserContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])(
 
 /***/ }),
 
-/***/ "./components/clients/Buttons.tsx":
-/*!****************************************!*\
-  !*** ./components/clients/Buttons.tsx ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/icons/Delete */ "@material-ui/icons/Delete");
-/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/Add */ "@material-ui/icons/Add");
-/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Email */ "@material-ui/icons/Email");
-/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../library/languages */ "./library/languages.tsx");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clients/Buttons.tsx";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-
-
-
-
-const Buttons = ({
-  clientsAreNotChecked,
-  toggleIsClientAdded,
-  deleteMultipleClients,
-  isClientAdded,
-  isEmailCreated,
-  toggleIsEmailCreated
-}) => __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Box"], {
-  my: "1rem",
-  display: "flex",
-  width: "320px",
-  maxWidth: "1",
-  justifyContent: "space-between",
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 16
-  },
-  __self: undefined
-}, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
-  variant: "contained",
-  color: "primary",
-  disabled: isClientAdded || isEmailCreated,
-  onClick: toggleIsClientAdded,
-  startIcon: __jsx(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 28
-    },
-    __self: undefined
-  }),
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 23
-  },
-  __self: undefined
-}, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.add), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
-  variant: "contained",
-  color: "primary",
-  onClick: toggleIsEmailCreated,
-  disabled: clientsAreNotChecked || isEmailCreated || isClientAdded,
-  startIcon: __jsx(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 37
-    },
-    __self: undefined
-  }),
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 32
-  },
-  __self: undefined
-}, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.email), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
-  variant: "contained",
-  color: "secondary",
-  disabled: clientsAreNotChecked,
-  onClick: deleteMultipleClients,
-  startIcon: __jsx(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 46
-    },
-    __self: undefined
-  }),
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 41
-  },
-  __self: undefined
-}, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.delete));
-
-/* harmony default export */ __webpack_exports__["default"] = (Buttons);
-
-/***/ }),
-
-/***/ "./components/clients/ClientForm.tsx":
-/*!*******************************************!*\
-  !*** ./components/clients/ClientForm.tsx ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../library/globalVariables */ "./library/globalVariables.tsx");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clients/ClientForm.tsx";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-const ClientForm = ({
-  fields,
-  onChange,
-  newClient
-}) => {
-  const inputs = fields.map(e => {
-    if (e.fieldName !== _library_globalVariables__WEBPACK_IMPORTED_MODULE_1__["default"].permanentFields.dateAdded && e.fieldName !== _library_globalVariables__WEBPACK_IMPORTED_MODULE_1__["default"].permanentFields.lastModified) {
-      if (e.fieldType === "text") {
-        return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
-          item: true,
-          xs: 12,
-          sm: 6,
-          key: e.fieldName,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 19
-          },
-          __self: undefined
-        }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
-          type: "text",
-          key: e.fieldName,
-          label: e.fieldName,
-          id: e.fieldName,
-          autoFocus: e.fieldName === _library_globalVariables__WEBPACK_IMPORTED_MODULE_1__["default"].permanentFields.fistName,
-          name: e.fieldName,
-          margin: "normal",
-          fullWidth: true,
-          onChange: onChange,
-          defaultValue: newClient[e.fieldName],
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 20
-          },
-          __self: undefined
-        }));
-      } else if (e.fieldType === "number") {
-        return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
-          item: true,
-          xs: 12,
-          sm: 6,
-          key: e.fieldName,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 36
-          },
-          __self: undefined
-        }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
-          id: e.fieldName,
-          key: e.fieldName,
-          label: e.fieldName,
-          margin: "normal",
-          fullWidth: true,
-          type: "number",
-          name: e.fieldName,
-          onChange: onChange,
-          defaultValue: newClient[e.fieldName],
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 37
-          },
-          __self: undefined
-        }));
-      } else if (e.fieldType === "select") {
-        return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
-          item: true,
-          xs: 12,
-          sm: 6,
-          key: e.fieldName,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 52
-          },
-          __self: undefined
-        }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["FormControl"], {
-          margin: "normal",
-          fullWidth: true,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 53
-          },
-          __self: undefined
-        }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["InputLabel"], {
-          htmlFor: e.fieldName,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 54
-          },
-          __self: undefined
-        }, e.fieldName), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Select"], {
-          name: e.fieldName,
-          id: e.fieldName,
-          onChange: onChange,
-          value: newClient[e.fieldName] || "",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 55
-          },
-          __self: undefined
-        }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["MenuItem"], {
-          value: "",
-          key: _library_globalVariables__WEBPACK_IMPORTED_MODULE_1__["default"].blankOption,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 61
-          },
-          __self: undefined
-        }, _library_globalVariables__WEBPACK_IMPORTED_MODULE_1__["default"].blankOption), e.fieldOptions.map(e => {
-          return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["MenuItem"], {
-            value: e.value,
-            key: e.id,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 66
-            },
-            __self: undefined
-          }, e.value);
-        }))));
-      }
-    }
-  });
-  return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
-    container: true,
-    spacing: 3,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 79
-    },
-    __self: undefined
-  }, inputs);
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (ClientForm);
-
-/***/ }),
-
-/***/ "./components/clients/CreateClient.tsx":
-/*!*********************************************!*\
-  !*** ./components/clients/CreateClient.tsx ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "moment");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var generate_unique_id__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! generate-unique-id */ "generate-unique-id");
-/* harmony import */ var generate_unique_id__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(generate_unique_id__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _UserContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../UserContext */ "./components/UserContext.tsx");
-/* harmony import */ var _ClientForm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ClientForm */ "./components/clients/ClientForm.tsx");
-/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../library/globalVariables */ "./library/globalVariables.tsx");
-/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../library/languages */ "./library/languages.tsx");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Box */ "@material-ui/core/Box");
-/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Typography */ "@material-ui/core/Typography");
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_14__);
-
-
-
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clients/CreateClient.tsx";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
-
-
-
-
-
-
-
-
-
-
-
-
-const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_14__["makeStyles"])(theme => Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_14__["createStyles"])({
-  formWrapper: {
-    marginTop: theme.spacing(3),
-    borderRadius: theme.spacing(1),
-    padding: theme.spacing(3),
-    backgroundColor: theme.palette.grey["200"],
-    boxShadow: theme.shadows["1"],
-    width: "50%",
-    [theme.breakpoints.down("sm")]: {
-      width: "100%"
-    }
-  },
-  textField: {
-    marginTop: theme.spacing(2)
-  }
-}));
-
-const CreateClient = ({
-  fields,
-  isClientAdded,
-  toggleIsClientAdded,
-  addNewClientToState
-}) => {
-  const classes = useStyles({});
-  const initialNewClientState = fields.map(e => e.fieldName).reduce((o, key) => _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default()(o, {
-    [key]: ""
-  }), {});
-  const user = Object(react__WEBPACK_IMPORTED_MODULE_3__["useContext"])(_UserContext__WEBPACK_IMPORTED_MODULE_7__["default"]);
-  const {
-    0: submitting,
-    1: setSubmitting
-  } = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(false);
-  const {
-    0: newClient,
-    1: setNewClient
-  } = Object(react__WEBPACK_IMPORTED_MODULE_3__["useReducer"])((state, action) => {
-    switch (action.type) {
-      case "onChange":
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-          [action.payload.fieldName]: action.payload.fieldType === _library_globalVariables__WEBPACK_IMPORTED_MODULE_9__["default"].fieldTypes.number ? _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(action.payload.value) : action.payload.value
-        });
-
-      case "addId":
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-          _id: generate_unique_id__WEBPACK_IMPORTED_MODULE_6___default()({
-            length: 24,
-            useNumbers: true,
-            useLetters: false,
-            includeSymbols: ["a", "b", "c", "d", "e", "f"]
-          })
-        });
-
-      case "addDate":
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-          ["Date added"]: moment__WEBPACK_IMPORTED_MODULE_4___default()().format("llll")
-        });
-
-      case "clear":
-        return {
-          initialNewClientState
-        };
-
-      default:
-        return state;
-    }
-  }, initialNewClientState);
-
-  const onChange = event => {
-    setNewClient({
-      type: "onChange",
-      payload: {
-        fieldName: event.target.name,
-        value: event.target.value,
-        fieldType: event.target.type
-      }
-    });
-  };
-
-  Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(() => {
-    //trigger side effect when submitting state is changed and its is true
-    submitting ? submitNewClient() : null;
-  }, [submitting]);
-
-  const onSubmit = e => {
-    // on Button Click prepare client object to be ready to send
-    e.preventDefault();
-    setNewClient({
-      type: "addDate"
-    });
-    setNewClient({
-      type: "addId"
-    }); // change submitting state to trigger effect with POST req.
-
-    setSubmitting(true);
-  };
-
-  const submitNewClient = async () => {
-    //post req to DB
-    const clientRes = await axios__WEBPACK_IMPORTED_MODULE_5___default()({
-      method: "POST",
-      data: newClient,
-      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_9__["default"].serverURL}/clients`,
-      params: {
-        key: user.user.userkey
-      },
-      responseType: "json"
-    });
-    const clientData = await clientRes.data;
-
-    if (clientData.msg === _library_globalVariables__WEBPACK_IMPORTED_MODULE_9__["default"].msgSuccess) {
-      // add client data to clients state for table update
-      addNewClientToState(newClient); // reset newClient state
-
-      setNewClient({
-        type: "clear"
-      }); // hide form
-
-      toggleIsClientAdded(); //reset submitting
-
-      setSubmitting(false);
-    } else {
-      alert(_library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.somethingWentWrong);
-    }
-  };
-
-  const onCancel = () => {
-    setNewClient({
-      type: "clear"
-    });
-    toggleIsClientAdded();
-  };
-
-  return isClientAdded ? __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_12___default.a, {
-    className: classes.formWrapper,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 140
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_13___default.a, {
-    variant: "h4",
-    component: "h2",
-    gutterBottom: true,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 141
-    },
-    __self: undefined
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.addNewClient), __jsx("form", {
-    onSubmit: onSubmit,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 144
-    },
-    __self: undefined
-  }, __jsx(_ClientForm__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    fields: fields,
-    onChange: onChange,
-    newClient: newClient,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 145
-    },
-    __self: undefined
-  }), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_12___default.a, {
-    display: "flex",
-    justifyContent: "flex-end",
-    mt: "2rem",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 146
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11___default.a, {
-    variant: "contained",
-    color: "secondary",
-    style: {
-      marginRight: "1rem"
-    },
-    onClick: onCancel,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 147
-    },
-    __self: undefined
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.cancel), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11___default.a, {
-    variant: "contained",
-    color: "primary",
-    type: "submit",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 155
-    },
-    __self: undefined
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_10__["default"].en.save)))) : null;
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (CreateClient);
-
-/***/ }),
-
-/***/ "./components/clients/TableBody.tsx":
-/*!******************************************!*\
-  !*** ./components/clients/TableBody.tsx ***!
-  \******************************************/
+/***/ "./components/dashboard/ShowRecordsNumber.tsx":
+/*!****************************************************!*\
+  !*** ./components/dashboard/ShowRecordsNumber.tsx ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1308,15 +519,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uniqid */ "uniqid");
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _UserContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../UserContext */ "./components/UserContext.tsx");
-/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../library/languages */ "./library/languages.tsx");
-/* harmony import */ var _material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons/Person */ "@material-ui/icons/Person");
-/* harmony import */ var _material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clients/TableBody.tsx";
+/* harmony import */ var _UserContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../UserContext */ "./components/UserContext.tsx");
+/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../library/languages */ "./library/languages.tsx");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__);
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/dashboard/ShowRecordsNumber.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -1325,245 +532,80 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-
-
-const TableBody = ({
-  clients,
-  sort,
-  fields,
-  handleCheckbox
+const ShowRecordsNumber = ({
+  data,
+  string,
+  buttonString,
+  link,
+  subData
 }) => {
-  const {
-    sortBy,
-    reverse
-  } = sort;
-  const user = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_UserContext__WEBPACK_IMPORTED_MODULE_3__["default"]); // field we want to filter is type number -> return true and filter it correctly -> 23 > 4
-
-  if (fields.some(e => e.fieldName === sortBy && e.fieldType === "number")) {
-    clients.sort((a, b) => reverse ? b[sortBy] - a[sortBy] : a[sortBy] - b[sortBy]);
-  } else {
-    clients.sort((a, b) => reverse ? b[sortBy] > a[sortBy] ? -1 : 1 : b[sortBy] < a[sortBy] ? -1 : 1);
-  }
-
-  const fieldNames = [];
-  fields.forEach(e => fieldNames.push(e.fieldName));
-  const tableClients = clients.map(client => {
-    let items = [];
-
-    for (let i = 0; i < fieldNames.length; i++) {
-      items[i] = null;
-    }
-
-    const tableItem = () => {
-      for (let key in client) {
-        //show only clients data with existing fields
-        if (client[key] !== client._id && fieldNames.includes(key)) {
-          items[fieldNames.indexOf(key)] = __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
-            key: uniqid__WEBPACK_IMPORTED_MODULE_2___default()(),
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 44
-            },
-            __self: undefined
-          }, client[key]);
-        }
-      } // add put checkbox at first position
-
-
-      items.unshift(__jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
-        padding: "checkbox",
-        key: uniqid__WEBPACK_IMPORTED_MODULE_2___default()(),
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 50
-        },
-        __self: undefined
-      }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Checkbox"], {
-        color: "primary",
-        checked: !!client.isChecked || client.isChecked,
-        onChange: () => handleCheckbox(client._id),
-        inputProps: {
-          'aria-label': 'primary checkbox'
-        },
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 51
-        },
-        __self: undefined
-      }))); // add put profile link at last position
-
-      items.push(__jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
-        key: uniqid__WEBPACK_IMPORTED_MODULE_2___default()(),
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 63
-        },
-        __self: undefined
-      }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-        href: `/client/[id]/?key=${user.user.userkey}`,
-        as: `/client/${client._id}/?key=${user.user.userkey}`,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 64
-        },
-        __self: undefined
-      }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
-        startIcon: __jsx(_material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_5___default.a, {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 68
-          },
-          __self: undefined
-        }),
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 68
-        },
-        __self: undefined
-      }, _library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.go))));
-      items = items.map(e => !!!e ? __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
-        key: uniqid__WEBPACK_IMPORTED_MODULE_2___default()(),
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 74
-        },
-        __self: undefined
-      }) : e);
-      return items;
-    };
-
-    return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableRow"], {
-      key: client._id,
-      hover: true,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 80
-      },
-      __self: undefined
-    }, tableItem());
-  });
-  return tableClients;
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (TableBody);
-
-/***/ }),
-
-/***/ "./components/clients/TableHead.tsx":
-/*!******************************************!*\
-  !*** ./components/clients/TableHead.tsx ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! uniqid */ "uniqid");
-/* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../library/languages */ "./library/languages.tsx");
-/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/TableHead */ "@material-ui/core/TableHead");
-/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/TableRow */ "@material-ui/core/TableRow");
-/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _material_ui_icons_KeyboardArrowDown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons/KeyboardArrowDown */ "@material-ui/icons/KeyboardArrowDown");
-/* harmony import */ var _material_ui_icons_KeyboardArrowDown__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_KeyboardArrowDown__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__);
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/components/clients/TableHead.tsx";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-
-
-
-
-const TableHeader = ({
-  fields,
-  sortBy,
-  sort,
-  handleCheckAll,
-  allCheck
-}) => {
-  const tableHeadings = fields.map(e => {
-    return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
-      key: uniqid__WEBPACK_IMPORTED_MODULE_1___default()(),
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 19
-      },
-      __self: undefined
-    }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
-      onClick: () => sortBy(e.fieldName),
-      startIcon: __jsx(_material_ui_icons_KeyboardArrowDown__WEBPACK_IMPORTED_MODULE_5___default.a, {
-        color: sort.sortBy === e.fieldName ? "secondary" : "primary",
-        style: sort.reverse && sort.sortBy === e.fieldName ? {
-          transform: "rotate(180deg)"
-        } : null,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 23
-        },
-        __self: undefined
-      }),
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 20
-      },
-      __self: undefined
-    }, e.fieldName));
-  });
-  return __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_3___default.a, {
+  const user = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_UserContext__WEBPACK_IMPORTED_MODULE_2__["default"]);
+  return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Card"], {
+    style: {
+      padding: "2rem 2rem",
+      height: "100%"
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 17
     },
     __self: undefined
-  }, __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_4___default.a, {
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Box"], {
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "100%",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 23
     },
     __self: undefined
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
-    key: uniqid__WEBPACK_IMPORTED_MODULE_1___default()(),
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Typography"], {
+    component: "h2",
+    variant: "h2",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 30
     },
     __self: undefined
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Checkbox"], {
+  }, data), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Typography"], {
+    gutterBottom: true,
+    style: {
+      color: "#535658"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 33
+    },
+    __self: undefined
+  }, subData), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Typography"], {
+    variant: "h5",
+    gutterBottom: true,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 34
+    },
+    __self: undefined
+  }, string), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: `${link}/[key]`,
+    as: `${link}/${user.user.userkey}`,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 38
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
     color: "primary",
-    checked: allCheck,
-    onChange: () => handleCheckAll(),
-    inputProps: {
-      "aria-label": "primary checkbox"
-    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 39
     },
     __self: undefined
-  })), tableHeadings, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 53
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Typography"], {
-    variant: "button",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 54
-    },
-    __self: undefined
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_2__["default"].en.clientProfile))));
+  }, _library_languages__WEBPACK_IMPORTED_MODULE_3__["default"].en.goTo, " ", buttonString.toLowerCase()))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (TableHeader);
+/* harmony default export */ __webpack_exports__["default"] = (ShowRecordsNumber);
 
 /***/ }),
 
@@ -1839,17 +881,6 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-prope
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-property-symbols */ "core-js/library/fn/object/get-own-property-symbols");
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js":
 /*!********************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/keys.js ***!
@@ -1858,17 +889,6 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-prope
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "core-js/library/fn/object/keys");
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/core-js/parse-int.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/parse-int */ "core-js/library/fn/parse-int");
 
 /***/ }),
 
@@ -1909,49 +929,6 @@ function _defineProperty(obj, key, value) {
   }
 
   return obj;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectSpread; });
-/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
-/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
-/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
-/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
-
-
-
-
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    var ownKeys = _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(source);
-
-    if (typeof _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default.a === 'function') {
-      ownKeys = ownKeys.concat(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default()(source).filter(function (sym) {
-        return _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(source, sym).enumerable;
-      }));
-    }
-
-    ownKeys.forEach(function (key) {
-      Object(_defineProperty__WEBPACK_IMPORTED_MODULE_3__["default"])(target, key, source[key]);
-    });
-  }
-
-  return target;
 }
 
 /***/ }),
@@ -3823,41 +2800,33 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./pages/clients/[key].tsx":
-/*!*********************************!*\
-  !*** ./pages/clients/[key].tsx ***!
-  \*********************************/
+/***/ "./pages/dashboard/[key].tsx":
+/*!***********************************!*\
+  !*** ./pages/dashboard/[key].tsx ***!
+  \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/router */ "next/router");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/Header */ "./components/Header.tsx");
-/* harmony import */ var _components_clients_TableBody__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/clients/TableBody */ "./components/clients/TableBody.tsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Header */ "./components/Header.tsx");
+/* harmony import */ var _components_dashboard_ShowRecordsNumber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/dashboard/ShowRecordsNumber */ "./components/dashboard/ShowRecordsNumber.tsx");
+/* harmony import */ var _components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/LoadingSpinner */ "./components/LoadingSpinner.tsx");
 /* harmony import */ var _components_UserContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/UserContext */ "./components/UserContext.tsx");
-/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../library/stringMethods */ "./library/stringMethods.tsx");
-/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../library/globalVariables */ "./library/globalVariables.tsx");
-/* harmony import */ var _components_clients_TableHead__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/clients/TableHead */ "./components/clients/TableHead.tsx");
-/* harmony import */ var _components_clients_CreateClient__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/clients/CreateClient */ "./components/clients/CreateClient.tsx");
-/* harmony import */ var _components_EmailForm__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/EmailForm */ "./components/EmailForm.tsx");
-/* harmony import */ var _components_clients_Buttons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/clients/Buttons */ "./components/clients/Buttons.tsx");
-/* harmony import */ var _components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/LoadingSpinner */ "./components/LoadingSpinner.tsx");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/TableBody */ "@material-ui/core/TableBody");
-/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../library/languages */ "./library/languages.tsx");
+/* harmony import */ var _library_globalVariables__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../library/globalVariables */ "./library/globalVariables.tsx");
+/* harmony import */ var _library_stringMethods__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../library/stringMethods */ "./library/stringMethods.tsx");
+/* harmony import */ var _library_languages__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../library/languages */ "./library/languages.tsx");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__);
+var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/dashboard/[key].tsx";
 
-var _jsxFileName = "/Users/davidzoufaly/code/dp/crm-app-fe/pages/clients/[key].tsx";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
@@ -3870,318 +2839,154 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
-
-
-
-
-
-const Clients = ({
-  fieldData,
-  clientData
+const Dashboard = ({
+  lastCampaign,
+  clientsLastWeek,
+  clientCounter,
+  fieldCounter,
+  emailsCounter
 }) => {
-  const router = Object(next_router__WEBPACK_IMPORTED_MODULE_2__["useRouter"])();
-  const user = Object(react__WEBPACK_IMPORTED_MODULE_1__["useContext"])(_components_UserContext__WEBPACK_IMPORTED_MODULE_6__["default"]);
-  const {
-    0: clients,
-    1: setClients
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useReducer"])((state, action) => {
-    switch (action.type) {
-      case "handleCheckedClients":
-        return state.map(client => client._id === action.payload.id ? !!!client.isChecked ? Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
-          isChecked: true
-        }) : Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
-          isChecked: false
-        }) : client);
-
-      case "addClient":
-        return [...state, action.payload.newClient];
-
-      case "deleteCheckedClients":
-        return state.filter(client => !client.isChecked);
-
-      case "unCheckAll":
-        return state.map(client => Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
-          isChecked: false
-        }));
-
-      case "toggleCheckAll":
-        return state.map(client => Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
-          isChecked: !action.payload.checked
-        }));
-
-      default:
-        return state;
-    }
-  }, clientData);
-  const {
-    0: sort,
-    1: setSort
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
-    //default sort by "date added"
-    sortBy: "Date added",
-    reverse: true
-  });
-  const {
-    0: allCheck,
-    1: setAllCheck
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
+  const router = Object(next_router__WEBPACK_IMPORTED_MODULE_1__["useRouter"])();
   const {
     0: initialized,
     1: setInitialized
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
-  const {
-    0: isClientAdded,
-    1: setIsClientAdded
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
-  const {
-    0: isEmailCreated,
-    1: setIsEmailCreated
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
-    // set page title
-    const title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_7__["default"](router.pathname).removeSlash().removeSlashAndTextAfter().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].titleSubText).getString();
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const user = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_components_UserContext__WEBPACK_IMPORTED_MODULE_6__["default"]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const title = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_8__["default"](router.pathname).removeSlash().removeSlashAndTextAfter().firstCharUpperCase().addStringToEnd(_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].titleSubText).getString();
     document.title = title;
     setInitialized(true);
     user.checkUser();
   }, [router]);
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
-    // reset email state, when user uncheck all recievers / clients
-    filterCheckedClients().length === 0 && isEmailCreated ? setIsEmailCreated(!isEmailCreated) : null;
-  }, [clients]); // create H1
-
-  const h1 = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_7__["default"](router.pathname).removeSlash().removeSlashAndTextAfter().firstCharUpperCase().getString();
-
-  const sortBy = fieldName => {
-    setSort(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, sort, {
-      sortBy: fieldName,
-      reverse: fieldName === sort.sortBy ? // if clicked again on same field -> reverse sort based on current reverse state
-      !sort.reverse ? true : false : // if new field being clicked -> set reverse true to immediately sort column ASC
-      true
-    }));
-  };
-
-  const handleCheckbox = id => {
-    setClients({
-      type: "handleCheckedClients",
-      payload: {
-        id
-      }
-    });
-  };
-
-  const handleCheckAll = () => {
-    setAllCheck(state => !state);
-    setClients({
-      type: "toggleCheckAll",
-      payload: {
-        checked: allCheck
-      }
-    });
-  };
-
-  const addNewClientToState = newClient => {
-    setClients({
-      type: "addClient",
-      payload: {
-        newClient
-      }
-    });
-  };
-
-  const filterCheckedClients = () => clients.filter(client => client.isChecked);
-
-  const unCheckAll = () => {
-    setClients({
-      type: "unCheckAll"
-    });
-  };
-
-  const toggleIsEmailCreated = () => {
-    setIsEmailCreated(isEmailCreated ? false : true);
-  };
-
-  const toggleIsClientAdded = () => {
-    isClientAdded ? setIsClientAdded(false) : setIsClientAdded(true);
-  };
-
-  const deleteMultipleClients = async () => {
-    setClients({
-      type: "deleteCheckedClients"
-    });
-    await axios__WEBPACK_IMPORTED_MODULE_3___default()({
-      method: "DELETE",
-      data: filterCheckedClients().map(e => e._id),
-      url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].serverURL}/clients/`,
-      params: {
-        key: user.user.userkey
-      },
-      responseType: "json"
-    });
-  };
-
-  return !user.user.signedIn && !initialized ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  const h1 = new _library_stringMethods__WEBPACK_IMPORTED_MODULE_8__["default"](router.pathname).removeSlash().removeSlashAndTextAfter().firstCharUpperCase().getString();
+  const campaignStr = lastCampaign.length > 0 ? `${_library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.last} ${_library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.sent} ${lastCampaign[0].date} ${_library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.to.toLowerCase()} ${lastCampaign[0].to.length} ${lastCampaign[0].to.length > 1 ? _library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.clients : _library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.client}` : "";
+  const lastWeekStr = `${clientsLastWeek > 0 ? "+" : ""} ${clientsLastWeek} ${_library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.pastSevenDays}`;
+  return !initialized && !user.user.signedIn ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 148
+      lineNumber: 57
     },
     __self: undefined
-  }) : __jsx("div", {
+  }) : __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 150
+      lineNumber: 60
     },
     __self: undefined
-  }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 151
-    },
-    __self: undefined
-  }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["Typography"], {
+  }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["Typography"], {
     component: "h1",
     variant: "h3",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 152
-    },
-    __self: undefined
-  }, h1), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["Typography"], {
-    variant: "h5",
     gutterBottom: true,
-    style: {
-      color: "#535658"
-    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 155
+      lineNumber: 61
     },
     __self: undefined
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_16__["default"].en.saved, " ", clients.length), __jsx(_components_EmailForm__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    to: filterCheckedClients().map(e => e["Email"]),
-    isEmailCreated: isEmailCreated,
-    toggleIsEmailCreated: toggleIsEmailCreated,
-    unCheckAll: unCheckAll,
+  }, h1), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["Grid"], {
+    container: true,
+    justify: "space-around",
+    alignItems: "stretch",
+    spacing: 4,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 158
+      lineNumber: 64
     },
     __self: undefined
-  }), __jsx(_components_clients_CreateClient__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    fields: fieldData,
-    isClientAdded: isClientAdded,
-    toggleIsClientAdded: toggleIsClientAdded,
-    addNewClientToState: addNewClientToState,
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["Grid"], {
+    item: true,
+    xs: 12,
+    md: 4,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 164
+      lineNumber: 65
     },
     __self: undefined
-  }), __jsx(_components_clients_Buttons__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    clientsAreNotChecked: !clients.some(client => client.isChecked),
-    deleteMultipleClients: deleteMultipleClients,
-    toggleIsClientAdded: toggleIsClientAdded,
-    isClientAdded: isClientAdded,
-    toggleIsEmailCreated: toggleIsEmailCreated,
-    isEmailCreated: isEmailCreated,
+  }, __jsx(_components_dashboard_ShowRecordsNumber__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    data: clientCounter,
+    string: _library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.clientsSaved,
+    buttonString: _library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.clients,
+    subData: lastWeekStr,
+    link: "/clients",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 170
+      lineNumber: 66
     },
     __self: undefined
-  }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["Box"], {
-    width: "1",
-    overflow: "auto",
+  })), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["Grid"], {
+    item: true,
+    xs: 12,
+    md: 4,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 178
+      lineNumber: 74
     },
     __self: undefined
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["Table"], {
-    "aria-label": "clients table",
-    size: "small",
-    style: {
-      backgroundColor: "white",
-      border: "1px solid #e0e0e0"
-    },
+  }, __jsx(_components_dashboard_ShowRecordsNumber__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    data: fieldCounter.custom,
+    string: _library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.customClientFields,
+    buttonString: _library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.customClientFields,
+    subData: `${fieldCounter.permanent + fieldCounter.custom} ${_library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.total}`,
+    link: "/settings",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 179
+      lineNumber: 75
     },
     __self: undefined
-  }, __jsx(_components_clients_TableHead__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    fields: fieldData,
-    handleCheckAll: handleCheckAll,
-    allCheck: allCheck,
-    sortBy: sortBy,
-    sort: sort,
+  })), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__["Grid"], {
+    item: true,
+    xs: 12,
+    md: 4,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 184
+      lineNumber: 85
     },
     __self: undefined
-  }), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_15___default.a, {
+  }, __jsx(_components_dashboard_ShowRecordsNumber__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    data: emailsCounter,
+    string: _library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.emailsSent,
+    buttonString: _library_languages__WEBPACK_IMPORTED_MODULE_9__["default"].en.emails,
+    subData: campaignStr,
+    link: "/emails",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 191
+      lineNumber: 86
     },
     __self: undefined
-  }, __jsx(_components_clients_TableBody__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    clients: clients,
-    fields: fieldData,
-    sort: sort,
-    handleCheckbox: handleCheckbox,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 192
-    },
-    __self: undefined
-  })))));
+  }))));
 };
 
-Clients.getInitialProps = async context => {
-  //fetch clients
-  const clientRes = await axios__WEBPACK_IMPORTED_MODULE_3___default()({
-    method: "GET",
-    url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].serverURL}/clients/`,
-    params: {
-      key: context.query.key
-    },
-    responseType: "json"
-  });
-  const clientData = await clientRes.data; //fetch fields
-
-  const fieldRes = await axios__WEBPACK_IMPORTED_MODULE_3___default()({
-    method: "GET",
-    url: `${_library_globalVariables__WEBPACK_IMPORTED_MODULE_8__["default"].serverURL}/fields`,
-    params: {
-      key: context.query.key
-    },
-    responseType: "json"
-  });
-  const fieldData = await fieldRes.data; //? fetch clients counter -> unsued -> takes number from main clients
-  // const resClientCount = await axios(
-  //   `${globalVars.serverURL}/clients/count?key=${context.query.key}`
-  // );
-  // const clientCount = await resClientCount.data
-
+Dashboard.getInitialProps = async context => {
+  const resLastCampaign = await axios__WEBPACK_IMPORTED_MODULE_2___default()(`${_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL}/emails/last?key=${context.query.key}`);
+  const resLastWeekNumber = await axios__WEBPACK_IMPORTED_MODULE_2___default()(`${_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL}/clients/last-week?key=${context.query.key}`);
+  const resClientCount = await axios__WEBPACK_IMPORTED_MODULE_2___default()(`${_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL}/clients/count?key=${context.query.key}`);
+  const resFieldsData = await axios__WEBPACK_IMPORTED_MODULE_2___default()(`${_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL}/fields/count?key=${context.query.key}`);
+  const resEmailsCount = await axios__WEBPACK_IMPORTED_MODULE_2___default()(`${_library_globalVariables__WEBPACK_IMPORTED_MODULE_7__["default"].serverURL}/emails/count?key=${context.query.key}`);
+  const lastCampaign = await resLastCampaign.data;
+  const clientsLastWeek = await resLastWeekNumber.data;
+  const clientCounter = await resClientCount.data;
+  const fieldCounter = await resFieldsData.data;
+  const emailsCounter = await resEmailsCount.data;
   return {
-    clientData,
-    fieldData
+    lastCampaign,
+    clientsLastWeek,
+    clientCounter,
+    fieldCounter,
+    emailsCounter
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Clients);
+/* harmony default export */ __webpack_exports__["default"] = (Dashboard);
 
 /***/ }),
 
-/***/ 4:
-/*!***************************************!*\
-  !*** multi ./pages/clients/[key].tsx ***!
-  \***************************************/
+/***/ 5:
+/*!*****************************************!*\
+  !*** multi ./pages/dashboard/[key].tsx ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/davidzoufaly/code/dp/crm-app-fe/pages/clients/[key].tsx */"./pages/clients/[key].tsx");
+module.exports = __webpack_require__(/*! /Users/davidzoufaly/code/dp/crm-app-fe/pages/dashboard/[key].tsx */"./pages/dashboard/[key].tsx");
 
 
 /***/ }),
@@ -4208,17 +3013,6 @@ module.exports = require("@material-ui/core/Box");
 
 /***/ }),
 
-/***/ "@material-ui/core/Button":
-/*!*******************************************!*\
-  !*** external "@material-ui/core/Button" ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Button");
-
-/***/ }),
-
 /***/ "@material-ui/core/CircularProgress":
 /*!*****************************************************!*\
   !*** external "@material-ui/core/CircularProgress" ***!
@@ -4238,50 +3032,6 @@ module.exports = require("@material-ui/core/CircularProgress");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Container");
-
-/***/ }),
-
-/***/ "@material-ui/core/TableBody":
-/*!**********************************************!*\
-  !*** external "@material-ui/core/TableBody" ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/TableBody");
-
-/***/ }),
-
-/***/ "@material-ui/core/TableHead":
-/*!**********************************************!*\
-  !*** external "@material-ui/core/TableHead" ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/TableHead");
-
-/***/ }),
-
-/***/ "@material-ui/core/TableRow":
-/*!*********************************************!*\
-  !*** external "@material-ui/core/TableRow" ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/TableRow");
-
-/***/ }),
-
-/***/ "@material-ui/core/Typography":
-/*!***********************************************!*\
-  !*** external "@material-ui/core/Typography" ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Typography");
 
 /***/ }),
 
@@ -4307,17 +3057,6 @@ module.exports = require("@material-ui/core/useMediaQuery");
 
 /***/ }),
 
-/***/ "@material-ui/icons/Add":
-/*!*****************************************!*\
-  !*** external "@material-ui/icons/Add" ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/icons/Add");
-
-/***/ }),
-
 /***/ "@material-ui/icons/Close":
 /*!*******************************************!*\
   !*** external "@material-ui/icons/Close" ***!
@@ -4337,17 +3076,6 @@ module.exports = require("@material-ui/icons/Close");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/icons/Dashboard");
-
-/***/ }),
-
-/***/ "@material-ui/icons/Delete":
-/*!********************************************!*\
-  !*** external "@material-ui/icons/Delete" ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/icons/Delete");
 
 /***/ }),
 
@@ -4373,17 +3101,6 @@ module.exports = require("@material-ui/icons/ExitToApp");
 
 /***/ }),
 
-/***/ "@material-ui/icons/KeyboardArrowDown":
-/*!*******************************************************!*\
-  !*** external "@material-ui/icons/KeyboardArrowDown" ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/icons/KeyboardArrowDown");
-
-/***/ }),
-
 /***/ "@material-ui/icons/Menu":
 /*!******************************************!*\
   !*** external "@material-ui/icons/Menu" ***!
@@ -4403,28 +3120,6 @@ module.exports = require("@material-ui/icons/Menu");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/icons/PeopleAlt");
-
-/***/ }),
-
-/***/ "@material-ui/icons/Person":
-/*!********************************************!*\
-  !*** external "@material-ui/icons/Person" ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/icons/Person");
-
-/***/ }),
-
-/***/ "@material-ui/icons/Send":
-/*!******************************************!*\
-  !*** external "@material-ui/icons/Send" ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/icons/Send");
 
 /***/ }),
 
@@ -4516,17 +3211,6 @@ module.exports = require("core-js/library/fn/object/get-own-property-descriptor"
 
 /***/ }),
 
-/***/ "core-js/library/fn/object/get-own-property-symbols":
-/*!*********************************************************************!*\
-  !*** external "core-js/library/fn/object/get-own-property-symbols" ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("core-js/library/fn/object/get-own-property-symbols");
-
-/***/ }),
-
 /***/ "core-js/library/fn/object/keys":
 /*!*************************************************!*\
   !*** external "core-js/library/fn/object/keys" ***!
@@ -4538,17 +3222,6 @@ module.exports = require("core-js/library/fn/object/keys");
 
 /***/ }),
 
-/***/ "core-js/library/fn/parse-int":
-/*!***********************************************!*\
-  !*** external "core-js/library/fn/parse-int" ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("core-js/library/fn/parse-int");
-
-/***/ }),
-
 /***/ "core-js/library/fn/promise":
 /*!*********************************************!*\
   !*** external "core-js/library/fn/promise" ***!
@@ -4557,28 +3230,6 @@ module.exports = require("core-js/library/fn/parse-int");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/promise");
-
-/***/ }),
-
-/***/ "generate-unique-id":
-/*!*************************************!*\
-  !*** external "generate-unique-id" ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("generate-unique-id");
-
-/***/ }),
-
-/***/ "moment":
-/*!*************************!*\
-  !*** external "moment" ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("moment");
 
 /***/ }),
 
@@ -4623,17 +3274,6 @@ module.exports = require("prop-types-exact");
 /***/ (function(module, exports) {
 
 module.exports = require("react");
-
-/***/ }),
-
-/***/ "uniqid":
-/*!*************************!*\
-  !*** external "uniqid" ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("uniqid");
 
 /***/ }),
 

@@ -18,13 +18,12 @@ import languages from "../../library/languages";
 const Clients = ({ fieldData, clientData }: any) => {
   const router = useRouter();
   const user = useContext(UserContext);
-
   const [clients, setClients] = useReducer((state, action) => {
     switch (action.type) {
       case "handleCheckedClients":
         return state.map(client =>
           client._id === action.payload.id
-            ? client.isChecked === false || client.isChecked === undefined
+            ? !!!client.isChecked
               ? { ...client, isChecked: true }
               : { ...client, isChecked: false }
             : client
@@ -34,7 +33,9 @@ const Clients = ({ fieldData, clientData }: any) => {
       case "deleteCheckedClients":
         return state.filter(client => !client.isChecked);
       case "unCheckAll":
-        return state.map(client => (client = { ...client, isChecked: false }));
+        return state.map(client => ({ ...client, isChecked: false }));
+        case "toggleCheckAll":
+        return state.map(client => ({ ...client, isChecked: !action.payload.checked }))
       default:
         return state;
     }
@@ -45,7 +46,8 @@ const Clients = ({ fieldData, clientData }: any) => {
     sortBy: "Date added",
     reverse: true
   });
-
+  
+  const [allCheck, setAllCheck] = useState(false);
   const [initialized, setInitialized] = useState(false);
   const [isClientAdded, setIsClientAdded] = useState(false);
   const [isEmailCreated, setIsEmailCreated] = useState(false);
@@ -99,6 +101,14 @@ const Clients = ({ fieldData, clientData }: any) => {
     });
   };
 
+  const handleCheckAll = () => {
+    setAllCheck(state => !state)
+    setClients({
+      type: "toggleCheckAll",
+      payload: {checked: allCheck}
+    });
+  };
+
   const addNewClientToState = newClient => {
     setClients({
       type: "addClient",
@@ -142,7 +152,7 @@ const Clients = ({ fieldData, clientData }: any) => {
       <Typography component="h1" variant="h3">
         {h1}
       </Typography>
-      <Typography variant="h5" gutterBottom style={{color: "#535658"}}>
+      <Typography variant="h5" gutterBottom style={{ color: "#535658" }}>
         {languages.en.saved} {clients.length}
       </Typography>
       <EmailForm
@@ -171,7 +181,13 @@ const Clients = ({ fieldData, clientData }: any) => {
           size="small"
           style={{ backgroundColor: "white", border: "1px solid #e0e0e0" }}
         >
-          <TableHead fields={fieldData} sortBy={sortBy} sort={sort} />
+          <TableHead
+            fields={fieldData}
+            handleCheckAll={handleCheckAll}
+            allCheck={allCheck}
+            sortBy={sortBy}
+            sort={sort}
+          />
           <TableBodyMui>
             <TableBody
               clients={clients}
@@ -205,7 +221,7 @@ Clients.getInitialProps = async (context: any) => {
   });
   const fieldData = await fieldRes.data;
 
-  //? fetch clients counter -> unsued takes number from main clients
+  //? fetch clients counter -> unsued -> takes number from main clients
   // const resClientCount = await axios(
   //   `${globalVars.serverURL}/clients/count?key=${context.query.key}`
   // );
