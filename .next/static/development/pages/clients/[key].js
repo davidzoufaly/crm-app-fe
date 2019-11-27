@@ -760,7 +760,7 @@ var Buttons = function Buttons(_ref) {
   return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Box"], {
     my: "1rem",
     display: "flex",
-    width: "370px",
+    width: "320px",
     maxWidth: "1",
     justifyContent: "space-between",
     __source: {
@@ -785,7 +785,7 @@ var Buttons = function Buttons(_ref) {
       lineNumber: 23
     },
     __self: this
-  }, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.addNew), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.add), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
     variant: "contained",
     color: "primary",
     onClick: toggleIsEmailCreated,
@@ -1351,7 +1351,7 @@ var TableBody = function TableBody(_ref) {
         __self: this
       }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Checkbox"], {
         color: "primary",
-        checked: client.isChecked === undefined ? false : client.isChecked,
+        checked: !!client.isChecked || client.isChecked,
         onChange: function onChange() {
           return handleCheckbox(client._id);
         },
@@ -1395,7 +1395,7 @@ var TableBody = function TableBody(_ref) {
         __self: this
       }, _library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.go))));
       items = items.map(function (e) {
-        return e === null ? __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+        return !!!e ? __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
           key: uniqid__WEBPACK_IMPORTED_MODULE_2___default()(),
           __source: {
             fileName: _jsxFileName,
@@ -1456,13 +1456,15 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 var TableHeader = function TableHeader(_ref) {
   var fields = _ref.fields,
       sortBy = _ref.sortBy,
-      sort = _ref.sort;
+      sort = _ref.sort,
+      handleCheckAll = _ref.handleCheckAll,
+      allCheck = _ref.allCheck;
   var tableHeadings = fields.map(function (e) {
     return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
       key: uniqid__WEBPACK_IMPORTED_MODULE_1___default()(),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 17
+        lineNumber: 19
       },
       __self: this
     }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
@@ -1476,13 +1478,13 @@ var TableHeader = function TableHeader(_ref) {
         } : null,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 21
+          lineNumber: 23
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 18
+        lineNumber: 20
       },
       __self: this
     }, e.fieldName));
@@ -1490,32 +1492,47 @@ var TableHeader = function TableHeader(_ref) {
   return __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 40
     },
     __self: this
   }, __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 41
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+    key: uniqid__WEBPACK_IMPORTED_MODULE_1___default()(),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 42
     },
     __self: this
-  }), tableHeadings, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Checkbox"], {
+    color: "primary",
+    checked: allCheck,
+    onChange: function onChange() {
+      return handleCheckAll();
+    },
+    inputProps: {
+      "aria-label": "primary checkbox"
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 43
+    },
+    __self: this
+  })), tableHeadings, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Typography"], {
     variant: "button",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 54
     },
     __self: this
   }, _library_languages__WEBPACK_IMPORTED_MODULE_2__["default"].en.clientProfile))));
@@ -1536,8 +1553,8 @@ var TableHeader = function TableHeader(_ref) {
 __webpack_require__.r(__webpack_exports__);
 var globalVars = {
   titleSubText: "| CRM-APP",
-  serverURL: "http://localhost:8080/api",
-  // serverURL: "https://crm-app-be.herokuapp.com/api",
+  // serverURL: "http://localhost:8080/api",
+  serverURL: "https://crm-app-be.herokuapp.com/api",
   permanentFields: {
     fistName: "First name",
     lastName: "Last name",
@@ -78574,7 +78591,7 @@ var Clients = function Clients(_ref) {
     switch (action.type) {
       case "handleCheckedClients":
         return state.map(function (client) {
-          return client._id === action.payload.id ? client.isChecked === false || client.isChecked === undefined ? Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_3__["default"])({}, client, {
+          return client._id === action.payload.id ? !!!client.isChecked ? Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_3__["default"])({}, client, {
             isChecked: true
           }) : Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_3__["default"])({}, client, {
             isChecked: false
@@ -78591,8 +78608,15 @@ var Clients = function Clients(_ref) {
 
       case "unCheckAll":
         return state.map(function (client) {
-          return client = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_3__["default"])({}, client, {
+          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_3__["default"])({}, client, {
             isChecked: false
+          });
+        });
+
+      case "toggleCheckAll":
+        return state.map(function (client) {
+          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_3__["default"])({}, client, {
+            isChecked: !action.payload.checked
           });
         });
 
@@ -78604,23 +78628,28 @@ var Clients = function Clients(_ref) {
       setClients = _useReducer[1];
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])({
-    sortBy: "First name",
+    //default sort by "date added"
+    sortBy: "Date added",
     reverse: true
   }),
       sort = _useState[0],
       setSort = _useState[1];
 
   var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(false),
-      initialized = _useState2[0],
-      setInitialized = _useState2[1];
+      allCheck = _useState2[0],
+      setAllCheck = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(false),
-      isClientAdded = _useState3[0],
-      setIsClientAdded = _useState3[1];
+      initialized = _useState3[0],
+      setInitialized = _useState3[1];
 
   var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(false),
-      isEmailCreated = _useState4[0],
-      setIsEmailCreated = _useState4[1];
+      isClientAdded = _useState4[0],
+      setIsClientAdded = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(false),
+      isEmailCreated = _useState5[0],
+      setIsEmailCreated = _useState5[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_4__["useEffect"])(function () {
     // set page title
@@ -78650,6 +78679,18 @@ var Clients = function Clients(_ref) {
       type: "handleCheckedClients",
       payload: {
         id: id
+      }
+    });
+  };
+
+  var handleCheckAll = function handleCheckAll() {
+    setAllCheck(function (state) {
+      return !state;
+    });
+    setClients({
+      type: "toggleCheckAll",
+      payload: {
+        checked: allCheck
       }
     });
   };
@@ -78725,19 +78766,19 @@ var Clients = function Clients(_ref) {
   return !user.user.signedIn && !initialized ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_16__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 137
+      lineNumber: 148
     },
     __self: this
   }) : __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 139
+      lineNumber: 150
     },
     __self: this
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_7__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 140
+      lineNumber: 151
     },
     __self: this
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_17__["Typography"], {
@@ -78745,7 +78786,7 @@ var Clients = function Clients(_ref) {
     variant: "h3",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 141
+      lineNumber: 152
     },
     __self: this
   }, h1), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_17__["Typography"], {
@@ -78756,7 +78797,7 @@ var Clients = function Clients(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 144
+      lineNumber: 155
     },
     __self: this
   }, _library_languages__WEBPACK_IMPORTED_MODULE_19__["default"].en.saved, " ", clients.length), __jsx(_components_EmailForm__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -78768,7 +78809,7 @@ var Clients = function Clients(_ref) {
     unCheckAll: unCheckAll,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 147
+      lineNumber: 158
     },
     __self: this
   }), __jsx(_components_clients_CreateClient__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -78778,7 +78819,7 @@ var Clients = function Clients(_ref) {
     addNewClientToState: addNewClientToState,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 153
+      lineNumber: 164
     },
     __self: this
   }), __jsx(_components_clients_Buttons__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -78792,7 +78833,7 @@ var Clients = function Clients(_ref) {
     isEmailCreated: isEmailCreated,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 159
+      lineNumber: 170
     },
     __self: this
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_17__["Box"], {
@@ -78800,7 +78841,7 @@ var Clients = function Clients(_ref) {
     overflow: "auto",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 167
+      lineNumber: 178
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_17__["Table"], {
@@ -78812,22 +78853,24 @@ var Clients = function Clients(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 168
+      lineNumber: 179
     },
     __self: this
   }, __jsx(_components_clients_TableHead__WEBPACK_IMPORTED_MODULE_12__["default"], {
     fields: fieldData,
+    handleCheckAll: handleCheckAll,
+    allCheck: allCheck,
     sortBy: sortBy,
     sort: sort,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 173
+      lineNumber: 184
     },
     __self: this
   }), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_18__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 174
+      lineNumber: 191
     },
     __self: this
   }, __jsx(_components_clients_TableBody__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -78837,7 +78880,7 @@ var Clients = function Clients(_ref) {
     handleCheckbox: handleCheckbox,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 175
+      lineNumber: 192
     },
     __self: this
   })))));
@@ -78910,7 +78953,7 @@ function () {
 
 /***/ }),
 
-/***/ 3:
+/***/ 1:
 /*!**********************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fclients%2F%5Bkey%5D&absolutePagePath=%2FUsers%2Fdavidzoufaly%2Fcode%2Fdp%2Fcrm-app-fe%2Fpages%2Fclients%2F%5Bkey%5D.tsx ***!
   \**********************************************************************************************************************************************************************/
@@ -78933,5 +78976,5 @@ module.exports = dll_b35e09dc2ca94ac6d9c1;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=[key].js.map

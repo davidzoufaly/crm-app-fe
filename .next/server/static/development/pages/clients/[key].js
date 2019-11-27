@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -822,7 +822,7 @@ const Buttons = ({
 }) => __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Box"], {
   my: "1rem",
   display: "flex",
-  width: "370px",
+  width: "320px",
   maxWidth: "1",
   justifyContent: "space-between",
   __source: {
@@ -847,7 +847,7 @@ const Buttons = ({
     lineNumber: 23
   },
   __self: undefined
-}, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.addNew), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
+}, _library_languages__WEBPACK_IMPORTED_MODULE_5__["default"].en.add), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
   variant: "contained",
   color: "primary",
   onClick: toggleIsEmailCreated,
@@ -1380,7 +1380,7 @@ const TableBody = ({
         __self: undefined
       }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Checkbox"], {
         color: "primary",
-        checked: client.isChecked === undefined ? false : client.isChecked,
+        checked: !!client.isChecked || client.isChecked,
         onChange: () => handleCheckbox(client._id),
         inputProps: {
           'aria-label': 'primary checkbox'
@@ -1421,7 +1421,7 @@ const TableBody = ({
         },
         __self: undefined
       }, _library_languages__WEBPACK_IMPORTED_MODULE_4__["default"].en.go))));
-      items = items.map(e => e === null ? __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+      items = items.map(e => !!!e ? __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
         key: uniqid__WEBPACK_IMPORTED_MODULE_2___default()(),
         __source: {
           fileName: _jsxFileName,
@@ -1484,14 +1484,16 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 const TableHeader = ({
   fields,
   sortBy,
-  sort
+  sort,
+  handleCheckAll,
+  allCheck
 }) => {
   const tableHeadings = fields.map(e => {
     return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
       key: uniqid__WEBPACK_IMPORTED_MODULE_1___default()(),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 17
+        lineNumber: 19
       },
       __self: undefined
     }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
@@ -1503,13 +1505,13 @@ const TableHeader = ({
         } : null,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 21
+          lineNumber: 23
         },
         __self: undefined
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 18
+        lineNumber: 20
       },
       __self: undefined
     }, e.fieldName));
@@ -1517,32 +1519,45 @@ const TableHeader = ({
   return __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_3___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 40
     },
     __self: undefined
   }, __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_4___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 41
     },
     __self: undefined
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+    key: uniqid__WEBPACK_IMPORTED_MODULE_1___default()(),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 42
     },
     __self: undefined
-  }), tableHeadings, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Checkbox"], {
+    color: "primary",
+    checked: allCheck,
+    onChange: () => handleCheckAll(),
+    inputProps: {
+      "aria-label": "primary checkbox"
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 43
+    },
+    __self: undefined
+  })), tableHeadings, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53
     },
     __self: undefined
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Typography"], {
     variant: "button",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 54
     },
     __self: undefined
   }, _library_languages__WEBPACK_IMPORTED_MODULE_2__["default"].en.clientProfile))));
@@ -1563,8 +1578,8 @@ const TableHeader = ({
 __webpack_require__.r(__webpack_exports__);
 const globalVars = {
   titleSubText: "| CRM-APP",
-  serverURL: "http://localhost:8080/api",
-  // serverURL: "https://crm-app-be.herokuapp.com/api",
+  // serverURL: "http://localhost:8080/api",
+  serverURL: "https://crm-app-be.herokuapp.com/api",
   permanentFields: {
     fistName: "First name",
     lastName: "Last name",
@@ -3872,7 +3887,7 @@ const Clients = ({
   } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useReducer"])((state, action) => {
     switch (action.type) {
       case "handleCheckedClients":
-        return state.map(client => client._id === action.payload.id ? client.isChecked === false || client.isChecked === undefined ? Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
+        return state.map(client => client._id === action.payload.id ? !!!client.isChecked ? Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
           isChecked: true
         }) : Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
           isChecked: false
@@ -3885,8 +3900,13 @@ const Clients = ({
         return state.filter(client => !client.isChecked);
 
       case "unCheckAll":
-        return state.map(client => client = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
+        return state.map(client => Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
           isChecked: false
+        }));
+
+      case "toggleCheckAll":
+        return state.map(client => Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, client, {
+          isChecked: !action.payload.checked
         }));
 
       default:
@@ -3897,9 +3917,14 @@ const Clients = ({
     0: sort,
     1: setSort
   } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
-    sortBy: "First name",
+    //default sort by "date added"
+    sortBy: "Date added",
     reverse: true
   });
+  const {
+    0: allCheck,
+    1: setAllCheck
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
   const {
     0: initialized,
     1: setInitialized
@@ -3940,6 +3965,16 @@ const Clients = ({
       type: "handleCheckedClients",
       payload: {
         id
+      }
+    });
+  };
+
+  const handleCheckAll = () => {
+    setAllCheck(state => !state);
+    setClients({
+      type: "toggleCheckAll",
+      payload: {
+        checked: allCheck
       }
     });
   };
@@ -3987,19 +4022,19 @@ const Clients = ({
   return !user.user.signedIn && !initialized ? __jsx(_components_LoadingSpinner__WEBPACK_IMPORTED_MODULE_13__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 137
+      lineNumber: 148
     },
     __self: undefined
   }) : __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 139
+      lineNumber: 150
     },
     __self: undefined
   }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 140
+      lineNumber: 151
     },
     __self: undefined
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["Typography"], {
@@ -4007,7 +4042,7 @@ const Clients = ({
     variant: "h3",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 141
+      lineNumber: 152
     },
     __self: undefined
   }, h1), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["Typography"], {
@@ -4018,7 +4053,7 @@ const Clients = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 144
+      lineNumber: 155
     },
     __self: undefined
   }, _library_languages__WEBPACK_IMPORTED_MODULE_16__["default"].en.saved, " ", clients.length), __jsx(_components_EmailForm__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -4028,7 +4063,7 @@ const Clients = ({
     unCheckAll: unCheckAll,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 147
+      lineNumber: 158
     },
     __self: undefined
   }), __jsx(_components_clients_CreateClient__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -4038,7 +4073,7 @@ const Clients = ({
     addNewClientToState: addNewClientToState,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 153
+      lineNumber: 164
     },
     __self: undefined
   }), __jsx(_components_clients_Buttons__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -4050,7 +4085,7 @@ const Clients = ({
     isEmailCreated: isEmailCreated,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 159
+      lineNumber: 170
     },
     __self: undefined
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["Box"], {
@@ -4058,7 +4093,7 @@ const Clients = ({
     overflow: "auto",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 167
+      lineNumber: 178
     },
     __self: undefined
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["Table"], {
@@ -4070,22 +4105,24 @@ const Clients = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 168
+      lineNumber: 179
     },
     __self: undefined
   }, __jsx(_components_clients_TableHead__WEBPACK_IMPORTED_MODULE_9__["default"], {
     fields: fieldData,
+    handleCheckAll: handleCheckAll,
+    allCheck: allCheck,
     sortBy: sortBy,
     sort: sort,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 173
+      lineNumber: 184
     },
     __self: undefined
   }), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_15___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 174
+      lineNumber: 191
     },
     __self: undefined
   }, __jsx(_components_clients_TableBody__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -4095,7 +4132,7 @@ const Clients = ({
     handleCheckbox: handleCheckbox,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 175
+      lineNumber: 192
     },
     __self: undefined
   })))));
@@ -4121,7 +4158,7 @@ Clients.getInitialProps = async context => {
     },
     responseType: "json"
   });
-  const fieldData = await fieldRes.data; //? fetch clients counter -> unsued takes number from main clients
+  const fieldData = await fieldRes.data; //? fetch clients counter -> unsued -> takes number from main clients
   // const resClientCount = await axios(
   //   `${globalVars.serverURL}/clients/count?key=${context.query.key}`
   // );
@@ -4137,7 +4174,7 @@ Clients.getInitialProps = async context => {
 
 /***/ }),
 
-/***/ 6:
+/***/ 4:
 /*!***************************************!*\
   !*** multi ./pages/clients/[key].tsx ***!
   \***************************************/

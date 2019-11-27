@@ -5,7 +5,8 @@ import Button from "./Button";
 import globalVars from "../../library/globalVariables";
 import languages from "../../library/languages";
 import stringMethods from "../../library/stringMethods";
-import { Typography, Box } from '@material-ui/core';
+import LoadingSpinner from "../LoadingSpinner";
+import { Typography, Box } from "@material-ui/core";
 
 const RegisterForm = ({ changeToLogin }) => {
   const [regUser, setRegUser] = useState({
@@ -13,11 +14,12 @@ const RegisterForm = ({ changeToLogin }) => {
     password: "",
     repeatPassword: ""
   });
+  const [isReg, setIsReg] = useState(false);
 
   const onChange = e => {
     setRegUser({ ...regUser, [e.target.name]: e.target.value });
   };
-
+  
   const sentFormToBe = async () => {
     const { username, password } = regUser;
 
@@ -28,6 +30,7 @@ const RegisterForm = ({ changeToLogin }) => {
       responseType: "json"
     });
     const userData = await userRes.data;
+    setIsReg(!!!userData) 
 
     switch (userData.msg) {
       case globalVars.msgSuccess:
@@ -43,6 +46,7 @@ const RegisterForm = ({ changeToLogin }) => {
   };
 
   const onRegister = () => {
+    setIsReg(true);
     regUser.password === regUser.repeatPassword
       ? sentFormToBe()
       : alert(languages.en.passwordsDoesNotMatch);
@@ -53,8 +57,7 @@ const RegisterForm = ({ changeToLogin }) => {
       <Typography component="h2" variant="h4" gutterBottom>
         {new stringMethods(languages.en.register)
           .firstCharUpperCase()
-          .getString()
-        }
+          .getString()}
       </Typography>
       <form>
         <TextInput
@@ -83,7 +86,12 @@ const RegisterForm = ({ changeToLogin }) => {
             .getString()}
         />
         <Box display="flex" justifyContent="flex-end" mt="2rem">
-          <Button onClick={onRegister} text={languages.en.register} variant="contained" />
+          {isReg ? <LoadingSpinner margin={"r"} level={1} /> : null}
+          <Button
+            onClick={onRegister}
+            text={languages.en.register}
+            variant="contained"
+          />
         </Box>
       </form>
     </>

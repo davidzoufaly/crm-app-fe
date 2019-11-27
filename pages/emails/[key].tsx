@@ -7,7 +7,6 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import UserContext from "../../components/UserContext";
 import stringMethods from "../../library/stringMethods";
 import globalVars from "../../library/globalVariables";
-import moment from "moment";
 import languages from "../../library/languages";
 import {
   TableHead,

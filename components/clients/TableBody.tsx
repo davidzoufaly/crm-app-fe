@@ -4,7 +4,7 @@ import uniqid from "uniqid";
 import UserContext from "../UserContext";
 import languages from "../../library/languages";
 import PersonIcon from '@material-ui/icons/Person';
-import {TableCell, TableRow, Checkbox, Button, Typography} from '@material-ui/core';
+import {TableCell, TableRow, Checkbox, Button } from '@material-ui/core';
 
 const TableBody = ({ clients, sort, fields, handleCheckbox }: any) => {
   const { sortBy, reverse } = sort;
@@ -50,7 +50,7 @@ const TableBody = ({ clients, sort, fields, handleCheckbox }: any) => {
         <TableCell padding="checkbox" key={uniqid()}>
         <Checkbox
         color="primary"
-        checked={client.isChecked === undefined ? false : client.isChecked}
+        checked={!!client.isChecked || client.isChecked}
         onChange={() => handleCheckbox(client._id)}
         inputProps={{
           'aria-label': 'primary checkbox',
@@ -71,7 +71,7 @@ const TableBody = ({ clients, sort, fields, handleCheckbox }: any) => {
       );
 
       items = items.map(e =>
-        e === null ? <TableCell key={uniqid()}></TableCell> : e
+        !!!e ? <TableCell key={uniqid()}></TableCell> : e
       );
 
       return items;
