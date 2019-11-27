@@ -16,7 +16,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/dashboard/[key]": [
+    "/emails/[key]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

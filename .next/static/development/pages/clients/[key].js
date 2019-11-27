@@ -1459,12 +1459,18 @@ var TableHeader = function TableHeader(_ref) {
       sort = _ref.sort,
       handleCheckAll = _ref.handleCheckAll,
       allCheck = _ref.allCheck;
-  var tableHeadings = fields.map(function (e) {
+  var tableHeadings = fields // sort by ID
+  .sort(function (a, b) {
+    return b._id > a._id ? -1 : 1;
+  }) // set field permanents first
+  .sort(function (a, b) {
+    return (b.fieldPermanent ? 1 : 0) - (a.fieldPermanent ? 1 : 0);
+  }).map(function (e) {
     return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
       key: uniqid__WEBPACK_IMPORTED_MODULE_1___default()(),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 19
+        lineNumber: 24
       },
       __self: this
     }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
@@ -1478,13 +1484,13 @@ var TableHeader = function TableHeader(_ref) {
         } : null,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 23
+          lineNumber: 28
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 20
+        lineNumber: 25
       },
       __self: this
     }, e.fieldName));
@@ -1492,20 +1498,20 @@ var TableHeader = function TableHeader(_ref) {
   return __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 45
     },
     __self: this
   }, __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 46
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
     key: uniqid__WEBPACK_IMPORTED_MODULE_1___default()(),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 47
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Checkbox"], {
@@ -1519,20 +1525,20 @@ var TableHeader = function TableHeader(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 48
     },
     __self: this
   })), tableHeadings, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 58
     },
     __self: this
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Typography"], {
     variant: "button",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 59
     },
     __self: this
   }, _library_languages__WEBPACK_IMPORTED_MODULE_2__["default"].en.clientProfile))));

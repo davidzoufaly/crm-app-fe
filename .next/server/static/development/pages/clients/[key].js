@@ -1488,12 +1488,14 @@ const TableHeader = ({
   handleCheckAll,
   allCheck
 }) => {
-  const tableHeadings = fields.map(e => {
+  const tableHeadings = fields // sort by ID
+  .sort((a, b) => b._id > a._id ? -1 : 1) // set field permanents first
+  .sort((a, b) => (b.fieldPermanent ? 1 : 0) - (a.fieldPermanent ? 1 : 0)).map(e => {
     return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
       key: uniqid__WEBPACK_IMPORTED_MODULE_1___default()(),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 19
+        lineNumber: 24
       },
       __self: undefined
     }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
@@ -1505,13 +1507,13 @@ const TableHeader = ({
         } : null,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 23
+          lineNumber: 28
         },
         __self: undefined
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 20
+        lineNumber: 25
       },
       __self: undefined
     }, e.fieldName));
@@ -1519,20 +1521,20 @@ const TableHeader = ({
   return __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_3___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 45
     },
     __self: undefined
   }, __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_4___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 46
     },
     __self: undefined
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
     key: uniqid__WEBPACK_IMPORTED_MODULE_1___default()(),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 47
     },
     __self: undefined
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Checkbox"], {
@@ -1544,20 +1546,20 @@ const TableHeader = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 48
     },
     __self: undefined
   })), tableHeadings, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 58
     },
     __self: undefined
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Typography"], {
     variant: "button",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 59
     },
     __self: undefined
   }, _library_languages__WEBPACK_IMPORTED_MODULE_2__["default"].en.clientProfile))));

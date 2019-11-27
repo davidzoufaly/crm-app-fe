@@ -14,7 +14,12 @@ interface IProps {
 }
 
 const TableHeader = ({ fields, sortBy, sort, handleCheckAll, allCheck }: IProps) => {
-  const tableHeadings = fields.map((e: any) => {
+  const tableHeadings = fields
+  // sort by ID
+  .sort((a,b) => b._id > a._id ? -1 : 1)
+  // set field permanents first
+  .sort((a,b) => (b.fieldPermanent ? 1 : 0) - (a.fieldPermanent ? 1 : 0))
+  .map((e: any) => {
     return (
         <TableCell key={uniqid()}>
           <Button

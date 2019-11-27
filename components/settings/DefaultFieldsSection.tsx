@@ -12,6 +12,7 @@ const DefaultClientFieldsSection = ({
 }: any) => {
   const defaultFieldNames = state
     .filter(({ fieldPermanent }: any) => fieldPermanent === true)
+    .sort((a,b) => b._id > a._id ? -1 : 1)
     .map(({ fieldName, _id }: any) => {
       return (
         <Card key={_id}>

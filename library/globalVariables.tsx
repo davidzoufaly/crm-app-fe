@@ -10,7 +10,7 @@ const globalVars = {
         lastModified: "Last modified"
     },
     fieldTypes: {
-        text : "text",
+        text: "text",
         number: "number",
         select: "select"
     },
